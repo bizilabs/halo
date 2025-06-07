@@ -20,7 +20,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 # android
 android-application = { id = "com.android.application", version.ref = "gradle-android-plugin" }
 android-library = { id = "com.android.library", version.ref = "gradle-android-plugin" }
-vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 # compose
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

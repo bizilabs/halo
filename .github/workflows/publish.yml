@@ -5,21 +5,26 @@ on:
 jobs:
   publish:
     name: Release build and publish
-    runs-on: macOS-latest
+    runs-on: macos-latest
+
     steps:
-      - name: Check out code
+      - name: checkout
         uses: actions/checkout@v4
-      - name: Set up JDK 21
+
+      - name: setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 21
-      - name: Publish to MavenCentral
-        run: ./gradlew publishToMavenCentral --no-configuration-cache
-        env:
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+          java-version: 17
 
+      - name: Build
+        run: ./gradlew assemble --stacktrace -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release library
+        run: ./gradlew shared:publish -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: ./gradlew assemble --stacktrace -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release library
+        run: ./gradlew shared:publish -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
