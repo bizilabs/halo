@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -18,12 +20,18 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    linuxX64()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // put your multiplatform dependencies here
+                // compose
+                implementation(compose.ui)
+                implementation(compose.runtime)
+                implementation(compose.material3)
+                implementation(compose.foundation)
+                implementation(compose.components.resources)
+                implementation(compose.materialIconsExtended)
+                implementation(compose.components.uiToolingPreview)
             }
         }
         val commonTest by getting {
