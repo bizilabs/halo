@@ -1,13 +1,34 @@
 [versions]
-agp = "8.5.2"
-kotlin = "2.1.10"
-android-minSdk = "24"
-android-compileSdk = "34"
+# gradle
+gradle-android-plugin = "8.5.2"
+android-sdk-min = "24"
+android-sdk-compile = "34"
+# jetbrains
+kotlin = "2.1.20"
+ksp = "2.1.20-1.0.31" # always match with kotlin version
+kotlinx-coroutines = "1.10.1"
+kotlinx-serialization = "1.8.0"
+maven-publish = "0.31.0"
+compose-multiplatform = "1.8.1"
+ktlint = "12.2.0"
+kover = "0.9.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
 [plugins]
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.29.0" }
+# android
+android-application = { id = "com.android.application", version.ref = "gradle-android-plugin" }
+android-library = { id = "com.android.library", version.ref = "gradle-android-plugin" }
+vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+# compose
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+# kotlin
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+# other
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref="kover" }
