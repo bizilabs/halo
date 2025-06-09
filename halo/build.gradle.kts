@@ -67,6 +67,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+compose {
+    resources {
+        publicResClass = false
+        packageOfResClass = "org.bizilabs.halo.generated.resources"
+        generateResClass = auto
+    }
+}
 
 group = "org.bizilabs"
 
