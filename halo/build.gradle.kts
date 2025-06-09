@@ -75,7 +75,7 @@ compose {
     }
 }
 
-group = "org.bizilabs"
+group = "org.bizilabs.halo"
 
 publishing {
     val properties = findProperties("local.properties")
