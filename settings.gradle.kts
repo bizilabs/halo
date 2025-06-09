@@ -25,5 +25,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "shady"
+rootProject.name = "halo"
 include(":library")

@@ -1,6 +1,6 @@
 @file:Suppress("ktlint:standard:filename", "ktlint:standard:property-naming")
 
-package org.bizilabs.shady.base
+package org.bizilabs.halo.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
@@ -80,7 +80,7 @@ private data object MonoFont {
             )
 }
 
-class ShadyFonts internal constructor() {
+class HaloFonts internal constructor() {
     val Regular
         @Composable
         get() = RegularFont.FontFamily

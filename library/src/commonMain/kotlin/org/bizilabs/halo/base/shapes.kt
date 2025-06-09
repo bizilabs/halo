@@ -1,6 +1,6 @@
 @file:Suppress("ktlint:standard:filename")
 
-package org.bizilabs.shady.base
+package org.bizilabs.halo.base
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
@@ -13,7 +13,7 @@ private val ShapeMD = RoundedCornerShape(12.dp)
 private val ShapeLG = RoundedCornerShape(24.dp)
 private val ShapeXL = RoundedCornerShape(48.dp)
 
-data object ShadyShapes {
+data object HaloShapes {
     val None: Shapes =
         Shapes(
             extraSmall = ShapeNone,
