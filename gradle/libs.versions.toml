@@ -6,15 +6,23 @@ android-sdk-compile = "34"
 # jetbrains
 kotlin = "2.1.20"
 ksp = "2.1.20-1.0.31" # always match with kotlin version
-kotlinx-coroutines = "1.10.1"
+kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.8.0"
 maven-publish = "0.31.0"
 compose-multiplatform = "1.8.1"
+compose-hotreload = "1.0.0-alpha10"
 ktlint = "12.2.0"
 kover = "0.9.1"
+voyager = "1.0.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
+# voyager
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 
 [plugins]
 # android
@@ -24,6 +32,7 @@ maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publ
 # compose
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-hotreload = { id = "org.jetbrains.compose.hot-reload", version.ref = "compose-hotreload" }
 # kotlin
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -32,3 +41,8 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 # other
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref="kover" }
+
+[bundles]
+voyager = [
+    "voyager-navigator", "voyager-transitions", "voyager-koin"
+]

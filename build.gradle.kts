@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.ksp) apply false
     // compose
     alias(libs.plugins.compose.multiplatform) apply false
+    alias(libs.plugins.compose.hotreload) apply false
     alias(libs.plugins.compose.compiler) apply false
     // others
     alias(libs.plugins.ktlint)
