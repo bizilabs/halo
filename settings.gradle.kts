@@ -26,4 +26,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "halo"
-include(":library")
+include(":halo")

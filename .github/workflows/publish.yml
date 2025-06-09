@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 on:
   release:
     types: [released, prereleased]
@@ -24,4 +24,4 @@ jobs:
         run: ./gradlew assemble --stacktrace -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
       - name: Release library
-        run: ./gradlew shared:publish -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew halo:publish -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}

@@ -68,6 +68,8 @@ android {
     }
 }
 
+group = "org.bizilabs"
+
 publishing {
     val properties = findProperties("local.properties")
     repositories {
