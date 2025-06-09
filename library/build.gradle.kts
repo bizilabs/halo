@@ -72,7 +72,7 @@ publishing {
     val properties = findProperties("local.properties")
     repositories {
         maven {
-            setUrl("https://maven.pkg.github.com/bizilabs/shady")
+            setUrl("https://maven.pkg.github.com/bizilabs/halo")
             credentials {
                 username = properties["github.username"].toString()
                 password = properties["github.token"].toString()

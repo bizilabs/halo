@@ -5,26 +5,26 @@ package org.bizilabs.halo.base
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import halo.library.generated.resources.Res
+import halo.library.generated.resources.black
+import halo.library.generated.resources.bold
+import halo.library.generated.resources.bold_extra
+import halo.library.generated.resources.bold_semi
+import halo.library.generated.resources.light
+import halo.library.generated.resources.light_extra
+import halo.library.generated.resources.medium
+import halo.library.generated.resources.mono_black
+import halo.library.generated.resources.mono_bold
+import halo.library.generated.resources.mono_bold_extra
+import halo.library.generated.resources.mono_bold_semi
+import halo.library.generated.resources.mono_light
+import halo.library.generated.resources.mono_light_extra
+import halo.library.generated.resources.mono_medium
+import halo.library.generated.resources.mono_regular
+import halo.library.generated.resources.mono_thin
+import halo.library.generated.resources.regular
+import halo.library.generated.resources.thin
 import org.jetbrains.compose.resources.Font
-import shady.library.generated.resources.Res
-import shady.library.generated.resources.black
-import shady.library.generated.resources.bold
-import shady.library.generated.resources.bold_extra
-import shady.library.generated.resources.bold_semi
-import shady.library.generated.resources.light
-import shady.library.generated.resources.light_extra
-import shady.library.generated.resources.medium
-import shady.library.generated.resources.mono_black
-import shady.library.generated.resources.mono_bold
-import shady.library.generated.resources.mono_bold_extra
-import shady.library.generated.resources.mono_bold_semi
-import shady.library.generated.resources.mono_light
-import shady.library.generated.resources.mono_light_extra
-import shady.library.generated.resources.mono_medium
-import shady.library.generated.resources.mono_regular
-import shady.library.generated.resources.mono_thin
-import shady.library.generated.resources.regular
-import shady.library.generated.resources.thin
 
 private data object RegularFont {
     val Black = Res.font.black
