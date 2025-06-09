@@ -30,4 +30,4 @@ jobs:
         run: ./gradlew assemble --stacktrace -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Library
-        run: ./gradlew shared:publish -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew library:publish -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
