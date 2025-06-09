@@ -1,18 +1,31 @@
 package org.bizilabs.halo
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.text.font.FontFamily
+import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloFonts
 import org.bizilabs.halo.base.HaloShapes
+import org.bizilabs.halo.base.LocalHaloColorScheme
+import org.bizilabs.halo.base.getHaloColorScheme
+import org.bizilabs.halo.base.provideHaloColorScheme
 
 data object HaloDefaults {
     val Fonts = HaloFonts()
     val Shapes = HaloShapes
+    val ColorThemes = HaloColorScheme
 }
 
-data object HaloTheme
+data object HaloTheme {
+    val colorScheme: HaloColorScheme
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalHaloColorScheme.current
+}
 
 /**
  * @param shapes
@@ -21,7 +34,12 @@ data object HaloTheme
 fun HaloTheme(
     font: FontFamily = HaloDefaults.Fonts.Regular,
     shapes: Shapes = HaloDefaults.Shapes.None,
+    colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
     content: @Composable () -> Unit,
 ) {
-    MaterialTheme(shapes = shapes, content = content)
+    CompositionLocalProvider(
+        provideHaloColorScheme(colorScheme = colorScheme),
+    ) {
+        MaterialTheme(shapes = shapes, content = content)
+    }
 }

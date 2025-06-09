@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import org.bizilabs.halo.HaloTheme
 
 @Composable
 internal fun OutlineCardBase(
@@ -19,7 +20,11 @@ internal fun OutlineCardBase(
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     shape: Shape = CardDefaults.shape,
-    colors: CardColors = CardDefaults.cardColors(),
+    colors: CardColors =
+        CardDefaults.cardColors(
+            contentColor = HaloTheme.colorScheme.surface.content,
+            containerColor = HaloTheme.colorScheme.surface.container,
+        ),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
     interactionSource: MutableInteractionSource? = null,
@@ -44,7 +49,11 @@ fun HaloOutlineCard(
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     shape: Shape = CardDefaults.shape,
-    colors: CardColors = CardDefaults.cardColors(),
+    colors: CardColors =
+        CardDefaults.cardColors(
+            contentColor = HaloTheme.colorScheme.surface.content,
+            containerColor = HaloTheme.colorScheme.surface.container,
+        ),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
     interactionSource: MutableInteractionSource? = null,

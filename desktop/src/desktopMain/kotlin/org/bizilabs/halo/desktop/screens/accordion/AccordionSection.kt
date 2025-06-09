@@ -4,60 +4,55 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Surface
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloAccordion
 import org.bizilabs.halo.components.HaloFilledAccordion
 import org.bizilabs.halo.components.HaloOutlinedAccordion
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.extensions.dashedBorder
+import org.bizilabs.halo.components.cards.HaloSlotCard
 
 @Composable
 fun AccordionSection() {
-    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(top = 16.dp)) {
-        HaloText(text = "Accordion")
-        HaloText(text = "An accordion allows users to expand and collapse sections of content.")
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+        Column(modifier = Modifier.padding(vertical = 16.dp)) {
+            HaloText(
+                text = "Accordion",
+                color = HaloTheme.colorScheme.background.content,
+                fontWeight = FontWeight.SemiBold,
+            )
+            HaloText(
+                text = "An accordion allows users to expand and collapse sections of content.",
+                color = HaloTheme.colorScheme.background.content,
+                fontWeight = FontWeight.Light,
+            )
+        }
+
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
                 HaloText(text = "Design")
-                Surface(
-                    modifier =
-                        Modifier
-                            .padding(top = 8.dp)
-                            .fillMaxWidth()
-                            .dashedBorder(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)),
-                ) {
-                    Column(modifier = Modifier.padding(8.dp)) {
-                        Surface(
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .dashedBorder(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)),
-                            color = MaterialTheme.colorScheme.surface,
-                        ) {
-                            HaloText(modifier = Modifier.padding(16.dp), text = "Header")
+                Spacer(modifier = Modifier.height(8.dp))
+                HaloSlotCard(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+                        HaloSlotCard {
+                            HaloText(modifier = Modifier.fillMaxWidth().padding(16.dp), text = "Header")
                         }
-                        Spacer(modifier = Modifier.padding(top = 4.dp))
-                        Surface(
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .dashedBorder(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)),
-                            color = MaterialTheme.colorScheme.surface,
-                        ) {
-                            HaloText(modifier = Modifier.padding(16.dp), text = "Content")
+                        Spacer(modifier = Modifier.fillMaxWidth().padding(top = 4.dp))
+                        HaloSlotCard {
+                            HaloText(modifier = Modifier.fillMaxWidth().padding(16.dp), text = "Content")
                         }
                     }
                 }

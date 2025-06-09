@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
@@ -38,14 +39,22 @@ fun LandingScreenContent(
     state: GalleryScreenState,
     onAction: (GalleryScreenAction) -> Unit,
 ) {
-    Scaffold { pad ->
-        AnimatedContent(state.section) { section ->
-            when (section) {
-                GalleryScreenSection.Accordion -> {
-                    AccordionSection()
-                }
+    HaloTheme(
+        colorScheme =
+            when (state.isDarkModeEnabled) {
+                true -> state.colorTheme.dark
+                false -> state.colorTheme.light
+            },
+    ) {
+        Scaffold { pad ->
+            AnimatedContent(state.section) { section ->
+                when (section) {
+                    GalleryScreenSection.Accordion -> {
+                        AccordionSection()
+                    }
 
-                null -> GalleryList(state = state, onAction = onAction)
+                    null -> GalleryList(state = state, onAction = onAction)
+                }
             }
         }
     }

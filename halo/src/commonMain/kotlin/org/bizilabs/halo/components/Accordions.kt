@@ -13,10 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -83,14 +81,7 @@ fun HaloFilledAccordion(
     onClick: () -> Unit = { },
     content: @Composable () -> Unit,
 ) {
-    HaloCard(
-        modifier = modifier,
-        colors =
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.onSurface,
-            ),
-    ) {
+    HaloCard(modifier = modifier) {
         AccordionBase(
             collapsed = collapsed,
             header = { HaloAccordionHeader(collapsed = collapsed, modifier = Modifier, header = header) },
@@ -109,14 +100,7 @@ fun HaloOutlinedAccordion(
     onClick: () -> Unit = { },
     content: @Composable () -> Unit,
 ) {
-    HaloOutlineCard(
-        modifier = modifier,
-        colors =
-            CardDefaults.outlinedCardColors(
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.onSurface,
-            ),
-    ) {
+    HaloOutlineCard(modifier = modifier) {
         AccordionBase(
             collapsed = collapsed,
             header = {

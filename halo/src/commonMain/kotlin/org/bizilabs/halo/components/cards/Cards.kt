@@ -10,6 +10,11 @@ import androidx.compose.material3.CardElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.extensions.dashedBorder
 
 @Composable
 internal fun CardBase(
@@ -42,7 +47,11 @@ fun HaloCard(
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     shape: Shape = CardDefaults.shape,
-    colors: CardColors = CardDefaults.cardColors(),
+    colors: CardColors =
+        CardDefaults.cardColors(
+            contentColor = HaloTheme.colorScheme.surface.content,
+            containerColor = HaloTheme.colorScheme.surface.container,
+        ),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource? = null,
@@ -56,6 +65,47 @@ fun HaloCard(
         colors = colors,
         elevation = elevation,
         border = border,
+        interactionSource = interactionSource,
+        content = content,
+    )
+}
+
+@Composable
+fun HaloSlotCard(
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    onClick: (() -> Unit)? = null,
+    shape: Shape = CardDefaults.shape,
+    colors: CardColors =
+        CardDefaults.cardColors(
+            contentColor = HaloTheme.colorScheme.surface.content,
+            containerColor = HaloTheme.colorScheme.surface.container,
+        ),
+    elevation: CardElevation = CardDefaults.cardElevation(),
+    strokeWidth: Dp = 2.dp,
+    dashLength: Dp = 4.dp,
+    gapLength: Dp = 4.dp,
+    cap: StrokeCap = StrokeCap.Round,
+    interactionSource: MutableInteractionSource? = null,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    CardBase(
+        modifier =
+            modifier.dashedBorder(
+                HaloTheme.colorScheme.surface.content
+                    .copy(alpha = 0.25f),
+                shape = shape,
+                strokeWidth = strokeWidth,
+                dashLength = dashLength,
+                gapLength = gapLength,
+                cap = cap,
+            ),
+        enabled = enabled,
+        onClick = onClick ?: {},
+        shape = shape,
+        colors = colors,
+        elevation = elevation,
+        border = null,
         interactionSource = interactionSource,
         content = content,
     )
