@@ -6,11 +6,6 @@ import org.bizilabs.halo.HaloDefaults
 import org.bizilabs.halo.base.colors.HaloDarkColorScheme
 import org.bizilabs.halo.base.colors.HaloLightColorScheme
 
-data class HaloColorValueHighlight(
-    val highlighted: Color,
-    val unhighlighted: Color,
-)
-
 data class HaloColorValue(
     val container: Color,
     val content: Color,
@@ -24,6 +19,10 @@ data class HaloColorTheme(
 data class HaloColorScheme(
     val background: HaloColorValue,
     val surface: HaloColorValue,
+    val info: HaloColorValue,
+    val error: HaloColorValue,
+    val success: HaloColorValue,
+    val warning: HaloColorValue,
 ) {
     companion object {
         val Default =

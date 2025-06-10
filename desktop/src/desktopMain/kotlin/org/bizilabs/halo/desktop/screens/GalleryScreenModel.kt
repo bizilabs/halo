@@ -13,9 +13,14 @@ sealed interface GalleryScreenSection {
             get() = "Accordion"
     }
 
+    data object Card : GalleryScreenSection {
+        override val label: String
+            get() = "Card"
+    }
+
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion)
+            get() = listOf(Accordion, Card)
     }
 }
 
@@ -23,6 +28,8 @@ sealed interface GalleryScreenAction {
     data class UpdateSection(
         val section: GalleryScreenSection,
     ) : GalleryScreenAction
+
+    data object ToggleTheme : GalleryScreenAction
 }
 
 data class GalleryScreenState(
@@ -36,10 +43,15 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
     fun onAction(action: GalleryScreenAction) {
         when (action) {
             is GalleryScreenAction.UpdateSection -> updateSection(action.section)
+            GalleryScreenAction.ToggleTheme -> toggleTheme()
         }
     }
 
     private fun updateSection(section: GalleryScreenSection) {
         mutableState.update { it.copy(section = section) }
+    }
+
+    private fun toggleTheme() {
+        mutableState.update { it.copy(isDarkModeEnabled = !it.isDarkModeEnabled) }
     }
 }
