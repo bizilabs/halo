@@ -33,6 +33,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 // compose
+                implementation(project(":halo"))
                 api(compose.ui)
                 api(compose.runtime)
                 api(compose.material3)

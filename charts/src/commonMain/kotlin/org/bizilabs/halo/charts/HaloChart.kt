@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.charts.data.ChartData
 import org.bizilabs.halo.charts.data.Line
 import org.bizilabs.halo.charts.data.LineChartData
@@ -21,6 +22,7 @@ import org.bizilabs.halo.charts.data.Point
 import org.bizilabs.halo.charts.helpers.format
 import org.bizilabs.halo.charts.style.AxisStyle
 import org.bizilabs.halo.charts.style.ChartDefaults
+import org.bizilabs.halo.charts.style.IndicatorStyle
 import org.bizilabs.halo.charts.style.LineChartStyle
 import org.bizilabs.halo.charts.style.LineStyle
 import org.bizilabs.halo.charts.ui.HaloLineChart
@@ -107,7 +109,8 @@ fun HaloLineChartSample() {
             style =
                 ChartDefaults.lineChartStyle().copy(
                     pointSpacing = 80.dp,
-                    yAxisStyle = AxisStyle(labelCount = 10),
+                    yAxisStyle = AxisStyle(labelCount = 10, axisBackgroundColor = HaloTheme.colorScheme.background.container),
+                    indicatorStyle = IndicatorStyle(Color.Blue),
                 ),
             onPointSelected = { point ->
                 selectedValue = point?.y?.format(2) ?: "N/A"

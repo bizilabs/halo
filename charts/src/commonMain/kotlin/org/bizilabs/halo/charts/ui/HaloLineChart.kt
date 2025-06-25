@@ -49,6 +49,8 @@ import org.bizilabs.halo.charts.style.IndicatorStyle
 import org.bizilabs.halo.charts.style.LineChartStyle
 import org.bizilabs.halo.charts.style.LineStyle
 import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.floor
 
 @Composable
 fun HaloLineChart(
@@ -84,14 +86,25 @@ fun HaloLineChart(
     val minY = remember(allPoints) { allPoints.minOf { it.y } }
     val maxY = remember(allPoints) { allPoints.maxOf { it.y } }
 
-    // Calculate Y-axis labels and the required padding.
+    // Calculate Y-axis labels(In whole numbers) and the required padding.
     val yAxisLabels =
         remember(minY, maxY, style.yAxisStyle) {
+            val axisMin = floor(minY).toInt()
+            var axisMax = ceil(maxY).toInt()
+
+            // Edge case: If min and max data values result in the same floor/ceil (e.g., 5.1 and 5.3
+            // both yield 5 for floor and 6 for ceil, but if 5.0 and 5.0, both yield 5),
+            // we need at least one step to show a range.
+            if (axisMin == axisMax) {
+                axisMax += 1 // Ensure the max is at least one greater than the min.
+            }
+
             (0..style.yAxisStyle.labelCount).map { i ->
-                val value = minY + (maxY - minY) * i / style.yAxisStyle.labelCount
-                value.format(1)
+                val value = axisMin + (axisMax - axisMin) * i / style.yAxisStyle.labelCount
+                value.toString()
             }
         }
+
     val yAxisPadding =
         remember(yAxisLabels, style.yAxisStyle) {
             (yAxisLabels.maxOfOrNull { textMeasurer.measure(AnnotatedString(it)).size.width } ?: 0)
@@ -266,7 +279,7 @@ fun HaloLineChart(
                 Modifier
                     .fillMaxHeight()
                     .width(yAxisPadding.toInt().pxToDp())
-                    .background(Color.Red),
+                    .background(style.yAxisStyle.axisBackgroundColor),
         ) {
             drawYAxis(yAxisLabels, toPxY, style.yAxisStyle, textMeasurer, chartWidth)
         }

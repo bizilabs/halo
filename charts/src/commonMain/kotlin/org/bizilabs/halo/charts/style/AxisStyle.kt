@@ -17,5 +17,6 @@ data class AxisStyle(
     val labelCount: Int = 4,
     val showGridLines: Boolean = true,
     val gridLineColor: Color = Color.Gray.copy(alpha = 0.2f),
+    val axisBackgroundColor: Color = Color.Gray,
     val gridLineWidth: Dp = 1.dp,
 )
