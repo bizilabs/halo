@@ -55,14 +55,15 @@ internal fun DrawScope.drawXAxis(
     drawingHeight: Float,
 ) {
     val uniquePoints = points.distinctBy { it.x }
-    uniquePoints.forEach { point ->
+    uniquePoints.forEachIndexed { index, point ->
         point.xLabel?.let { label ->
-            val x = toPxX(point.x)
             val textLayoutResult =
                 textMeasurer.measure(
                     text = AnnotatedString(label),
                     style = style.labelTextStyle,
                 )
+            val x =
+                toPxX(point.x)
             drawText(
                 textLayoutResult = textLayoutResult,
                 topLeft = Offset(x - textLayoutResult.size.width / 2, drawingHeight + 8.dp.toPx()),

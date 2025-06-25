@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,14 +58,14 @@ fun HaloChart(
 @Composable
 fun HaloLineChartSample() {
     val months =
-        listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+        listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "December")
     val samplePoints1 =
         List(12) { i ->
             Point(i.toFloat(), Random.nextDouble(40.0, 110.0).toFloat(), months[i])
         }
     val samplePoints2 =
         List(12) { i ->
-            Point(i.toFloat(), Random.nextDouble(20.0, 90.0).toFloat(), months[i])
+            Point(i.toFloat(), Random.nextDouble(0.0, 90.0).toFloat(), months[i])
         }
 
     val lineChartData =
@@ -95,7 +94,7 @@ fun HaloLineChartSample() {
 
     var selectedValue by remember { mutableStateOf<String?>("Tap or Drag") }
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    Column(modifier = Modifier.fillMaxSize()) {
         Text(
             text = "Investment Value: ${selectedValue ?: "None"}",
             style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
@@ -111,7 +110,6 @@ fun HaloLineChartSample() {
                     yAxisStyle = AxisStyle(labelCount = 10),
                 ),
             onPointSelected = { point ->
-//                selectedValue = point?.y?.let { "$%.2f".format(it) } ?: "N/A"
                 selectedValue = point?.y?.format(2) ?: "N/A"
             },
         )

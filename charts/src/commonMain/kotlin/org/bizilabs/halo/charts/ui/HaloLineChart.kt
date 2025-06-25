@@ -2,7 +2,7 @@ package org.bizilabs.halo.charts.ui
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -35,6 +35,7 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import org.bizilabs.halo.charts.data.ChartPadding
 import org.bizilabs.halo.charts.data.LineChartData
 import org.bizilabs.halo.charts.data.Point
 import org.bizilabs.halo.charts.draw.drawXAxis
@@ -43,6 +44,7 @@ import org.bizilabs.halo.charts.draw.generatePath
 import org.bizilabs.halo.charts.helpers.dpToPx
 import org.bizilabs.halo.charts.helpers.format
 import org.bizilabs.halo.charts.helpers.pxToDp
+import org.bizilabs.halo.charts.style.ChartDefaults
 import org.bizilabs.halo.charts.style.IndicatorStyle
 import org.bizilabs.halo.charts.style.LineChartStyle
 import org.bizilabs.halo.charts.style.LineStyle
@@ -52,7 +54,12 @@ import kotlin.math.abs
 fun HaloLineChart(
     lineChartData: LineChartData,
     modifier: Modifier = Modifier,
-    style: LineChartStyle,
+    contentPadding: ChartPadding =
+        ChartPadding(
+            start = 16.dp,
+            end = 16.dp,
+        ),
+    style: LineChartStyle = ChartDefaults.lineChartStyle(),
     onPointSelected: (Point?) -> Unit,
 ) {
     val textMeasurer = rememberTextMeasurer()
@@ -73,6 +80,7 @@ fun HaloLineChart(
     // Find min/max values to scale the chart correctly.
     val minX = remember(allPoints) { allPoints.minOf { it.x } }
     val maxX = remember(allPoints) { allPoints.maxOf { it.x } }
+
     val minY = remember(allPoints) { allPoints.minOf { it.y } }
     val maxY = remember(allPoints) { allPoints.maxOf { it.y } }
 
@@ -81,18 +89,12 @@ fun HaloLineChart(
         remember(minY, maxY, style.yAxisStyle) {
             (0..style.yAxisStyle.labelCount).map { i ->
                 val value = minY + (maxY - minY) * i / style.yAxisStyle.labelCount
-//                "%.1f".format(value)
                 value.format(1)
             }
         }
     val yAxisPadding =
         remember(yAxisLabels, style.yAxisStyle) {
-            with(density) {
-                (
-                    yAxisLabels.maxOfOrNull { textMeasurer.measure(AnnotatedString(it)).size.width }
-                        ?: 0
-                ) + 16.dp.toPx()
-            }
+            (yAxisLabels.maxOfOrNull { textMeasurer.measure(AnnotatedString(it)).size.width } ?: 0)
         }.toFloat()
 
     val xAxisPadding =
@@ -125,24 +127,25 @@ fun HaloLineChart(
         val chartHeight = constraints.maxHeight.toFloat()
         val chartWidth = constraints.maxWidth.toFloat()
 
-        val drawingWidth = (allPoints.distinctBy { it.x }.size - 1) * style.pointSpacing.dpToPx()
+        // Calculate the width of the chart content and add padding at the end.
+        val startPadding = with(density) { contentPadding.start.toPx() }
+        val endPadding = with(density) { contentPadding.end.toPx() }
+        val contentWidth = (allPoints.distinctBy { it.x }.size - 1) * style.pointSpacing.dpToPx()
+        val drawingWidth =
+            yAxisPadding + startPadding + contentWidth + endPadding // Total width of the scrollable canvas
+
         val drawingHeight = chartHeight - xAxisPadding
 
-        // Lambdas to convert data points to canvas coordinates, accounting for padding.
+        // Lambdas to convert data points to canvas coordinates.
+        // The X mapping is done over the contentWidth so it doesn't stretch into the padding.
         val toPxX: (Float) -> Float = { x ->
-            yAxisPadding + (
-                ((x - minX) / ((maxX - minX).takeIf { it > 0 } ?: 1f))
-            ) * (drawingWidth - yAxisPadding)
+            val xRange = (maxX - minX).takeIf { it > 0f } ?: 1f
+            yAxisPadding + startPadding + ((x - minX) / xRange) * contentWidth
         }
         val toPxY: (Float) -> Float = { y ->
-            drawingHeight - (((y - minY) / ((maxY - minY).takeIf { it > 0 } ?: 1f))) * drawingHeight
+            val yRange = (maxY - minY).takeIf { it > 0f } ?: 1f
+            drawingHeight - ((y - minY) / yRange) * drawingHeight
         }
-
-        // Draw Y-Axis labels and grid lines
-        Canvas(modifier = Modifier.fillMaxHeight().width(yAxisPadding.dp)) {
-            drawYAxis(yAxisLabels, toPxY, style.yAxisStyle, textMeasurer, chartWidth)
-        }
-
         Spacer(modifier = Modifier.width(yAxisPadding.dp))
 
         Box(
@@ -164,24 +167,25 @@ fun HaloLineChart(
                                     // Keep selection on tap release unless configured otherwise
                                 },
                             )
-                        }.pointerInput(allPoints) {
-                            detectDragGestures(
-                                onDragStart = { offset -> touchLocation = offset },
-                                onDragEnd = {
-                                    touchLocation = null
-                                    // Optional: Clear selection on drag end
-                                    // selectedIndex = null
-                                    // onPointSelected(null)
-                                },
-                                onDragCancel = {
-                                    touchLocation = null
-                                    // selectedIndex = null
-                                    // onPointSelected(null)
-                                },
-                            ) { change, _ ->
-                                touchLocation = change.position
-                            }
                         },
+//                            .pointerInput(allPoints) {
+                //                            detectDragGestures(
+                //                                onDragStart = { offset -> touchLocation = offset },
+                //                                onDragEnd = {
+                //                                    touchLocation = null
+                //                                    // Optional: Clear selection on drag end
+                //                                    // selectedIndex = null
+                //                                    // onPointSelected(null)
+                //                                },
+                //                                onDragCancel = {
+                //                                    touchLocation = null
+                //                                    // selectedIndex = null
+                //                                    // onPointSelected(null)
+                //                                },
+                //                            ) { change, _ ->
+                //                                touchLocation = change.position
+                //                            }
+//                        },
             ) {
                 // Find the closest point index to the touch location
                 val currentTouchLocation = touchLocation
@@ -244,7 +248,6 @@ fun HaloLineChart(
                     if (primaryPoint != null) {
                         drawIndicator(
                             points = pointsAtSelectedIndex,
-                            primaryPoint = primaryPoint,
                             toPxX = toPxX,
                             toPxY = toPxY,
                             style = style.indicatorStyle,
@@ -256,6 +259,17 @@ fun HaloLineChart(
                 }
             }
         }
+
+        // Draw Y-Axis labels and grid lines
+        Canvas(
+            modifier =
+                Modifier
+                    .fillMaxHeight()
+                    .width(yAxisPadding.toInt().pxToDp())
+                    .background(Color.Red),
+        ) {
+            drawYAxis(yAxisLabels, toPxY, style.yAxisStyle, textMeasurer, chartWidth)
+        }
     }
 }
 
@@ -264,7 +278,6 @@ fun HaloLineChart(
  */
 internal fun DrawScope.drawIndicator(
     points: List<Point>,
-    primaryPoint: Point,
     toPxX: (Float) -> Float,
     toPxY: (Float) -> Float,
     style: IndicatorStyle,
@@ -272,7 +285,7 @@ internal fun DrawScope.drawIndicator(
     textMeasurer: TextMeasurer,
     drawingHeight: Float,
 ) {
-    val pointX = toPxX(primaryPoint.x)
+    val pointX = toPxX(points.first().x)
 
     // Draw vertical line
     drawLine(
@@ -300,44 +313,43 @@ internal fun DrawScope.drawIndicator(
             radius = (style.indicatorCircleRadius - style.indicatorCircleStrokeWidth / 2).toPx(),
             center = Offset(pointX, pointY),
         )
-    }
 
-    // --- Draw the value label for the primary point ---
+        // --- Draw the value label for the primary point ---
 //    val labelText = "%.2f".format(primaryPoint.y)
-    val labelText = primaryPoint.y.format(2)
-    val textLayoutResult =
-        textMeasurer.measure(
-            text = AnnotatedString(labelText),
-            style = style.labelTextStyle,
+        val labelText = point.y.format(2)
+        val textLayoutResult =
+            textMeasurer.measure(
+                text = AnnotatedString(labelText),
+                style = style.labelTextStyle,
+            )
+
+        val padding = 8.dp.toPx()
+        val boxWidth = textLayoutResult.size.width + padding * 2
+        val boxHeight = textLayoutResult.size.height + padding
+
+        val boxTopLeft =
+            Offset(
+                x = (pointX - boxWidth / 2).coerceIn(0f, size.width - boxWidth),
+                y =
+                    (pointY - boxHeight - style.indicatorCircleRadius.toPx() - padding / 2).coerceAtLeast(
+                        0f,
+                    ),
+            )
+
+        // Draw rounded rect background for the label
+        drawRoundRect(
+            color = style.labelBackgroundColor,
+            topLeft = boxTopLeft,
+            size = Size(boxWidth, boxHeight),
+            cornerRadius =
+                androidx.compose.ui.geometry
+                    .CornerRadius(8.dp.toPx()),
         )
 
-    val padding = 8.dp.toPx()
-    val boxWidth = textLayoutResult.size.width + padding * 2
-    val boxHeight = textLayoutResult.size.height + padding
-    val pointY = toPxY(primaryPoint.y)
-
-    val boxTopLeft =
-        Offset(
-            x = (pointX - boxWidth / 2).coerceIn(0f, size.width - boxWidth),
-            y =
-                (pointY - boxHeight - style.indicatorCircleRadius.toPx() - padding / 2).coerceAtLeast(
-                    0f,
-                ),
+        // Draw the text itself
+        drawText(
+            textLayoutResult = textLayoutResult,
+            topLeft = Offset(boxTopLeft.x + padding, boxTopLeft.y + padding / 2),
         )
-
-    // Draw rounded rect background for the label
-    drawRoundRect(
-        color = style.labelBackgroundColor,
-        topLeft = boxTopLeft,
-        size = Size(boxWidth, boxHeight),
-        cornerRadius =
-            androidx.compose.ui.geometry
-                .CornerRadius(8.dp.toPx()),
-    )
-
-    // Draw the text itself
-    drawText(
-        textLayoutResult = textLayoutResult,
-        topLeft = Offset(boxTopLeft.x + padding, boxTopLeft.y + padding / 2),
-    )
+    }
 }
