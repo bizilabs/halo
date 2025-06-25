@@ -302,7 +302,7 @@ internal fun DrawScope.drawIndicator(
 
         // Outer stroke for the circle
         drawCircle(
-            color = Color.White, // or a theme-appropriate background color
+            color = Color.White,
             radius = style.indicatorCircleRadius.toPx(),
             center = Offset(pointX, pointY),
         )

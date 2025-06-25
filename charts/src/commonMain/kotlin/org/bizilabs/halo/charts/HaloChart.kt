@@ -76,7 +76,7 @@ fun HaloLineChartSample() {
                         points = samplePoints1,
                         style =
                             LineStyle(
-                                color = Color(0xFFC5A4FF), // A nice purple
+                                color = Color(0xFFC5A4FF),
                                 strokeWidth = 3.dp,
                             ),
                     ),
@@ -84,12 +84,12 @@ fun HaloLineChartSample() {
                         points = samplePoints2,
                         style =
                             LineStyle(
-                                color = Color(0xFF43D4C4), // A nice teal
+                                color = Color(0xFF43D4C4),
                                 strokeWidth = 3.dp,
                             ),
                     ),
                 ),
-            defaultSelectedIndex = 4, // Select "May" by default
+            defaultSelectedIndex = 4,
         )
 
     var selectedValue by remember { mutableStateOf<String?>("Tap or Drag") }
@@ -106,7 +106,7 @@ fun HaloLineChartSample() {
             modifier = Modifier.fillMaxSize().height(350.dp),
             style =
                 ChartDefaults.lineChartStyle().copy(
-                    pointSpacing = 80.dp, // More space between points
+                    pointSpacing = 80.dp,
                     yAxisStyle = AxisStyle(labelCount = 10),
                 ),
             onPointSelected = { point ->

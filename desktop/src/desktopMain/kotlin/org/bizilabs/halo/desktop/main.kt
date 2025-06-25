@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:filename")
+
 package org.bizilabs.halo.desktop
 
 import androidx.compose.ui.window.Window
