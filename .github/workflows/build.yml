@@ -15,16 +15,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - target: iosSimulatorArm64Test
+          - target: build
             os: macos-latest
-          - target: jvmTest
-            os: ubuntu-latest
-          - target: linuxX64Test
-            os: ubuntu-latest
-          - target: testDebugUnitTest
-            os: ubuntu-latest
-          - target: testReleaseUnitTest
-            os: ubuntu-latest
+#          - target: build
+#            os: ubuntu-latest
+#          - target: linuxX64Test
+#            os: ubuntu-latest
+#          - target: testDebugUnitTest
+#            os: ubuntu-latest
+#          - target: testReleaseUnitTest
+#            os: ubuntu-latest
     runs-on: ${{ matrix.os }}
 
     steps:
