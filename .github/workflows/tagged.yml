@@ -31,3 +31,6 @@ jobs:
 
       - name: Publish Library
         run: ./gradlew halo:publish -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Library
+        run: ./gradlew charts:publish -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}

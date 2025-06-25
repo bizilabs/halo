@@ -15,6 +15,7 @@ kotlin {
 
         commonMain.dependencies {
             implementation(project(":halo"))
+            implementation(project(":charts"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.ui)

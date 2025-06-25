@@ -27,5 +27,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "halo"
 include(":halo")
+include(":charts")
 // apps
 include(":desktop")
