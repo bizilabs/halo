@@ -53,7 +53,6 @@ fun HaloChart(
                 onPointSelected = onPointSelected,
             )
         }
-        // Cases for BarChartData, PieChartData, etc. can be added here.
     }
 }
 

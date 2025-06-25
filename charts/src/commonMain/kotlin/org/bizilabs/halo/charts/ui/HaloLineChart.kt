@@ -247,27 +247,29 @@ fun HaloLineChart(
                 }
 
                 // Draw indicator for the selected point index
-                selectedIndex?.let { index ->
-                    val pointsAtSelectedIndex =
-                        lineChartData.lines.mapNotNull { it.points.getOrNull(index) }
-                    val lineStyles = lineChartData.lines.map { it.style }
+                if (lineChartData.selectedLineVisible) {
+                    selectedIndex?.let { index ->
+                        val pointsAtSelectedIndex =
+                            lineChartData.lines.mapNotNull { it.points.getOrNull(index) }
+                        val lineStyles = lineChartData.lines.map { it.style }
 
-                    // Find the point closest to the touch vertically to display its label
-                    val primaryPoint =
-                        currentTouchLocation?.let { touch ->
-                            pointsAtSelectedIndex.minByOrNull { abs(toPxY(it.y) - touch.y) }
-                        } ?: pointsAtSelectedIndex.firstOrNull()
+                        // Find the point closest to the touch vertically to display its label
+                        val primaryPoint =
+                            currentTouchLocation?.let { touch ->
+                                pointsAtSelectedIndex.minByOrNull { abs(toPxY(it.y) - touch.y) }
+                            } ?: pointsAtSelectedIndex.firstOrNull()
 
-                    if (primaryPoint != null) {
-                        drawIndicator(
-                            points = pointsAtSelectedIndex,
-                            toPxX = toPxX,
-                            toPxY = toPxY,
-                            style = style.indicatorStyle,
-                            lineStyles = lineStyles,
-                            textMeasurer = textMeasurer,
-                            drawingHeight = drawingHeight,
-                        )
+                        if (primaryPoint != null) {
+                            drawIndicator(
+                                points = pointsAtSelectedIndex,
+                                toPxX = toPxX,
+                                toPxY = toPxY,
+                                style = style.indicatorStyle,
+                                lineStyles = lineStyles,
+                                textMeasurer = textMeasurer,
+                                drawingHeight = drawingHeight,
+                            )
+                        }
                     }
                 }
             }

@@ -20,4 +20,5 @@ sealed interface ChartData {
 data class LineChartData(
     val lines: List<Line>,
     val defaultSelectedIndex: Int? = 0,
+    val selectedLineVisible: Boolean = true,
 ) : ChartData
