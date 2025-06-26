@@ -27,10 +27,10 @@ jobs:
         run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Build with Tag Version
-        run: ./gradlew assemble --stacktrace -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew assemble --stacktrace -Pversion=$TAG_NAME -PmavenUsername=${{ secrets.CURRENT_GITHUB_USER }} -PmavenPassword=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish Library
-        run: ./gradlew halo:publish -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Halo Library
+        run: ./gradlew halo:publish -Pversion=$TAG_NAME -PmavenUsername=${{ secrets.CURRENT_GITHUB_USER }} -PmavenPassword=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish Library
-        run: ./gradlew charts:publish -Pversion=$TAG_NAME -PGITHUB_USER=${{ secrets.CURRENT_GITHUB_USER }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Charts Library
+        run: ./gradlew charts:publish -Pversion=$TAG_NAME -PmavenUsername=${{ secrets.CURRENT_GITHUB_USER }} -PmavenPassword=${{ secrets.GITHUB_TOKEN }}

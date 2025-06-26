@@ -10,11 +10,11 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-fun Project.findProperties(file: String): Properties {
+/*fun Project.findProperties(file: String): Properties {
     val properties = Properties()
     properties.load(project.rootProject.file(file).reader())
     return properties
-}
+}*/
 
 kotlin {
     jvm()
@@ -78,13 +78,13 @@ compose {
 group = "org.bizilabs.halo"
 
 publishing {
-    val properties = findProperties("local.properties")
+   // val properties = findProperties("local.properties")
     repositories {
         maven {
             setUrl("https://maven.pkg.github.com/bizilabs/halo")
             credentials {
-                username = properties["github.username"].toString()
-                password = properties["github.token"].toString()
+                username = project.properties["mavenUsername"].toString()
+                password = project.properties["mavenPassword"].toString()
             }
         }
     }
