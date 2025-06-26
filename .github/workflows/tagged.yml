@@ -9,6 +9,10 @@ jobs:
     name: Tagged build and publish
     runs-on: macos-latest
 
+    permissions:
+      contents: write # Needed for release assets if applicable, good practice for publishing
+      packages: write # Crucial for publishing to GitHub Packages
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
