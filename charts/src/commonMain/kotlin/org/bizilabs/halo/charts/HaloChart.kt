@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
@@ -59,7 +61,20 @@ fun HaloChart(
 @Composable
 fun HaloLineChartSample() {
     val months =
-        listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "December")
+        listOf(
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "December"
+        )
     val samplePoints1 =
         List(12) { i ->
             Point(i.toFloat(), Random.nextDouble(40.0, 110.0).toFloat(), months[i])
@@ -80,6 +95,7 @@ fun HaloLineChartSample() {
                                 color = Color(0xFFC5A4FF),
                                 strokeWidth = 3.dp,
                             ),
+                        label = "Line 1"
                     ),
                     Line(
                         points = samplePoints2,
@@ -88,6 +104,7 @@ fun HaloLineChartSample() {
                                 color = Color(0xFF43D4C4),
                                 strokeWidth = 3.dp,
                             ),
+                        label = "Line 2"
                     ),
                 ),
             defaultSelectedIndex = 4,
@@ -104,12 +121,16 @@ fun HaloLineChartSample() {
         Spacer(Modifier.height(16.dp))
         HaloChart(
             chartData = lineChartData,
-            modifier = Modifier.fillMaxSize().height(350.dp),
+            modifier = Modifier.fillMaxSize().height(240.dp).padding(horizontal = 16.dp),
             style =
                 ChartDefaults.lineChartStyle().copy(
                     pointSpacing = 80.dp,
-                    yAxisStyle = AxisStyle(labelCount = 10, axisBackgroundColor = HaloTheme.colorScheme.background.container),
+                    yAxisStyle = AxisStyle(
+                        labelCount = 10,
+                        axisBackgroundColor = HaloTheme.colorScheme.background.container
+                    ),
                     indicatorStyle = IndicatorStyle(Color.Blue),
+                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.background.content)
                 ),
             onPointSelected = { point ->
                 selectedValue = point?.y?.format(2) ?: "N/A"

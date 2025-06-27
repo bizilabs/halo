@@ -71,7 +71,7 @@ android {
 compose {
     resources {
         publicResClass = false
-        packageOfResClass = "org.bizilabs.halo.generated.resources"
+        packageOfResClass = "org.bizilabs.halo.charts.generated.resources"
         generateResClass = auto
     }
 }

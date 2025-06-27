@@ -1,8 +1,11 @@
 package org.bizilabs.halo.charts.style
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 /**
  * A container for all chart styling options.
@@ -16,6 +19,8 @@ data class LineChartStyle(
     val yAxisStyle: AxisStyle = AxisStyle(),
     val xAxisStyle: AxisStyle = AxisStyle(),
     val indicatorStyle: IndicatorStyle = IndicatorStyle(),
+    val legendTextStyle: TextStyle = TextStyle(color = Color.Black, fontSize = 14.sp), // Added legend text style
+    val legendBottomSpacing: Dp = 24.dp
 )
 
 /**

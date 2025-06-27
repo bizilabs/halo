@@ -17,20 +17,11 @@ internal fun DrawScope.drawYAxis(
     toPxY: (Float) -> Float,
     style: AxisStyle,
     textMeasurer: TextMeasurer,
-    chartWidth: Float,
+    yAxisLabelMaxWidth: Float,
 ) {
     labels.forEach { label ->
         val yValue = label.toFloat()
         val y = toPxY(yValue)
-
-        if (style.showGridLines) {
-            drawLine(
-                color = style.gridLineColor,
-                start = Offset(0f, y),
-                end = Offset(chartWidth, y),
-                strokeWidth = style.gridLineWidth.toPx(),
-            )
-        }
 
         val textLayoutResult =
             textMeasurer.measure(
@@ -39,7 +30,7 @@ internal fun DrawScope.drawYAxis(
             )
         drawText(
             textLayoutResult = textLayoutResult,
-            topLeft = Offset(0f, y - textLayoutResult.size.height / 2),
+            topLeft = Offset(yAxisLabelMaxWidth - textLayoutResult.size.width, y - textLayoutResult.size.height / 2),
         )
     }
 }

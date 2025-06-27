@@ -22,4 +22,5 @@ data class Point(
 data class Line(
     val points: List<Point>,
     val style: LineStyle = LineStyle(),
+    val label: String,
 )
