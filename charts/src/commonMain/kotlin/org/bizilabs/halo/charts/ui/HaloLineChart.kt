@@ -42,6 +42,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.bizilabs.halo.base.HaloShapes
@@ -198,8 +199,34 @@ fun HaloLineChart(
             // Calculate the width of the chart content and add padding at the end.
             val startPadding = with(density) { contentPadding.start.toPx() }
             val endPadding = with(density) { contentPadding.end.toPx() }
-            val contentWidth =
-                (allPoints.distinctBy { it.x }.size - 1) * style.pointSpacing.dpToPx()
+
+            // Calculate width for chart content (excluding Y-axis padding, including start/end contentPadding)
+            val availableContentWidthForDynamicSpacing =
+                chartWidth - yAxisPadding - with(density) { contentPadding.start.toPx() } - with(
+                    density
+                ) { contentPadding.end.toPx() }
+            val numUniqueXPoints = allPoints.distinctBy { it.x }.size
+
+            val calculatedPointSpacingPx = if (numUniqueXPoints > 1) {
+                if (style.pointSpacing == Dp.Unspecified) {
+                    // Calculate dynamic spacing
+                    (availableContentWidthForDynamicSpacing / (numUniqueXPoints - 1))
+                        .coerceAtLeast(style.minPointSpacing.dpToPx())
+                } else {
+                    // Use fixed spacing
+                    style.pointSpacing.dpToPx()
+                }
+            } else {
+                0f // If 0 or 1 data point, spacing is not applicable or 0
+            }
+
+            // Recalculate contentWidth based on potentially dynamic spacing
+            val contentWidth = if (numUniqueXPoints > 1) {
+                (numUniqueXPoints - 1) * calculatedPointSpacingPx
+            } else {
+                0f // For 0 or 1 point, contentWidth is 0
+            }
+
             val drawingWidth =
                 yAxisPadding + startPadding + contentWidth + endPadding // Total width of the scrollable canvas
 
