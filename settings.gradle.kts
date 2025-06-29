@@ -30,3 +30,5 @@ include(":halo")
 include(":charts")
 // apps
 include(":desktop")
+include(":sample:android")
+include(":sample:halo")
