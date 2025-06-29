@@ -11,8 +11,11 @@ import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloFonts
 import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.base.LocalHaloColorScheme
+import org.bizilabs.halo.base.LocalThickness
+import org.bizilabs.halo.base.Thickness
 import org.bizilabs.halo.base.getHaloColorScheme
 import org.bizilabs.halo.base.provideHaloColorScheme
+import org.bizilabs.halo.base.provideThickness
 
 data object HaloDefaults {
     val Fonts = HaloFonts()
@@ -25,6 +28,10 @@ data object HaloTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalHaloColorScheme.current
+
+    val thickness: Thickness
+        @Composable
+        get() = LocalThickness.current
 }
 
 /**
@@ -38,6 +45,7 @@ fun HaloTheme(
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
+        provideThickness(),
         provideHaloColorScheme(colorScheme = colorScheme),
     ) {
         MaterialTheme(shapes = shapes, content = content)

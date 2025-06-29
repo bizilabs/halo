@@ -17,6 +17,7 @@ data class HaloColorTheme(
 )
 
 data class HaloColorScheme(
+    val primary: HaloColorValue,
     val background: HaloColorValue,
     val surface: HaloColorValue,
     val info: HaloColorValue,
