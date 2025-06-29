@@ -4,6 +4,10 @@ import androidx.compose.ui.graphics.Color
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloColorValue
 
+//Default Light Primary Color
+val BaseDarkPrimaryContainerColor = Color(0xFF2454FF)
+val BaseDarkPrimaryContentColor = Color(0xFFFFFFF)
+
 // Default Dark Background Color
 private val BaseDarkBackgroundContainerColor = Color(0xFF0A0A0A)
 private val BaseDarkBackgroundContentColor = Color(0xFFFFFFFF)
@@ -30,6 +34,10 @@ private val BaseDarkInfoContentColor = Color(0xFFFFFFFF)
 
 internal val HaloDarkColorScheme =
     HaloColorScheme(
+        primary = HaloColorValue(
+            content = BaseDarkPrimaryContentColor,
+            container = BaseDarkPrimaryContainerColor
+        ),
         background =
             HaloColorValue(
                 container = BaseDarkBackgroundContainerColor,

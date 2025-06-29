@@ -12,7 +12,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import org.bizilabs.halo.HaloTheme
 
 @Composable
 fun HaloButton(
@@ -22,7 +24,10 @@ fun HaloButton(
     shape: Shape = MaterialTheme.shapes.medium,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(),
+    buttonColors: ButtonColors = ButtonDefaults.buttonColors(
+        containerColor = HaloTheme.colorScheme.primary.container,
+        contentColor = HaloTheme.colorScheme.primary.content
+    ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
     content: @Composable RowScope.() -> Unit,
@@ -49,7 +54,9 @@ fun HaloTextButton(
     shape: Shape = MaterialTheme.shapes.medium,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(),
+    buttonColors: ButtonColors = ButtonDefaults.buttonColors(
+        contentColor = HaloTheme.colorScheme.primary.content
+    ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
     content: @Composable RowScope.() -> Unit,
@@ -59,7 +66,7 @@ fun HaloTextButton(
         modifier = modifier,
         enabled = enabled,
         shape = shape,
-        colors =buttonColors,
+        colors = buttonColors,
         elevation = elevation,
         border = border,
         contentPadding = contentPadding,
@@ -74,8 +81,15 @@ fun HaloOutlineButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shape: Shape = MaterialTheme.shapes.medium,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(),
-    border: BorderStroke = ButtonDefaults.outlinedButtonBorder() ,
+    buttonColors: ButtonColors = ButtonDefaults.buttonColors(
+        containerColor = Color.Transparent,
+        contentColor = HaloTheme.colorScheme.primary.content
+    ),
+    border: BorderStroke = BorderStroke(
+        width = HaloTheme.thickness.small,
+        color = if (enabled) HaloTheme.colorScheme.primary.container
+        else ButtonDefaults.outlinedButtonColors().disabledContentColor,
+    ),
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
