@@ -10,12 +10,15 @@ import androidx.compose.ui.text.font.FontFamily
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloFonts
 import org.bizilabs.halo.base.HaloShapes
+import org.bizilabs.halo.base.HaloTypography
 import org.bizilabs.halo.base.LocalHaloColorScheme
+import org.bizilabs.halo.base.LocalHaloTypography
 import org.bizilabs.halo.base.LocalThickness
 import org.bizilabs.halo.base.Thickness
 import org.bizilabs.halo.base.getHaloColorScheme
 import org.bizilabs.halo.base.provideHaloColorScheme
 import org.bizilabs.halo.base.provideThickness
+import org.bizilabs.halo.base.provideTypography
 
 data object HaloDefaults {
     val Fonts = HaloFonts()
@@ -32,6 +35,11 @@ data object HaloTheme {
     val thickness: Thickness
         @Composable
         get() = LocalThickness.current
+
+    val typography: HaloTypography
+        @Composable
+        get() = LocalHaloTypography.current
+
 }
 
 /**
@@ -40,6 +48,7 @@ data object HaloTheme {
 @Composable
 fun HaloTheme(
     font: FontFamily = HaloDefaults.Fonts.Regular,
+    typography: HaloTypography =  HaloTypography(fontFamily = font),
     shapes: Shapes = HaloDefaults.Shapes.None,
     colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
     content: @Composable () -> Unit,
@@ -47,6 +56,7 @@ fun HaloTheme(
     CompositionLocalProvider(
         provideThickness(),
         provideHaloColorScheme(colorScheme = colorScheme),
+        provideTypography(typography = typography)
     ) {
         MaterialTheme(shapes = shapes, content = content)
     }
