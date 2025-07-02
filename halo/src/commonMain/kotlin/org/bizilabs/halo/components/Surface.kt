@@ -16,7 +16,7 @@ import org.bizilabs.halo.HaloTheme
 fun HaloSurface(
     modifier: Modifier = Modifier,
     shape: Shape = RectangleShape,
-    color: Color = HaloTheme.colorScheme.surface.container,
+    color: Color = HaloTheme.colorScheme.background.surface,
     contentColor: Color = contentColorFor(color),
     tonalElevation: Dp = 0.dp,
     shadowElevation: Dp = 0.dp,

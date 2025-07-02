@@ -28,12 +28,12 @@ fun AccordionSection() {
         Column(modifier = Modifier.padding(vertical = 16.dp)) {
             HaloText(
                 text = "Accordion",
-                color = HaloTheme.colorScheme.background.content,
+                color = HaloTheme.colorScheme.background.onBase,
                 fontWeight = FontWeight.SemiBold,
             )
             HaloText(
                 text = "An accordion allows users to expand and collapse sections of content.",
-                color = HaloTheme.colorScheme.background.content,
+                color = HaloTheme.colorScheme.background.onBase,
                 fontWeight = FontWeight.Light,
             )
         }

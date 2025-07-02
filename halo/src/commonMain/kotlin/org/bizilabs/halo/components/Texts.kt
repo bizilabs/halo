@@ -22,7 +22,7 @@ import org.bizilabs.halo.HaloTheme
 fun HaloText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = HaloTheme.colorScheme.background.content,
+    color: Color = HaloTheme.colorScheme.background.onBase,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
@@ -63,7 +63,7 @@ fun HaloText(
 fun HaloText(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    color: Color = HaloTheme.colorScheme.background.content,
+    color: Color = HaloTheme.colorScheme.background.onBase,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,

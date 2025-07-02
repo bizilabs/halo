@@ -25,8 +25,8 @@ fun HaloButton(
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
     buttonColors: ButtonColors = ButtonDefaults.buttonColors(
-        containerColor = HaloTheme.colorScheme.primary.container,
-        contentColor = HaloTheme.colorScheme.primary.content
+        containerColor = HaloTheme.colorScheme.primary.base,
+        contentColor = HaloTheme.colorScheme.primary.onBase
     ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
@@ -55,7 +55,7 @@ fun HaloTextButton(
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
     buttonColors: ButtonColors = ButtonDefaults.buttonColors(
-        contentColor = HaloTheme.colorScheme.primary.content
+        contentColor = HaloTheme.colorScheme.primary.onBase
     ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
@@ -83,11 +83,11 @@ fun HaloOutlineButton(
     shape: Shape = MaterialTheme.shapes.medium,
     buttonColors: ButtonColors = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
-        contentColor = HaloTheme.colorScheme.primary.content
+        contentColor = HaloTheme.colorScheme.primary.onBase
     ),
     border: BorderStroke = BorderStroke(
         width = HaloTheme.thickness.small,
-        color = if (enabled) HaloTheme.colorScheme.primary.container
+        color = if (enabled) HaloTheme.colorScheme.primary.base
         else ButtonDefaults.outlinedButtonColors().disabledContentColor,
     ),
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),

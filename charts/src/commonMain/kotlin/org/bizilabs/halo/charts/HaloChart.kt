@@ -127,10 +127,10 @@ fun HaloLineChartSample() {
                     pointSpacing = 80.dp,
                     yAxisStyle = AxisStyle(
                         labelCount = 10,
-                        axisBackgroundColor = HaloTheme.colorScheme.background.container
+                        axisBackgroundColor = HaloTheme.colorScheme.background.base
                     ),
                     indicatorStyle = IndicatorStyle(Color.Blue),
-                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.background.content)
+                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.background.onBase)
                 ),
             onPointSelected = { point ->
                 selectedValue = point?.y?.format(2) ?: "N/A"

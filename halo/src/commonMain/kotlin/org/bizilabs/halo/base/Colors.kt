@@ -6,9 +6,25 @@ import org.bizilabs.halo.HaloDefaults
 import org.bizilabs.halo.base.colors.HaloDarkColorScheme
 import org.bizilabs.halo.base.colors.HaloLightColorScheme
 
+/***
+ * @param dark This is the darker version of the color.
+ * @param base This is the main version of the color
+ * @param subtle This is a lighter version of the color, which could be used for borders
+ * @param onBase This is the lightest version of the color and contrasts with the base
+ */
+
 data class HaloColorValue(
-    val container: Color,
-    val content: Color,
+    val dark: Color,
+    val base: Color,
+    val subtle: Color,
+    val onBase: Color,
+)
+
+data class HaloBackgroundValue(
+    val surface: Color,
+    val base: Color,
+    val onSurface: Color,
+    val onBase: Color,
 )
 
 data class HaloColorTheme(
@@ -18,8 +34,7 @@ data class HaloColorTheme(
 
 data class HaloColorScheme(
     val primary: HaloColorValue,
-    val background: HaloColorValue,
-    val surface: HaloColorValue,
+    val background: HaloBackgroundValue,
     val info: HaloColorValue,
     val error: HaloColorValue,
     val success: HaloColorValue,
