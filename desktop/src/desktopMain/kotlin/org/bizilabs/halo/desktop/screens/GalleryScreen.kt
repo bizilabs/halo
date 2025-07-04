@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import org.bizilabs.halo.HaloTheme
-import org.bizilabs.halo.charts.HaloLineChartSample
+import org.bizilabs.halo.components.BadgePreview
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
@@ -89,7 +89,7 @@ fun LandingScreenContent(
                     }
 
                     null -> {
-                        HaloLineChartSample()
+                        BadgePreview()
                     }
                 }
             }
