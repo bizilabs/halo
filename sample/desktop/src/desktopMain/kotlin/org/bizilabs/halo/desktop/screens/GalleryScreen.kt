@@ -1,6 +1,7 @@
 package org.bizilabs.halo.desktop.screens
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,21 +16,24 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import org.bizilabs.halo.HaloTheme
-import org.bizilabs.halo.components.BadgePreview
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
 import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
+import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
 
 data object GalleryScreen : Screen {
@@ -58,7 +62,25 @@ fun LandingScreenContent(
     ) {
         Scaffold(
             topBar = {
-                Row(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    AnimatedVisibility(visible = state.section != null) {
+                        IconButton(
+                            onClick = { onAction(GalleryScreenAction.ClickBack) },
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                                contentDescription = "navigate back",
+                            )
+                        }
+                    }
+                    HaloText(
+                        modifier = Modifier.padding(16.dp),
+                        text = "Halo",
+                        fontSize = 24.sp,
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                     IconButton(onClick = {
                         onAction(GalleryScreenAction.ToggleTheme)
@@ -80,17 +102,13 @@ fun LandingScreenContent(
         ) { pad ->
             AnimatedContent(state.section) { section ->
                 when (section) {
-                    GalleryScreenSection.Accordion -> {
-                        AccordionSection()
-                    }
+                    GalleryScreenSection.Accordion -> AccordionSection()
 
-                    GalleryScreenSection.Card -> {
-                        CardSection()
-                    }
+                    GalleryScreenSection.Card -> CardSection()
 
-                    null -> {
-                        BadgePreview()
-                    }
+                    GalleryScreenSection.Badge -> BadgeSection()
+
+                    null -> GalleryList(state = state, onAction = onAction)
                 }
             }
         }

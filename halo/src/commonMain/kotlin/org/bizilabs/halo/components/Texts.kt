@@ -16,13 +16,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import org.bizilabs.halo.HaloTheme
 
 @Composable
 fun HaloText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = HaloTheme.colorScheme.background.onBase,
+    color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
@@ -63,7 +62,7 @@ fun HaloText(
 fun HaloText(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    color: Color = HaloTheme.colorScheme.background.onBase,
+    color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,

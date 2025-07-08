@@ -26,9 +26,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "halo"
+// libraries
 include(":halo")
 include(":charts")
 // apps
-include(":desktop")
 include(":sample:android")
-include(":sample:halo")
+include(":sample:desktop")

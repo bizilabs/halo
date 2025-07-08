@@ -25,7 +25,7 @@ import org.bizilabs.halo.components.cards.HaloSlotCard
 @Composable
 fun AccordionSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-        Column(modifier = Modifier.padding(vertical = 16.dp)) {
+        Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
                 text = "Accordion",
                 color = HaloTheme.colorScheme.background.onBase,
@@ -64,7 +64,7 @@ fun AccordionSection() {
                     collapsed = open,
                     onClick = { open = !open },
                     header = {
-                        HaloText(text = "Title")
+                        HaloText(modifier = Modifier.padding(8.dp), text = "Title")
                     },
                 ) {
                     HaloText(text = "Content")

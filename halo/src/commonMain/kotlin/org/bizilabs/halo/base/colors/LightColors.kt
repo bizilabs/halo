@@ -5,7 +5,7 @@ import org.bizilabs.halo.base.HaloBackgroundValue
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloColorValue
 
-//Default Light Primary Color
+// Default Light Primary Color
 val BaseLightPrimaryDarkerColor = Color(0xFF3A065A)
 val BaseLightPrimaryDarkColor = Color(0xFF690BA2)
 val BaseLightPrimaryBaseColor = Color(0xFFA020F0)
@@ -14,7 +14,7 @@ val BaseLightPrimaryLightestColor = Color(0xFFF1DFFD)
 
 // Default Light Background Color
 private val BaseLightBackgroundContainerColor = Color(0xFFFFFFFF)
-private val BaseLightBackgroundContentColor = Color(0xFFEFF3FF)
+private val BaseLightBackgroundContentColor = Color(0xFF000000)
 
 // Default Light Surface Color
 private val BaseLightSurfaceContainerColor = Color(0xFFF0F0F0)
@@ -50,13 +50,14 @@ private val BaseLightInfoLightestColor = Color(0xFFEFF3FF)
 
 internal val HaloLightColorScheme =
     HaloColorScheme(
-        primary = HaloColorValue(
-            stronger = BaseLightPrimaryDarkerColor,
-            strong = BaseLightPrimaryDarkColor,
-            neutral = BaseLightPrimaryBaseColor,
-            weak = BaseLightPrimarySubtleColor,
-            weaker = BaseLightPrimaryLightestColor
-        ),
+        primary =
+            HaloColorValue(
+                stronger = BaseLightPrimaryDarkerColor,
+                strong = BaseLightPrimaryDarkColor,
+                neutral = BaseLightPrimaryBaseColor,
+                weak = BaseLightPrimarySubtleColor,
+                weaker = BaseLightPrimaryLightestColor,
+            ),
         background =
             HaloBackgroundValue(
                 base = BaseLightBackgroundContainerColor,

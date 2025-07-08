@@ -1,5 +1,6 @@
 package org.bizilabs.halo.desktop.screens
 
+import androidx.compose.material.Badge
 import cafe.adriel.voyager.core.model.StateScreenModel
 import kotlinx.coroutines.flow.update
 import org.bizilabs.halo.HaloDefaults
@@ -13,6 +14,11 @@ sealed interface GalleryScreenSection {
             get() = "Accordion"
     }
 
+    data object Badge : GalleryScreenSection {
+        override val label: String
+            get() = "Badge"
+    }
+
     data object Card : GalleryScreenSection {
         override val label: String
             get() = "Card"
@@ -20,7 +26,7 @@ sealed interface GalleryScreenSection {
 
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Card)
+            get() = listOf(Accordion, Badge, Card)
     }
 }
 
@@ -30,6 +36,8 @@ sealed interface GalleryScreenAction {
     ) : GalleryScreenAction
 
     data object ToggleTheme : GalleryScreenAction
+
+    data object ClickBack : GalleryScreenAction
 }
 
 data class GalleryScreenState(
@@ -44,6 +52,7 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
         when (action) {
             is GalleryScreenAction.UpdateSection -> updateSection(action.section)
             GalleryScreenAction.ToggleTheme -> toggleTheme()
+            GalleryScreenAction.ClickBack -> mutableState.update { it.copy(section = null) }
         }
     }
 
