@@ -34,6 +34,7 @@ import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
 import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
+import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
 
 data object GalleryScreen : Screen {
@@ -107,6 +108,8 @@ fun LandingScreenContent(
                     GalleryScreenSection.Card -> CardSection()
 
                     GalleryScreenSection.Badge -> BadgeSection()
+
+                    GalleryScreenSection.Button -> ButtonSection()
 
                     null -> GalleryList(state = state, onAction = onAction)
                 }

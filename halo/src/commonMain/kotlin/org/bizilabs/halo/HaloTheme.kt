@@ -17,6 +17,7 @@ import org.bizilabs.halo.base.LocalHaloTypography
 import org.bizilabs.halo.base.LocalThickness
 import org.bizilabs.halo.base.Thickness
 import org.bizilabs.halo.base.getHaloColorScheme
+import org.bizilabs.halo.base.provideContentColor
 import org.bizilabs.halo.base.provideHaloColorScheme
 import org.bizilabs.halo.base.provideThickness
 import org.bizilabs.halo.base.provideTypography
@@ -40,7 +41,6 @@ data object HaloTheme {
     val typography: HaloTypography
         @Composable
         get() = LocalHaloTypography.current
-
 }
 
 /**
@@ -49,7 +49,7 @@ data object HaloTheme {
 @Composable
 fun HaloTheme(
     font: FontFamily = HaloDefaults.Fonts.Regular,
-    typography: HaloTypography =  HaloTypography(fontFamily = font),
+    typography: HaloTypography = HaloTypography(fontFamily = font),
     shapes: Shapes = HaloDefaults.Shapes.None,
     colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
     content: @Composable () -> Unit,
@@ -60,7 +60,8 @@ fun HaloTheme(
     CompositionLocalProvider(
         provideThickness(),
         provideHaloColorScheme(colorScheme = colorScheme),
-        provideTypography(typography = typography)
+        provideTypography(typography = typography),
+        provideContentColor(color = colorScheme.background.onBase),
     ) {
         MaterialTheme(shapes = shapes, content = content)
     }

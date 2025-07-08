@@ -24,10 +24,11 @@ fun HaloButton(
     shape: Shape = MaterialTheme.shapes.medium,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(
-        containerColor = HaloTheme.colorScheme.primary.neutral,
-        contentColor = HaloTheme.colorScheme.primary.weaker
-    ),
+    buttonColors: ButtonColors =
+        ButtonDefaults.buttonColors(
+            containerColor = HaloTheme.colorScheme.primary.neutral,
+            contentColor = HaloTheme.colorScheme.primary.weaker,
+        ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
     content: @Composable RowScope.() -> Unit,
@@ -54,9 +55,11 @@ fun HaloTextButton(
     shape: Shape = MaterialTheme.shapes.medium,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(
-        contentColor = HaloTheme.colorScheme.primary.weaker
-    ),
+    buttonColors: ButtonColors =
+        ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = HaloTheme.colorScheme.primary.neutral,
+        ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,
     content: @Composable RowScope.() -> Unit,
@@ -81,15 +84,21 @@ fun HaloOutlineButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shape: Shape = MaterialTheme.shapes.medium,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(
-        containerColor = Color.Transparent,
-        contentColor = HaloTheme.colorScheme.primary.weaker
-    ),
-    border: BorderStroke = BorderStroke(
-        width = HaloTheme.thickness.small,
-        color = if (enabled) HaloTheme.colorScheme.primary.neutral
-        else ButtonDefaults.outlinedButtonColors().disabledContentColor,
-    ),
+    buttonColors: ButtonColors =
+        ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = HaloTheme.colorScheme.primary.neutral,
+        ),
+    border: BorderStroke =
+        BorderStroke(
+            width = HaloTheme.thickness.small,
+            color =
+                if (enabled) {
+                    HaloTheme.colorScheme.primary.neutral
+                } else {
+                    ButtonDefaults.outlinedButtonColors().disabledContentColor
+                },
+        ),
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,

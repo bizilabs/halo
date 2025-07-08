@@ -19,6 +19,11 @@ sealed interface GalleryScreenSection {
             get() = "Badge"
     }
 
+    data object Button : GalleryScreenSection {
+        override val label: String
+            get() = "Button"
+    }
+
     data object Card : GalleryScreenSection {
         override val label: String
             get() = "Card"
@@ -26,7 +31,7 @@ sealed interface GalleryScreenSection {
 
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Badge, Card)
+            get() = listOf(Accordion, Badge, Button, Card)
     }
 }
 

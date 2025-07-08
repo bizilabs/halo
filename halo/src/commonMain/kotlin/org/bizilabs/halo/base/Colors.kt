@@ -1,5 +1,6 @@
 package org.bizilabs.halo.base
 
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
@@ -9,7 +10,7 @@ import org.bizilabs.halo.base.colors.HaloLightColorScheme
 import org.bizilabs.halo.base.colors.PolarDarkColorScheme
 import org.bizilabs.halo.base.colors.PolarLightColorScheme
 
-/***
+/**
  * @param stronger This is a variant of neutral that's highly contrasting on the theme selected.
  * On Light Mode it could be the darkest version of the neutral color while on dark mode,
  * it could be the lightest version of the neutral color
@@ -74,3 +75,5 @@ internal fun getHaloColorScheme(isDarkThemeEnabled: Boolean) =
 internal val LocalHaloColorScheme = staticCompositionLocalOf { HaloLightColorScheme }
 
 internal fun provideHaloColorScheme(colorScheme: HaloColorScheme) = LocalHaloColorScheme provides colorScheme
+
+internal fun provideContentColor(color: Color) = LocalContentColor provides color
