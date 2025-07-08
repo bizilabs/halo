@@ -1,5 +1,6 @@
 package org.bizilabs.halo.base
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import org.bizilabs.halo.HaloDefaults
@@ -7,19 +8,25 @@ import org.bizilabs.halo.base.colors.HaloDarkColorScheme
 import org.bizilabs.halo.base.colors.HaloLightColorScheme
 
 /***
- * @param dark This is the darker version of the color.
- * @param base This is the main version of the color
- * @param subtle This is a lighter version of the color, which could be used for borders
- * @param onBase This is the lightest version of the color and contrasts with the base
+ * @param stronger This is a variant of neutral that's highly contrasting on the theme selected.
+ * On Light Mode it could be the darkest version of the neutral color while on dark mode,
+ * it could be the lightest version of the neutral color
+ * @param strong TThis is a variant of neutral provides medium contrast, suitable for prominent elements.
+ * @param neutral This is the main version of the color
+ * @param weak This is a variant of neutral offers subtle contrast. It's ideal for subtle elements like borders or dividers
+ * @param weaker This is a variant of neutral that's least contrasting on the theme selected.
  */
 
+@Immutable
 data class HaloColorValue(
-    val dark: Color,
-    val base: Color,
-    val subtle: Color,
-    val onBase: Color,
+    val stronger: Color,
+    val strong: Color,
+    val neutral: Color,
+    val weak: Color,
+    val weaker: Color,
 )
 
+@Immutable
 data class HaloBackgroundValue(
     val surface: Color,
     val base: Color,
@@ -32,6 +39,7 @@ data class HaloColorTheme(
     val dark: HaloColorScheme,
 )
 
+@Immutable
 data class HaloColorScheme(
     val primary: HaloColorValue,
     val background: HaloBackgroundValue,
@@ -57,4 +65,5 @@ internal fun getHaloColorScheme(isDarkThemeEnabled: Boolean) =
 
 internal val LocalHaloColorScheme = staticCompositionLocalOf { HaloLightColorScheme }
 
-internal fun provideHaloColorScheme(colorScheme: HaloColorScheme) = LocalHaloColorScheme provides colorScheme
+internal fun provideHaloColorScheme(colorScheme: HaloColorScheme) =
+    LocalHaloColorScheme provides colorScheme

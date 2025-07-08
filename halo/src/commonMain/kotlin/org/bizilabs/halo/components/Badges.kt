@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Badge
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -57,28 +56,28 @@ fun HaloFilledBadge(
 ) {
     val (backgroundColor: Color, contentColor: Color) = when (mode) {
         ComponentMode.Default -> Pair(
-            HaloTheme.colorScheme.primary.base,
-            HaloTheme.colorScheme.primary.light
+            HaloTheme.colorScheme.primary.neutral,
+            HaloTheme.colorScheme.primary.weaker
         )
 
         ComponentMode.Info -> Pair(
-            HaloTheme.colorScheme.info.base,
-            HaloTheme.colorScheme.info.light
+            HaloTheme.colorScheme.info.neutral,
+            HaloTheme.colorScheme.info.weaker
         )
 
         ComponentMode.Success -> Pair(
-            HaloTheme.colorScheme.success.base,
-            HaloTheme.colorScheme.success.light
+            HaloTheme.colorScheme.success.neutral,
+            HaloTheme.colorScheme.success.weaker
         )
 
         ComponentMode.Error -> Pair(
-            HaloTheme.colorScheme.error.base,
-            HaloTheme.colorScheme.error.light
+            HaloTheme.colorScheme.error.neutral,
+            HaloTheme.colorScheme.error.weaker
         )
 
         ComponentMode.Warning -> Pair(
-            HaloTheme.colorScheme.warning.base,
-            HaloTheme.colorScheme.warning.light
+            HaloTheme.colorScheme.warning.neutral,
+            HaloTheme.colorScheme.warning.weaker
         )
     }
     /**
@@ -111,35 +110,35 @@ fun HaloOutlinedBadge(
 ) {
     val (backgroundColor: Color, contentColor: Color, borderColor: Color) = when (mode) {
         ComponentMode.Default -> Triple(
-            //HaloTheme.colorScheme.primary.light, // This doesn't work
+            //HaloTheme.colorScheme.primary.weaker, // This doesn't work
             Color(0xFFEFF3FF), // This works
-            //HaloTheme.colorScheme.primary.dark, // This content color doesn't
+            //HaloTheme.colorScheme.primary.strong, // This content color doesn't
             Color(0xFF0024A6), // This content color doesn't
-            HaloTheme.colorScheme.primary.subtle
+            HaloTheme.colorScheme.primary.weak
         )
 
         ComponentMode.Info -> Triple(
-            HaloTheme.colorScheme.info.light,
-            HaloTheme.colorScheme.info.dark,
-            HaloTheme.colorScheme.info.subtle
+            HaloTheme.colorScheme.info.weaker,
+            HaloTheme.colorScheme.info.strong,
+            HaloTheme.colorScheme.info.weak
         )
 
         ComponentMode.Success -> Triple(
-            HaloTheme.colorScheme.success.light,
-            HaloTheme.colorScheme.success.dark,
-            HaloTheme.colorScheme.success.subtle
+            HaloTheme.colorScheme.success.weaker,
+            HaloTheme.colorScheme.success.strong,
+            HaloTheme.colorScheme.success.weak
         )
 
         ComponentMode.Error -> Triple(
-            HaloTheme.colorScheme.error.light,
-            HaloTheme.colorScheme.error.dark,
-            HaloTheme.colorScheme.error.subtle
+            HaloTheme.colorScheme.error.weaker,
+            HaloTheme.colorScheme.error.strong,
+            HaloTheme.colorScheme.error.weak
         )
 
         ComponentMode.Warning -> Triple(
-            HaloTheme.colorScheme.warning.light,
-            HaloTheme.colorScheme.warning.dark,
-            HaloTheme.colorScheme.warning.subtle
+            HaloTheme.colorScheme.warning.weaker,
+            HaloTheme.colorScheme.warning.strong,
+            HaloTheme.colorScheme.warning.weak
         )
     }
     /**
@@ -204,7 +203,7 @@ fun BadgePreview() {
                 .padding(48.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            HaloText("Halo Badges", color = HaloTheme.colorScheme.primary.base)
+            HaloText("Halo Badges", color = HaloTheme.colorScheme.primary.neutral)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 HaloFilledBadge(text = "Filled Badge")
                 HaloFilledBadge(
