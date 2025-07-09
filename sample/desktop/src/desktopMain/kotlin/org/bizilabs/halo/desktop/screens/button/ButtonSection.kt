@@ -62,6 +62,15 @@ fun ButtonSection() {
                 }
             }
             item {
+                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Base Disabled")
+                HaloButton(
+                    onClick = {},
+                    enabled = false
+                ) {
+                    HaloText(modifier = Modifier.padding(8.dp), text = "Content")
+                }
+            }
+            item {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Filled")
                 HaloButton(onClick = {}) {
                     HaloText(modifier = Modifier.padding(8.dp), text = "Content")
