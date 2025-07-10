@@ -23,15 +23,15 @@ fun HaloButton(
     enabled: Boolean = true,
     shape: Shape = MaterialTheme.shapes.medium,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
-    disabledContainerColor: Color = HaloTheme.colorScheme.background.onBase.copy(0.1f),
-    disabledContentColor: Color = HaloTheme.colorScheme.background.onBase,
     border: BorderStroke? = null,
     buttonColors: ButtonColors =
         ButtonDefaults.buttonColors(
             containerColor = HaloTheme.colorScheme.primary.neutral,
             contentColor = HaloTheme.colorScheme.primary.weaker,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor
+            disabledContainerColor =
+                HaloTheme.colorScheme.background.onBase
+                    .copy(0.1f),
+            disabledContentColor = HaloTheme.colorScheme.background.onBase,
         ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,

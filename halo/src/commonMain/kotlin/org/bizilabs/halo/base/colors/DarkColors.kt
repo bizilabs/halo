@@ -5,7 +5,7 @@ import org.bizilabs.halo.base.HaloBackgroundValue
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloColorValue
 
-//Default Light Primary Color
+// Default Light Primary Color
 val BaseDarkPrimaryDarkerColor = Color(0xFF3A065A)
 val BaseDarkPrimaryDarkColor = Color(0xFF690BA2)
 val BaseDarkPrimaryBaseColor = Color(0xFFA020F0)
@@ -50,19 +50,20 @@ private val BaseDarkInfoLightestColor = Color(0xFFEFF3FF)
 
 internal val HaloDarkColorScheme =
     HaloColorScheme(
-        primary = HaloColorValue(
-            stronger = BaseDarkPrimaryDarkerColor,
-            strong = BaseDarkPrimaryDarkColor,
-            neutral = BaseDarkPrimaryBaseColor,
-            weak = BaseDarkPrimarySubtleColor,
-            weaker = BaseDarkPrimaryLightestColor,
-        ),
+        primary =
+            HaloColorValue(
+                stronger = BaseDarkPrimaryDarkerColor,
+                strong = BaseDarkPrimaryDarkColor,
+                neutral = BaseDarkPrimaryBaseColor,
+                weak = BaseDarkPrimarySubtleColor,
+                weaker = BaseDarkPrimaryLightestColor,
+            ),
         background =
             HaloBackgroundValue(
                 base = BaseDarkBackgroundContainerColor,
                 onBase = BaseDarkBackgroundContentColor,
                 surface = BaseDarkSurfaceContainerColor,
-                onSurface = BaseDarkSurfaceContentColor
+                onSurface = BaseDarkSurfaceContentColor,
             ),
         success =
             HaloColorValue(
@@ -70,7 +71,7 @@ internal val HaloDarkColorScheme =
                 strong = BaseDarkSuccessDarkColor,
                 neutral = BaseDarkSuccessBaseColor,
                 weaker = BaseDarkSuccessLightestColor,
-                weak = BaseDarkSuccessSubtleColor
+                weak = BaseDarkSuccessSubtleColor,
             ),
         error =
             HaloColorValue(
