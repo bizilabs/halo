@@ -21,7 +21,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HaloTopActionBar(
+fun HaloTopBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
@@ -54,10 +54,10 @@ fun HaloTopActionBar(
 @Composable
 private fun HaloTopActionBarPreview() {
     HaloTheme {
-        HaloTopActionBar(
+        HaloTopBar(
             title = {
                 Text(
-                    text = "Cart"
+                    text = "Cart",
                 )
             },
             modifier = Modifier,
@@ -67,10 +67,10 @@ private fun HaloTopActionBarPreview() {
                 ) {
                     Icon(
                         imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = "Shopping cart icon"
+                        contentDescription = "Shopping cart icon",
                     )
                 }
-            }
+            },
         )
     }
 }

@@ -36,7 +36,7 @@ import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
-import org.bizilabs.halo.desktop.screens.topactionbar.TopActionBarSection
+import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
 
 data object GalleryScreen : Screen {
     @Composable
@@ -112,7 +112,7 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Button -> ButtonSection()
 
-                    GalleryScreenSection.TopActionBar -> TopActionBarSection()
+                    GalleryScreenSection.TopBar -> TopBarSection()
 
                     null -> GalleryList(state = state, onAction = onAction)
                 }
