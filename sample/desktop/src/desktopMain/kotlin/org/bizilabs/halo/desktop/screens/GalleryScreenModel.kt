@@ -1,6 +1,5 @@
 package org.bizilabs.halo.desktop.screens
 
-import androidx.compose.material.Badge
 import cafe.adriel.voyager.core.model.StateScreenModel
 import kotlinx.coroutines.flow.update
 import org.bizilabs.halo.HaloDefaults
@@ -29,14 +28,14 @@ sealed interface GalleryScreenSection {
             get() = "Card"
     }
 
-    data object TopActionBar : GalleryScreenSection {
+    data object TopBar : GalleryScreenSection {
         override val label: String
-            get() = "TopActionBar"
+            get() = "TopBar"
     }
 
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Badge, Button, Card, TopActionBar)
+            get() = listOf(Accordion, Badge, Button, Card, TopBar)
     }
 }
 
