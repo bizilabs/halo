@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -65,7 +66,11 @@ fun ButtonSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Base Disabled")
                 HaloButton(
                     onClick = {},
-                    enabled = false
+                    enabled = false,
+                    buttonColors = ButtonDefaults.buttonColors(
+                        disabledContainerColor = HaloTheme.colorScheme.background.onBase.copy(0.1f),
+                        disabledContentColor = HaloTheme.colorScheme.background.onBase
+                    )
                 ) {
                     HaloText(modifier = Modifier.padding(8.dp), text = "Content")
                 }
