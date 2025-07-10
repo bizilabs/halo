@@ -2,7 +2,6 @@ package org.bizilabs.halo.desktop.screens.button
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -65,7 +64,7 @@ fun ButtonSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Base Disabled")
                 HaloButton(
                     onClick = {},
-                    enabled = false
+                    enabled = false,
                 ) {
                     HaloText(modifier = Modifier.padding(8.dp), text = "Content")
                 }
