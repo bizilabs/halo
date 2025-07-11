@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.base.colors.ProvideContentColor
 import org.bizilabs.halo.components.HaloSurface
 
@@ -36,6 +37,12 @@ internal enum class TextFieldMode {
     FILLED,
     OUTLINED,
 }
+
+data class HaloTextFieldColors(
+    val default: HaloColor,
+    val focused: HaloColor,
+    val disabled: HaloColor,
+)
 
 @Composable
 internal fun HaloBaseTextField(
@@ -57,6 +64,7 @@ internal fun HaloBaseTextField(
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
     shape: Shape = RoundedCornerShape(20),
+    colors: HaloTextFieldColors? = null,
 ) {
     var focused by remember { mutableStateOf(false) }
 
@@ -65,16 +73,21 @@ internal fun HaloBaseTextField(
             when {
                 readOnly ->
                     when (mode) {
-                        TextFieldMode.FILLED -> HaloTheme.colorScheme.disabled.container
-                        TextFieldMode.OUTLINED -> HaloTheme.colorScheme.background.base
+                        TextFieldMode.FILLED ->
+                            colors?.default?.container
+                                ?: HaloTheme.colorScheme.disabled.container
+
+                        TextFieldMode.OUTLINED ->
+                            colors?.default?.container
+                                ?: HaloTheme.colorScheme.background.base
                     }
-                !enabled -> HaloTheme.colorScheme.disabled.container
+
+                !enabled -> colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
                 else -> {
                     if (focused) {
-                        HaloTheme.colorScheme.background.surface
+                        colors?.focused?.container ?: HaloTheme.colorScheme.background.surface
                     } else {
-                        HaloTheme.colorScheme.background.surface
-                            .copy(alpha = 0.75f)
+                        colors?.default?.container ?: HaloTheme.colorScheme.background.surface
                     }
                 }
             },
@@ -89,13 +102,13 @@ internal fun HaloBaseTextField(
     val contentColor by animateColorAsState(
         targetValue =
             when {
-                readOnly -> HaloTheme.colorScheme.background.onBase
-                !enabled -> HaloTheme.colorScheme.disabled.content
+                readOnly -> colors?.default?.content ?: HaloTheme.colorScheme.background.onBase
+                !enabled -> colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
                 else -> {
                     if (focused) {
-                        HaloTheme.colorScheme.background.onBase
+                        colors?.focused?.container ?: HaloTheme.colorScheme.background.onBase
                     } else {
-                        HaloTheme.colorScheme.background.onSurface
+                        colors?.default?.container ?: HaloTheme.colorScheme.background.onSurface
                     }
                 }
             },
@@ -110,13 +123,13 @@ internal fun HaloBaseTextField(
     val borderColor by animateColorAsState(
         targetValue =
             when {
-                readOnly -> HaloTheme.colorScheme.disabled.border
-                !enabled -> HaloTheme.colorScheme.disabled.border
+                readOnly -> colors?.default?.border ?: HaloTheme.colorScheme.disabled.border
+                !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
                 else -> {
                     if (focused) {
-                        HaloTheme.colorScheme.background.onBase
+                        colors?.focused?.border ?: HaloTheme.colorScheme.background.onBase
                     } else {
-                        HaloTheme.colorScheme.background.onSurface
+                        colors?.default?.border ?: HaloTheme.colorScheme.background.onSurface
                     }
                 }
             },
@@ -193,6 +206,28 @@ internal fun HaloBaseTextField(
                     trailing?.invoke()
                 }
             }
+
+            val helperColor by animateColorAsState(
+                targetValue =
+                    when {
+                        readOnly -> colors?.default?.border ?: HaloTheme.colorScheme.disabled.border
+                        !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
+                        else -> {
+                            if (focused) {
+                                colors?.focused?.border ?: HaloTheme.colorScheme.background.onBase
+                            } else {
+                                colors?.default?.border ?: HaloTheme.colorScheme.background.onSurface
+                            }
+                        }
+                    },
+                animationSpec =
+                    tween(
+                        durationMillis = 500,
+                        easing = FastOutSlowInEasing,
+                    ),
+                label = "borderColorAnimation",
+            )
+
             ProvideContentColor(
                 color =
                     HaloTheme.colorScheme.background.onBase
@@ -222,6 +257,7 @@ fun HaloFilledTextField(
     interactionSource: MutableInteractionSource? = null,
     lines: Int = 1,
     shape: Shape = RoundedCornerShape(20),
+    colors: HaloTextFieldColors? = null,
 ) {
     HaloBaseTextField(
         mode = TextFieldMode.FILLED,
@@ -241,6 +277,7 @@ fun HaloFilledTextField(
         interactionSource = interactionSource,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
+        colors = colors,
     )
 }
 
@@ -262,6 +299,7 @@ fun HaloOutlinedTextField(
     interactionSource: MutableInteractionSource? = null,
     lines: Int = 1,
     shape: Shape = RoundedCornerShape(20),
+    colors: HaloTextFieldColors? = null,
 ) {
     HaloBaseTextField(
         mode = TextFieldMode.OUTLINED,
@@ -281,5 +319,6 @@ fun HaloOutlinedTextField(
         textStyle = textStyle,
         keyboardActions = keyboardActions,
         keyboardOptions = keyboardOptions,
+        colors = colors,
     )
 }
