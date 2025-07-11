@@ -2,6 +2,7 @@ package org.bizilabs.halo.base.colors
 
 import androidx.compose.ui.graphics.Color
 import org.bizilabs.halo.base.HaloBackgroundValue
+import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloColorValue
 
@@ -96,5 +97,11 @@ internal val HaloLightColorScheme =
                 neutral = BaseLightInfoBaseColor,
                 weak = BaseLightInfoSubtleColor,
                 weaker = BaseLightInfoLightestColor,
+            ),
+        disabled =
+            HaloColor(
+                container = Gray100,
+                content = Gray200,
+                border = Gray300,
             ),
     )

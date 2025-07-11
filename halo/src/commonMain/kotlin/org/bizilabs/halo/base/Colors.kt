@@ -37,6 +37,13 @@ data class HaloBackgroundValue(
     val onBase: Color,
 )
 
+@Immutable
+data class HaloColor(
+    val container: Color,
+    val content: Color,
+    val border: Color,
+)
+
 data class HaloColorTheme(
     val light: HaloColorScheme,
     val dark: HaloColorScheme,
@@ -50,6 +57,7 @@ data class HaloColorScheme(
     val error: HaloColorValue,
     val success: HaloColorValue,
     val warning: HaloColorValue,
+    val disabled: HaloColor,
 ) {
     companion object {
         val Default =

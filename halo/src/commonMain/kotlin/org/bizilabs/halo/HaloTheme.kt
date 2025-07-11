@@ -6,7 +6,6 @@ import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontFamily
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloFonts
@@ -54,9 +53,6 @@ fun HaloTheme(
     colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
     content: @Composable () -> Unit,
 ) {
-    println(" Providing primary.onBase: ${colorScheme.primary.weaker.toArgb()}")
-    println(" Providing primary.dark: ${colorScheme.primary.strong.value}")
-
     CompositionLocalProvider(
         provideThickness(),
         provideHaloColorScheme(colorScheme = colorScheme),
