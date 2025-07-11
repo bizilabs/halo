@@ -27,17 +27,11 @@ fun AccordionSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
-                text = "Accordion",
-                color = HaloTheme.colorScheme.background.onBase,
-                fontWeight = FontWeight.SemiBold,
-            )
-            HaloText(
                 text = "An accordion allows users to expand and collapse sections of content.",
                 color = HaloTheme.colorScheme.background.onBase,
                 fontWeight = FontWeight.Light,
             )
         }
-
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp),

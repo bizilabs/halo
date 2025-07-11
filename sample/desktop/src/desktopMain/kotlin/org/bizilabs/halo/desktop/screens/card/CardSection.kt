@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
 import org.bizilabs.halo.components.cards.HaloSlotCard
@@ -17,6 +20,13 @@ import org.bizilabs.halo.components.cards.HaloSlotCard
 @Composable
 fun CardSection() {
     Column(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(bottom = 16.dp)) {
+            HaloText(
+                text = "A card is a contained unit of information related to a topic. ",
+                color = HaloTheme.colorScheme.background.onBase,
+                fontWeight = FontWeight.Light,
+            )
+        }
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {

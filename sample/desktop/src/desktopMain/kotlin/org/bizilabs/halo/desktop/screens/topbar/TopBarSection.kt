@@ -30,11 +30,6 @@ fun TopBarSection() {
     ) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
-                text = "TopBar",
-                color = HaloTheme.colorScheme.background.onBase,
-                fontWeight = FontWeight.SemiBold,
-            )
-            HaloText(
                 text =
                     "The Top Bar displays information and actions relating to the current screen. " +
                         "It helps users understand where they are in the app and provides quick access to key actions.",

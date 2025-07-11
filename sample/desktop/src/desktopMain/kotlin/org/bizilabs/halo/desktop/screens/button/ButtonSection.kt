@@ -23,11 +23,6 @@ fun ButtonSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
-                text = "Button",
-                color = HaloTheme.colorScheme.background.onBase,
-                fontWeight = FontWeight.SemiBold,
-            )
-            HaloText(
                 text = "A Button is a clickable element which communicates that users can trigger an action.",
                 color = HaloTheme.colorScheme.background.onBase,
                 fontWeight = FontWeight.Light,
