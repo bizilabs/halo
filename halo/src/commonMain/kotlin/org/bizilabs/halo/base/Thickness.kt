@@ -12,5 +12,4 @@ data class Thickness(
 
 internal val LocalThickness = staticCompositionLocalOf<Thickness> { error("No thickness provided") }
 
-internal fun provideThickness(thickness: Thickness = Thickness()) =
-    LocalThickness provides thickness
+internal fun provideThickness(thickness: Thickness = Thickness()) = LocalThickness provides thickness
