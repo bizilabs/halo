@@ -5,5 +5,5 @@ enum class ComponentMode {
     Info,
     Success,
     Error,
-    Warning
+    Warning,
 }

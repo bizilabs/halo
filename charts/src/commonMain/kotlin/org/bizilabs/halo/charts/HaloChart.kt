@@ -73,7 +73,7 @@ fun HaloLineChartSample() {
             "Sep",
             "Oct",
             "Nov",
-            "December"
+            "December",
         )
     val samplePoints1 =
         List(12) { i ->
@@ -95,7 +95,7 @@ fun HaloLineChartSample() {
                                 color = Color(0xFFC5A4FF),
                                 strokeWidth = 3.dp,
                             ),
-                        label = "Line 1"
+                        label = "Line 1",
                     ),
                     Line(
                         points = samplePoints2,
@@ -104,7 +104,7 @@ fun HaloLineChartSample() {
                                 color = Color(0xFF43D4C4),
                                 strokeWidth = 3.dp,
                             ),
-                        label = "Line 2"
+                        label = "Line 2",
                     ),
                 ),
             defaultSelectedIndex = 4,
@@ -125,12 +125,13 @@ fun HaloLineChartSample() {
             style =
                 ChartDefaults.lineChartStyle().copy(
                     pointSpacing = 80.dp,
-                    yAxisStyle = AxisStyle(
-                        labelCount = 10,
-                        axisBackgroundColor = HaloTheme.colorScheme.background.base
-                    ),
+                    yAxisStyle =
+                        AxisStyle(
+                            labelCount = 10,
+                            axisBackgroundColor = HaloTheme.colorScheme.background.base,
+                        ),
                     indicatorStyle = IndicatorStyle(Color.Blue),
-                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.background.onBase)
+                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.background.onBase),
                 ),
             onPointSelected = { point ->
                 selectedValue = point?.y?.format(2) ?: "N/A"

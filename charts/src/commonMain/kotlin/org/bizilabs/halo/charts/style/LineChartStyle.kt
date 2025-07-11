@@ -23,8 +23,8 @@ data class LineChartStyle(
     val yAxisStyle: AxisStyle = AxisStyle(),
     val xAxisStyle: AxisStyle = AxisStyle(),
     val indicatorStyle: IndicatorStyle = IndicatorStyle(),
-    val legendTextStyle: TextStyle = TextStyle(color = Color.Black, fontSize = 14.sp), // Added legend text style
-    val legendBottomSpacing: Dp = 24.dp
+    val legendTextStyle: TextStyle = TextStyle(color = Color.Black, fontSize = 14.sp),
+    val legendBottomSpacing: Dp = 24.dp,
 )
 
 /**

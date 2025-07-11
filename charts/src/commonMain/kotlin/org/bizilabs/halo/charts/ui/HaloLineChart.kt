@@ -119,12 +119,15 @@ fun HaloLineChart(
 
     val yAxisLabelMaxWidth =
         remember(yAxisLabels, style.yAxisStyle) {
-            (yAxisLabels.maxOfOrNull {
-                textMeasurer.measure(
-                    AnnotatedString(it),
-                    style = style.yAxisStyle.labelTextStyle
-                ).size.width
-            } ?: 0)
+            (
+                yAxisLabels.maxOfOrNull {
+                    textMeasurer
+                        .measure(
+                            AnnotatedString(it),
+                            style = style.yAxisStyle.labelTextStyle,
+                        ).size.width
+                } ?: 0
+            )
         }.toFloat()
 
     val yAxisPadding =
@@ -137,9 +140,11 @@ fun HaloLineChart(
 
     // This buffer accounts for half of the label height at both top and bottom edges
     // plus a small extra visual padding.
-    val labelVerticalMarginPx = with(density) {
-        style.yAxisStyle.labelTextStyle.fontSize.toPx() / 2 + 4.dp.toPx()
-    }
+    val labelVerticalMarginPx =
+        with(density) {
+            style.yAxisStyle.labelTextStyle.fontSize
+                .toPx() / 2 + 4.dp.toPx()
+        }
 
     // Trigger animation when data changes.
     LaunchedEffect(lineChartData) {
@@ -163,29 +168,30 @@ fun HaloLineChart(
     val scrollState = rememberScrollState()
 
     Column(modifier = modifier.fillMaxWidth()) {
-
         // Legend
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = style.legendBottomSpacing),
-            verticalAlignment = Alignment.CenterVertically
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = style.legendBottomSpacing),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             lineChartData.lines.forEach { line ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(end = 16.dp)
+                    modifier = Modifier.padding(end = 16.dp),
                 ) {
                     Spacer(
-                        modifier = Modifier
-                            .size(16.dp)
-                            .clip(HaloShapes.ExtraSmall.extraSmall)
-                            .background(line.style.color)
+                        modifier =
+                            Modifier
+                                .size(16.dp)
+                                .clip(HaloShapes.ExtraSmall.extraSmall)
+                                .background(line.style.color),
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     HaloText(
                         text = line.label,
-                        style = style.legendTextStyle
+                        style = style.legendTextStyle,
                     )
                 }
             }
@@ -202,30 +208,33 @@ fun HaloLineChart(
 
             // Calculate width for chart content (excluding Y-axis padding, including start/end contentPadding)
             val availableContentWidthForDynamicSpacing =
-                chartWidth - yAxisPadding - with(density) { contentPadding.start.toPx() } - with(
-                    density
-                ) { contentPadding.end.toPx() }
+                chartWidth - yAxisPadding - with(density) { contentPadding.start.toPx() } -
+                    with(
+                        density,
+                    ) { contentPadding.end.toPx() }
             val numUniqueXPoints = allPoints.distinctBy { it.x }.size
 
-            val calculatedPointSpacingPx = if (numUniqueXPoints > 1) {
-                if (style.pointSpacing == Dp.Unspecified) {
-                    // Calculate dynamic spacing
-                    (availableContentWidthForDynamicSpacing / (numUniqueXPoints - 1))
-                        .coerceAtLeast(style.minPointSpacing.dpToPx())
+            val calculatedPointSpacingPx =
+                if (numUniqueXPoints > 1) {
+                    if (style.pointSpacing == Dp.Unspecified) {
+                        // Calculate dynamic spacing
+                        (availableContentWidthForDynamicSpacing / (numUniqueXPoints - 1))
+                            .coerceAtLeast(style.minPointSpacing.dpToPx())
+                    } else {
+                        // Use fixed spacing
+                        style.pointSpacing.dpToPx()
+                    }
                 } else {
-                    // Use fixed spacing
-                    style.pointSpacing.dpToPx()
+                    0f // If 0 or 1 data point, spacing is not applicable or 0
                 }
-            } else {
-                0f // If 0 or 1 data point, spacing is not applicable or 0
-            }
 
             // Recalculate contentWidth based on potentially dynamic spacing
-            val contentWidth = if (numUniqueXPoints > 1) {
-                (numUniqueXPoints - 1) * calculatedPointSpacingPx
-            } else {
-                0f // For 0 or 1 point, contentWidth is 0
-            }
+            val contentWidth =
+                if (numUniqueXPoints > 1) {
+                    (numUniqueXPoints - 1) * calculatedPointSpacingPx
+                } else {
+                    0f // For 0 or 1 point, contentWidth is 0
+                }
 
             val drawingWidth =
                 yAxisPadding + startPadding + contentWidth + endPadding // Total width of the scrollable canvas
@@ -293,10 +302,12 @@ fun HaloLineChart(
                             drawLine(
                                 color = style.yAxisStyle.gridLineColor,
                                 start = Offset(yAxisPadding, y),
-                                end = Offset(
-                                    drawingWidth,
-                                    y
-                                ), // Use drawingWidth as the end point for grid lines
+                                end =
+                                    Offset(
+                                        drawingWidth,
+                                        y,
+                                    ),
+                                // Use drawingWidth as the end point for grid lines
                                 strokeWidth = style.yAxisStyle.gridLineWidth.toPx(),
                             )
                         }
@@ -386,20 +397,20 @@ fun HaloLineChart(
                         .offset(y = (-labelVerticalMarginPx).pxToDp())
                         // Set the height of the Y-axis canvas to cover the drawingHeight plus the top extension
                         .height(with(density) { (chartHeight + labelVerticalMarginPx).pxToDp() })
-                        .width(yAxisPadding.pxToDp()), // Use the calculated padding for width
+                        .width(yAxisPadding.pxToDp()),
             ) {
                 // Draw the background rectangle first
                 drawRect(
                     color = style.yAxisStyle.axisBackgroundColor,
                     // The rectangle starts at 0,0 of this Canvas. This Canvas itself is offset.
                     topLeft = Offset.Zero,
-                    size = size // Use the actual size of the DrawScope (this Canvas's current dimensions)
+                    size = size,
                 )
                 // Local toPxY for labels, mapping data to this specific Canvas's coordinates
                 val toPxYLabelsCanvas: (Float) -> Float = { y ->
                     val yRange = (maxY - minY).takeIf { it > 0f } ?: 1f
                     val yNormalized =
-                        (y - minY) / yRange // Normalized y from 0 (minY) to 1 (maxY)
+                        (y - minY) / yRange
 
                     // Map yNormalized (0 to 1) to the Y-axis canvas coordinates.
                     // We want:
@@ -410,10 +421,10 @@ fun HaloLineChart(
 
                 drawYAxis(
                     labels = yAxisLabels,
-                    toPxY = toPxYLabelsCanvas, // Pass the specific toPxY for labels
+                    toPxY = toPxYLabelsCanvas,
                     style = style.yAxisStyle,
                     textMeasurer = textMeasurer,
-                    yAxisLabelMaxWidth = yAxisLabelMaxWidth // Pass for label positioning
+                    yAxisLabelMaxWidth = yAxisLabelMaxWidth,
                 )
             }
         }
