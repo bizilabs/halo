@@ -100,8 +100,8 @@ internal val HaloLightColorScheme =
             ),
         disabled =
             HaloColor(
-                container = Gray100,
-                content = Gray200,
-                border = Gray300,
+                container = Gray200,
+                content = Gray500,
+                border = Gray400,
             ),
     )

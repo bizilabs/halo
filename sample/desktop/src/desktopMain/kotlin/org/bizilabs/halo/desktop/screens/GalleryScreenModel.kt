@@ -29,6 +29,10 @@ sealed interface GalleryScreenSection {
     }
 
     data object TopBar : GalleryScreenSection {
+        override val label: String
+            get() = "TopBar"
+    }
+
     data object TextField : GalleryScreenSection {
         override val label: String
             get() = "TextField"

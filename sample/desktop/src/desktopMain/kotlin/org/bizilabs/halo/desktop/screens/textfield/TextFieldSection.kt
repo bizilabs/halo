@@ -27,24 +27,21 @@ import org.bizilabs.halo.components.textfields.HaloOutlinedTextField
 @Composable
 fun TextFieldSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-        Column(modifier = Modifier.padding(bottom = 16.dp)) {
-            HaloText(
-                text = "TextField",
-                color = HaloTheme.colorScheme.background.onBase,
-                style = HaloTheme.typography.titleSmall,
-            )
-            HaloText(
-                text = "An Input is a form element that lets users enter one of various types of text on a single line.",
-                color = HaloTheme.colorScheme.background.onBase,
-                style = HaloTheme.typography.bodyMedium,
-            )
-        }
+        HaloText(
+            modifier = Modifier.padding(vertical = 16.dp),
+            text = "An Input is a form element that lets users enter one of various types of text on a single line.",
+            color = HaloTheme.colorScheme.background.onBase,
+            style = HaloTheme.typography.bodyMedium,
+        )
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                HaloText(text = "Design")
+                HaloText(
+                    text = "Design",
+                    style = HaloTheme.typography.subTitle,
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 HaloSlotCard(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
@@ -127,9 +124,6 @@ fun TextFieldSection() {
                             helper = {
                                 HaloText(text = "Helper")
                             },
-                            placeholder = {
-                                HaloText(text = "Placeholder")
-                            },
                             leading = {
                                 HaloText(text = "Leading")
                             },
@@ -158,9 +152,6 @@ fun TextFieldSection() {
                             },
                             helper = {
                                 HaloText(text = "Helper")
-                            },
-                            placeholder = {
-                                HaloText(text = "Placeholder")
                             },
                             leading = {
                                 HaloText(text = "Leading")
@@ -195,9 +186,6 @@ fun TextFieldSection() {
                             },
                             helper = {
                                 HaloText(text = "Helper")
-                            },
-                            placeholder = {
-                                HaloText(text = "Placeholder")
                             },
                             leading = {
                                 HaloText(text = "Leading")
@@ -240,9 +228,6 @@ fun TextFieldSection() {
                             helper = {
                                 HaloText(text = "Helper")
                             },
-                            placeholder = {
-                                HaloText(text = "Placeholder")
-                            },
                             leading = {
                                 HaloText(text = "Leading")
                             },
@@ -271,9 +256,6 @@ fun TextFieldSection() {
                             },
                             helper = {
                                 HaloText(text = "Helper")
-                            },
-                            placeholder = {
-                                HaloText(text = "Placeholder")
                             },
                             leading = {
                                 HaloText(text = "Leading")
@@ -308,9 +290,6 @@ fun TextFieldSection() {
                             },
                             helper = {
                                 HaloText(text = "Helper")
-                            },
-                            placeholder = {
-                                HaloText(text = "Placeholder")
                             },
                             leading = {
                                 HaloText(text = "Leading")

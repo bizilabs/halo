@@ -36,8 +36,8 @@ import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
-import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
 import org.bizilabs.halo.desktop.screens.textfield.TextFieldSection
+import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
 
 data object GalleryScreen : Screen {
     @Composable
@@ -81,7 +81,7 @@ fun LandingScreenContent(
                     }
                     HaloText(
                         modifier = Modifier.padding(16.dp),
-                        text = "Halo",
+                        text = if (state.section != null) state.section.label else "Halo",
                         fontSize = 24.sp,
                     )
                     Spacer(modifier = Modifier.weight(1f))
