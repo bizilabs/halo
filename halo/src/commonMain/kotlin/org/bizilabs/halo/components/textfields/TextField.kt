@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.colors.ProvideContentColor
@@ -46,8 +45,12 @@ internal fun HaloBaseTextField(
     placeholder: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
+    singleLine: Boolean = true,
     textStyle: TextStyle = LocalTextStyle.current,
     mode: TextFieldMode = TextFieldMode.FILLED,
+    interactionSource: MutableInteractionSource? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     label: @Composable (() -> Unit)? = null,
     count: @Composable (() -> Unit)? = null,
     helper: @Composable (() -> Unit)? = null,
@@ -60,7 +63,11 @@ internal fun HaloBaseTextField(
     val containerColor by animateColorAsState(
         targetValue =
             when {
-                readOnly -> HaloTheme.colorScheme.background.base
+                readOnly ->
+                    when (mode) {
+                        TextFieldMode.FILLED -> HaloTheme.colorScheme.disabled.container
+                        TextFieldMode.OUTLINED -> HaloTheme.colorScheme.background.base
+                    }
                 !enabled -> HaloTheme.colorScheme.disabled.container
                 else -> {
                     if (focused) {
@@ -136,11 +143,15 @@ internal fun HaloBaseTextField(
             modifier
                 .focusable(enabled && readOnly.not())
                 .onFocusChanged { focused = it.isFocused },
-        value = value,
+        value = value.ifBlank { placeholder },
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle.copy(color = contentColor),
         onValueChange = onValueChange,
+        singleLine = singleLine,
+        interactionSource = interactionSource,
+        keyboardActions = keyboardActions,
+        keyboardOptions = keyboardOptions,
     ) { innerTextField ->
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
@@ -204,20 +215,12 @@ fun HaloFilledTextField(
     label: @Composable (() -> Unit)? = null,
     count: @Composable (() -> Unit)? = null,
     helper: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
-    prefix: @Composable (() -> Unit)? = null,
-    suffix: @Composable (() -> Unit)? = null,
-    supportingText: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    singleLine: Boolean = false,
-    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-    minLines: Int = 1,
     interactionSource: MutableInteractionSource? = null,
+    lines: Int = 1,
     shape: Shape = RoundedCornerShape(20),
 ) {
     HaloBaseTextField(
@@ -234,6 +237,10 @@ fun HaloFilledTextField(
         helper = helper,
         count = count,
         shape = shape,
+        singleLine = lines == 1,
+        interactionSource = interactionSource,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
     )
 }
 
@@ -248,20 +255,12 @@ fun HaloOutlinedTextField(
     label: @Composable (() -> Unit)? = null,
     count: @Composable (() -> Unit)? = null,
     helper: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
-    prefix: @Composable (() -> Unit)? = null,
-    suffix: @Composable (() -> Unit)? = null,
-    supportingText: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    singleLine: Boolean = false,
-    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-    minLines: Int = 1,
     interactionSource: MutableInteractionSource? = null,
+    lines: Int = 1,
     shape: Shape = RoundedCornerShape(20),
 ) {
     HaloBaseTextField(
@@ -277,5 +276,10 @@ fun HaloOutlinedTextField(
         helper = helper,
         count = count,
         shape = shape,
+        singleLine = lines == 1,
+        interactionSource = interactionSource,
+        textStyle = textStyle,
+        keyboardActions = keyboardActions,
+        keyboardOptions = keyboardOptions,
     )
 }
