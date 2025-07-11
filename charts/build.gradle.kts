@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -8,12 +7,6 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.maven.publish)
-}
-
-fun Project.findProperties(file: String): Properties {
-    val properties = Properties()
-    properties.load(project.rootProject.file(file).reader())
-    return properties
 }
 
 kotlin {
@@ -76,16 +69,15 @@ compose {
     }
 }
 
-group = "org.bizilabs.halo.charts"
+group = "org.bizilabs.halo"
 
 publishing {
-    val properties = findProperties("local.properties")
     repositories {
         maven {
             setUrl("https://maven.pkg.github.com/bizilabs/halo")
             credentials {
-                username = properties["github.username"].toString()
-                password = properties["github.token"].toString()
+                username = project.properties["mavenUsername"].toString()
+                password = project.properties["mavenPassword"].toString()
             }
         }
     }
