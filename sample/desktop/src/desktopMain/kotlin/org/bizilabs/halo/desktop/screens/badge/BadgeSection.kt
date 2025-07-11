@@ -98,7 +98,7 @@ fun BadgeSection() {
 
                     item {
                         HaloFilledBadge(mode = ComponentMode.Error) {
-                            HaloText(text = "Filled Error")
+                            HaloText(text = "Error")
                         }
                     }
                 }

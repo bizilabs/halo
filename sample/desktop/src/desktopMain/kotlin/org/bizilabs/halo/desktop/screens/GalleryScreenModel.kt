@@ -29,13 +29,14 @@ sealed interface GalleryScreenSection {
     }
 
     data object TopBar : GalleryScreenSection {
+    data object TextField : GalleryScreenSection {
         override val label: String
-            get() = "TopBar"
+            get() = "TextField"
     }
 
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Badge, Button, Card, TopBar)
+            get() = listOf(Accordion, Badge, Button, Card, TextField, TopBar)
     }
 }
 

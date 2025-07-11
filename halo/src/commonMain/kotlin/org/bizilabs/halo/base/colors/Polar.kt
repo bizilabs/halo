@@ -28,6 +28,7 @@ internal val PolarLightColorScheme =
         error = HaloLightColorScheme.error,
         warning = HaloLightColorScheme.warning,
         info = HaloLightColorScheme.info,
+        disabled = HaloLightColorScheme.disabled,
     )
 
 internal val PolarDarkColorScheme =
@@ -44,4 +45,5 @@ internal val PolarDarkColorScheme =
         error = HaloDarkColorScheme.error,
         warning = HaloDarkColorScheme.warning,
         info = HaloDarkColorScheme.info,
+        disabled = HaloDarkColorScheme.disabled,
     )
