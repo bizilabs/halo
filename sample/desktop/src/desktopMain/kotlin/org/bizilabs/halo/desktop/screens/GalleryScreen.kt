@@ -36,6 +36,7 @@ import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
+import org.bizilabs.halo.desktop.screens.textfield.CodeFieldSection
 import org.bizilabs.halo.desktop.screens.textfield.TextFieldSection
 import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
 
@@ -115,9 +116,20 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.TopBar -> TopBarSection()
 
-                    GalleryScreenSection.TextField -> TextFieldSection()
+                    GalleryScreenSection.TextField -> {
+                        GalleryList(
+                            sections =
+                                listOf(
+                                    GalleryScreenSection.TextField.Code,
+                                    GalleryScreenSection.TextField.Field,
+                                ),
+                            onAction = onAction,
+                        )
+                    }
 
-                    null -> GalleryList(state = state, onAction = onAction)
+                    null -> GalleryList(sections = state.sections, onAction = onAction)
+                    GalleryScreenSection.TextField.Code -> CodeFieldSection()
+                    GalleryScreenSection.TextField.Field -> TextFieldSection()
                 }
             }
         }
@@ -126,7 +138,7 @@ fun LandingScreenContent(
 
 @Composable
 fun GalleryList(
-    state: GalleryScreenState,
+    sections: List<GalleryScreenSection>,
     onAction: (GalleryScreenAction) -> Unit,
 ) {
     LazyVerticalGrid(
@@ -134,7 +146,7 @@ fun GalleryList(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(state.sections) {
+        items(sections) {
             GalleryItem(title = it.label) { onAction(GalleryScreenAction.UpdateSection(it)) }
         }
     }
