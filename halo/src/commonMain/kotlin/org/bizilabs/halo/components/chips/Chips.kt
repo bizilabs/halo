@@ -1,6 +1,7 @@
 package org.bizilabs.halo.components.chips
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -82,7 +83,7 @@ internal fun HaloBaseChip(
     enabled: Boolean = true,
     colors: HaloChipColors? = null,
     shape: Shape = RoundedCornerShape(10.dp),
-    selected: Boolean = false,
+    isSelected: Boolean = false,
     chipMode: ChipMode = ChipMode.FILLED,
     chipType: ChipType = ChipType.SELECTION,
     onClickChip: (() -> Unit)? = null,
@@ -98,12 +99,22 @@ internal fun HaloBaseChip(
                 true -> {
                     when (chipMode) {
                         ChipMode.FILLED ->
-                            colors?.default?.content
-                                ?: HaloTheme.colorScheme.background.onSurface
+                            if (isSelected) {
+                                colors?.default?.content
+                                    ?: HaloTheme.colorScheme.background.surface
+                            } else {
+                                colors?.default?.content
+                                    ?: HaloTheme.colorScheme.background.onSurface
+                            }
 
                         ChipMode.OUTLINED -> {
-                            colors?.default?.content
-                                ?: HaloTheme.colorScheme.background.onSurface
+                            if (isSelected) {
+                                colors?.default?.content
+                                    ?: HaloTheme.colorScheme.background.surface
+                            } else {
+                                colors?.default?.content
+                                    ?: HaloTheme.colorScheme.background.onSurface
+                            }
                         }
                     }
                 }
@@ -113,6 +124,7 @@ internal fun HaloBaseChip(
                         ChipMode.FILLED -> {
                             colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
                         }
+
                         ChipMode.OUTLINED ->
                             colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
                     }
@@ -126,23 +138,32 @@ internal fun HaloBaseChip(
                 true -> {
                     when (chipMode) {
                         ChipMode.FILLED -> {
-                            if (selected && chipType == ChipType.SELECTION) {
-                                colors?.default?.container ?: HaloTheme.colorScheme.background.onSurface
-                                    .copy(0.25f)
+                            if (isSelected && chipType == ChipType.SELECTION) {
+                                colors?.default?.container
+                                    ?: HaloTheme.colorScheme.background.onSurface
                             } else {
-                                colors?.default?.container ?: HaloTheme.colorScheme.background.surface
+                                colors?.default?.container
+                                    ?: HaloTheme.colorScheme.background.surface
                             }
                         }
+
                         ChipMode.OUTLINED -> {
-                            colors?.default?.container ?: Color.Transparent
+                            if (isSelected) {
+                                colors?.default?.container
+                                    ?: HaloTheme.colorScheme.background.onSurface
+                            } else {
+                                colors?.default?.container ?: Color.Transparent
+                            }
                         }
                     }
                 }
+
                 false -> {
                     when (chipMode) {
                         ChipMode.FILLED -> {
                             colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
                         }
+
                         ChipMode.OUTLINED -> {
                             colors?.disabled?.container ?: Color.Transparent
                         }
@@ -155,14 +176,15 @@ internal fun HaloBaseChip(
         targetValue =
             when (enabled) {
                 true -> {
-                    if (selected && chipType == ChipType.SELECTION) {
+                    if (isSelected && chipType == ChipType.SELECTION) {
                         colors?.default?.border ?: HaloTheme.colorScheme.background.onBase
-                            .copy(0.5f)
+                            .copy(0.25f)
                     } else {
                         colors?.default?.border ?: HaloTheme.colorScheme.background.onBase
                             .copy(0.15f)
                     }
                 }
+
                 false ->
                     colors?.disabled?.border ?: HaloTheme.colorScheme.background.onBase
                         .copy(0.1f)
@@ -176,12 +198,6 @@ internal fun HaloBaseChip(
             modifier
                 .clip(shape)
                 .then(
-                    if (chipMode == ChipMode.OUTLINED) {
-                        Modifier.border(width = 1.dp, color = outlineColor, shape = shape)
-                    } else {
-                        Modifier
-                    },
-                ).then(
                     if (isChipClickable && chipType == ChipType.SELECTION) {
                         Modifier.clickable(onClick = onClickChip)
                     } else {
@@ -190,6 +206,15 @@ internal fun HaloBaseChip(
                 ),
         shape = shape,
         color = containerColor,
+        border =
+            if (chipMode == ChipMode.OUTLINED) {
+                BorderStroke(
+                    width = 1.dp,
+                    color = outlineColor,
+                )
+            } else {
+                null
+            },
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(12.dp))
