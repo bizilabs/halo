@@ -55,7 +55,7 @@ fun HaloOutlinedInputChip(
         onClickChip = null,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
-        selected = selected,
+        isSelected = selected,
         colors = colors,
         onClickTrailingIcon = onClickTrailingIcon,
         shape = shape,
