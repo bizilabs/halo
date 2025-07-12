@@ -13,6 +13,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -20,6 +24,7 @@ import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
 import org.bizilabs.halo.components.chips.HaloInputChip
+import org.bizilabs.halo.components.chips.HaloOutlinedInputChip
 import org.bizilabs.halo.components.chips.HaloOutlinedSelectionChip
 import org.bizilabs.halo.components.chips.HaloSelectionChip
 
@@ -28,14 +33,10 @@ fun ChipSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
-                text = "Chip",
-                color = HaloTheme.colorScheme.background.onBase,
-                fontWeight = FontWeight.SemiBold,
-            )
-            HaloText(
                 text =
                     "Chips are compact UI elements that represent an input, attribute, or action. " +
-                        "They allow users to make selections, filter content, or trigger events in a lightweight, visually distinct format.",
+                        "They allow users to make selections, filter content, or " +
+                        "trigger events in a lightweight, visually distinct format.",
                 color = HaloTheme.colorScheme.background.onBase,
                 fontWeight = FontWeight.Light,
             )
@@ -82,59 +83,31 @@ fun ChipSection() {
             }
             item {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Selection")
+                var selectedIndex by remember { mutableIntStateOf(0) }
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
                         HaloSelectionChip(
-                            onClick = {},
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                            onClick = { selectedIndex = 0 },
+                            selected = selectedIndex == 0,
+                            text = "Content",
+                        )
                     }
                     item {
                         HaloSelectionChip(
-                            onClick = {},
+                            onClick = { selectedIndex = 1 },
+                            selected = selectedIndex == 1,
+                            text = "Content",
                             leadingIcon = Icons.Default.ShoppingCart,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                        )
                     }
                     item {
                         HaloSelectionChip(
-                            onClick = {},
+                            onClick = { selectedIndex = 2 },
+                            selected = selectedIndex == 2,
+                            text = "Content",
                             leadingIcon = Icons.Default.ShoppingCart,
                             trailingIcon = Icons.Default.Close,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
-                    }
-                }
-            }
-            item {
-                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Input")
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    item {
-                        HaloInputChip(
-                            onClickTrailingIcon = {},
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
-                    }
-                    item {
-                        HaloInputChip(
-                            onClickTrailingIcon = {},
-                            leadingIcon = Icons.Default.ShoppingCart,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
-                    }
-                    item {
-                        HaloInputChip(
-                            onClickTrailingIcon = {},
-                            leadingIcon = Icons.Default.ShoppingCart,
-                            trailingIcon = Icons.Default.Close,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                        )
                     }
                 }
             }
@@ -143,59 +116,133 @@ fun ChipSection() {
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
                         HaloSelectionChip(
-                            onClick = {},
+                            text = "Content",
                             enabled = false,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                        )
                     }
                     item {
                         HaloSelectionChip(
-                            onClick = {},
+                            text = "Content",
                             enabled = false,
                             leadingIcon = Icons.Default.ShoppingCart,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                        )
                     }
                     item {
                         HaloSelectionChip(
-                            onClick = {},
+                            text = "Content",
                             enabled = false,
                             leadingIcon = Icons.Default.ShoppingCart,
                             trailingIcon = Icons.Default.Close,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                        )
                     }
                 }
             }
             item {
-                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Outline")
+                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Selection Outlined")
+                var selectedIndex by remember { mutableIntStateOf(0) }
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
                         HaloOutlinedSelectionChip(
-                            onClick = {},
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                            onClick = { selectedIndex = 0 },
+                            selected = selectedIndex == 0,
+                            text = "Content",
+                        )
                     }
                     item {
                         HaloOutlinedSelectionChip(
-                            onClick = {},
+                            onClick = { selectedIndex = 1 },
+                            selected = selectedIndex == 1,
                             leadingIcon = Icons.Default.ShoppingCart,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                            text = "Content",
+                        )
                     }
                     item {
                         HaloOutlinedSelectionChip(
-                            onClick = {},
+                            onClick = { selectedIndex = 2 },
+                            selected = selectedIndex == 2,
                             leadingIcon = Icons.Default.ShoppingCart,
                             trailingIcon = Icons.Default.Close,
-                        ) {
-                            HaloText(modifier = Modifier.padding(8.dp), text = "Content")
-                        }
+                            text = "Content",
+                        )
+                    }
+                }
+            }
+            item {
+                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Selection Outlined Disabled")
+                var selectedIndex by remember { mutableIntStateOf(0) }
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    item {
+                        HaloOutlinedSelectionChip(
+                            onClick = { selectedIndex = 0 },
+                            selected = selectedIndex == 0,
+                            text = "Content",
+                            enabled = false,
+                        )
+                    }
+                    item {
+                        HaloOutlinedSelectionChip(
+                            onClick = { selectedIndex = 1 },
+                            selected = selectedIndex == 1,
+                            leadingIcon = Icons.Default.ShoppingCart,
+                            text = "Content",
+                            enabled = false,
+                        )
+                    }
+                    item {
+                        HaloOutlinedSelectionChip(
+                            onClick = { selectedIndex = 2 },
+                            selected = selectedIndex == 2,
+                            leadingIcon = Icons.Default.ShoppingCart,
+                            trailingIcon = Icons.Default.Close,
+                            text = "Content",
+                            enabled = false,
+                        )
+                    }
+                }
+            }
+            item {
+                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Input")
+                var selectedIndex by remember { mutableIntStateOf(0) }
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    item {
+                        HaloInputChip(
+                            onClickTrailingIcon = { selectedIndex = 2 },
+                            selected = selectedIndex == 2,
+                            trailingIcon = Icons.Default.Close,
+                            text = "Content",
+                        )
+                    }
+                    item {
+                        HaloInputChip(
+                            onClickTrailingIcon = { selectedIndex = 2 },
+                            selected = selectedIndex == 2,
+                            leadingIcon = Icons.Default.ShoppingCart,
+                            trailingIcon = Icons.Default.Close,
+                            text = "Content",
+                        )
+                    }
+                }
+            }
+            item {
+                HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Input Outlined")
+                var selectedIndex by remember { mutableIntStateOf(0) }
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    item {
+                        HaloOutlinedInputChip(
+                            onClickTrailingIcon = { selectedIndex = 1 },
+                            selected = selectedIndex == 1,
+                            trailingIcon = Icons.Default.Close,
+                            text = "Content",
+                        )
+                    }
+                    item {
+                        HaloOutlinedInputChip(
+                            onClickTrailingIcon = { selectedIndex = 2 },
+                            selected = selectedIndex == 2,
+                            leadingIcon = Icons.Default.ShoppingCart,
+                            trailingIcon = Icons.Default.Close,
+                            text = "Content",
+                        )
                     }
                 }
             }
