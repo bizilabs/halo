@@ -99,7 +99,7 @@ internal fun HaloBaseChip(
                 true -> {
                     when (chipMode) {
                         ChipMode.FILLED ->
-                            if (isSelected) {
+                            if (isSelected && chipType == ChipType.SELECTION) {
                                 colors?.default?.content
                                     ?: HaloTheme.colorScheme.background.surface
                             } else {
@@ -108,7 +108,7 @@ internal fun HaloBaseChip(
                             }
 
                         ChipMode.OUTLINED -> {
-                            if (isSelected) {
+                            if (isSelected && chipType == ChipType.SELECTION) {
                                 colors?.default?.content
                                     ?: HaloTheme.colorScheme.background.surface
                             } else {
@@ -148,7 +148,7 @@ internal fun HaloBaseChip(
                         }
 
                         ChipMode.OUTLINED -> {
-                            if (isSelected) {
+                            if (isSelected && chipType == ChipType.SELECTION) {
                                 colors?.default?.container
                                     ?: HaloTheme.colorScheme.background.onSurface
                             } else {
