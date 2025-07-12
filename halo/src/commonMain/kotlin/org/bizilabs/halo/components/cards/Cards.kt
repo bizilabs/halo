@@ -60,7 +60,7 @@ fun HaloCard(
     CardBase(
         modifier = modifier,
         enabled = enabled,
-        onClick = onClick ?: {},
+        onClick = onClick,
         shape = shape,
         colors = colors,
         elevation = elevation,
