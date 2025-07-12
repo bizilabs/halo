@@ -33,9 +33,21 @@ sealed interface GalleryScreenSection {
             get() = "TopBar"
     }
 
-    data object TextField : GalleryScreenSection {
+    sealed class TextField : GalleryScreenSection {
+        companion object : TextField()
+
         override val label: String
             get() = "TextField"
+
+        data object Code : TextField() {
+            override val label: String
+                get() = "Code"
+        }
+
+        data object Field : TextField() {
+            override val label: String
+                get() = "Field"
+        }
     }
 
     companion object {
@@ -57,7 +69,7 @@ sealed interface GalleryScreenAction {
 data class GalleryScreenState(
     val isDarkModeEnabled: Boolean = false,
     val colorTheme: HaloColorTheme = HaloDefaults.ColorThemes.Default,
-    val section: GalleryScreenSection? = null,
+    val section: GalleryScreenSection? = GalleryScreenSection.TextField.Code,
     val sections: List<GalleryScreenSection> = GalleryScreenSection.values,
 )
 
@@ -66,7 +78,7 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
         when (action) {
             is GalleryScreenAction.UpdateSection -> updateSection(action.section)
             GalleryScreenAction.ToggleTheme -> toggleTheme()
-            GalleryScreenAction.ClickBack -> mutableState.update { it.copy(section = null) }
+            GalleryScreenAction.ClickBack -> navigateBack()
         }
     }
 
@@ -76,5 +88,15 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
 
     private fun toggleTheme() {
         mutableState.update { it.copy(isDarkModeEnabled = !it.isDarkModeEnabled) }
+    }
+
+    private fun navigateBack() {
+        val update =
+            when (state.value.section) {
+                GalleryScreenSection.TextField.Code -> GalleryScreenSection.TextField
+                GalleryScreenSection.TextField.Field -> GalleryScreenSection.TextField
+                else -> null
+            }
+        mutableState.update { it.copy(section = update) }
     }
 }
