@@ -37,6 +37,7 @@ import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
 import org.bizilabs.halo.desktop.screens.textfield.CodeFieldSection
+import org.bizilabs.halo.desktop.screens.chip.ChipSection
 import org.bizilabs.halo.desktop.screens.textfield.TextFieldSection
 import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
 
@@ -126,6 +127,8 @@ fun LandingScreenContent(
                             onAction = onAction,
                         )
                     }
+
+                    GalleryScreenSection.Chip -> ChipSection()
 
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                     GalleryScreenSection.TextField.Code -> CodeFieldSection()
