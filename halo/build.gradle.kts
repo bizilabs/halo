@@ -33,6 +33,9 @@ kotlin {
                 implementation(compose.components.resources)
                 implementation(compose.materialIconsExtended)
                 implementation(compose.components.uiToolingPreview)
+                implementation(libs.coil.kt)
+                implementation(libs.coil.kt.compose)
+                implementation(libs.coil.kt.svg)
             }
         }
         val commonTest by getting {

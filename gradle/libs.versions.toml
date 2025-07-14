@@ -21,6 +21,7 @@ espresso-core = "3.6.1"
 lifecycle-runtime-ktx = "2.9.1"
 activity-compose = "1.10.1"
 compose-bom = "2024.09.00"
+coil = "3.2.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -44,6 +45,10 @@ ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
+# coil
+coil-kt = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
+coil-kt-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-kt-svg = { group = "io.coil-kt.coil3", name = "coil-svg", version.ref = "coil" }
 
 [plugins]
 # android
@@ -67,3 +72,4 @@ kover = { id = "org.jetbrains.kotlinx.kover", version.ref="kover" }
 voyager = [
     "voyager-navigator", "voyager-transitions", "voyager-koin"
 ]
+

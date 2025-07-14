@@ -33,6 +33,7 @@ import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
 import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
+import org.bizilabs.halo.desktop.screens.avatar.AvatarSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
@@ -133,6 +134,7 @@ fun LandingScreenContent(
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                     GalleryScreenSection.TextField.Code -> CodeFieldSection()
                     GalleryScreenSection.TextField.Field -> TextFieldSection()
+                    GalleryScreenSection.Avatar -> AvatarSection()
                 }
             }
         }
