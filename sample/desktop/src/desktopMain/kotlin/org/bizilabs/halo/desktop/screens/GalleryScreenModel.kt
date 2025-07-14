@@ -55,9 +55,14 @@ sealed interface GalleryScreenSection {
             get() = "Chip"
     }
 
+    data object Avatar : GalleryScreenSection {
+        override val label: String
+            get() = "Avatar"
+    }
+
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Badge, Button, Card, TextField, TopBar, Chip)
+            get() = listOf(Accordion, Badge, Button, Card, TextField, TopBar, Chip, Avatar)
     }
 }
 
