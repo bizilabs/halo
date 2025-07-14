@@ -19,13 +19,11 @@ import androidx.compose.ui.unit.dp
 import halo.sample.desktop.generated.resources.Res
 import halo.sample.desktop.generated.resources.avatar_image
 import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.base.ComponentSize
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.avatars.HaloAvatarExtraLarge
-import org.bizilabs.halo.components.avatars.HaloAvatarExtraSmall
-import org.bizilabs.halo.components.avatars.HaloAvatarLarge
-import org.bizilabs.halo.components.avatars.HaloAvatarMedium
-import org.bizilabs.halo.components.avatars.HaloAvatarSmall
+import org.bizilabs.halo.components.avatars.HaloAvatar
 import org.bizilabs.halo.components.cards.HaloSlotCard
+import org.bizilabs.halo.state.HaloBorder
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -75,43 +73,45 @@ fun AvatarSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Extra Small")
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
-                        HaloAvatarExtraSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = false,
+                            size = ComponentSize.ExtraSmall,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarExtraSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = true,
+                            size = ComponentSize.ExtraSmall,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                     item {
-                        HaloAvatarExtraSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = false,
+                            size = ComponentSize.ExtraSmall,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarExtraSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = true,
+                            size = ComponentSize.ExtraSmall,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                 }
@@ -121,43 +121,45 @@ fun AvatarSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Small")
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
-                        HaloAvatarSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = false,
+                            size = ComponentSize.Small,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = true,
+                            size = ComponentSize.Small,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                     item {
-                        HaloAvatarSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = false,
+                            size = ComponentSize.Small,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarSmall(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = true,
+                            size = ComponentSize.Small,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                 }
@@ -167,43 +169,45 @@ fun AvatarSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Medium")
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
-                        HaloAvatarMedium(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = false,
+                            size = ComponentSize.Medium,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarMedium(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = true,
+                            size = ComponentSize.Medium,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                     item {
-                        HaloAvatarMedium(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = false,
+                            size = ComponentSize.Medium,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarMedium(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = true,
+                            size = ComponentSize.Medium,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                 }
@@ -213,43 +217,45 @@ fun AvatarSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Large")
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
-                        HaloAvatarLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = false,
+                            size = ComponentSize.Large,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = true,
+                            size = ComponentSize.Large,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                     item {
-                        HaloAvatarLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = false,
+                            size = ComponentSize.Large,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = true,
+                            size = ComponentSize.Large,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                 }
@@ -259,43 +265,45 @@ fun AvatarSection() {
                 HaloText(modifier = Modifier.padding(bottom = 16.dp), text = "Extra Large")
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
-                        HaloAvatarExtraLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = false,
+                            size = ComponentSize.ExtraLarge,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarExtraLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = false,
-                            withBorder = true,
+                            size = ComponentSize.ExtraLarge,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                     item {
-                        HaloAvatarExtraLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = false,
+                            size = ComponentSize.ExtraLarge,
                             placeholderContent = placeholderImage,
                         )
                     }
                     item {
-                        HaloAvatarExtraLarge(
+                        HaloAvatar(
                             model = null,
                             modifier = Modifier,
                             onClick = null,
                             isLoading = true,
-                            withBorder = true,
+                            size = ComponentSize.ExtraLarge,
                             placeholderContent = placeholderImage,
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
                         )
                     }
                 }

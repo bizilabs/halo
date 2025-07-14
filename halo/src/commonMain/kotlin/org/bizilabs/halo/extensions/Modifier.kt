@@ -111,7 +111,7 @@ fun Modifier.dashedBorder(
  * ```
  */
 @Composable
-internal fun Modifier.shimmerEffect(
+fun Modifier.shimmerEffect(
     colors: List<Color> =
         listOf(
             HaloTheme.colorScheme.background.onSurface

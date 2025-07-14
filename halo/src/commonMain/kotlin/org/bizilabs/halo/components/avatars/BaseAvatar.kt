@@ -21,6 +21,7 @@ import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.components.cards.HaloCard
 import org.bizilabs.halo.components.cards.HaloOutlineCard
+import org.bizilabs.halo.state.HaloBorder
 
 /**
  * A base composable for displaying an avatar image with optional border, shape, and state-specific content.
@@ -29,22 +30,22 @@ import org.bizilabs.halo.components.cards.HaloOutlineCard
  * (e.g., user profile pictures, group avatars) with consistent styling and flexible behavior.
  * It supports three avatar content states via [ContentType]:
  *
- * - [ContentType.REMOTE_IMAGE]: Loads an image from a remote source (e.g., URL, file, resource).
- * - [ContentType.LOADING]: Displays the [loadingContent] composable, useful for shimmer or progress indicators.
- * - [ContentType.PLACEHOLDER]: Displays fallback content via [placeholderContent] when no image is intended or available.
+ * - [ContentType.Data]: Loads an image from a remote source (e.g., URL, file, resource).
+ * - [ContentType.Loading]: Displays the [loadingContent] composable, useful for shimmer or progress indicators.
+ * - [ContentType.Placeholder]: Displays fallback content via [placeholderContent] when no image is intended or available.
  *
  * - If [withBorder] is true, the avatar is wrapped in an outlined card.
  * - You can customize the visual appearance using [HaloAvatarColors] for container, content, and border colors.
  *
  * @param modifier Modifier applied to the avatar container.
- * @param model The image source to load (e.g., URL, resource ID, or file). Used when [contentType] is [ContentType.REMOTE_IMAGE].
+ * @param model The image source to load (e.g., URL, resource ID, or file). Used when [contentType] is [ContentType.Data].
  * @param onClick Optional click handler. If provided, the avatar becomes interactive.
  * @param shape The shape of the avatar. Defaults to a rounded rectangle.
  * @param contentScale Defines how the image is scaled inside the container. Defaults to [ContentScale.Crop].
  * @param withBorder Whether to display a border around the avatar.
  * @param loadingContent Composable content shown during loading (e.g., spinner or shimmer).
  * @param errorContent Composable content shown if the image fails to load.
- * @param placeholderContent Composable content shown when [contentType] is [ContentType.PLACEHOLDER].
+ * @param placeholderContent Composable content shown when [contentType] is [ContentType.Placeholder].
  * @param colors Optional color configuration for avatar background, content, and border.
  * @param contentType Defines the current avatar content state (loading, image, or placeholder).
  */
@@ -56,9 +57,9 @@ data class HaloAvatarColors(
 )
 
 enum class ContentType {
-    REMOTE_IMAGE,
-    LOADING,
-    PLACEHOLDER,
+    Data,
+    Loading,
+    Placeholder,
 }
 
 @Composable
@@ -68,19 +69,19 @@ internal fun BaseAvatar(
     onClick: (() -> Unit)?,
     shape: Shape = RoundedCornerShape(10),
     contentScale: ContentScale = ContentScale.Crop,
-    withBorder: Boolean = false,
+    border: HaloBorder? = null,
+    colors: HaloAvatarColors? = null,
+    contentType: ContentType,
     loadingContent: (@Composable () -> Unit)? = null,
     errorContent: (@Composable () -> Unit)? = null,
     placeholderContent: (@Composable () -> Unit)? = null,
-    colors: HaloAvatarColors? = null,
-    contentType: ContentType,
 ) {
     val cardColors =
         CardDefaults.cardColors(
             contentColor = colors?.default?.content ?: HaloTheme.colorScheme.background.onSurface,
             containerColor = colors?.default?.container ?: HaloTheme.colorScheme.background.surface,
         )
-    val borderColor = colors?.default?.border ?: HaloTheme.colorScheme.background.onSurface
+    val borderColor = border?.color ?: HaloTheme.colorScheme.background.onSurface
 
     Box(
         modifier = modifier.clip(shape),
@@ -89,7 +90,7 @@ internal fun BaseAvatar(
         val content: @Composable () -> Unit =
             {
                 when (contentType) {
-                    ContentType.LOADING -> {
+                    ContentType.Loading -> {
                         Box(
                             modifier =
                                 Modifier
@@ -102,7 +103,7 @@ internal fun BaseAvatar(
                             loadingContent?.invoke()
                         }
                     }
-                    ContentType.REMOTE_IMAGE -> {
+                    ContentType.Data -> {
                         val stateContentBox: @Composable (content: @Composable () -> Unit) -> Unit = { content ->
                             Box(modifier = Modifier.fillMaxSize().padding(4.dp), contentAlignment = Alignment.Center) { content() }
                         }
@@ -120,17 +121,17 @@ internal fun BaseAvatar(
                             },
                         )
                     }
-                    ContentType.PLACEHOLDER -> {
+                    ContentType.Placeholder -> {
                         placeholderContent?.invoke()
                     }
                 }
             }
 
-        if (withBorder) {
+        if (border != null) {
             AvatarOutlineCard(
                 onClick = onClick,
                 colors = cardColors,
-                border = BorderStroke(1.dp, borderColor),
+                border = BorderStroke(border.width, borderColor),
                 shape = shape,
             ) {
                 content()
