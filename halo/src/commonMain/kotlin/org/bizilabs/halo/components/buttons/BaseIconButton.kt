@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
@@ -50,20 +51,6 @@ import org.bizilabs.halo.state.HaloBorder
  * @param onClick Callback triggered when the button is clicked.
  * @param content The composable content inside the button, typically an icon.
  */
-data class IconButtonColors(
-    val default: HaloColor,
-    val disabled: HaloColor,
-)
-
-internal fun resolveIconButtonSizeDp(size: ComponentSize): Dp =
-    when (size) {
-        ComponentSize.ExtraSmall -> 32.dp
-        ComponentSize.Small -> 40.dp
-        ComponentSize.Medium -> 48.dp
-        ComponentSize.Large -> 56.dp
-        ComponentSize.ExtraLarge -> 64.dp
-    }
-
 @Composable
 internal fun BaseIconButton(
     modifier: Modifier = Modifier,
@@ -79,9 +66,9 @@ internal fun BaseIconButton(
     val enabledContainerColor =
         colors?.default?.container ?: HaloTheme.colorScheme.background.onBase
             .copy(0.15f)
-    val enabledContentColor = colors?.default?.content ?: HaloTheme.colorScheme.background.onSurface
-    val disabledContainerColor = colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
-    val disabledContentColor = colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
+    val enabledContentColor = colors?.default?.content ?: HaloIconButtonDefaults.iconButtonColors().default.content
+    val disabledContainerColor = colors?.disabled?.container ?: HaloIconButtonDefaults.iconButtonColors().disabled.container
+    val disabledContentColor = colors?.disabled?.content ?: HaloIconButtonDefaults.iconButtonColors().disabled.content
     val containerColor = if (enabled) enabledContainerColor else disabledContainerColor
     val contentColor = if (enabled) enabledContentColor else disabledContentColor
     val containerShape = shape ?: CircleShape
@@ -112,4 +99,77 @@ internal fun BaseIconButton(
     ) {
         ProvideContentColor(contentColor, content = content)
     }
+}
+
+data class IconButtonColors(
+    val default: HaloColor,
+    val disabled: HaloColor,
+)
+
+internal fun resolveIconButtonSizeDp(size: ComponentSize): Dp =
+    when (size) {
+        ComponentSize.ExtraSmall -> 32.dp
+        ComponentSize.Small -> 40.dp
+        ComponentSize.Medium -> 48.dp
+        ComponentSize.Large -> 56.dp
+        ComponentSize.ExtraLarge -> 64.dp
+    }
+
+/**
+ * Contains default values and helpers for configuring [HaloIconButton] and [HaloOutlinedIconButton].
+ *
+ * Use this object to access theme-aware color defaults for icon buttons in various states (enabled, disabled).
+ * These defaults follow the Halo design system and ensure consistent appearance across your UI.
+ *
+ * ### Example:
+ * ```
+ * HaloIconButton(
+ *     onClick = { /* Handle click */ },
+ *     colors = HaloIconButtonDefaults.iconButtonColors()
+ * ) {
+ *     Icon(Icons.Default.Settings, contentDescription = "Settings")
+ * }
+ * ```
+ */
+object HaloIconButtonDefaults {
+    /**
+     * Returns a [IconButtonColors] instance that provides container, content, and border colors for
+     * both enabled and disabled states of an icon button.
+     *
+     * All colors default to theme-derived values, ensuring visual consistency with the rest of the app.
+     *
+     * @param container Background color when the button is enabled.
+     * @param content Foreground (icon) color when the button is enabled.
+     * @param border Border color when the button is enabled.
+     * @param disabledContainer Background color when the button is disabled.
+     * @param disabledContent Foreground (icon) color when the button is disabled.
+     * @param disabledBorder Border color when the button is disabled.
+     *
+     * @return [IconButtonColors] containing [HaloColor] definitions for default and disabled states.
+     */
+    @Composable
+    fun iconButtonColors(
+        container: Color =
+            HaloTheme.colorScheme.background.onBase
+                .copy(0.15f),
+        content: Color = HaloTheme.colorScheme.background.onSurface,
+        border: Color = HaloTheme.colorScheme.background.onSurface,
+        disabledContainer: Color = HaloTheme.colorScheme.disabled.container,
+        disabledContent: Color = HaloTheme.colorScheme.disabled.content,
+        disabledBorder: Color = HaloTheme.colorScheme.disabled.border,
+    ): IconButtonColors =
+        IconButtonColors(
+            default =
+                HaloColor(
+                    container = container,
+                    content = content,
+                    border = border,
+                ),
+            disabled =
+                HaloColor(
+                    container = disabledContainer,
+                    content = disabledContent,
+                    border = disabledBorder,
+                ),
+        )
 }
