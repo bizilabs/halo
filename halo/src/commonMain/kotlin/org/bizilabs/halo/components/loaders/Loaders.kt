@@ -41,11 +41,11 @@ fun HaloShimmerBox(
     modifier: Modifier = Modifier,
     colors: List<Color> =
         listOf(
-            HaloTheme.colorScheme.background.onSurface
+            HaloTheme.colorScheme.content.strong
                 .copy(0.1f),
-            HaloTheme.colorScheme.background.onSurface
+            HaloTheme.colorScheme.content.strong
                 .copy(0.7f),
-            HaloTheme.colorScheme.background.onSurface
+            HaloTheme.colorScheme.content.strong
                 .copy(0.1f),
         ),
     shape: Shape = CircleShape,
@@ -72,7 +72,7 @@ fun HaloShimmerBox(
 fun HaloCircularProgressIndicator(
     modifier: Modifier = Modifier,
     strokeWidth: Dp = 1.dp,
-    color: Color = HaloTheme.colorScheme.background.onSurface,
+    color: Color = HaloTheme.colorScheme.content.strong,
 ) {
     Box(
         modifier = modifier,

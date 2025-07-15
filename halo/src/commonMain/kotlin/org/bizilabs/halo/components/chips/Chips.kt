@@ -104,7 +104,7 @@ internal fun HaloBaseChip(
                                     ?: HaloTheme.colorScheme.background.surface
                             } else {
                                 colors?.default?.content
-                                    ?: HaloTheme.colorScheme.background.onSurface
+                                    ?: HaloTheme.colorScheme.content.strong
                             }
 
                         ChipMode.OUTLINED -> {
@@ -113,7 +113,7 @@ internal fun HaloBaseChip(
                                     ?: HaloTheme.colorScheme.background.surface
                             } else {
                                 colors?.default?.content
-                                    ?: HaloTheme.colorScheme.background.onSurface
+                                    ?: HaloTheme.colorScheme.content.strong
                             }
                         }
                     }
@@ -140,7 +140,7 @@ internal fun HaloBaseChip(
                         ChipMode.FILLED -> {
                             if (isSelected && chipType == ChipType.SELECTION) {
                                 colors?.default?.container
-                                    ?: HaloTheme.colorScheme.background.onSurface
+                                    ?: HaloTheme.colorScheme.content.strong
                             } else {
                                 colors?.default?.container
                                     ?: HaloTheme.colorScheme.background.surface
@@ -150,7 +150,7 @@ internal fun HaloBaseChip(
                         ChipMode.OUTLINED -> {
                             if (isSelected && chipType == ChipType.SELECTION) {
                                 colors?.default?.container
-                                    ?: HaloTheme.colorScheme.background.onSurface
+                                    ?: HaloTheme.colorScheme.content.strong
                             } else {
                                 colors?.default?.container ?: Color.Transparent
                             }
@@ -177,16 +177,16 @@ internal fun HaloBaseChip(
             when (enabled) {
                 true -> {
                     if (isSelected && chipType == ChipType.SELECTION) {
-                        colors?.default?.border ?: HaloTheme.colorScheme.background.onBase
+                        colors?.default?.border ?: HaloTheme.colorScheme.content.stronger
                             .copy(0.25f)
                     } else {
-                        colors?.default?.border ?: HaloTheme.colorScheme.background.onBase
+                        colors?.default?.border ?: HaloTheme.colorScheme.content.stronger
                             .copy(0.15f)
                     }
                 }
 
                 false ->
-                    colors?.disabled?.border ?: HaloTheme.colorScheme.background.onBase
+                    colors?.disabled?.border ?: HaloTheme.colorScheme.content.stronger
                         .copy(0.1f)
             },
     )

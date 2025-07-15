@@ -64,7 +64,7 @@ internal fun BaseIconButton(
     content: @Composable () -> Unit,
 ) {
     val enabledContainerColor =
-        colors?.default?.container ?: HaloTheme.colorScheme.background.onBase
+        colors?.default?.container ?: HaloTheme.colorScheme.content.stronger
             .copy(0.15f)
     val enabledContentColor = colors?.default?.content ?: HaloIconButtonDefaults.iconButtonColors().default.content
     val disabledContainerColor = colors?.disabled?.container ?: HaloIconButtonDefaults.iconButtonColors().disabled.container
@@ -150,10 +150,10 @@ object HaloIconButtonDefaults {
     @Composable
     fun iconButtonColors(
         container: Color =
-            HaloTheme.colorScheme.background.onBase
+            HaloTheme.colorScheme.content.stronger
                 .copy(0.15f),
-        content: Color = HaloTheme.colorScheme.background.onSurface,
-        border: Color = HaloTheme.colorScheme.background.onSurface,
+        content: Color = HaloTheme.colorScheme.content.strong,
+        border: Color = HaloTheme.colorScheme.content.strong,
         disabledContainer: Color = HaloTheme.colorScheme.disabled.container,
         disabledContent: Color = HaloTheme.colorScheme.disabled.content,
         disabledBorder: Color = HaloTheme.colorScheme.disabled.border,

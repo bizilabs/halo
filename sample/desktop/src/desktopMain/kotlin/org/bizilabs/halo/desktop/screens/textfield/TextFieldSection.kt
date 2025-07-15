@@ -30,7 +30,7 @@ fun TextFieldSection() {
         HaloText(
             modifier = Modifier.padding(vertical = 16.dp),
             text = "An Input is a form element that lets users enter one of various types of text on a single line.",
-            color = HaloTheme.colorScheme.background.onBase,
+            color = HaloTheme.colorScheme.content.stronger,
             style = HaloTheme.typography.bodyMedium,
         )
         LazyColumn(

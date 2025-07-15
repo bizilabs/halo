@@ -29,9 +29,9 @@ fun HaloButton(
             containerColor = HaloTheme.colorScheme.primary.neutral,
             contentColor = HaloTheme.colorScheme.primary.weaker,
             disabledContainerColor =
-                HaloTheme.colorScheme.background.onBase
+                HaloTheme.colorScheme.content.stronger
                     .copy(0.1f),
-            disabledContentColor = HaloTheme.colorScheme.background.onBase,
+            disabledContentColor = HaloTheme.colorScheme.content.stronger,
         ),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource? = null,

@@ -114,11 +114,11 @@ fun Modifier.dashedBorder(
 fun Modifier.shimmerEffect(
     colors: List<Color> =
         listOf(
-            HaloTheme.colorScheme.background.onSurface
+            HaloTheme.colorScheme.content.strong
                 .copy(0.1f),
-            HaloTheme.colorScheme.background.onSurface
+            HaloTheme.colorScheme.content.strong
                 .copy(0.7f),
-            HaloTheme.colorScheme.background.onSurface
+            HaloTheme.colorScheme.content.strong
                 .copy(0.1f),
         ),
 ): Modifier {

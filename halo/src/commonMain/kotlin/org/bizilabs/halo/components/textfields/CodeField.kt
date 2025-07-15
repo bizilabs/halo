@@ -63,18 +63,18 @@ internal fun HaloCodeCharacterField(
             default =
                 HaloColor(
                     container =
-                        HaloTheme.colorScheme.background.onSurface
+                        HaloTheme.colorScheme.content.strong
                             .copy(0.1f),
-                    content = HaloTheme.colorScheme.background.onBase,
-                    border = HaloTheme.colorScheme.background.onBase,
+                    content = HaloTheme.colorScheme.content.stronger,
+                    border = HaloTheme.colorScheme.content.stronger,
                 ),
             focused =
                 HaloColor(
                     container =
-                        HaloTheme.colorScheme.background.onSurface
+                        HaloTheme.colorScheme.content.strong
                             .copy(0.25f),
-                    content = HaloTheme.colorScheme.background.onSurface,
-                    border = HaloTheme.colorScheme.background.onSurface,
+                    content = HaloTheme.colorScheme.content.strong,
+                    border = HaloTheme.colorScheme.content.strong,
                 ),
             disabled =
                 HaloColor(
@@ -133,9 +133,9 @@ internal fun HaloCodeCharacterField(
                 !enabled -> colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
                 else -> {
                     if (completeFocus) {
-                        colors?.focused?.container ?: HaloTheme.colorScheme.background.onBase
+                        colors?.focused?.container ?: HaloTheme.colorScheme.content.stronger
                     } else {
-                        colors?.default?.container ?: HaloTheme.colorScheme.background.onSurface
+                        colors?.default?.container ?: HaloTheme.colorScheme.content.strong
                     }
                 }
             },
@@ -154,9 +154,9 @@ internal fun HaloCodeCharacterField(
                 !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
                 else -> {
                     if (completeFocus) {
-                        colors?.focused?.border ?: HaloTheme.colorScheme.background.onBase
+                        colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
                     } else {
-                        colors?.default?.border ?: HaloTheme.colorScheme.background.onSurface
+                        colors?.default?.border ?: HaloTheme.colorScheme.content.strong
                     }
                 }
             },

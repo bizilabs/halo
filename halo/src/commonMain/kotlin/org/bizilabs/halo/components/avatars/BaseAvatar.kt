@@ -78,10 +78,10 @@ internal fun BaseAvatar(
 ) {
     val cardColors =
         CardDefaults.cardColors(
-            contentColor = colors?.default?.content ?: HaloTheme.colorScheme.background.onSurface,
+            contentColor = colors?.default?.content ?: HaloTheme.colorScheme.content.strong,
             containerColor = colors?.default?.container ?: HaloTheme.colorScheme.background.surface,
         )
-    val borderColor = border?.color ?: HaloTheme.colorScheme.background.onSurface
+    val borderColor = border?.color ?: HaloTheme.colorScheme.content.strong
 
     Box(
         modifier = modifier.clip(shape),

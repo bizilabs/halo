@@ -44,7 +44,7 @@ fun AvatarSection() {
                     "Avatars are compact UI elements that visually represent a user, entity, or object.\n" +
                         "They are commonly used to personalize experiences, indicate identity, " +
                         "or enhance recognition in components such as profiles, lists, and chat messages.",
-                color = HaloTheme.colorScheme.background.onBase,
+                color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
         }
@@ -90,7 +90,7 @@ fun AvatarSection() {
                             isLoading = false,
                             size = ComponentSize.ExtraSmall,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                     item {
@@ -111,7 +111,7 @@ fun AvatarSection() {
                             isLoading = true,
                             size = ComponentSize.ExtraSmall,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                 }
@@ -138,7 +138,7 @@ fun AvatarSection() {
                             isLoading = false,
                             size = ComponentSize.Small,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                     item {
@@ -159,7 +159,7 @@ fun AvatarSection() {
                             isLoading = true,
                             size = ComponentSize.Small,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                 }
@@ -186,7 +186,7 @@ fun AvatarSection() {
                             isLoading = false,
                             size = ComponentSize.Medium,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                     item {
@@ -207,7 +207,7 @@ fun AvatarSection() {
                             isLoading = true,
                             size = ComponentSize.Medium,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                 }
@@ -234,7 +234,7 @@ fun AvatarSection() {
                             isLoading = false,
                             size = ComponentSize.Large,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                     item {
@@ -255,7 +255,7 @@ fun AvatarSection() {
                             isLoading = true,
                             size = ComponentSize.Large,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                 }
@@ -282,7 +282,7 @@ fun AvatarSection() {
                             isLoading = false,
                             size = ComponentSize.ExtraLarge,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                     item {
@@ -303,7 +303,7 @@ fun AvatarSection() {
                             isLoading = true,
                             size = ComponentSize.ExtraLarge,
                             placeholderContent = placeholderImage,
-                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+                            border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
                         )
                     }
                 }
