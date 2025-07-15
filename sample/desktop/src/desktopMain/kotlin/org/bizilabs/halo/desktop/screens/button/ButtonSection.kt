@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
-import org.bizilabs.halo.components.HaloButton
-import org.bizilabs.halo.components.HaloOutlineButton
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.HaloTextButton
+import org.bizilabs.halo.components.buttons.HaloButton
+import org.bizilabs.halo.components.buttons.HaloOutlineButton
+import org.bizilabs.halo.components.buttons.HaloTextButton
 import org.bizilabs.halo.components.cards.HaloSlotCard
 
 @Composable

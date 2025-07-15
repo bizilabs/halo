@@ -1,4 +1,4 @@
-package org.bizilabs.halo.components
+package org.bizilabs.halo.components.buttons
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
