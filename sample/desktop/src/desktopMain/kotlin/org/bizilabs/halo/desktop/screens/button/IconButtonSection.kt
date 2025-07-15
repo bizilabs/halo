@@ -31,7 +31,7 @@ fun IconButtonSection() {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
                 text = "An icon button is a compact, clickable element that triggers an action using only an icon.",
-                color = HaloTheme.colorScheme.background.onBase,
+                color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
         }

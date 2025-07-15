@@ -37,7 +37,7 @@ fun ChipSection() {
                     "Chips are compact UI elements that represent an input, attribute, or action. " +
                         "They allow users to make selections, filter content, or " +
                         "trigger events in a lightweight, visually distinct format.",
-                color = HaloTheme.colorScheme.background.onBase,
+                color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
         }

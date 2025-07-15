@@ -67,13 +67,14 @@ internal val HaloLightColorScheme =
                 base = BaseLightBackgroundContainerColor,
                 surface = BaseLightSurfaceContainerColor,
             ),
-        content = HaloColorValue(
-            stronger = BaseLightContentStrongerColor,
-            strong = BaseLightContentStrongColor,
-            neutral = BaseLightContentNeutralColor,
-            weak = BaseLightContentWeakColor,
-            weaker = BaseLightContentWeakerColor,
-        ),
+        content =
+            HaloColorValue(
+                stronger = BaseLightContentStrongerColor,
+                strong = BaseLightContentStrongColor,
+                neutral = BaseLightContentNeutralColor,
+                weak = BaseLightContentWeakColor,
+                weaker = BaseLightContentWeakerColor,
+            ),
         success =
             HaloColorValue(
                 stronger = BaseLightSuccessDarkerColor,

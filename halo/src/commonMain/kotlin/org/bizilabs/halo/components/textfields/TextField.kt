@@ -102,13 +102,13 @@ internal fun HaloBaseTextField(
     val contentColor by animateColorAsState(
         targetValue =
             when {
-                readOnly -> colors?.default?.content ?: HaloTheme.colorScheme.background.onBase
+                readOnly -> colors?.default?.content ?: HaloTheme.colorScheme.content.stronger
                 !enabled -> colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
                 else -> {
                     if (focused) {
-                        colors?.focused?.container ?: HaloTheme.colorScheme.background.onBase
+                        colors?.focused?.container ?: HaloTheme.colorScheme.content.stronger
                     } else {
-                        colors?.default?.container ?: HaloTheme.colorScheme.background.onSurface
+                        colors?.default?.container ?: HaloTheme.colorScheme.content.strong
                     }
                 }
             },
@@ -127,9 +127,9 @@ internal fun HaloBaseTextField(
                 !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
                 else -> {
                     if (focused) {
-                        colors?.focused?.border ?: HaloTheme.colorScheme.background.onBase
+                        colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
                     } else {
-                        colors?.default?.border ?: HaloTheme.colorScheme.background.onSurface
+                        colors?.default?.border ?: HaloTheme.colorScheme.content.strong
                     }
                 }
             },
@@ -214,9 +214,9 @@ internal fun HaloBaseTextField(
                         !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
                         else -> {
                             if (focused) {
-                                colors?.focused?.border ?: HaloTheme.colorScheme.background.onBase
+                                colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
                             } else {
-                                colors?.default?.border ?: HaloTheme.colorScheme.background.onSurface
+                                colors?.default?.border ?: HaloTheme.colorScheme.content.strong
                             }
                         }
                     },
@@ -230,7 +230,7 @@ internal fun HaloBaseTextField(
 
             ProvideContentColor(
                 color =
-                    HaloTheme.colorScheme.background.onBase
+                    HaloTheme.colorScheme.content.stronger
                         .copy(0.5f),
             ) {
                 helper?.invoke()

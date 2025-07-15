@@ -56,7 +56,7 @@ fun HaloOutlinedIconButton(
     colors: IconButtonColors? = null,
     interactionSource: MutableInteractionSource? = null,
     shape: Shape? = null,
-    border: HaloBorder = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+    border: HaloBorder = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
     size: ComponentSize = ComponentSize.Small,
     containerPadding: PaddingValues = PaddingValues(),
     onClick: () -> Unit,
@@ -67,8 +67,8 @@ fun HaloOutlinedIconButton(
             default =
                 HaloColor(
                     container = Color.Transparent,
-                    content = HaloTheme.colorScheme.background.onSurface,
-                    border = HaloTheme.colorScheme.background.onSurface,
+                    content = HaloTheme.colorScheme.content.strong,
+                    border = HaloTheme.colorScheme.content.strong,
                 ),
             disabled =
                 HaloColor(

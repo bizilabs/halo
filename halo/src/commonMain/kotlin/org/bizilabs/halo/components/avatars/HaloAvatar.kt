@@ -49,7 +49,7 @@ import org.bizilabs.halo.state.HaloBorder
  * HaloAvatar(
  *     model = "https://example.com/avatar.png",
  *     size = ComponentSize.Medium,
- *     border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.background.onSurface),
+ *     border = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
  *     onClick = { /* open profile */ }
  * )
  * ```

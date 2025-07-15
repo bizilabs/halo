@@ -23,7 +23,7 @@ fun CardSection() {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
                 text = "A card is a contained unit of information related to a topic. ",
-                color = HaloTheme.colorScheme.background.onBase,
+                color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
         }
