@@ -36,6 +36,7 @@ import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.avatar.AvatarSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
+import org.bizilabs.halo.desktop.screens.button.IconButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
 import org.bizilabs.halo.desktop.screens.chip.ChipSection
 import org.bizilabs.halo.desktop.screens.textfield.CodeFieldSection
@@ -114,8 +115,6 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Badge -> BadgeSection()
 
-                    GalleryScreenSection.Button -> ButtonSection()
-
                     GalleryScreenSection.TopBar -> TopBarSection()
 
                     GalleryScreenSection.TextField -> {
@@ -135,6 +134,18 @@ fun LandingScreenContent(
                     GalleryScreenSection.TextField.Code -> CodeFieldSection()
                     GalleryScreenSection.TextField.Field -> TextFieldSection()
                     GalleryScreenSection.Avatar -> AvatarSection()
+                    GalleryScreenSection.Button ->
+                        GalleryList(
+                            sections =
+                                listOf(
+                                    GalleryScreenSection.Button.Regular,
+                                    GalleryScreenSection.Button.Icon,
+                                ),
+                            onAction = onAction,
+                        )
+
+                    GalleryScreenSection.Button.Icon -> IconButtonSection()
+                    GalleryScreenSection.Button.Regular -> ButtonSection()
                 }
             }
         }

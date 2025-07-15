@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.bizilabs.halo.HaloTheme
-import org.bizilabs.halo.components.HaloButton
 import org.bizilabs.halo.components.HaloScaffold
 import org.bizilabs.halo.components.HaloText
+import org.bizilabs.halo.components.buttons.HaloButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

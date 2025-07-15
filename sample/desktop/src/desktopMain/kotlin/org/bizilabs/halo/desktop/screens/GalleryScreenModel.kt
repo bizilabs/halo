@@ -18,9 +18,21 @@ sealed interface GalleryScreenSection {
             get() = "Badge"
     }
 
-    data object Button : GalleryScreenSection {
+    sealed class Button : GalleryScreenSection {
+        companion object : Button()
+
         override val label: String
             get() = "Button"
+
+        data object Regular : Button() {
+            override val label: String
+                get() = "Regular"
+        }
+
+        data object Icon : Button() {
+            override val label: String
+                get() = "Icon"
+        }
     }
 
     data object Card : GalleryScreenSection {
@@ -105,6 +117,8 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
             when (state.value.section) {
                 GalleryScreenSection.TextField.Code -> GalleryScreenSection.TextField
                 GalleryScreenSection.TextField.Field -> GalleryScreenSection.TextField
+                GalleryScreenSection.Button.Regular -> GalleryScreenSection.Button
+                GalleryScreenSection.Button.Icon -> GalleryScreenSection.Button
                 else -> null
             }
         mutableState.update { it.copy(section = update) }
