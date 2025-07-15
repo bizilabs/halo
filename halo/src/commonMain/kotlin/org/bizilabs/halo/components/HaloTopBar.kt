@@ -31,9 +31,9 @@ fun HaloTopBar(
     colors: TopAppBarColors =
         TopAppBarDefaults.topAppBarColors(
             containerColor = HaloTheme.colorScheme.background.surface,
-            titleContentColor = HaloTheme.colorScheme.background.onSurface,
-            actionIconContentColor = HaloTheme.colorScheme.background.onSurface,
-            navigationIconContentColor = HaloTheme.colorScheme.background.onSurface,
+            titleContentColor = HaloTheme.colorScheme.content.strong,
+            actionIconContentColor = HaloTheme.colorScheme.content.strong,
+            navigationIconContentColor = HaloTheme.colorScheme.content.strong,
         ),
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {

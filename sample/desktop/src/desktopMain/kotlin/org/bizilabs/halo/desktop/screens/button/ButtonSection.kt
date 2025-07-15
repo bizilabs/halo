@@ -24,7 +24,7 @@ fun ButtonSection() {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
                 text = "A Button is a clickable element which communicates that users can trigger an action.",
-                color = HaloTheme.colorScheme.background.onBase,
+                color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
         }

@@ -13,13 +13,16 @@ val BaseLightPrimaryBaseColor = Color(0xFFA020F0)
 val BaseLightPrimarySubtleColor = Color(0xFFC87FF6)
 val BaseLightPrimaryLightestColor = Color(0xFFF1DFFD)
 
-// Default Light Background Color
+// Default Light Background Colors
 private val BaseLightBackgroundContainerColor = Color(0xFFFFFFFF)
-private val BaseLightBackgroundContentColor = Color(0xFF000000)
-
-// Default Light Surface Color
 private val BaseLightSurfaceContainerColor = Color(0xFFF0F0F0)
-private val BaseLightSurfaceContentColor = Color(0xFF0F0F0F)
+
+// Default Light Content Colors
+private val BaseLightContentStrongerColor = Color(0xFF000000)
+private val BaseLightContentStrongColor = Color(0xFF0F0F0F)
+private val BaseLightContentNeutralColor = Color(0xFF222122)
+private val BaseLightContentWeakColor = Color(0xFF959595)
+private val BaseLightContentWeakerColor = Color(0xFFEAE8EB)
 
 // Default Light Success Color
 private val BaseLightSuccessDarkerColor = Color(0xFF163217)
@@ -62,10 +65,15 @@ internal val HaloLightColorScheme =
         background =
             HaloBackgroundValue(
                 base = BaseLightBackgroundContainerColor,
-                onBase = BaseLightBackgroundContentColor,
                 surface = BaseLightSurfaceContainerColor,
-                onSurface = BaseLightSurfaceContentColor,
             ),
+        content = HaloColorValue(
+            stronger = BaseLightContentStrongerColor,
+            strong = BaseLightContentStrongColor,
+            neutral = BaseLightContentNeutralColor,
+            weak = BaseLightContentWeakColor,
+            weaker = BaseLightContentWeakerColor,
+        ),
         success =
             HaloColorValue(
                 stronger = BaseLightSuccessDarkerColor,

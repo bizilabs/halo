@@ -20,7 +20,7 @@ fun HaloScaffold(
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     containerColor: Color = HaloTheme.colorScheme.background.base,
-    contentColor: Color = contentColorFor(HaloTheme.colorScheme.background.onBase),
+    contentColor: Color = contentColorFor(HaloTheme.colorScheme.content.stronger),
     contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
     content: @Composable (PaddingValues) -> Unit,
 ) {

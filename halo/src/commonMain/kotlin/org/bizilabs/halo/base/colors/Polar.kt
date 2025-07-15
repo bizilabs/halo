@@ -20,10 +20,9 @@ internal val PolarLightColorScheme =
         background =
             HaloBackgroundValue(
                 base = PolarLightBackgroundColor,
-                onBase = PolarLightOnBackgroundColor,
                 surface = PolarLightSurfaceColor,
-                onSurface = PolarLightOnSurfaceColor,
             ),
+        content = HaloLightColorScheme.content,
         success = HaloLightColorScheme.success,
         error = HaloLightColorScheme.error,
         warning = HaloLightColorScheme.warning,
@@ -37,10 +36,9 @@ internal val PolarDarkColorScheme =
         background =
             HaloBackgroundValue(
                 base = PolarDarkBackgroundColor,
-                onBase = PolarDarkOnBackgroundColor,
                 surface = PolarDarkSurfaceColor,
-                onSurface = PolarDarkOnSurfaceColor,
             ),
+        content = HaloDarkColorScheme.content,
         success = HaloDarkColorScheme.success,
         error = HaloDarkColorScheme.error,
         warning = HaloDarkColorScheme.warning,
