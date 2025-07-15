@@ -49,7 +49,7 @@ fun HaloCard(
     shape: Shape = CardDefaults.shape,
     colors: CardColors =
         CardDefaults.cardColors(
-            contentColor = HaloTheme.colorScheme.background.onSurface,
+            contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
@@ -78,7 +78,7 @@ fun HaloSlotCard(
     shape: Shape = CardDefaults.shape,
     colors: CardColors =
         CardDefaults.cardColors(
-            contentColor = HaloTheme.colorScheme.background.onSurface,
+            contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
@@ -92,7 +92,7 @@ fun HaloSlotCard(
     CardBase(
         modifier =
             modifier.dashedBorder(
-                HaloTheme.colorScheme.background.onSurface
+                HaloTheme.colorScheme.content.strong
                     .copy(alpha = 0.25f),
                 shape = shape,
                 strokeWidth = strokeWidth,

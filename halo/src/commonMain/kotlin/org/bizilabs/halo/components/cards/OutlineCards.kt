@@ -22,7 +22,7 @@ internal fun OutlineCardBase(
     shape: Shape = CardDefaults.shape,
     colors: CardColors =
         CardDefaults.cardColors(
-            contentColor = HaloTheme.colorScheme.background.onSurface,
+            contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
@@ -51,7 +51,7 @@ fun HaloOutlineCard(
     shape: Shape = CardDefaults.shape,
     colors: CardColors =
         CardDefaults.cardColors(
-            contentColor = HaloTheme.colorScheme.background.onSurface,
+            contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),

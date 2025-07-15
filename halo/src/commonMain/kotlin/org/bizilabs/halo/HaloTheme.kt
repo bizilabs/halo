@@ -57,7 +57,7 @@ fun HaloTheme(
         provideThickness(),
         provideHaloColorScheme(colorScheme = colorScheme),
         provideTypography(typography = typography),
-        provideContentColor(color = colorScheme.background.onBase),
+        provideContentColor(color = colorScheme.content.stronger),
     ) {
         MaterialTheme(shapes = shapes, content = content)
     }

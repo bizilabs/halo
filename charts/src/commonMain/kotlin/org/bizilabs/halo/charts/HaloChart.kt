@@ -131,7 +131,7 @@ fun HaloLineChartSample() {
                             axisBackgroundColor = HaloTheme.colorScheme.background.base,
                         ),
                     indicatorStyle = IndicatorStyle(Color.Blue),
-                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.background.onBase),
+                    legendTextStyle = TextStyle(color = HaloTheme.colorScheme.content.stronger)
                 ),
             onPointSelected = { point ->
                 selectedValue = point?.y?.format(2) ?: "N/A"

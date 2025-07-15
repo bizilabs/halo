@@ -27,7 +27,7 @@ fun BadgeSection() {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
                 text = "A Badge is a visual label that describes an attribute of an object.",
-                color = HaloTheme.colorScheme.background.onBase,
+                color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
         }
@@ -56,7 +56,7 @@ fun BadgeSection() {
                     properties =
                         BadgeProperties.default().copy(
                             backgroundColor = HaloTheme.colorScheme.background.surface,
-                            contentColor = HaloTheme.colorScheme.background.onSurface,
+                            contentColor = HaloTheme.colorScheme.content.strong,
                         ),
                 ) {
                     HaloText(text = "Content")

@@ -105,7 +105,7 @@ fun LandingScreenContent(
                 }
             },
             backgroundColor = HaloTheme.colorScheme.background.base,
-            contentColor = HaloTheme.colorScheme.background.onBase,
+            contentColor = HaloTheme.colorScheme.content.stronger,
         ) { pad ->
             AnimatedContent(state.section) { section ->
                 when (section) {

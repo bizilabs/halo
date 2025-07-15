@@ -33,8 +33,6 @@ data class HaloColorValue(
 data class HaloBackgroundValue(
     val surface: Color,
     val base: Color,
-    val onSurface: Color,
-    val onBase: Color,
 )
 
 @Immutable
@@ -53,6 +51,7 @@ data class HaloColorTheme(
 data class HaloColorScheme(
     val primary: HaloColorValue,
     val background: HaloBackgroundValue,
+    val content: HaloColorValue,
     val info: HaloColorValue,
     val error: HaloColorValue,
     val success: HaloColorValue,
