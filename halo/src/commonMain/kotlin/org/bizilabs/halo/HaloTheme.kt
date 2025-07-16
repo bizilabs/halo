@@ -8,6 +8,7 @@ import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.font.FontFamily
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloFonts
@@ -54,19 +55,21 @@ fun HaloTheme(
     typography: HaloTypography = HaloTypography(fontFamily = font),
     shapes: Shapes = HaloDefaults.Shapes.None,
     colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
-    ripple: Indication =
-        ripple(
-            color = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()).content.neutral,
-            bounded = true,
-        ),
+    ripple: Indication? = null,
     content: @Composable () -> Unit,
 ) {
+    val defaultRippleColor = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()).content.neutral
+    val rippleIndication =
+        ripple ?: remember(defaultRippleColor) {
+            ripple(color = defaultRippleColor, bounded = true)
+        }
+
     CompositionLocalProvider(
         provideThickness(),
         provideHaloColorScheme(colorScheme = colorScheme),
         provideTypography(typography = typography),
         provideContentColor(color = colorScheme.content.stronger),
-        provideRippleIndication(ripple = ripple),
+        provideRippleIndication(ripple = ripple ?: rippleIndication),
     ) {
         MaterialTheme(shapes = shapes, content = content)
     }

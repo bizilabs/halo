@@ -58,15 +58,8 @@ fun HaloOutlinedSelectionChip(
     enabled: Boolean = true,
     text: String,
 ) {
-    val defaultRippleIndication =
-        if (selected) {
-            ripple(
-                color = colors?.default?.content ?: HaloTheme.colorScheme.background.surface,
-                bounded = true,
-            )
-        } else {
-            ripple
-        }
+    val rippleColor = colors?.default?.content ?: HaloTheme.colorScheme.background.surface
+    val defaultRippleIndication = ripple ?: rememberSelectedRippleIndication(selected = selected, color = rippleColor)
 
     HaloBaseChip(
         modifier = modifier,
