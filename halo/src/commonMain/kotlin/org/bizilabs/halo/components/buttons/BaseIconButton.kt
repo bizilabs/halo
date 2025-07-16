@@ -1,5 +1,7 @@
 package org.bizilabs.halo.components.buttons
 
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -48,6 +50,8 @@ import org.bizilabs.halo.state.HaloBorder
  * @param border Optional [HaloBorder] to apply a stroke around the button.
  * @param shape Optional shape of the button container. Defaults to [CircleShape] if not specified.
  * @param containerPadding Padding inside the button's container, applied around the content. Defaults to no padding.
+ * @param ripple Optional [Indication] used to draw visual feedback such as ripple effects when the button is pressed.
+ *               If `null`, the ripple falls back to [LocalIndication.current], typically provided by the theme.
  * @param onClick Callback triggered when the button is clicked.
  * @param content The composable content inside the button, typically an icon.
  */
@@ -60,6 +64,7 @@ internal fun BaseIconButton(
     border: HaloBorder? = null,
     shape: Shape? = null,
     containerPadding: PaddingValues = PaddingValues(),
+    ripple: Indication? = null,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -92,11 +97,7 @@ internal fun BaseIconButton(
                     enabled = enabled,
                     role = Role.Button,
                     interactionSource = interactionSource,
-                    indication =
-                        ripple(
-                            bounded = true,
-                            color = contentColor.copy(0.1f),
-                        ),
+                    indication = ripple ?: LocalIndication.current,
                 ).padding(containerPadding),
         contentAlignment = Alignment.Center,
     ) {

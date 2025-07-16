@@ -2,6 +2,7 @@ package org.bizilabs.halo.components.chips
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -32,31 +34,41 @@ import org.bizilabs.halo.components.HaloSurface
  * and interaction handling. It provides support for outlined or filled styles and different chip types
  * such as selection and input.
  *
+ * This function handles:
+ * - Dynamic visual state changes (enabled, disabled, selected)
+ * - Optional icons on either side
+ * - Custom shapes and container colors
+ * - Ripple effects and interaction tracking
+ * - Contextual content coloring for theme consistency
+ *
  * @param modifier Modifier applied to the chip container.
  * @param enabled Whether the chip is enabled for interaction. Defaults to `true`.
  * @param colors Optional [HaloChipColors] to define chip colors for different states (default, focused, disabled).
  * @param shape The shape of the chip. Defaults to [RoundedCornerShape] with 10.dp corner radius.
- * @param selected Whether the chip is currently selected. Affects visual styling, especially in filled mode.
+ * @param isSelected Whether the chip is currently selected. Affects visual styling, especially in filled mode.
  * @param chipMode Defines the visual style of the chip: [ChipMode.FILLED] or [ChipMode.OUTLINED].
  * @param chipType Defines the behavioral style of the chip: [ChipType.SELECTION] or [ChipType.INPUT].
- * @param onClickChip Optional lambda triggered when the chip is clicked (only works when [enabled] is true and [chipType] is [ChipType.SELECTION]).
- * @param onClickTrailingIcon Optional lambda triggered when the trailing icon is clicked (only works when [chipType] is [ChipType.INPUT]).
+ * @param ripple Optional [Indication] used to show interaction feedback (e.g., ripple) on click.
+ *               If null, falls back to [LocalIndication.current], typically set by the theme.
+ * @param onClickChip Optional lambda triggered when the chip is clicked. Only applies when [chipType] is [ChipType.SELECTION] and [enabled] is `true`.
+ * @param onClickTrailingIcon Optional lambda triggered when the trailing icon is clicked. Only applies when [chipType] is [ChipType.INPUT] and [enabled] is `true`.
  * @param leadingIcon Optional [ImageVector] shown before the content.
  * @param trailingIcon Optional [ImageVector] shown after the content.
  * @param interactionSource Used to track user interaction state. Defaults to a new [MutableInteractionSource].
- * @param content The content displayed inside the chip, provided with the computed [Color] used for text and icons.
+ * @param content The content displayed inside the chip, composable and theme-aware (e.g., text with the resolved content color).
  *
  * ### Example Usage
  * ```
  * HaloBaseChip(
- *     selected = true,
+ *     isSelected = true,
  *     chipMode = ChipMode.OUTLINED,
  *     chipType = ChipType.SELECTION,
- *     onClickChip = { /* Handle chip click */ },
+ *     ripple = rememberRipple(),
+ *     onClickChip = { /* Handle click */ },
  *     leadingIcon = Icons.Default.Star,
  *     trailingIcon = Icons.Default.Close
- * ) { contentColor ->
- *     Text("Chip Label", color = contentColor)
+ * ) {
+ *     Text("Filter")
  * }
  * ```
  */
@@ -86,6 +98,7 @@ internal fun HaloBaseChip(
     isSelected: Boolean = false,
     chipMode: ChipMode = ChipMode.FILLED,
     chipType: ChipType = ChipType.SELECTION,
+    ripple: Indication? = null,
     onClickChip: (() -> Unit)? = null,
     onClickTrailingIcon: (() -> Unit)? = null,
     leadingIcon: ImageVector? = null,
@@ -199,7 +212,11 @@ internal fun HaloBaseChip(
                 .clip(shape)
                 .then(
                     if (isChipClickable && chipType == ChipType.SELECTION) {
-                        Modifier.clickable(onClick = onClickChip)
+                        Modifier.clickable(
+                            onClick = onClickChip,
+                            interactionSource = interactionSource,
+                            indication = ripple ?: LocalIndication.current,
+                        )
                     } else {
                         Modifier
                     },
@@ -240,7 +257,7 @@ internal fun HaloBaseChip(
                                         .clickable(
                                             onClick = onClickTrailingIcon ?: {},
                                             interactionSource = interactionSource,
-                                            indication = LocalIndication.current,
+                                            indication = ripple ?: LocalIndication.current,
                                         )
                                 } else {
                                     Modifier
