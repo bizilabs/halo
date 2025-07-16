@@ -87,14 +87,17 @@ internal fun BaseIconButton(
                 .clip(containerShape)
                 .background(color = containerColor)
                 .then(borderModifier)
-                .padding(containerPadding)
                 .clickable(
                     onClick = onClick,
                     enabled = enabled,
                     role = Role.Button,
                     interactionSource = interactionSource,
-                    indication = ripple(),
-                ),
+                    indication =
+                        ripple(
+                            bounded = true,
+                            color = contentColor.copy(0.1f),
+                        ),
+                ).padding(containerPadding),
         contentAlignment = Alignment.Center,
     ) {
         ProvideContentColor(contentColor, content = content)
