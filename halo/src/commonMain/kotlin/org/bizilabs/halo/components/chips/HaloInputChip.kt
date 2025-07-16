@@ -1,5 +1,6 @@
 package org.bizilabs.halo.components.chips
 
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -21,6 +22,8 @@ import org.bizilabs.halo.components.HaloText
  *
  * @param modifier Modifier to apply to the chip container.
  * @param colors Optional [HaloChipColors] to customize the chip's appearance across states.
+ * @param ripple Optional [Indication] used to show visual feedback (e.g., ripple) when the trailing icon is clicked.
+ *               If `null`, falls back to [LocalIndication.current], typically defined by the theme.
  * @param onClickTrailingIcon Optional lambda triggered when the trailing icon is clicked (e.g., to remove the chip).
  * @param leadingIcon Optional [ImageVector] displayed before the chip's text.
  * @param trailingIcon Optional [ImageVector] displayed after the chip's text, typically used for removal.
@@ -35,6 +38,7 @@ import org.bizilabs.halo.components.HaloText
  *     text = "Design",
  *     leadingIcon = Icons.Default.Tag,
  *     trailingIcon = Icons.Default.Close,
+ *     ripple = rememberRipple(), // Optional ripple customization
  *     onClickTrailingIcon = { /* Remove chip */ }
  * )
  * ```
@@ -43,6 +47,7 @@ import org.bizilabs.halo.components.HaloText
 fun HaloInputChip(
     modifier: Modifier = Modifier,
     colors: HaloChipColors? = null,
+    ripple: Indication? = null,
     onClickTrailingIcon: (() -> Unit)? = null,
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
@@ -58,6 +63,7 @@ fun HaloInputChip(
         trailingIcon = trailingIcon,
         isSelected = selected,
         colors = colors,
+        ripple = ripple,
         onClickTrailingIcon = onClickTrailingIcon,
         shape = shape,
         enabled = enabled,

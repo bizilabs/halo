@@ -1,5 +1,6 @@
 package org.bizilabs.halo.components.buttons
 
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
@@ -12,13 +13,15 @@ import org.bizilabs.halo.base.ComponentSize
  * A composable icon button that provides a clickable surface for icons, built on top of [BaseIconButton].
  *
  * `HaloIconButton` is used for compact, icon-only actions (e.g., "Edit", "Close", "Share") and is size-aware via [ComponentSize].
- * It supports customization of colors, shape, internal padding, and interactions, while maintaining accessibility and minimum touch targets.
+ * It supports customization of colors, shape, internal padding, ripple effect, and interactions,
+ * while maintaining accessibility and minimum touch targets.
  *
  * ### Features:
  * - Built-in sizing using [ComponentSize] (e.g., ExtraSmall to ExtraLarge)
  * - Support for custom shapes and colors via [Shape] and [IconButtonColors]
  * - Optional internal padding via [containerPadding]
- * - Ripple effect and interaction tracking via [MutableInteractionSource]
+ * - Ripple effect customization via [Indication]
+ * - Interaction tracking via [MutableInteractionSource]
  * - Fully themeable and composable content
  *
  * @param modifier Modifier applied to the icon button.
@@ -28,6 +31,8 @@ import org.bizilabs.halo.base.ComponentSize
  * @param shape Optional shape of the button container. Defaults to a circle if not specified.
  * @param size The size of the button. Defaults to [ComponentSize.Small].
  * @param containerPadding Optional padding applied inside the button's container, around the icon.
+ * @param ripple Optional [Indication] used to provide visual feedback (e.g., ripple effect) when the button is pressed.
+ *               If `null`, the button uses the default indication from the current theme via [LocalIndication].
  * @param onClick Callback triggered when the icon button is clicked.
  * @param content The icon or any composable content to display inside the button.
  *
@@ -36,7 +41,8 @@ import org.bizilabs.halo.base.ComponentSize
  * HaloIconButton(
  *     onClick = { /* Do something */ },
  *     size = ComponentSize.Medium,
- *     containerPadding = PaddingValues(8.dp)
+ *     containerPadding = PaddingValues(8.dp),
+ *     ripple = rememberRipple() // Optional custom ripple effect
  * ) {
  *     Icon(Icons.Default.Favorite, contentDescription = "Favorite")
  * }
@@ -51,6 +57,7 @@ fun HaloIconButton(
     shape: Shape? = null,
     size: ComponentSize = ComponentSize.Small,
     containerPadding: PaddingValues = PaddingValues(),
+    ripple: Indication? = null,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -63,6 +70,7 @@ fun HaloIconButton(
         interactionSource = interactionSource,
         shape = shape,
         containerPadding = containerPadding,
+        ripple = ripple,
         onClick = onClick,
         content = content,
     )

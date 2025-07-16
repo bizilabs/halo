@@ -86,24 +86,27 @@ fun ChipSection() {
                 var selectedIndex by remember { mutableIntStateOf(0) }
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     item {
+                        val isSelected = selectedIndex == 0
                         HaloSelectionChip(
                             onClick = { selectedIndex = 0 },
-                            selected = selectedIndex == 0,
+                            selected = isSelected,
                             text = "Content",
                         )
                     }
                     item {
+                        val isSelected = selectedIndex == 1
                         HaloSelectionChip(
                             onClick = { selectedIndex = 1 },
-                            selected = selectedIndex == 1,
+                            selected = isSelected,
                             text = "Content",
                             leadingIcon = Icons.Default.ShoppingCart,
                         )
                     }
                     item {
+                        val isSelected = selectedIndex == 2
                         HaloSelectionChip(
                             onClick = { selectedIndex = 2 },
-                            selected = selectedIndex == 2,
+                            selected = isSelected,
                             text = "Content",
                             leadingIcon = Icons.Default.ShoppingCart,
                             trailingIcon = Icons.Default.Close,

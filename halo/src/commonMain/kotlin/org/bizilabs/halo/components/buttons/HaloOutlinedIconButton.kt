@@ -1,5 +1,6 @@
 package org.bizilabs.halo.components.buttons
 
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
@@ -32,9 +33,11 @@ import org.bizilabs.halo.state.HaloBorder
  * @param colors Optional color configuration for enabled and disabled states using [IconButtonColors].
  * @param interactionSource Optional interaction source to observe user interactions.
  * @param shape Optional shape of the button container. Defaults to a circle if not specified.
- * @param border Border style applied to the icon button. Defaults to a 1.dp border using theme's `onSurface` color.
+ * @param border Border style applied to the icon button. Defaults to a 1.dp border using the theme's `onSurface` color.
  * @param size The size of the button. Defaults to [ComponentSize.Small].
  * @param containerPadding Padding applied inside the button's container around the icon.
+ * @param ripple Optional [Indication] used to show visual feedback (e.g., ripple effect) when the button is clicked.
+ *               If `null`, the theme's default indication is used.
  * @param onClick Callback triggered when the icon button is clicked.
  * @param content The icon or any composable content to display inside the button.
  *
@@ -43,7 +46,8 @@ import org.bizilabs.halo.state.HaloBorder
  * HaloOutlinedIconButton(
  *     onClick = { /* Refresh */ },
  *     size = ComponentSize.Medium,
- *     containerPadding = PaddingValues(8.dp)
+ *     containerPadding = PaddingValues(8.dp),
+ *     ripple = rememberRipple() // Optional: customize the ripple effect
  * ) {
  *     Icon(Icons.Default.Refresh, contentDescription = "Refresh")
  * }
@@ -59,6 +63,7 @@ fun HaloOutlinedIconButton(
     border: HaloBorder = HaloBorder(width = 1.dp, color = HaloTheme.colorScheme.content.strong),
     size: ComponentSize = ComponentSize.Small,
     containerPadding: PaddingValues = PaddingValues(),
+    ripple: Indication? = null,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -88,6 +93,7 @@ fun HaloOutlinedIconButton(
         border = border,
         shape = shape,
         containerPadding = containerPadding,
+        ripple = ripple,
         onClick = onClick,
         content = content,
     )

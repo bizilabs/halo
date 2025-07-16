@@ -1,8 +1,10 @@
 package org.bizilabs.halo
 
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -18,6 +20,7 @@ import org.bizilabs.halo.base.Thickness
 import org.bizilabs.halo.base.getHaloColorScheme
 import org.bizilabs.halo.base.provideContentColor
 import org.bizilabs.halo.base.provideHaloColorScheme
+import org.bizilabs.halo.base.provideRippleIndication
 import org.bizilabs.halo.base.provideThickness
 import org.bizilabs.halo.base.provideTypography
 
@@ -51,6 +54,11 @@ fun HaloTheme(
     typography: HaloTypography = HaloTypography(fontFamily = font),
     shapes: Shapes = HaloDefaults.Shapes.None,
     colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
+    ripple: Indication =
+        ripple(
+            color = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()).content.neutral,
+            bounded = true,
+        ),
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
@@ -58,6 +66,7 @@ fun HaloTheme(
         provideHaloColorScheme(colorScheme = colorScheme),
         provideTypography(typography = typography),
         provideContentColor(color = colorScheme.content.stronger),
+        provideRippleIndication(ripple = ripple),
     ) {
         MaterialTheme(shapes = shapes, content = content)
     }

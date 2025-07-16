@@ -1,5 +1,7 @@
 package org.bizilabs.halo.base
 
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -84,3 +86,5 @@ internal val LocalHaloColorScheme = staticCompositionLocalOf { HaloLightColorSch
 internal fun provideHaloColorScheme(colorScheme: HaloColorScheme) = LocalHaloColorScheme provides colorScheme
 
 internal fun provideContentColor(color: Color) = LocalContentColor provides color
+
+internal fun provideRippleIndication(ripple: Indication) = LocalIndication provides ripple
