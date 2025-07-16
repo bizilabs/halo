@@ -17,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -88,6 +89,15 @@ data class HaloChipColors(
     val focused: HaloColor,
     val disabled: HaloColor,
 )
+
+@Composable
+internal fun rememberSelectedRippleIndication(
+    selected: Boolean,
+    color: Color,
+): Indication? =
+    remember(selected, color) {
+        if (selected) ripple(color = color, bounded = true) else null
+    }
 
 @Composable
 internal fun HaloBaseChip(
