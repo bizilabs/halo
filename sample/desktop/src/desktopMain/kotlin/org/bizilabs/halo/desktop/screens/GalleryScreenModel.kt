@@ -72,9 +72,26 @@ sealed interface GalleryScreenSection {
             get() = "Avatar"
     }
 
+    sealed class Stepper : GalleryScreenSection {
+        companion object : Stepper()
+
+        override val label: String
+            get() = "Stepper"
+
+        data object Horizontal : Stepper() {
+            override val label: String
+                get() = "Horizontal"
+        }
+
+        data object Vertical : Stepper() {
+            override val label: String
+                get() = "Vertical"
+        }
+    }
+
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Badge, Button, Card, TextField, TopBar, Chip, Avatar)
+            get() = listOf(Accordion, Badge, Button, Card, Stepper, TextField, TopBar, Chip, Avatar)
     }
 }
 
