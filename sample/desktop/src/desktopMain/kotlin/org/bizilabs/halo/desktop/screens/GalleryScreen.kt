@@ -112,6 +112,7 @@ fun LandingScreenContent(
                     GalleryScreenSection.Accordion -> AccordionSection()
 
                     GalleryScreenSection.Card -> CardSection()
+                    GalleryScreenSection.Chip -> ChipSection()
 
                     GalleryScreenSection.Badge -> BadgeSection()
 
@@ -128,9 +129,6 @@ fun LandingScreenContent(
                         )
                     }
 
-                    GalleryScreenSection.Chip -> ChipSection()
-
-                    null -> GalleryList(sections = state.sections, onAction = onAction)
                     GalleryScreenSection.TextField.Code -> CodeFieldSection()
                     GalleryScreenSection.TextField.Field -> TextFieldSection()
                     GalleryScreenSection.Avatar -> AvatarSection()
@@ -146,6 +144,21 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Button.Icon -> IconButtonSection()
                     GalleryScreenSection.Button.Regular -> ButtonSection()
+                    is GalleryScreenSection.Stepper -> {
+                        GalleryList(
+                            sections =
+                                listOf(
+                                    GalleryScreenSection.Stepper.Horizontal,
+                                    GalleryScreenSection.Stepper.Vertical,
+                                ),
+                            onAction = onAction,
+                        )
+                    }
+
+//                    GalleryScreenSection.Stepper.Horizontal -> HorizontalStepperSection()
+//                    GalleryScreenSection.Stepper.Vertical -> HorizontalStepperSection()
+
+                    null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
             }
         }
