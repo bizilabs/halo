@@ -29,7 +29,23 @@ data class HaloColorValue(
     val neutral: Color,
     val weak: Color,
     val weaker: Color,
-)
+) {
+    val filled: HaloColor
+        get() =
+            HaloColor(
+                container = neutral,
+                content = weaker,
+                border = Color.Transparent,
+            )
+
+    val outlined: HaloColor
+        get() =
+            HaloColor(
+                container = weaker,
+                content = strong,
+                border = weak,
+            )
+}
 
 @Immutable
 data class HaloBackgroundValue(
