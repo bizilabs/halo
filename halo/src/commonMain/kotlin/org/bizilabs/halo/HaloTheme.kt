@@ -69,7 +69,7 @@ fun HaloTheme(
         provideHaloColorScheme(colorScheme = colorScheme),
         provideTypography(typography = typography),
         provideContentColor(color = colorScheme.content.stronger),
-        provideRippleIndication(ripple = ripple ?: rippleIndication),
+        provideRippleIndication(ripple = rippleIndication),
     ) {
         MaterialTheme(shapes = shapes, content = content)
     }

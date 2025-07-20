@@ -72,6 +72,11 @@ sealed interface GalleryScreenSection {
             get() = "Avatar"
     }
 
+    data object BottomSheet : GalleryScreenSection {
+        override val label: String
+            get() = "BottomSheet"
+    }
+
     sealed class Stepper : GalleryScreenSection {
         companion object : Stepper()
 
@@ -94,14 +99,15 @@ sealed interface GalleryScreenSection {
             get() =
                 listOf(
                     Accordion,
-                    Avatar,
                     Badge,
                     Button,
                     Card,
-                    Chip,
-                    Stepper,
                     TextField,
                     TopBar,
+                    Chip,
+                    Avatar,
+                    BottomSheet,
+                    Stepper,
                 )
     }
 }
