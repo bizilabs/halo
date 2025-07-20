@@ -18,10 +18,10 @@ private val BaseLightBackgroundContainerColor = Color(0xFFFFFFFF)
 private val BaseLightSurfaceContainerColor = Color(0xFFF0F0F0)
 
 // Default Light Content Colors
-private val BaseLightContentStrongerColor = Color(0xFF000000)
-private val BaseLightContentStrongColor = Color(0xFF0F0F0F)
-private val BaseLightContentNeutralColor = Color(0xFF222122)
-private val BaseLightContentWeakColor = Color(0xFF959595)
+private val BaseLightContentStrongerColor = Color(0xFF020202)
+private val BaseLightContentStrongColor = Color(0xFF201F20)
+private val BaseLightContentNeutralColor = Color(0xFF615E62)
+private val BaseLightContentWeakColor = Color(0xFFCECBCE)
 private val BaseLightContentWeakerColor = Color(0xFFEAE8EB)
 
 // Default Light Success Color

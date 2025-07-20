@@ -162,11 +162,42 @@ fun TextFieldSection() {
                         )
                     }
                 }
+                Spacer(Modifier.height(24.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    Column(modifier = Modifier.weight(0.5f)) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        HaloText(
+                            modifier = Modifier.padding(bottom = 8.dp),
+                            text = "Error",
+                            style = HaloTheme.typography.subTitle,
+                        )
+                        var content by remember { mutableStateOf("content") }
+                        HaloFilledTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            enabled = true,
+                            isError = true,
+                            value = content,
+                            onValueChange = { content = it },
+                            label = {
+                                HaloText(text = "Label")
+                            },
+                            count = {
+                                HaloText(text = "Count")
+                            },
+                            helper = {
+                                HaloText(text = "Helper")
+                            },
+                            leading = {
+                                HaloText(text = "Leading")
+                            },
+                            trailing = {
+                                HaloText(text = "Leading")
+                            },
+                        )
+                    }
+                    Column(modifier = Modifier.weight(1f)) {
                         HaloText(
                             modifier = Modifier.padding(bottom = 8.dp),
                             text = "Read Only",
@@ -195,7 +226,6 @@ fun TextFieldSection() {
                             },
                         )
                     }
-                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
             item {
@@ -266,10 +296,40 @@ fun TextFieldSection() {
                         )
                     }
                 }
+                Spacer(Modifier.height(24.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        HaloText(
+                            modifier = Modifier.padding(bottom = 8.dp),
+                            text = "Error",
+                            style = HaloTheme.typography.subTitle,
+                        )
+                        var content by remember { mutableStateOf("content") }
+                        HaloOutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = content,
+                            isError = true,
+                            onValueChange = { content = it },
+                            label = {
+                                HaloText(text = "Label")
+                            },
+                            count = {
+                                HaloText(text = "Count")
+                            },
+                            helper = {
+                                HaloText(text = "Helper")
+                            },
+                            leading = {
+                                HaloText(text = "Leading")
+                            },
+                            trailing = {
+                                HaloText(text = "Leading")
+                            },
+                        )
+                    }
                     Column(modifier = Modifier.weight(1f)) {
                         HaloText(
                             modifier = Modifier.padding(bottom = 8.dp),
@@ -299,7 +359,6 @@ fun TextFieldSection() {
                             },
                         )
                     }
-                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
             item { Spacer(modifier = Modifier.padding(24.dp)) }

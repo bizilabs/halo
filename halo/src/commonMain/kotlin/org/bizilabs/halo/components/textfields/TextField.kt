@@ -25,11 +25,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.HaloColor
+import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.base.colors.ProvideContentColor
 import org.bizilabs.halo.components.HaloSurface
 
@@ -42,6 +45,9 @@ data class HaloTextFieldColors(
     val default: HaloColor,
     val focused: HaloColor,
     val disabled: HaloColor,
+    val error: HaloColor,
+    val cursor: Color,
+    val errorCursor: Color,
 )
 
 @Composable
@@ -63,7 +69,8 @@ internal fun HaloBaseTextField(
     helper: @Composable (() -> Unit)? = null,
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
-    shape: Shape = RoundedCornerShape(20),
+    isError: Boolean = false,
+    shape: Shape = HaloShapes.Medium.medium,
     colors: HaloTextFieldColors? = null,
 ) {
     var focused by remember { mutableStateOf(false) }
@@ -125,11 +132,12 @@ internal fun HaloBaseTextField(
             when {
                 readOnly -> colors?.default?.border ?: HaloTheme.colorScheme.disabled.border
                 !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
+                isError -> colors?.error?.border ?: HaloTheme.colorScheme.error.neutral
                 else -> {
                     if (focused) {
                         colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
                     } else {
-                        colors?.default?.border ?: HaloTheme.colorScheme.content.strong
+                        colors?.default?.border ?: HaloTheme.colorScheme.content.neutral
                     }
                 }
             },
@@ -151,6 +159,20 @@ internal fun HaloBaseTextField(
         label = "borderWidthAnimation",
     )
 
+    val cursorColor by animateColorAsState(
+        targetValue =
+            when {
+                isError -> colors?.errorCursor ?: HaloTheme.colorScheme.error.neutral
+                else -> colors?.cursor ?: HaloTheme.colorScheme.content.stronger
+            },
+        animationSpec =
+            tween(
+                durationMillis = 500,
+                easing = FastOutSlowInEasing,
+            ),
+        label = "borderColorAnimation",
+    )
+
     BasicTextField(
         modifier =
             modifier
@@ -165,6 +187,7 @@ internal fun HaloBaseTextField(
         interactionSource = interactionSource,
         keyboardActions = keyboardActions,
         keyboardOptions = keyboardOptions,
+        cursorBrush = SolidColor(cursorColor),
     ) { innerTextField ->
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
@@ -212,6 +235,7 @@ internal fun HaloBaseTextField(
                     when {
                         readOnly -> colors?.default?.border ?: HaloTheme.colorScheme.disabled.border
                         !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
+                        isError -> colors?.error?.content ?: HaloTheme.colorScheme.error.neutral
                         else -> {
                             if (focused) {
                                 colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
@@ -229,9 +253,8 @@ internal fun HaloBaseTextField(
             )
 
             ProvideContentColor(
-                color =
-                    HaloTheme.colorScheme.content.stronger
-                        .copy(0.5f),
+                // color = HaloTheme.colorScheme.content.neutral,
+                color = helperColor,
             ) {
                 helper?.invoke()
             }
@@ -244,6 +267,7 @@ fun HaloFilledTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    placeholder: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
@@ -252,6 +276,7 @@ fun HaloFilledTextField(
     helper: @Composable (() -> Unit)? = null,
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource? = null,
@@ -264,11 +289,13 @@ fun HaloFilledTextField(
         modifier = modifier,
         value = value,
         onValueChange = onValueChange,
+        placeholder = placeholder,
         enabled = enabled,
         readOnly = readOnly,
         label = label,
         leading = leading,
         trailing = trailing,
+        isError = isError,
         textStyle = textStyle,
         helper = helper,
         count = count,
@@ -286,6 +313,7 @@ fun HaloOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    placeholder: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
@@ -294,6 +322,7 @@ fun HaloOutlinedTextField(
     helper: @Composable (() -> Unit)? = null,
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource? = null,
@@ -304,6 +333,7 @@ fun HaloOutlinedTextField(
     HaloBaseTextField(
         mode = TextFieldMode.OUTLINED,
         modifier = modifier,
+        placeholder = placeholder,
         enabled = enabled,
         readOnly = readOnly,
         value = value,
@@ -312,6 +342,7 @@ fun HaloOutlinedTextField(
         leading = leading,
         trailing = trailing,
         helper = helper,
+        isError = isError,
         count = count,
         shape = shape,
         singleLine = lines == 1,
