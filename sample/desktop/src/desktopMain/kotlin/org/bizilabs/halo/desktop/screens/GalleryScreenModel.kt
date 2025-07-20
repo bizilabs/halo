@@ -91,7 +91,18 @@ sealed interface GalleryScreenSection {
 
     companion object {
         val values: List<GalleryScreenSection>
-            get() = listOf(Accordion, Badge, Button, Card, Stepper, TextField, TopBar, Chip, Avatar)
+            get() =
+                listOf(
+                    Accordion,
+                    Avatar,
+                    Badge,
+                    Button,
+                    Card,
+                    Chip,
+                    Stepper,
+                    TextField,
+                    TopBar,
+                )
     }
 }
 
@@ -108,7 +119,7 @@ sealed interface GalleryScreenAction {
 data class GalleryScreenState(
     val isDarkModeEnabled: Boolean = false,
     val colorTheme: HaloColorTheme = HaloDefaults.ColorThemes.Default,
-    val section: GalleryScreenSection? = null,
+    val section: GalleryScreenSection? = GalleryScreenSection.Stepper.Horizontal,
     val sections: List<GalleryScreenSection> = GalleryScreenSection.values,
 )
 
@@ -136,6 +147,8 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
                 GalleryScreenSection.TextField.Field -> GalleryScreenSection.TextField
                 GalleryScreenSection.Button.Regular -> GalleryScreenSection.Button
                 GalleryScreenSection.Button.Icon -> GalleryScreenSection.Button
+                GalleryScreenSection.Stepper.Horizontal -> GalleryScreenSection.Stepper
+                GalleryScreenSection.Stepper.Vertical -> GalleryScreenSection.Stepper
                 else -> null
             }
         mutableState.update { it.copy(section = update) }

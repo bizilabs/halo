@@ -39,6 +39,8 @@ import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.button.IconButtonSection
 import org.bizilabs.halo.desktop.screens.card.CardSection
 import org.bizilabs.halo.desktop.screens.chip.ChipSection
+import org.bizilabs.halo.desktop.screens.stepper.HorizontalStepperSection
+import org.bizilabs.halo.desktop.screens.stepper.VerticalStepperSection
 import org.bizilabs.halo.desktop.screens.textfield.CodeFieldSection
 import org.bizilabs.halo.desktop.screens.textfield.TextFieldSection
 import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
@@ -144,7 +146,7 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Button.Icon -> IconButtonSection()
                     GalleryScreenSection.Button.Regular -> ButtonSection()
-                    is GalleryScreenSection.Stepper -> {
+                    GalleryScreenSection.Stepper -> {
                         GalleryList(
                             sections =
                                 listOf(
@@ -155,8 +157,8 @@ fun LandingScreenContent(
                         )
                     }
 
-//                    GalleryScreenSection.Stepper.Horizontal -> HorizontalStepperSection()
-//                    GalleryScreenSection.Stepper.Vertical -> HorizontalStepperSection()
+                    GalleryScreenSection.Stepper.Horizontal -> HorizontalStepperSection()
+                    GalleryScreenSection.Stepper.Vertical -> VerticalStepperSection()
 
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
