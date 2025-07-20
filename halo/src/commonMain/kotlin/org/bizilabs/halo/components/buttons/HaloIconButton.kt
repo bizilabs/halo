@@ -52,7 +52,7 @@ import org.bizilabs.halo.base.ComponentSize
 fun HaloIconButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: IconButtonColors? = null,
+    colors: IconButtonColors? = HaloIconButtonDefaults.iconButtonColors(),
     interactionSource: MutableInteractionSource? = null,
     shape: Shape? = null,
     size: ComponentSize = ComponentSize.Small,
