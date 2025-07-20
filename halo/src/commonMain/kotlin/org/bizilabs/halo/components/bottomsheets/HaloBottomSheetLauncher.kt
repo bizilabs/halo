@@ -17,6 +17,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -44,6 +45,7 @@ import org.bizilabs.halo.HaloTheme
  * @param sheetSize Determines whether the sheet should fully expand or allow partial height. See [HaloSheetSize].
  * @param colors Defines the container and content colors used in the sheet. Defaults to [HaloSheetDefaults.sheetColors].
  * @param shape The shape of the sheet surface. Defaults to [BottomSheetDefaults.ExpandedShape].
+ * @param sheetMaxWidth Maximum width constraint for the sheet. Defaults to [HaloSheetDefaults.SheetMaxWidth].
  * @param content The composable content displayed inside the bottom sheet.
  *
  * @return A [HaloSheetLauncher] instance that provides `launch()` and `dismiss()` functions to control sheet visibility.
@@ -53,6 +55,7 @@ fun rememberHaloSheetLauncher(
     sheetSize: HaloSheetSize = HaloSheetSize.Full,
     colors: HaloSheetColors = HaloSheetDefaults.sheetColors(),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
+    sheetMaxWidth: Dp = HaloSheetDefaults.SheetMaxWidth,
     content: @Composable ColumnScope.() -> Unit,
 ): HaloSheetLauncher {
     val skipPartiallyExpanded =
@@ -81,6 +84,7 @@ fun rememberHaloSheetLauncher(
             shape = shape,
             containerColor = colors.container,
             contentColor = colors.content,
+            sheetMaxWidth = sheetMaxWidth,
             onDismissRequest = { isVisible = isVisible.not() },
             content = content,
         )
@@ -122,6 +126,8 @@ data class HaloSheetColors(
 )
 
 object HaloSheetDefaults {
+    val SheetMaxWidth: Dp = BottomSheetDefaults.SheetMaxWidth
+
     @Composable
     fun sheetColors(
         container: Color = HaloTheme.colorScheme.background.surface,
