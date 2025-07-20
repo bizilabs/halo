@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -28,9 +26,9 @@ fun BottomSheetSection() {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
                 text =
-                    "Chips are compact UI elements that represent an input, attribute, or action. " +
-                        "They allow users to make selections, filter content, or " +
-                        "trigger events in a lightweight, visually distinct format.",
+                    "Bottom sheets are surfaces anchored to the bottom of the screen that display " +
+                        "contextual content or actions. They can be used for menus, filters, " +
+                        "selections, or lightweight dialogs without disrupting the main UI.",
                 color = HaloTheme.colorScheme.content.stronger,
                 fontWeight = FontWeight.Light,
             )
