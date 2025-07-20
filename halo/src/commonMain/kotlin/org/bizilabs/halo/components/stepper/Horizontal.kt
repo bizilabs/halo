@@ -14,14 +14,14 @@ import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ComponentState
 
 @Composable
-fun ThamaniHorizontalStepItem(
+fun HaloHorizontalStepItem(
     index: Int,
     selected: Boolean,
     last: Boolean,
     state: ComponentState,
     modifier: Modifier = Modifier,
     icon: @Composable (Int) -> Unit = {
-        ThamaniStep(
+        HaloStep(
             index = it,
             state = state,
             selected = selected,
@@ -62,7 +62,7 @@ fun ThamaniHorizontalStepItem(
 }
 
 @Composable
-fun ThamaniHorizontalStepper(
+fun HaloHorizontalStepper(
     steps: Int,
     current: Int,
     state: (Int) -> ComponentState,
@@ -72,7 +72,7 @@ fun ThamaniHorizontalStepper(
 ) {
     LazyRow(modifier) {
         items(steps) { value ->
-            ThamaniHorizontalStepItem(
+            HaloHorizontalStepItem(
                 index = value,
                 selected = value == current,
                 last = value == steps - 1,

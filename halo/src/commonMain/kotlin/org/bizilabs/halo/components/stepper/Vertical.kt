@@ -16,14 +16,14 @@ import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ComponentState
 
 @Composable
-fun ThamaniVerticalStepItem(
+fun HaloVerticalStepItem(
     index: Int,
     selected: Boolean,
     last: Boolean,
     state: ComponentState,
     modifier: Modifier = Modifier,
     icon: @Composable (Int) -> Unit = {
-        ThamaniStep(
+        HaloStep(
             index = it,
             state = state,
             selected = selected,
@@ -64,7 +64,7 @@ fun ThamaniVerticalStepItem(
 }
 
 @Composable
-fun ThamaniVerticalStepper(
+fun HaloVerticalStepper(
     steps: Int,
     current: Int,
     state: (Int) -> ComponentState,
@@ -74,7 +74,7 @@ fun ThamaniVerticalStepper(
 ) {
     LazyColumn(modifier) {
         items(steps) { value ->
-            ThamaniVerticalStepItem(
+            HaloVerticalStepItem(
                 modifier = Modifier.fillMaxWidth(),
                 index = value,
                 selected = value == current,

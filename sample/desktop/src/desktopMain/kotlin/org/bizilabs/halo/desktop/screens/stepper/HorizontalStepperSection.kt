@@ -15,8 +15,8 @@ import org.bizilabs.halo.base.ComponentState
 import org.bizilabs.halo.components.HaloOutlinedBadge
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
+import org.bizilabs.halo.components.stepper.HaloHorizontalStepper
 import org.bizilabs.halo.components.stepper.StepperProperties
-import org.bizilabs.halo.components.stepper.ThamaniHorizontalStepper
 
 @Composable
 fun HorizontalStepperSection() {
@@ -54,7 +54,7 @@ fun HorizontalStepperSection() {
                     style = HaloTheme.typography.subTitle,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                ThamaniHorizontalStepper(
+                HaloHorizontalStepper(
                     steps = 3,
                     current = 1,
                     state = {
@@ -92,7 +92,7 @@ fun HorizontalStepperSection() {
                     style = HaloTheme.typography.subTitle,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                ThamaniHorizontalStepper(
+                HaloHorizontalStepper(
                     steps = 2,
                     current = 1,
                     state = {
@@ -114,7 +114,7 @@ fun HorizontalStepperSection() {
                 }
             }
             item {
-                ThamaniHorizontalStepper(
+                HaloHorizontalStepper(
                     steps = 2,
                     current = 1,
                     state = {
@@ -136,7 +136,7 @@ fun HorizontalStepperSection() {
                 }
             }
             item {
-                ThamaniHorizontalStepper(
+                HaloHorizontalStepper(
                     steps = 2,
                     current = 1,
                     state = {

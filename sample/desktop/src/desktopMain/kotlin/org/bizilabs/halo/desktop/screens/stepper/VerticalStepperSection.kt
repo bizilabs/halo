@@ -16,8 +16,8 @@ import org.bizilabs.halo.base.ComponentState
 import org.bizilabs.halo.components.HaloOutlinedBadge
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
+import org.bizilabs.halo.components.stepper.HaloVerticalStepper
 import org.bizilabs.halo.components.stepper.StepperProperties
-import org.bizilabs.halo.components.stepper.ThamaniVerticalStepper
 
 @Composable
 fun VerticalStepperSection() {
@@ -57,7 +57,7 @@ fun VerticalStepperSection() {
                             style = HaloTheme.typography.subTitle,
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        ThamaniVerticalStepper(
+                        HaloVerticalStepper(
                             modifier = Modifier.height(300.dp),
                             steps = 3,
                             current = 1,
@@ -101,7 +101,7 @@ fun VerticalStepperSection() {
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Row(modifier = Modifier.fillMaxWidth()) {
-                            ThamaniVerticalStepper(
+                            HaloVerticalStepper(
                                 modifier = Modifier.weight(1f).height(150.dp),
                                 steps = 2,
                                 current = 1,
@@ -122,7 +122,7 @@ fun VerticalStepperSection() {
                                     }
                                 HaloText(text = title)
                             }
-                            ThamaniVerticalStepper(
+                            HaloVerticalStepper(
                                 modifier = Modifier.weight(1f).height(300.dp),
                                 steps = 2,
                                 current = 1,
@@ -143,7 +143,7 @@ fun VerticalStepperSection() {
                                     }
                                 HaloText(text = title)
                             }
-                            ThamaniVerticalStepper(
+                            HaloVerticalStepper(
                                 modifier = Modifier.weight(1f).height(300.dp),
                                 steps = 2,
                                 current = 1,

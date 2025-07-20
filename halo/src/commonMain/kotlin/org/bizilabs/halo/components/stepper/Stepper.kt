@@ -34,7 +34,7 @@ data class StepperProperties(
 }
 
 @Composable
-fun ThamaniStep(
+fun HaloStep(
     index: Int,
     selected: Boolean,
     modifier: Modifier = Modifier,
