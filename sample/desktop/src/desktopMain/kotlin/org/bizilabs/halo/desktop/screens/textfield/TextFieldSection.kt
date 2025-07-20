@@ -115,6 +115,7 @@ fun TextFieldSection() {
                             modifier = Modifier.fillMaxWidth(),
                             value = content,
                             onValueChange = { content = it },
+                            placeholder = "Add here",
                             label = {
                                 HaloText(text = "Label")
                             },
@@ -249,6 +250,7 @@ fun TextFieldSection() {
                             modifier = Modifier.fillMaxWidth(),
                             value = content,
                             onValueChange = { content = it },
+                            placeholder = "Add here",
                             label = {
                                 HaloText(text = "Label")
                             },

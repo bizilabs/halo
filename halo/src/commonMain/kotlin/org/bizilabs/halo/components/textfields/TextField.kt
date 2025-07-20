@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -35,6 +36,7 @@ import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.base.colors.ProvideContentColor
 import org.bizilabs.halo.components.HaloSurface
+import org.bizilabs.halo.components.HaloText
 
 internal enum class TextFieldMode {
     FILLED,
@@ -48,6 +50,7 @@ data class HaloTextFieldColors(
     val error: HaloColor,
     val cursor: Color,
     val errorCursor: Color,
+    val placeholder: Color,
 )
 
 @Composable
@@ -91,10 +94,20 @@ internal fun HaloBaseTextField(
 
                 !enabled -> colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
                 else -> {
-                    if (focused) {
-                        colors?.focused?.container ?: HaloTheme.colorScheme.background.surface
-                    } else {
-                        colors?.default?.container ?: HaloTheme.colorScheme.background.surface
+                    when (mode) {
+                        TextFieldMode.FILLED ->
+                            if (focused) {
+                                colors?.focused?.container ?: HaloTheme.colorScheme.background.surface
+                            } else {
+                                colors?.default?.container ?: HaloTheme.colorScheme.background.surface
+                            }
+
+                        TextFieldMode.OUTLINED ->
+                            if (focused) {
+                                colors?.focused?.container ?: HaloTheme.colorScheme.background.surface
+                            } else {
+                                colors?.default?.container ?: HaloTheme.colorScheme.background.base
+                            }
                     }
                 }
             },
@@ -173,12 +186,22 @@ internal fun HaloBaseTextField(
         label = "borderColorAnimation",
     )
 
+    val placeholderColor by animateColorAsState(
+        targetValue = colors?.placeholder ?: HaloTheme.colorScheme.content.weak,
+        animationSpec =
+            tween(
+                durationMillis = 500,
+                easing = FastOutSlowInEasing,
+            ),
+        label = "placeholderColor",
+    )
+
     BasicTextField(
         modifier =
             modifier
                 .focusable(enabled && readOnly.not())
                 .onFocusChanged { focused = it.isFocused },
-        value = value.ifBlank { placeholder },
+        value = value,
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle.copy(color = contentColor),
@@ -216,14 +239,24 @@ internal fun HaloBaseTextField(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp, horizontal = 16.dp),
+                            .padding(vertical = 8.dp, horizontal = 16.dp)
+                            .heightIn(
+                                min = 32.dp,
+                            ),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     leading?.invoke()
                     Row(modifier = Modifier.weight(1f)) {
                         ProvideContentColor(color = contentColor) {
-                            innerTextField()
+                            if (value.isBlank() && !focused && placeholder.isNotBlank()) {
+                                HaloText(
+                                    text = placeholder,
+                                    style = textStyle.copy(color = placeholderColor),
+                                )
+                            } else {
+                                innerTextField()
+                            }
                         }
                     }
                     trailing?.invoke()
@@ -234,7 +267,10 @@ internal fun HaloBaseTextField(
                 targetValue =
                     when {
                         readOnly -> colors?.default?.border ?: HaloTheme.colorScheme.disabled.border
-                        !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
+                        !enabled ->
+                            colors?.disabled?.border
+                                ?: HaloTheme.colorScheme.disabled.border
+
                         isError -> colors?.error?.content ?: HaloTheme.colorScheme.error.neutral
                         else -> {
                             if (focused) {
@@ -253,7 +289,6 @@ internal fun HaloBaseTextField(
             )
 
             ProvideContentColor(
-                // color = HaloTheme.colorScheme.content.neutral,
                 color = helperColor,
             ) {
                 helper?.invoke()
