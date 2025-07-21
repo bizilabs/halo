@@ -17,7 +17,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -126,7 +128,9 @@ data class HaloSheetColors(
 )
 
 object HaloSheetDefaults {
-    val SheetMaxWidth: Dp = BottomSheetDefaults.SheetMaxWidth
+    val SheetMaxWidth: Dp
+        @Composable
+        get() = LocalWindowInfo.current.containerSize.width.dp
 
     @Composable
     fun sheetColors(
