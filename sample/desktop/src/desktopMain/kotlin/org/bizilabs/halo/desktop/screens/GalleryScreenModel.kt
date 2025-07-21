@@ -99,15 +99,15 @@ sealed interface GalleryScreenSection {
             get() =
                 listOf(
                     Accordion,
+                    Avatar,
                     Badge,
+                    BottomSheet,
                     Button,
                     Card,
+                    Chip,
+                    Stepper,
                     TextField,
                     TopBar,
-                    Chip,
-                    Avatar,
-                    BottomSheet,
-                    Stepper,
                 )
     }
 }
