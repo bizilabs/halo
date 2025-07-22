@@ -51,45 +51,21 @@ fun HaloFilledBadge(
     properties: BadgeProperties = BadgeProperties.default(),
     content: @Composable () -> Unit,
 ) {
-    val (container, content) =
+    val colors =
         when (mode) {
-            ComponentMode.Default ->
-                Pair(
-                    HaloTheme.colorScheme.primary.neutral,
-                    HaloTheme.colorScheme.primary.weaker,
-                )
-
-            ComponentMode.Info ->
-                Pair(
-                    HaloTheme.colorScheme.info.neutral,
-                    HaloTheme.colorScheme.info.weaker,
-                )
-
-            ComponentMode.Success ->
-                Pair(
-                    HaloTheme.colorScheme.success.neutral,
-                    HaloTheme.colorScheme.success.weaker,
-                )
-
-            ComponentMode.Error ->
-                Pair(
-                    HaloTheme.colorScheme.error.neutral,
-                    HaloTheme.colorScheme.error.weaker,
-                )
-
-            ComponentMode.Warning ->
-                Pair(
-                    HaloTheme.colorScheme.warning.neutral,
-                    HaloTheme.colorScheme.warning.weaker,
-                )
+            ComponentMode.Default -> HaloTheme.colorScheme.primary.filled
+            ComponentMode.Info -> HaloTheme.colorScheme.info.filled
+            ComponentMode.Success -> HaloTheme.colorScheme.success.filled
+            ComponentMode.Error -> HaloTheme.colorScheme.error.filled
+            ComponentMode.Warning -> HaloTheme.colorScheme.warning.filled
         }
 
     HaloBadge(
         modifier = modifier,
         properties =
             properties.copy(
-                backgroundColor = container,
-                contentColor = content,
+                backgroundColor = colors.container,
+                contentColor = colors.content,
             ),
     ) {
         content()
@@ -103,50 +79,21 @@ fun HaloOutlinedBadge(
     properties: BadgeProperties = BadgeProperties.default(),
     content: @Composable () -> Unit,
 ) {
-    val (container, content, border) =
+    val colors =
         when (mode) {
-            ComponentMode.Default ->
-                Triple(
-                    HaloTheme.colorScheme.primary.weaker,
-                    HaloTheme.colorScheme.primary.strong,
-                    HaloTheme.colorScheme.primary.weak,
-                )
-
-            ComponentMode.Info ->
-                Triple(
-                    HaloTheme.colorScheme.info.weaker,
-                    HaloTheme.colorScheme.info.strong,
-                    HaloTheme.colorScheme.info.weak,
-                )
-
-            ComponentMode.Success ->
-                Triple(
-                    HaloTheme.colorScheme.success.weaker,
-                    HaloTheme.colorScheme.success.strong,
-                    HaloTheme.colorScheme.success.weak,
-                )
-
-            ComponentMode.Error ->
-                Triple(
-                    HaloTheme.colorScheme.error.weaker,
-                    HaloTheme.colorScheme.error.strong,
-                    HaloTheme.colorScheme.error.weak,
-                )
-
-            ComponentMode.Warning ->
-                Triple(
-                    HaloTheme.colorScheme.warning.weaker,
-                    HaloTheme.colorScheme.warning.strong,
-                    HaloTheme.colorScheme.warning.weak,
-                )
+            ComponentMode.Default -> HaloTheme.colorScheme.primary.outlined
+            ComponentMode.Info -> HaloTheme.colorScheme.info.outlined
+            ComponentMode.Success -> HaloTheme.colorScheme.success.outlined
+            ComponentMode.Error -> HaloTheme.colorScheme.error.outlined
+            ComponentMode.Warning -> HaloTheme.colorScheme.warning.outlined
         }
     HaloBadge(
         modifier = modifier,
         properties =
             properties.copy(
-                backgroundColor = container,
-                contentColor = content,
-                borderColor = border,
+                backgroundColor = colors.container,
+                contentColor = colors.content,
+                borderColor = colors.border,
             ),
     ) {
         content()
