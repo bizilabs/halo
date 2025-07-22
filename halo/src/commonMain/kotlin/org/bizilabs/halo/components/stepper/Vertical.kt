@@ -26,13 +26,13 @@ fun HaloVerticalStep(
     last: Boolean,
     modifier: Modifier = Modifier,
     selected: Int? = null,
-    mode: StepMode = StepMode.NumberAndIcon,
+    type: StepType = StepType.NumberAndIcon,
     state: ComponentState = if (selected != null && index < selected) ComponentState.Success else ComponentState.Default,
     indicator: @Composable (Int) -> Unit = {
         HaloStepIndicator(
             index = index,
             selected = index == selected,
-            mode = mode,
+            type = type,
             state = state,
             shape = RoundedCornerShape(100f),
         )
@@ -73,6 +73,7 @@ fun HaloVerticalStepper(
     modifier: Modifier = Modifier,
     selected: Int? = null,
     stepMinHeight: Dp = 24.dp,
+    type: StepType = StepType.Dot,
     step: @Composable (Int) -> Unit = { index ->
         HaloVerticalStep(
             modifier = Modifier.fillMaxWidth(),
@@ -80,7 +81,7 @@ fun HaloVerticalStepper(
             selected = selected,
             last = index == steps - 1,
             dividerMinHeight = stepMinHeight,
-            mode = StepMode.Dot,
+            type = type,
             state =
                 when {
                     selected != null && index < selected -> ComponentState.Success

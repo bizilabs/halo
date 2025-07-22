@@ -17,7 +17,7 @@ import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
 import org.bizilabs.halo.components.stepper.HaloHorizontalStep
 import org.bizilabs.halo.components.stepper.HaloHorizontalStepper
-import org.bizilabs.halo.components.stepper.StepMode
+import org.bizilabs.halo.components.stepper.StepType
 
 @Composable
 fun HorizontalStepperSection() {
@@ -98,7 +98,7 @@ fun HorizontalStepperSection() {
                                 index = index,
                                 last = index == 4,
                                 selected = 3,
-                                mode = StepMode.Dot,
+                                type = StepType.Dot,
                                 state =
                                     when (index) {
                                         0 -> ComponentState.Success
@@ -143,7 +143,7 @@ fun HorizontalStepperSection() {
                             index = it,
                             last = it == 4,
                             selected = 2,
-                            mode = StepMode.Dot,
+                            type = StepType.Dot,
                         )
                     }
                     HaloText(
@@ -158,7 +158,7 @@ fun HorizontalStepperSection() {
                             index = it,
                             last = it == 4,
                             selected = 2,
-                            mode = StepMode.Icon,
+                            type = StepType.Icon,
                         )
                     }
                     HaloText(
@@ -173,7 +173,7 @@ fun HorizontalStepperSection() {
                             index = it,
                             last = it == 4,
                             selected = 2,
-                            mode = StepMode.Number,
+                            type = StepType.Number,
                         )
                     }
                     HaloText(
@@ -188,7 +188,7 @@ fun HorizontalStepperSection() {
                             index = it,
                             last = it == 4,
                             selected = 2,
-                            mode = StepMode.NumberAndIcon,
+                            type = StepType.NumberAndIcon,
                         )
                     }
                 }

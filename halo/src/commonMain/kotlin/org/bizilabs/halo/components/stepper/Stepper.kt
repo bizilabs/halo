@@ -4,13 +4,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -26,7 +24,7 @@ import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.base.colors.ProvideContentColor
 import org.bizilabs.halo.components.HaloText
 
-enum class StepMode {
+enum class StepType {
     Dot,
     Number,
     Icon,
@@ -38,7 +36,7 @@ fun HaloStepIndicator(
     index: Int,
     selected: Boolean,
     state: ComponentState = ComponentState.Default,
-    mode: StepMode = StepMode.NumberAndIcon,
+    type: StepType = StepType.NumberAndIcon,
     modifier: Modifier = Modifier,
     borderWidth: Dp = if (selected) 2.dp else 0.dp,
     shape: Shape = RoundedCornerShape(20),
@@ -90,8 +88,8 @@ fun HaloStepIndicator(
             }
 
             false -> {
-                when (mode) {
-                    StepMode.Number -> {
+                when (type) {
+                    StepType.Number -> {
                         HaloText(
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                             text = "${index + 1}",
@@ -100,7 +98,7 @@ fun HaloStepIndicator(
                         )
                     }
 
-                    StepMode.Icon -> {
+                    StepType.Icon -> {
                         Icon(
                             modifier = Modifier.padding(2.dp),
                             imageVector = Icons.Rounded.Check,
@@ -109,7 +107,7 @@ fun HaloStepIndicator(
                         )
                     }
 
-                    StepMode.NumberAndIcon -> {
+                    StepType.NumberAndIcon -> {
                         when (state) {
                             ComponentState.Success -> {
                                 Icon(
@@ -131,91 +129,10 @@ fun HaloStepIndicator(
                         }
                     }
 
-                    StepMode.Dot -> {
+                    StepType.Dot -> {
                         Box(modifier = Modifier.size(28.dp))
                     }
                 }
-            }
-        }
-    }
-}
-
-data class StepperProperties(
-    val width: Dp = 300.dp,
-    val height: Dp = 50.dp,
-    val padding: PaddingValues = PaddingValues(0.dp),
-    val shape: Shape = RoundedCornerShape(20),
-    val thickness: Dp = 2.dp,
-) {
-    companion object {
-        val Default = StepperProperties()
-    }
-}
-
-@Composable
-fun HaloStepIndicator(
-    index: Int,
-    selected: Boolean,
-    modifier: Modifier = Modifier,
-    state: ComponentState = ComponentState.Default,
-) {
-    val color =
-        when (state) {
-            ComponentState.Default -> {
-                if (selected) {
-                    HaloTheme.colorScheme.primary.filled
-                } else {
-                    HaloTheme.colorScheme.disabled
-                }
-            }
-
-            ComponentState.Loading -> {
-                if (selected) {
-                    HaloTheme.colorScheme.primary.filled
-                } else {
-                    HaloTheme.colorScheme.disabled
-                }
-            }
-
-            ComponentState.Error -> HaloTheme.colorScheme.error.filled
-            ComponentState.Success -> HaloTheme.colorScheme.success.filled
-        }
-
-    HaloStepIndicator(modifier = modifier, colors = color) {
-        when (state) {
-            ComponentState.Default -> {
-                HaloText(
-                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 14.dp),
-                    text = "${index + 1}",
-                    style = HaloTheme.typography.bodyLarge,
-                    color = color.content,
-                )
-            }
-
-            ComponentState.Loading -> {
-                CircularProgressIndicator(
-                    modifier = Modifier.padding(8.dp).size(24.dp),
-                    strokeWidth = 3.dp,
-                    color = color.content,
-                )
-            }
-
-            ComponentState.Error -> {
-                Icon(
-                    modifier = Modifier.padding(8.dp),
-                    imageVector = Icons.Rounded.Error,
-                    contentDescription = "error",
-                    tint = color.content,
-                )
-            }
-
-            ComponentState.Success -> {
-                Icon(
-                    modifier = Modifier.padding(8.dp),
-                    imageVector = Icons.Rounded.Check,
-                    contentDescription = "success",
-                    tint = color.content,
-                )
             }
         }
     }
