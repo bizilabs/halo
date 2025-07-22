@@ -2,6 +2,7 @@ package org.bizilabs.halo.desktop.screens.stepper
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ComponentState
-import org.bizilabs.halo.components.HaloOutlinedBadge
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
+import org.bizilabs.halo.components.stepper.HaloHorizontalStep
 import org.bizilabs.halo.components.stepper.HaloHorizontalStepper
-import org.bizilabs.halo.components.stepper.StepperProperties
+import org.bizilabs.halo.components.stepper.StepMode
 
 @Composable
 fun HorizontalStepperSection() {
@@ -37,13 +38,25 @@ fun HorizontalStepperSection() {
                     style = HaloTheme.typography.subTitle,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                HaloSlotCard(modifier = Modifier) {
-                    Column(modifier = Modifier.padding(8.dp)) {
-                        HaloSlotCard(modifier = Modifier) {
-                            HaloText(
-                                modifier = Modifier.padding(16.dp),
-                                text = "Content",
-                            )
+                Row {
+                    HaloSlotCard {
+                        Column(modifier = Modifier.padding(8.dp)) {
+                            HaloSlotCard(modifier = Modifier) {
+                                HaloText(
+                                    modifier = Modifier.padding(16.dp),
+                                    text = "indicator",
+                                )
+                            }
+                        }
+                    }
+                    HaloSlotCard(modifier = Modifier.fillMaxWidth(0.5f)) {
+                        Column(modifier = Modifier.padding(8.dp)) {
+                            HaloSlotCard(modifier = Modifier.fillMaxWidth()) {
+                                HaloText(
+                                    modifier = Modifier.padding(16.dp),
+                                    text = "divider",
+                                )
+                            }
                         }
                     }
                 }
@@ -55,32 +68,57 @@ fun HorizontalStepperSection() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 HaloHorizontalStepper(
-                    steps = 3,
-                    current = 1,
-                    state = {
-                        when (it) {
-                            0 -> ComponentState.Success
-                            1 -> ComponentState.Loading
-                            else -> ComponentState.Default
-                        }
-                    },
-                    properties = StepperProperties.Default.copy(width = 150.dp),
-                ) { step ->
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        HaloText(
-                            text = "Title  ${step + 1}",
-                            style = HaloTheme.typography.bodyMedium,
+                    steps = 5,
+                    selected = 2,
+                ) {
+                    Column {
+                        HaloHorizontalStep(
+                            index = it,
+                            last = it == 4,
+                            selected = 2,
                         )
                         HaloText(
-                            text = "Subtitle  ${step + 1}",
-                            style = HaloTheme.typography.bodySmall,
+                            modifier = Modifier.padding(top = 8.dp),
+                            text = "Step ${it + 1}",
+                            style = HaloTheme.typography.labelMedium,
                         )
-                        HaloOutlinedBadge {
+                    }
+                }
+            }
+            item {
+                Column {
+                    HaloText(
+                        text = "States",
+                        style = HaloTheme.typography.subTitle,
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    HaloHorizontalStepper(steps = 5, selected = 2) { index ->
+                        Column {
+                            HaloHorizontalStep(
+                                index = index,
+                                last = index == 4,
+                                selected = 3,
+                                mode = StepMode.Dot,
+                                state =
+                                    when (index) {
+                                        0 -> ComponentState.Success
+                                        1 -> ComponentState.Error
+                                        2 -> ComponentState.Loading
+                                        3 -> ComponentState.Default
+                                        else -> ComponentState.Default
+                                    },
+                            )
                             HaloText(
-                                text = "Badge  ${step + 1}",
-                                style = HaloTheme.typography.labelSmall,
+                                modifier = Modifier.padding(top = 8.dp),
+                                text =
+                                    when (index) {
+                                        0 -> "Success"
+                                        1 -> "Error"
+                                        2 -> "Loading"
+                                        3 -> "Current"
+                                        else -> "Default"
+                                    },
+                                style = HaloTheme.typography.labelMedium,
                             )
                         }
                     }
@@ -88,73 +126,71 @@ fun HorizontalStepperSection() {
             }
             item {
                 HaloText(
-                    text = "States",
+                    text = "Types",
                     style = HaloTheme.typography.subTitle,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                HaloHorizontalStepper(
-                    steps = 2,
-                    current = 1,
-                    state = {
-                        when (it) {
-                            0 -> ComponentState.Success
-                            1 -> ComponentState.Error
-                            else -> ComponentState.Default
-                        }
-                    },
-                    properties = StepperProperties.Default.copy(width = 150.dp),
-                ) { step ->
-                    val title =
-                        when (step) {
-                            0 -> "Success"
-                            1 -> "Error"
-                            else -> "Default"
-                        }
-                    HaloText(text = title)
-                }
-            }
-            item {
-                HaloHorizontalStepper(
-                    steps = 2,
-                    current = 1,
-                    state = {
-                        when (it) {
-                            0 -> ComponentState.Default
-                            1 -> ComponentState.Default
-                            else -> ComponentState.Default
-                        }
-                    },
-                    properties = StepperProperties.Default.copy(width = 150.dp),
-                ) { step ->
-                    val title =
-                        when (step) {
-                            0 -> "Default"
-                            1 -> "Default Highlighted"
-                            else -> "Default"
-                        }
-                    HaloText(text = title)
-                }
-            }
-            item {
-                HaloHorizontalStepper(
-                    steps = 2,
-                    current = 1,
-                    state = {
-                        when (it) {
-                            0 -> ComponentState.Loading
-                            1 -> ComponentState.Loading
-                            else -> ComponentState.Default
-                        }
-                    },
-                    properties = StepperProperties.Default.copy(width = 150.dp),
-                ) { step ->
-                    val title =
-                        when (step) {
-                            0 -> "Loading"
-                            1 -> "Loading Highlighted"
-                            else -> "Loading"
-                        }
-                    HaloText(text = title)
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    HaloText(
+                        text = "Dot",
+                        style = HaloTheme.typography.bodyMedium,
+                    )
+                    HaloHorizontalStepper(
+                        steps = 5,
+                        selected = 2,
+                    ) {
+                        HaloHorizontalStep(
+                            index = it,
+                            last = it == 4,
+                            selected = 2,
+                            mode = StepMode.Dot,
+                        )
+                    }
+                    HaloText(
+                        text = "Icon",
+                        style = HaloTheme.typography.bodyMedium,
+                    )
+                    HaloHorizontalStepper(
+                        steps = 5,
+                        selected = 2,
+                    ) {
+                        HaloHorizontalStep(
+                            index = it,
+                            last = it == 4,
+                            selected = 2,
+                            mode = StepMode.Icon,
+                        )
+                    }
+                    HaloText(
+                        text = "Number",
+                        style = HaloTheme.typography.bodyMedium,
+                    )
+                    HaloHorizontalStepper(
+                        steps = 5,
+                        selected = 2,
+                    ) {
+                        HaloHorizontalStep(
+                            index = it,
+                            last = it == 4,
+                            selected = 2,
+                            mode = StepMode.Number,
+                        )
+                    }
+                    HaloText(
+                        text = "Number & Icon",
+                        style = HaloTheme.typography.bodyMedium,
+                    )
+                    HaloHorizontalStepper(
+                        steps = 5,
+                        selected = 2,
+                    ) {
+                        HaloHorizontalStep(
+                            index = it,
+                            last = it == 4,
+                            selected = 2,
+                            mode = StepMode.NumberAndIcon,
+                        )
+                    }
                 }
             }
             item { Spacer(modifier = Modifier.padding(36.dp)) }
