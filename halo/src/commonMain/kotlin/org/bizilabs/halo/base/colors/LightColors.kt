@@ -39,11 +39,11 @@ private val BaseLightErrorSubtleColor = Color(0xFFFAADA8)
 private val BaseLightErrorLightestColor = Color(0xFFFEF1F0)
 
 // Default Light Warning Color
-private val BaseLightWarningDarkerColor = Color(0xFF4A3800)
-private val BaseLightWarningDarkColor = Color(0xFFA77D00)
-private val BaseLightWarningBaseColor = Color(0xFFFFC107)
-private val BaseLightWarningSubtleColor = Color(0xFFFFE494)
-private val BaseLightWarningLightestColor = Color(0xFFFFFBED)
+private val BaseLightWarningDarkerColor = Color(0xFF291500)
+private val BaseLightWarningDarkColor = Color(0xFF663500)
+private val BaseLightWarningBaseColor = Color(0xFFF57E00)
+private val BaseLightWarningLightColor = Color(0xFFFFB05C)
+private val BaseLightWarningLightestColor = Color(0xFFFFEBD6)
 
 // Default Light Info Color
 private val BaseLightInfoDarkerColor = Color(0xFF001253)
@@ -96,7 +96,7 @@ internal val HaloLightColorScheme =
                 stronger = BaseLightWarningDarkerColor,
                 strong = BaseLightWarningDarkColor,
                 neutral = BaseLightWarningBaseColor,
-                weak = BaseLightWarningSubtleColor,
+                weak = BaseLightWarningLightColor,
                 weaker = BaseLightWarningLightestColor,
             ),
         info =

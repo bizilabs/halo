@@ -39,11 +39,11 @@ private val BaseDarkErrorLightColor = Color(0xFFFF8B85)
 private val BaseDarkErrorLightestColor = Color(0xFFFFB1AD)
 
 // Default Dark Warning Color
-private val BaseDarkWarningDarkerColor = Color(0xFF291B00)
-private val BaseDarkWarningDarkColor = Color(0xFF523400)
-private val BaseDarkWarningBaseColor = Color(0xFFFFA000)
-private val BaseDarkWarningLightColor = Color(0xFFFFCB70)
-private val BaseDarkWarningLightestColor = Color(0xFFFFDA99)
+private val BaseDarkWarningDarkerColor = Color(0xFF291500)
+private val BaseDarkWarningDarkColor = Color(0xFF663500)
+private val BaseDarkWarningBaseColor = Color(0xFFFF890A)
+private val BaseDarkWarningLightColor = Color(0xFFFFB05C)
+private val BaseDarkWarningLightestColor = Color(0xFFFFD8AD)
 
 // Default Dark Info Color
 private val BaseDarkInfoDarkerColor = Color(0xFF000E3E)
