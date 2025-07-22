@@ -20,7 +20,7 @@ import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
 import org.bizilabs.halo.components.stepper.HaloVerticalStep
 import org.bizilabs.halo.components.stepper.HaloVerticalStepper
-import org.bizilabs.halo.components.stepper.StepMode
+import org.bizilabs.halo.components.stepper.StepType
 
 @Composable
 fun VerticalStepperSection() {
@@ -107,7 +107,7 @@ fun VerticalStepperSection() {
                                 index = index,
                                 last = index == 4,
                                 selected = 3,
-                                mode = StepMode.Dot,
+                                type = StepType.Dot,
                                 state =
                                     when (index) {
                                         0 -> ComponentState.Success
@@ -155,7 +155,7 @@ fun VerticalStepperSection() {
                                     index = it,
                                     last = it == 4,
                                     selected = 2,
-                                    mode = StepMode.Dot,
+                                    type = StepType.Dot,
                                 )
                             }
                         }
@@ -176,7 +176,7 @@ fun VerticalStepperSection() {
                                     index = it,
                                     last = it == 4,
                                     selected = 2,
-                                    mode = StepMode.Icon,
+                                    type = StepType.Icon,
                                 )
                             }
                         }
@@ -194,7 +194,7 @@ fun VerticalStepperSection() {
                                     index = it,
                                     last = it == 4,
                                     selected = 2,
-                                    mode = StepMode.Number,
+                                    type = StepType.Number,
                                 )
                             }
                         }
@@ -212,7 +212,7 @@ fun VerticalStepperSection() {
                                     index = it,
                                     last = it == 4,
                                     selected = 2,
-                                    mode = StepMode.NumberAndIcon,
+                                    type = StepType.NumberAndIcon,
                                 )
                             }
                         }

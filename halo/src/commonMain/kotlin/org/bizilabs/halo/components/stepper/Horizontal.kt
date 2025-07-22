@@ -25,13 +25,13 @@ fun HaloHorizontalStep(
     last: Boolean,
     modifier: Modifier = Modifier,
     selected: Int? = null,
-    mode: StepMode = StepMode.NumberAndIcon,
+    type: StepType = StepType.Dot,
     state: ComponentState = if (selected != null && index < selected) ComponentState.Success else ComponentState.Default,
     indicator: @Composable (Int) -> Unit = {
         HaloStepIndicator(
             index = index,
             selected = index == selected,
-            mode = mode,
+            type = type,
             state = state,
             shape = RoundedCornerShape(100f),
         )
@@ -70,13 +70,14 @@ fun HaloHorizontalStepper(
     steps: Int,
     modifier: Modifier = Modifier,
     selected: Int? = null,
+    type: StepType = StepType.Dot,
     stepMinWidth: Dp = 24.dp,
     step: @Composable (Int) -> Unit = { index ->
         HaloHorizontalStep(
             index = index,
             selected = selected,
             last = index == (steps - 1),
-            mode = StepMode.Dot,
+            type = type,
             dividerMinWidth = stepMinWidth,
             state =
                 when {
