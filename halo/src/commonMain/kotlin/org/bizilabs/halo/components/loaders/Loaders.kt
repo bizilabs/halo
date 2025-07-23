@@ -3,12 +3,14 @@ package org.bizilabs.halo.components.loaders
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
@@ -73,6 +75,8 @@ fun HaloCircularProgressIndicator(
     modifier: Modifier = Modifier,
     strokeWidth: Dp = 1.dp,
     color: Color = HaloTheme.colorScheme.content.strong,
+    trackColor: Color = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
+    strokeCap: StrokeCap = ProgressIndicatorDefaults.CircularIndeterminateStrokeCap,
 ) {
     Box(
         modifier = modifier,
@@ -81,6 +85,8 @@ fun HaloCircularProgressIndicator(
         CircularProgressIndicator(
             strokeWidth = 1.dp,
             color = color,
+            trackColor = trackColor,
+            strokeCap = strokeCap,
         )
     }
 }

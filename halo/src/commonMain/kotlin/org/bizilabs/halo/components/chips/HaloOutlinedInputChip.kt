@@ -5,47 +5,71 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.components.HaloText
 
 /**
- * A composable that displays an outlined input chip with optional icons and a trailing action.
+ * A composable that displays an **outlined input chip** with optional icons and a trailing action.
  *
- * This chip variant is used for user-editable content like tags or filters, styled with an
- * outlined container. It uses [ChipMode.OUTLINED] and [ChipType.INPUT] by default.
+ * Typically used for editable or removable content like tags, filters, or categories, this chip
+ * uses [ChipMode.OUTLINED] and [ChipType.INPUT] by default. It presents a transparent background
+ * with a border and supports a trailing icon that can trigger actions (e.g., delete).
  *
- * The chip does not respond to clicks on the chip body — only the trailing icon (if provided)
- * can trigger actions, typically used for removal or editing.
+ * Unlike selection chips, the main body of the chip is not clickable — only the trailing icon is interactive,
+ * assuming [onClickTrailingIcon] is provided.
  *
- * @param modifier Modifier to apply to the chip container.
- * @param colors Optional [HaloChipColors] to define styling for different states (default, focused, disabled).
- * @param ripple Optional [Indication] used to show visual feedback (e.g., ripple) when the trailing icon is clicked.
- *               If `null`, defaults to [LocalIndication.current], typically defined by the theme.
- * @param onClickTrailingIcon Optional lambda invoked when the trailing icon is clicked (e.g., to remove the chip).
- * @param leadingIcon Optional [ImageVector] shown before the text.
- * @param trailingIcon Optional [ImageVector] shown after the text, often used for the delete/remove icon.
- * @param shape The shape of the chip. Defaults to [RoundedCornerShape] with a 10.dp corner radius.
+ * ### Key Features:
+ * - Outlined style with transparent background
+ * - Leading/trailing icon support
+ * - Themed visual states (default, selected, disabled)
+ * - Optional ripple for the trailing icon
+ *
+ * @param modifier Modifier applied to the chip container.
+ * @param colors Required [HaloChipColors] for visual state styling. By default, the container is transparent to reflect an outlined look.
+ *               Use [HaloChipDefaults.chipColors] and override as needed.
+ * @param ripple Optional [Indication] for ripple feedback when the trailing icon is clicked.
+ *               Falls back to [LocalIndication.current] if not set.
+ * @param onClickTrailingIcon Optional callback triggered when the trailing icon is clicked.
+ * @param leadingIcon Optional [ImageVector] shown before the chip's label.
+ * @param trailingIcon Optional [ImageVector] shown after the label, typically for removing the chip.
+ * @param shape The shape of the chip container. Defaults to [RoundedCornerShape] with 10.dp radius.
  * @param selected Whether the chip is visually marked as selected. Defaults to `false`.
  * @param enabled Whether the chip is enabled and interactive. Defaults to `true`.
- * @param text The label text displayed inside the chip.
+ * @param text The text label shown inside the chip.
  *
- * ### Example Usage
+ * ### Example
  * ```
  * HaloOutlinedInputChip(
  *     text = "UX",
  *     leadingIcon = Icons.Default.Tag,
  *     trailingIcon = Icons.Default.Close,
- *     ripple = rememberRipple(), // Optional custom ripple
- *     onClickTrailingIcon = { /* Handle removal */ }
+ *     ripple = rememberRipple(),
+ *     onClickTrailingIcon = { /* Remove chip */ }
  * )
  * ```
+ *
+ * @see ChipMode
+ * @see ChipType
+ * @see HaloChipDefaults
+ * @see HaloChipColors
  */
 @Composable
 fun HaloOutlinedInputChip(
     modifier: Modifier = Modifier,
-    colors: HaloChipColors? = null,
+    colors: HaloChipColors =
+        HaloChipDefaults.chipColors(
+            default =
+                HaloChipDefaults.chipColors().default.copy(
+                    container = Color.Transparent,
+                ),
+            disabled =
+                HaloChipDefaults.chipColors().disabled.copy(
+                    container = Color.Transparent,
+                ),
+        ),
     ripple: Indication? = null,
     onClickTrailingIcon: (() -> Unit)? = null,
     leadingIcon: ImageVector? = null,
