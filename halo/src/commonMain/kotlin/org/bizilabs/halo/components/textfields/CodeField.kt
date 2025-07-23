@@ -14,7 +14,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextRange
@@ -28,7 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.HaloColor
-import org.bizilabs.halo.base.LocalTextStyle
+import org.bizilabs.halo.base.LocalHaloTextStyle
 import org.bizilabs.halo.components.HaloSurface
 import org.bizilabs.halo.components.HaloText
 
@@ -54,7 +53,7 @@ internal fun HaloCodeCharacterField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     secret: Boolean = false,
-    textStyle: TextStyle = LocalTextStyle.current,
+    textStyle: TextStyle = LocalHaloTextStyle.current,
     shape: Shape = RoundedCornerShape(10),
     colors: HaloCodeFieldColors? = null,
 ) {
