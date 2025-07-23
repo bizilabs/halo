@@ -44,7 +44,8 @@ import org.bizilabs.halo.components.HaloSurface
  *
  * @param modifier Modifier applied to the chip container.
  * @param enabled Whether the chip is enabled for interaction. Defaults to `true`.
- * @param colors Optional [HaloChipColors] to define chip colors for different states (default, focused, disabled).
+ * @param colors Required [HaloChipColors] configuration that defines chip colors for different states
+ *               (default, focused/selected, and disabled). Use [HaloChipDefaults.chipColors] for theme-aligned defaults.
  * @param shape The shape of the chip. Defaults to [RoundedCornerShape] with 10.dp corner radius.
  * @param isSelected Whether the chip is currently selected. Affects visual styling, especially in filled mode.
  * @param chipMode Defines the visual style of the chip: [ChipMode.FILLED] or [ChipMode.OUTLINED].
@@ -64,6 +65,7 @@ import org.bizilabs.halo.components.HaloSurface
  *     isSelected = true,
  *     chipMode = ChipMode.OUTLINED,
  *     chipType = ChipType.SELECTION,
+ *     colors = HaloChipDefaults.chipColors(),
  *     ripple = rememberRipple(),
  *     onClickChip = { /* Handle click */ },
  *     leadingIcon = Icons.Default.Star,
@@ -90,6 +92,41 @@ data class HaloChipColors(
     val disabled: HaloColor,
 )
 
+object HaloChipDefaults {
+    @Composable
+    fun chipColors(
+        default: HaloColor =
+            HaloColor(
+                container = HaloTheme.colorScheme.background.surface,
+                content = HaloTheme.colorScheme.content.strong,
+                border =
+                    HaloTheme.colorScheme.content.stronger
+                        .copy(0.15f),
+            ),
+        selected: HaloColor =
+            HaloColor(
+                container = HaloTheme.colorScheme.content.strong,
+                content = HaloTheme.colorScheme.background.surface,
+                border =
+                    HaloTheme.colorScheme.content.stronger
+                        .copy(0.25f),
+            ),
+        disabled: HaloColor =
+            HaloColor(
+                container = HaloTheme.colorScheme.disabled.container,
+                content = HaloTheme.colorScheme.disabled.content,
+                border =
+                    HaloTheme.colorScheme.content.stronger
+                        .copy(0.1f),
+            ),
+    ): HaloChipColors =
+        HaloChipColors(
+            default = default,
+            focused = selected,
+            disabled = disabled,
+        )
+}
+
 @Composable
 internal fun rememberSelectedRippleIndication(
     selected: Boolean,
@@ -103,7 +140,7 @@ internal fun rememberSelectedRippleIndication(
 internal fun HaloBaseChip(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: HaloChipColors? = null,
+    colors: HaloChipColors = HaloChipDefaults.chipColors(),
     shape: Shape = RoundedCornerShape(10.dp),
     isSelected: Boolean = false,
     chipMode: ChipMode = ChipMode.FILLED,
@@ -123,20 +160,16 @@ internal fun HaloBaseChip(
                     when (chipMode) {
                         ChipMode.FILLED ->
                             if (isSelected && chipType == ChipType.SELECTION) {
-                                colors?.default?.content
-                                    ?: HaloTheme.colorScheme.background.surface
+                                colors.focused.content
                             } else {
-                                colors?.default?.content
-                                    ?: HaloTheme.colorScheme.content.strong
+                                colors.default.content
                             }
 
                         ChipMode.OUTLINED -> {
                             if (isSelected && chipType == ChipType.SELECTION) {
-                                colors?.default?.content
-                                    ?: HaloTheme.colorScheme.background.surface
+                                colors.focused.content
                             } else {
-                                colors?.default?.content
-                                    ?: HaloTheme.colorScheme.content.strong
+                                colors.default.content
                             }
                         }
                     }
@@ -145,11 +178,11 @@ internal fun HaloBaseChip(
                 false -> {
                     when (chipMode) {
                         ChipMode.FILLED -> {
-                            colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
+                            colors.disabled.content
                         }
 
                         ChipMode.OUTLINED ->
-                            colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
+                            colors.disabled.content
                     }
                 }
             },
@@ -162,20 +195,17 @@ internal fun HaloBaseChip(
                     when (chipMode) {
                         ChipMode.FILLED -> {
                             if (isSelected && chipType == ChipType.SELECTION) {
-                                colors?.default?.container
-                                    ?: HaloTheme.colorScheme.content.strong
+                                colors.focused.container
                             } else {
-                                colors?.default?.container
-                                    ?: HaloTheme.colorScheme.background.surface
+                                colors.default.container
                             }
                         }
 
                         ChipMode.OUTLINED -> {
                             if (isSelected && chipType == ChipType.SELECTION) {
-                                colors?.default?.container
-                                    ?: HaloTheme.colorScheme.content.strong
+                                colors.focused.container
                             } else {
-                                colors?.default?.container ?: Color.Transparent
+                                colors.default.container
                             }
                         }
                     }
@@ -184,11 +214,11 @@ internal fun HaloBaseChip(
                 false -> {
                     when (chipMode) {
                         ChipMode.FILLED -> {
-                            colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
+                            colors.disabled.container
                         }
 
                         ChipMode.OUTLINED -> {
-                            colors?.disabled?.container ?: Color.Transparent
+                            colors.disabled.container
                         }
                     }
                 }
@@ -200,17 +230,14 @@ internal fun HaloBaseChip(
             when (enabled) {
                 true -> {
                     if (isSelected && chipType == ChipType.SELECTION) {
-                        colors?.default?.border ?: HaloTheme.colorScheme.content.stronger
-                            .copy(0.25f)
+                        colors.focused.border
                     } else {
-                        colors?.default?.border ?: HaloTheme.colorScheme.content.stronger
-                            .copy(0.15f)
+                        colors.default.border
                     }
                 }
 
                 false ->
-                    colors?.disabled?.border ?: HaloTheme.colorScheme.content.stronger
-                        .copy(0.1f)
+                    colors.disabled.border
             },
     )
 
