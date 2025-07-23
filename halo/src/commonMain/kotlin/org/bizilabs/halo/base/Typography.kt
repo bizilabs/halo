@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 @ConsistentCopyVisibility
 @Immutable
 data class HaloTypography internal constructor(
-    private val privateFontFamily: FontFamily,
+    internal val privateFontFamily: FontFamily,
     val titleLarge: TextStyle =
         TextStyle(
             fontFamily = privateFontFamily,
@@ -107,6 +107,11 @@ data class HaloTypography internal constructor(
     ) : this(
         privateFontFamily = fontFamily,
     )
+
+    companion object {
+        val Default: HaloTypography
+            get() = HaloTypography(fontFamily = FontFamily.Default)
+    }
 }
 
 val LocalHaloTypography =
@@ -121,10 +126,10 @@ internal fun provideTypography(typography: HaloTypography) = LocalHaloTypography
  * default. To set the value for this CompositionLocal, see [ProvideTextStyle] which will merge any
  * missing [TextStyle] properties with the existing [TextStyle] set in this CompositionLocal.
  */
-val LocalTextStyle = compositionLocalOf(structuralEqualityPolicy()) { TextStyle.Default }
+val LocalHaloTextStyle = compositionLocalOf(structuralEqualityPolicy()) { HaloTypography.Default.bodyMedium }
 
 /**
- * This function is used to set the current value of [LocalTextStyle], merging the given style
+ * This function is used to set the current value of [LocalHaloTextStyle], merging the given style
  * with the current style values for any missing attributes. Any [Text] components included in
  * this component's [content] will be styled with this style unless styled explicitly.
  */
@@ -133,6 +138,6 @@ fun ProvideTextStyle(
     value: TextStyle,
     content: @Composable () -> Unit,
 ) {
-    val mergedStyle = LocalTextStyle.current.merge(value)
-    CompositionLocalProvider(LocalTextStyle provides mergedStyle, content = content)
+    val mergedStyle = LocalHaloTextStyle.current.merge(value)
+    CompositionLocalProvider(LocalHaloTextStyle provides mergedStyle, content = content)
 }
