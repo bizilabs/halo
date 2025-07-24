@@ -4,64 +4,48 @@ package org.bizilabs.halo.base
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
 
-private val ShapeNone = RoundedCornerShape(0.dp)
-private val ShapeXS = RoundedCornerShape(4.dp)
-private val ShapeSM = RoundedCornerShape(8.dp)
-private val ShapeMD = RoundedCornerShape(12.dp)
-private val ShapeLG = RoundedCornerShape(24.dp)
-private val ShapeXL = RoundedCornerShape(48.dp)
+private val ShapeNone = RoundedCornerShape(0)
+private val ShapeXS = RoundedCornerShape(1.dp)
+private val ShapeSM = RoundedCornerShape(2.dp)
+private val ShapeMD = RoundedCornerShape(4.dp)
+private val ShapeLG = RoundedCornerShape(8.dp)
+private val ShapeXL = RoundedCornerShape(12.dp)
+private val ShapeFull = RoundedCornerShape(100)
 
-data object HaloShapes {
-    val None: Shapes =
-        Shapes(
-            extraSmall = ShapeNone,
-            small = ShapeNone,
-            medium = ShapeNone,
-            large = ShapeNone,
-            extraLarge = ShapeNone,
-        )
-    val ExtraSmall: Shapes =
-        Shapes(
-            extraSmall = ShapeXS,
-            small = ShapeXS,
-            medium = ShapeXS,
-            large = ShapeXS,
-            extraLarge = ShapeXS,
-        )
-    val Small: Shapes =
-        Shapes(
-            extraSmall = ShapeSM,
-            small = ShapeSM,
-            medium = ShapeSM,
-            large = ShapeSM,
-            extraLarge = ShapeSM,
-        )
-
-    val Medium: Shapes =
-        Shapes(
-            extraSmall = ShapeMD,
-            small = ShapeMD,
-            medium = ShapeMD,
-            large = ShapeMD,
-            extraLarge = ShapeMD,
-        )
-
-    val Large: Shapes =
-        Shapes(
-            extraSmall = ShapeLG,
-            small = ShapeLG,
-            medium = ShapeLG,
-            large = ShapeLG,
-            extraLarge = ShapeLG,
-        )
-    val ExtraLarge: Shapes =
-        Shapes(
-            extraSmall = ShapeXL,
-            small = ShapeXL,
-            medium = ShapeXL,
-            large = ShapeXL,
-            extraLarge = ShapeXL,
-        )
+data class HaloShapes(
+    val none: RoundedCornerShape = ShapeNone,
+    val extraSmall: RoundedCornerShape = ShapeXS,
+    val small: RoundedCornerShape = ShapeSM,
+    val medium: RoundedCornerShape = ShapeMD,
+    val large: RoundedCornerShape = ShapeLG,
+    val extraLarge: RoundedCornerShape = ShapeXL,
+    val full: RoundedCornerShape = ShapeFull,
+) {
+    companion object {
+        val Default = HaloShapes()
+        val Rounded =
+            HaloShapes(
+                extraSmall = RoundedCornerShape(2.dp),
+                small = RoundedCornerShape(4.dp),
+                medium = RoundedCornerShape(8.dp),
+                large = RoundedCornerShape(12.dp),
+                extraLarge = RoundedCornerShape(20.dp),
+            )
+    }
 }
+
+val LocalHaloShapes = staticCompositionLocalOf { HaloShapes() }
+
+internal fun provideHaloShapes(shapes: HaloShapes) = LocalHaloShapes provides shapes
+
+internal fun HaloShapes.asMaterialShapes() =
+    Shapes(
+        extraSmall = extraSmall,
+        small = small,
+        medium = medium,
+        large = large,
+        extraLarge = extraLarge,
+    )
