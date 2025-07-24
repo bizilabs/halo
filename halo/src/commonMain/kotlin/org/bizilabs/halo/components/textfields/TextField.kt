@@ -33,7 +33,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.HaloColor
-import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.base.colors.ProvideContentColor
 import org.bizilabs.halo.components.HaloSurface
 import org.bizilabs.halo.components.HaloText
@@ -73,7 +72,7 @@ internal fun HaloBaseTextField(
     leading: @Composable (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
-    shape: Shape = HaloShapes.Medium.medium,
+    shape: Shape = HaloTheme.shapes.medium,
     colors: HaloTextFieldColors? = null,
 ) {
     var focused by remember { mutableStateOf(false) }

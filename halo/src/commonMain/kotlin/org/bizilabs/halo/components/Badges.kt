@@ -24,7 +24,7 @@ data class BadgeProperties(
     val backgroundColor: Color,
     val contentColor: Color,
     val borderColor: Color,
-    val shape: Shape = HaloShapes.Small.small,
+    val shape: Shape = HaloShapes.Default.medium,
 ) {
     companion object {
         /**

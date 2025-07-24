@@ -15,6 +15,7 @@ import org.bizilabs.halo.base.HaloFonts
 import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.base.HaloTypography
 import org.bizilabs.halo.base.LocalHaloColorScheme
+import org.bizilabs.halo.base.LocalHaloShapes
 import org.bizilabs.halo.base.LocalHaloTypography
 import org.bizilabs.halo.base.LocalThickness
 import org.bizilabs.halo.base.Thickness
@@ -46,6 +47,10 @@ data object HaloTheme {
     val typography: HaloTypography
         @Composable
         get() = LocalHaloTypography.current
+
+    val shapes: HaloShapes
+        @Composable
+        get() = LocalHaloShapes.current
 }
 
 /**
@@ -60,7 +65,8 @@ fun HaloTheme(
     ripple: Indication? = null,
     content: @Composable () -> Unit,
 ) {
-    val defaultRippleColor = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()).content.neutral
+    val defaultRippleColor =
+        getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()).content.neutral
     val rippleIndication =
         ripple ?: remember(defaultRippleColor) {
             ripple(color = defaultRippleColor, bounded = true)
