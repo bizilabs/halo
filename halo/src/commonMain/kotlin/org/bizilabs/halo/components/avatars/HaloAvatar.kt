@@ -3,12 +3,12 @@ package org.bizilabs.halo.components.avatars
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ComponentSize
 import org.bizilabs.halo.components.loaders.HaloCircularProgressIndicator
 import org.bizilabs.halo.state.HaloBorder
@@ -58,7 +58,7 @@ import org.bizilabs.halo.state.HaloBorder
 fun HaloAvatar(
     model: Any?,
     modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(10),
+    shape: Shape = HaloTheme.shapes.medium,
     isLoading: Boolean = false,
     border: HaloBorder? = null,
     colors: HaloAvatarColors? = null,

@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.extensions.shimmerEffect
 
@@ -73,7 +72,7 @@ fun HaloShimmerBox(
 @Composable
 fun HaloCircularProgressIndicator(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp = 1.dp,
+    strokeWidth: Dp = HaloTheme.thickness.medium,
     color: Color = HaloTheme.colorScheme.content.strong,
     trackColor: Color = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
     strokeCap: StrokeCap = ProgressIndicatorDefaults.CircularIndeterminateStrokeCap,
@@ -83,7 +82,7 @@ fun HaloCircularProgressIndicator(
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator(
-            strokeWidth = 1.dp,
+            strokeWidth = strokeWidth,
             color = color,
             trackColor = trackColor,
             strokeCap = strokeCap,

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
@@ -67,7 +66,7 @@ internal fun BaseAvatar(
     modifier: Modifier = Modifier,
     model: Any?,
     onClick: (() -> Unit)?,
-    shape: Shape = RoundedCornerShape(10),
+    shape: Shape = HaloTheme.shapes.medium,
     contentScale: ContentScale = ContentScale.Crop,
     border: HaloBorder? = null,
     colors: HaloAvatarColors? = null,
@@ -161,7 +160,7 @@ private fun AvatarOutlineCard(
     onClick: (() -> Unit)? = null,
     colors: CardColors,
     border: BorderStroke,
-    shape: Shape,
+    shape: Shape = HaloTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     HaloOutlineCard(
@@ -190,7 +189,7 @@ private fun AvatarCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     colors: CardColors,
-    shape: Shape,
+    shape: Shape = HaloTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     HaloCard(

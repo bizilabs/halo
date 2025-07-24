@@ -45,7 +45,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import org.bizilabs.halo.base.HaloShapes
+import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.charts.data.ChartPadding
 import org.bizilabs.halo.charts.data.LineChartData
 import org.bizilabs.halo.charts.data.Point
@@ -185,7 +185,7 @@ fun HaloLineChart(
                         modifier =
                             Modifier
                                 .size(16.dp)
-                                .clip(HaloShapes.ExtraSmall.extraSmall)
+                                .clip(HaloTheme.shapes.medium)
                                 .background(line.style.color),
                     )
                     Spacer(modifier = Modifier.width(4.dp))
