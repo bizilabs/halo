@@ -18,9 +18,11 @@ import org.bizilabs.halo.base.LocalHaloColorScheme
 import org.bizilabs.halo.base.LocalHaloTypography
 import org.bizilabs.halo.base.LocalThickness
 import org.bizilabs.halo.base.Thickness
+import org.bizilabs.halo.base.asMaterialShapes
 import org.bizilabs.halo.base.getHaloColorScheme
 import org.bizilabs.halo.base.provideContentColor
 import org.bizilabs.halo.base.provideHaloColorScheme
+import org.bizilabs.halo.base.provideHaloShapes
 import org.bizilabs.halo.base.provideRippleIndication
 import org.bizilabs.halo.base.provideThickness
 import org.bizilabs.halo.base.provideTypography
@@ -53,7 +55,7 @@ data object HaloTheme {
 fun HaloTheme(
     font: FontFamily = HaloDefaults.Fonts.Regular,
     typography: HaloTypography = HaloTypography(fontFamily = font),
-    shapes: Shapes = HaloDefaults.Shapes.None,
+    shapes: HaloShapes = HaloDefaults.Shapes.Default,
     colorScheme: HaloColorScheme = getHaloColorScheme(isDarkThemeEnabled = isSystemInDarkTheme()),
     ripple: Indication? = null,
     content: @Composable () -> Unit,
@@ -70,7 +72,8 @@ fun HaloTheme(
         provideTypography(typography = typography),
         provideContentColor(color = colorScheme.content.stronger),
         provideRippleIndication(ripple = rippleIndication),
+        provideHaloShapes(shapes = shapes),
     ) {
-        MaterialTheme(shapes = shapes, content = content)
+        MaterialTheme(shapes = shapes.asMaterialShapes(), content = content)
     }
 }
