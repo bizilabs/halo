@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.bottomsheets.rememberHaloSheetLauncher
-import org.bizilabs.halo.components.buttons.HaloButton
+import org.bizilabs.halo.components.buttons.HaloFilledButton
 import org.bizilabs.halo.components.cards.HaloSlotCard
 
 @Composable
@@ -71,7 +71,7 @@ fun BottomSheetSection() {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(24.dp),
                 ) {
-                    HaloButton(
+                    HaloFilledButton(
                         onClick = { sheetLauncher.launch() },
                     ) {
                         HaloText("Show")
