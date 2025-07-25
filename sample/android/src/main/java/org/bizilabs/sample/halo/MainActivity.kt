@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloScaffold
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.buttons.HaloButton
+import org.bizilabs.halo.components.buttons.HaloFilledButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        HaloButton(onClick = {}) {
+                        HaloFilledButton(onClick = {}) {
                             HaloText(text = "Halo")
                         }
                     }
