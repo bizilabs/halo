@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.HaloColor
-import org.bizilabs.halo.components.cards.HaloCard
-import org.bizilabs.halo.components.cards.HaloOutlineCard
+import org.bizilabs.halo.components.cards.HaloFilledCard
+import org.bizilabs.halo.components.cards.HaloOutlinedCard
 import org.bizilabs.halo.state.HaloBorder
 
 /**
@@ -163,7 +163,7 @@ private fun AvatarOutlineCard(
     shape: Shape = HaloTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    HaloOutlineCard(
+    HaloOutlinedCard(
         modifier = modifier,
         border = border,
         colors = colors,
@@ -192,7 +192,7 @@ private fun AvatarCard(
     shape: Shape = HaloTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    HaloCard(
+    HaloFilledCard(
         modifier = modifier,
         colors = colors,
         onClick = onClick,

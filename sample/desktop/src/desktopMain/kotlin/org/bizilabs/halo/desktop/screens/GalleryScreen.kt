@@ -30,8 +30,8 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.cards.HaloCard
-import org.bizilabs.halo.components.cards.HaloOutlineCard
+import org.bizilabs.halo.components.cards.HaloFilledCard
+import org.bizilabs.halo.components.cards.HaloOutlinedCard
 import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.avatar.AvatarSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
@@ -191,7 +191,7 @@ fun GalleryItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
-    HaloCard(
+    HaloFilledCard(
         modifier = modifier.height(150.dp),
         onClick = onClick,
     ) {
@@ -207,7 +207,7 @@ fun GalleryOutlineItem(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    HaloOutlineCard(modifier = modifier.height(150.dp)) {
+    HaloOutlinedCard(modifier = modifier.height(150.dp)) {
         Column(modifier = Modifier.padding(16.dp)) {
             Spacer(modifier = Modifier.weight(1f))
             HaloText(text = title)

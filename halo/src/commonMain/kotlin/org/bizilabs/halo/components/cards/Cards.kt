@@ -21,39 +21,53 @@ internal fun CardBase(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
-    shape: Shape = CardDefaults.shape,
+    shape: Shape = HaloTheme.shapes.medium,
     colors: CardColors = CardDefaults.cardColors(),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Card(
-        onClick = onClick ?: {},
-        enabled = enabled,
-        modifier = modifier,
-        shape = shape,
-        colors = colors,
-        elevation = elevation,
-        border = border,
-        interactionSource = interactionSource,
-        content = content,
-    )
+    when (onClick != null) {
+        true ->
+            Card(
+                onClick = onClick,
+                enabled = enabled,
+                modifier = modifier,
+                shape = shape,
+                colors = colors,
+                elevation = elevation,
+                border = border,
+                interactionSource = interactionSource,
+                content = content,
+            )
+
+        false ->
+            Card(
+                modifier = modifier,
+                shape = shape,
+                colors = colors,
+                elevation = elevation,
+                border = border,
+                content = content,
+            )
+    }
 }
 
 @Composable
-fun HaloCard(
+fun HaloFilledCard(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
-    shape: Shape = CardDefaults.shape,
+    shape: Shape = HaloTheme.shapes.medium,
     colors: CardColors =
         CardDefaults.cardColors(
             contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
+            disabledContentColor = HaloTheme.colorScheme.disabled.content,
+            disabledContainerColor = HaloTheme.colorScheme.disabled.container,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
-    border: BorderStroke? = null,
     interactionSource: MutableInteractionSource? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -64,7 +78,7 @@ fun HaloCard(
         shape = shape,
         colors = colors,
         elevation = elevation,
-        border = border,
+        border = null,
         interactionSource = interactionSource,
         content = content,
     )
@@ -75,11 +89,13 @@ fun HaloSlotCard(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
-    shape: Shape = CardDefaults.shape,
+    shape: Shape = HaloTheme.shapes.medium,
     colors: CardColors =
         CardDefaults.cardColors(
             contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
+            disabledContentColor = HaloTheme.colorScheme.disabled.content,
+            disabledContainerColor = HaloTheme.colorScheme.disabled.container,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
     strokeWidth: Dp = 2.dp,
