@@ -19,50 +19,65 @@ internal fun OutlineCardBase(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
-    shape: Shape = CardDefaults.shape,
-    colors: CardColors =
-        CardDefaults.cardColors(
-            contentColor = HaloTheme.colorScheme.content.strong,
-            containerColor = HaloTheme.colorScheme.background.surface,
-        ),
+    shape: Shape = HaloTheme.shapes.medium,
+    colors: CardColors = CardDefaults.outlinedCardColors(),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
     interactionSource: MutableInteractionSource? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    OutlinedCard(
-        onClick = onClick ?: {},
-        enabled = enabled,
-        modifier = modifier,
-        shape = shape,
-        colors = colors,
-        elevation = elevation,
-        border = border,
-        interactionSource = interactionSource,
-        content = content,
-    )
+    when (onClick != null) {
+        true ->
+            OutlinedCard(
+                onClick = onClick,
+                enabled = enabled,
+                modifier = modifier,
+                shape = shape,
+                colors = colors,
+                elevation = elevation,
+                border = border,
+                interactionSource = interactionSource,
+                content = content,
+            )
+
+        false ->
+            OutlinedCard(
+                modifier = modifier,
+                shape = shape,
+                colors = colors,
+                elevation = elevation,
+                border = border,
+                content = content,
+            )
+    }
 }
 
 @Composable
-fun HaloOutlineCard(
+fun HaloOutlinedCard(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
-    shape: Shape = CardDefaults.shape,
+    shape: Shape = HaloTheme.shapes.medium,
     colors: CardColors =
-        CardDefaults.cardColors(
+        CardDefaults.outlinedCardColors(
             contentColor = HaloTheme.colorScheme.content.strong,
             containerColor = HaloTheme.colorScheme.background.surface,
+            disabledContentColor = HaloTheme.colorScheme.disabled.content,
+            disabledContainerColor = HaloTheme.colorScheme.disabled.container,
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
-    border: BorderStroke = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+    border: BorderStroke =
+        BorderStroke(
+            HaloTheme.thickness.medium,
+            HaloTheme.colorScheme.content.weak,
+        ),
     interactionSource: MutableInteractionSource? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     OutlineCardBase(
         modifier = modifier,
         enabled = enabled,
-        onClick = onClick ?: {},
+        onClick = onClick,
         shape = shape,
         colors = colors,
         elevation = elevation,

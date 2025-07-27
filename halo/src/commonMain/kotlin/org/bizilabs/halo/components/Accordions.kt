@@ -19,8 +19,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.bizilabs.halo.components.cards.HaloCard
-import org.bizilabs.halo.components.cards.HaloOutlineCard
+import org.bizilabs.halo.components.cards.HaloFilledCard
+import org.bizilabs.halo.components.cards.HaloOutlinedCard
 
 /**
  * @param header items that will appear at the top
@@ -81,7 +81,7 @@ fun HaloFilledAccordion(
     onClick: () -> Unit = { },
     content: @Composable () -> Unit,
 ) {
-    HaloCard(modifier = modifier) {
+    HaloFilledCard(modifier = modifier) {
         AccordionBase(
             collapsed = collapsed,
             header = { HaloAccordionHeader(collapsed = collapsed, modifier = Modifier, header = header) },
@@ -100,7 +100,7 @@ fun HaloOutlinedAccordion(
     onClick: () -> Unit = { },
     content: @Composable () -> Unit,
 ) {
-    HaloOutlineCard(modifier = modifier) {
+    HaloOutlinedCard(modifier = modifier) {
         AccordionBase(
             collapsed = collapsed,
             header = {
