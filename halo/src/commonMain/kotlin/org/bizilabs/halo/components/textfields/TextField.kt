@@ -92,18 +92,32 @@ internal fun HaloBaseTextField(
                     }
 
                 !enabled -> colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
+                isError ->
+                    when (mode) {
+                        TextFieldMode.FILLED ->
+                            colors?.error?.container
+                                ?: HaloTheme.colorScheme.error.weaker
+
+                        TextFieldMode.OUTLINED ->
+                            colors?.error?.container
+                                ?: HaloTheme.colorScheme.background.base
+                    }
+
                 else -> {
                     when (mode) {
                         TextFieldMode.FILLED ->
                             if (focused) {
-                                colors?.focused?.container ?: HaloTheme.colorScheme.background.surface
+                                colors?.focused?.container
+                                    ?: HaloTheme.colorScheme.background.surface
                             } else {
-                                colors?.default?.container ?: HaloTheme.colorScheme.background.surface
+                                colors?.default?.container
+                                    ?: HaloTheme.colorScheme.background.surface
                             }
 
                         TextFieldMode.OUTLINED ->
                             if (focused) {
-                                colors?.focused?.container ?: HaloTheme.colorScheme.background.surface
+                                colors?.focused?.container
+                                    ?: HaloTheme.colorScheme.background.surface
                             } else {
                                 colors?.default?.container ?: HaloTheme.colorScheme.background.base
                             }
@@ -125,9 +139,9 @@ internal fun HaloBaseTextField(
                 !enabled -> colors?.disabled?.content ?: HaloTheme.colorScheme.disabled.content
                 else -> {
                     if (focused) {
-                        colors?.focused?.container ?: HaloTheme.colorScheme.content.stronger
+                        colors?.focused?.content ?: HaloTheme.colorScheme.content.stronger
                     } else {
-                        colors?.default?.container ?: HaloTheme.colorScheme.content.strong
+                        colors?.default?.content ?: HaloTheme.colorScheme.content.strong
                     }
                 }
             },
@@ -182,7 +196,7 @@ internal fun HaloBaseTextField(
                 durationMillis = 500,
                 easing = FastOutSlowInEasing,
             ),
-        label = "borderColorAnimation",
+        label = "cursorColorAnimation",
     )
 
     val placeholderColor by animateColorAsState(
@@ -212,12 +226,14 @@ internal fun HaloBaseTextField(
         cursorBrush = SolidColor(cursorColor),
     ) { innerTextField ->
         Column(modifier = Modifier.fillMaxWidth()) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                label?.invoke()
-                count?.invoke()
+            if (label != null || count != null) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    label?.invoke()
+                    count?.invoke()
+                }
             }
             HaloSurface(
                 modifier = Modifier.padding(top = 4.dp, bottom = 2.dp),
@@ -287,10 +303,12 @@ internal fun HaloBaseTextField(
                 label = "borderColorAnimation",
             )
 
-            ProvideContentColor(
-                color = helperColor,
-            ) {
-                helper?.invoke()
+            if (helper != null) {
+                ProvideContentColor(
+                    color = helperColor,
+                ) {
+                    helper?.invoke()
+                }
             }
         }
     }
