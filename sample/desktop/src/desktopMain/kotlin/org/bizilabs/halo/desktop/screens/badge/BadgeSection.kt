@@ -74,6 +74,11 @@ fun BadgeSection() {
                         }
                     }
                     item {
+                        HaloFilledBadge(mode = ComponentMode.Primary) {
+                            HaloText(text = "Primary")
+                        }
+                    }
+                    item {
                         HaloFilledBadge(mode = ComponentMode.Info) {
                             HaloText(text = "Info")
                         }
@@ -107,6 +112,11 @@ fun BadgeSection() {
                     item {
                         HaloOutlinedBadge(mode = ComponentMode.Default) {
                             HaloText(text = "Default")
+                        }
+                    }
+                    item {
+                        HaloOutlinedBadge(mode = ComponentMode.Primary) {
+                            HaloText(text = "Primary")
                         }
                     }
                     item {
