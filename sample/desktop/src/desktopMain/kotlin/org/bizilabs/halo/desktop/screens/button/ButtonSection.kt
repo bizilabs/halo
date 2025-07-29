@@ -59,6 +59,14 @@ fun ButtonSection() {
                     HaloFilledButton(onClick = {}, size = ComponentSize.ExtraLarge, shape = HaloTheme.shapes.none) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
+                    HaloFilledButton(
+                        onClick = {},
+                        size = ComponentSize.ExtraLarge,
+                        mode = ComponentMode.Primary,
+                        shape = HaloTheme.shapes.small,
+                    ) {
+                        HaloText(modifier = Modifier.padding(0.dp), text = "Button")
+                    }
                     HaloFilledButton(onClick = {}, size = ComponentSize.Large, mode = ComponentMode.Info, shape = HaloTheme.shapes.medium) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
@@ -95,6 +103,14 @@ fun ButtonSection() {
                         onClick = {},
                         enabled = false,
                         shape = HaloTheme.shapes.none,
+                    ) {
+                        HaloText(modifier = Modifier.padding(0.dp), text = "Button")
+                    }
+                    HaloFilledButton(
+                        onClick = {},
+                        enabled = false,
+                        shape = HaloTheme.shapes.small,
+                        mode = ComponentMode.Primary,
                     ) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
@@ -138,6 +154,9 @@ fun ButtonSection() {
                     HaloOutlineButton(onClick = {}, shape = HaloTheme.shapes.none) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
+                    HaloOutlineButton(onClick = {}, mode = ComponentMode.Primary, shape = HaloTheme.shapes.small) {
+                        HaloText(modifier = Modifier.padding(0.dp), text = "Button")
+                    }
                     HaloOutlineButton(onClick = {}, mode = ComponentMode.Info, shape = HaloTheme.shapes.medium) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
@@ -159,6 +178,14 @@ fun ButtonSection() {
                         onClick = {},
                         enabled = false,
                         shape = HaloTheme.shapes.none,
+                    ) {
+                        HaloText(modifier = Modifier.padding(0.dp), text = "Button")
+                    }
+                    HaloOutlineButton(
+                        onClick = {},
+                        enabled = false,
+                        mode = ComponentMode.Primary,
+                        shape = HaloTheme.shapes.small,
                     ) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
@@ -203,6 +230,9 @@ fun ButtonSection() {
                     HaloTextButton(onClick = {}, shape = HaloTheme.shapes.none) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
+                    HaloTextButton(onClick = {}, mode = ComponentMode.Primary, shape = HaloTheme.shapes.small) {
+                        HaloText(modifier = Modifier.padding(0.dp), text = "Button")
+                    }
                     HaloTextButton(onClick = {}, mode = ComponentMode.Info, shape = HaloTheme.shapes.medium) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
@@ -224,6 +254,14 @@ fun ButtonSection() {
                         onClick = {},
                         enabled = false,
                         shape = HaloTheme.shapes.none,
+                    ) {
+                        HaloText(modifier = Modifier.padding(0.dp), text = "Button")
+                    }
+                    HaloTextButton(
+                        onClick = {},
+                        enabled = false,
+                        mode = ComponentMode.Primary,
+                        shape = HaloTheme.shapes.small,
                     ) {
                         HaloText(modifier = Modifier.padding(0.dp), text = "Button")
                     }
