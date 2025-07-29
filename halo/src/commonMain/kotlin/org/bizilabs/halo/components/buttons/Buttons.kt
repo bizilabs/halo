@@ -51,7 +51,8 @@ fun HaloFilledButton(
 ) {
     val enabledColors =
         when (mode) {
-            ComponentMode.Default -> HaloTheme.colorScheme.primary.filled
+            ComponentMode.Default -> HaloTheme.colorScheme.content.filled.copy(container = HaloTheme.colorScheme.content.strong)
+            ComponentMode.Primary -> HaloTheme.colorScheme.primary.filled
             ComponentMode.Info -> HaloTheme.colorScheme.info.filled
             ComponentMode.Success -> HaloTheme.colorScheme.success.filled
             ComponentMode.Error -> HaloTheme.colorScheme.error.filled
@@ -93,6 +94,10 @@ fun HaloOutlineButton(
     val enabledColors =
         when (mode) {
             ComponentMode.Default ->
+                HaloTheme.colorScheme.content.outlined.copy(
+                    container = Color.Transparent,
+                )
+            ComponentMode.Primary ->
                 HaloTheme.colorScheme.primary.outlined.copy(
                     container = Color.Transparent,
                     content = HaloTheme.colorScheme.primary.neutral,
@@ -125,7 +130,8 @@ fun HaloOutlineButton(
 
     val enabledBorderColor =
         when (mode) {
-            ComponentMode.Default -> HaloTheme.colorScheme.primary.outlined.border
+            ComponentMode.Default -> HaloTheme.colorScheme.content.outlined.border
+            ComponentMode.Primary -> HaloTheme.colorScheme.primary.outlined.border
             ComponentMode.Info -> HaloTheme.colorScheme.info.outlined.border
             ComponentMode.Success -> HaloTheme.colorScheme.success.outlined.border
             ComponentMode.Error -> HaloTheme.colorScheme.error.outlined.border
@@ -171,6 +177,12 @@ fun HaloTextButton(
     val enabledColors =
         when (mode) {
             ComponentMode.Default ->
+                HaloColor(
+                    container = Color.Transparent,
+                    content = HaloTheme.colorScheme.content.strong,
+                    border = Color.Transparent,
+                )
+            ComponentMode.Primary ->
                 HaloColor(
                     container = Color.Transparent,
                     content = HaloTheme.colorScheme.primary.neutral,

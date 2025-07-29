@@ -53,7 +53,8 @@ fun HaloFilledBadge(
 ) {
     val colors =
         when (mode) {
-            ComponentMode.Default -> HaloTheme.colorScheme.primary.filled
+            ComponentMode.Default -> HaloTheme.colorScheme.content.filled.copy(container = HaloTheme.colorScheme.content.strong)
+            ComponentMode.Primary -> HaloTheme.colorScheme.primary.filled
             ComponentMode.Info -> HaloTheme.colorScheme.info.filled
             ComponentMode.Success -> HaloTheme.colorScheme.success.filled
             ComponentMode.Error -> HaloTheme.colorScheme.error.filled
@@ -81,7 +82,8 @@ fun HaloOutlinedBadge(
 ) {
     val colors =
         when (mode) {
-            ComponentMode.Default -> HaloTheme.colorScheme.primary.outlined
+            ComponentMode.Default -> HaloTheme.colorScheme.content.outlined
+            ComponentMode.Primary -> HaloTheme.colorScheme.primary.outlined
             ComponentMode.Info -> HaloTheme.colorScheme.info.outlined
             ComponentMode.Success -> HaloTheme.colorScheme.success.outlined
             ComponentMode.Error -> HaloTheme.colorScheme.error.outlined
