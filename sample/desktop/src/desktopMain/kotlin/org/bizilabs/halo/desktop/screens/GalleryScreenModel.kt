@@ -94,6 +94,11 @@ sealed interface GalleryScreenSection {
         }
     }
 
+    data object BottomBar : GalleryScreenSection {
+        override val label: String
+            get() = "BottomBar"
+    }
+
     companion object {
         val values: List<GalleryScreenSection>
             get() =
@@ -108,6 +113,7 @@ sealed interface GalleryScreenSection {
                     Stepper,
                     TextField,
                     TopBar,
+                    BottomBar,
                 )
     }
 }

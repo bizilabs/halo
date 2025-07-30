@@ -35,6 +35,7 @@ import org.bizilabs.halo.components.cards.HaloOutlinedCard
 import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
 import org.bizilabs.halo.desktop.screens.avatar.AvatarSection
 import org.bizilabs.halo.desktop.screens.badge.BadgeSection
+import org.bizilabs.halo.desktop.screens.bottombar.BottomBarSection
 import org.bizilabs.halo.desktop.screens.bottomsheet.BottomSheetSection
 import org.bizilabs.halo.desktop.screens.button.ButtonSection
 import org.bizilabs.halo.desktop.screens.button.IconButtonSection
@@ -161,6 +162,7 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Stepper.Horizontal -> HorizontalStepperSection()
                     GalleryScreenSection.Stepper.Vertical -> VerticalStepperSection()
+                    GalleryScreenSection.BottomBar -> {}
 
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
