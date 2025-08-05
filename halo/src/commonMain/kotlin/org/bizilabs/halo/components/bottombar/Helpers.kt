@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
@@ -77,5 +78,7 @@ enum class HaloBottomBarIndicatorType {
     LineTop,
     LineBottom,
     Pill,
-    // TODO Think of more indicators
 }
+
+@Composable
+fun Float.pxToDp(): Dp = with(LocalDensity.current) { this@pxToDp.toDp() }

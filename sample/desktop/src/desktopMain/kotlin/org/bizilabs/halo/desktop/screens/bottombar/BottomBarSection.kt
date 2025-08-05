@@ -2,6 +2,7 @@ package org.bizilabs.halo.desktop.screens.bottombar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,8 +28,8 @@ import org.bizilabs.halo.components.bottombar.HaloBottomBar
 import org.bizilabs.halo.components.bottombar.HaloBottomBarIndicatorType
 import org.bizilabs.halo.components.bottombar.HaloBottomBarItem
 import org.bizilabs.halo.components.bottombar.HaloBottomBarItemContentOrientation
+import org.bizilabs.halo.components.bottombar.IndicatorProperties
 import org.bizilabs.halo.components.cards.HaloSlotCard
-import java.awt.SystemColor.text
 
 @Composable
 fun BottomBarSection() {
@@ -167,6 +168,10 @@ fun BottomBarSection() {
                         selectedItemIndex3 = index
                     },
                     indicator = HaloBottomBarIndicatorType.Pill,
+                    indicatorProperties =
+                        IndicatorProperties.default().copy(
+                            pillPadding = PaddingValues(vertical = 2.dp, horizontal = 4.dp),
+                        ),
                 ) {
                     List(4) { i ->
                         HaloBottomBarItem(
@@ -180,7 +185,7 @@ fun BottomBarSection() {
                                     tint = color,
                                 )
                             },
-                            contentOrientation = HaloBottomBarItemContentOrientation.Horizontal,
+                            contentOrientation = HaloBottomBarItemContentOrientation.Vertical,
                         )
                     }
                 }
