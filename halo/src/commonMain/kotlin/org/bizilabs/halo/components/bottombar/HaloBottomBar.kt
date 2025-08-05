@@ -39,6 +39,7 @@ import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.bizilabs.halo.HaloTheme
@@ -68,14 +69,15 @@ fun HaloBottomBar(
     (
         modifier: Modifier,
         density: Density,
+        bottomBarHeight: Dp,
         indicatorOffset: Animatable<Float, AnimationVector1D>,
         indicatorWidth: Animatable<Float, AnimationVector1D>,
     ) -> Unit
-    ) = { indicatorModifier, density, indicatorOffset, indicatorWidth ->
+    ) = { indicatorModifier, density, _, indicatorOffset, indicatorWidth ->
         HaloBottomBarIndicators.LineIndicator(
             modifier = indicatorModifier,
             density = density,
-            indicatorOffset = indicatorOffset,
+            indicatorOffsetX = indicatorOffset,
             indicatorWidth = indicatorWidth,
         )
     },
@@ -119,36 +121,36 @@ fun HaloBottomBar(
     containerColor = containerColor,
     selectedIndex = selectedIndex,
     onItemSelected = onItemSelected,
-    indicator = { indicatorModifier, density, indicatorOffset, indicatorWidth ->
-        Box { // Only used because of the align modifier
-            when (indicator) {
-                HaloBottomBarIndicatorType.LineTop ->
-                    HaloBottomBarIndicators.LineIndicator(
-                        modifier = indicatorModifier.align(Alignment.TopStart),
-                        density,
-                        indicatorOffset,
-                        indicatorWidth,
-                        indicatorProperties,
-                    )
+    indicator = { indicatorModifier, density, bottomBarHeight, indicatorXOffset, indicatorWidth ->
+        when (indicator) {
+            HaloBottomBarIndicatorType.LineTop ->
+                HaloBottomBarIndicators.LineIndicator(
+                    modifier = indicatorModifier,
+                    density = density,
+                    indicatorOffsetX = indicatorXOffset,
+                    indicatorWidth = indicatorWidth,
+                    properties = indicatorProperties,
+                )
 
-                HaloBottomBarIndicatorType.LineBottom ->
-                    HaloBottomBarIndicators.LineIndicator(
-                        modifier = indicatorModifier.align(Alignment.Center), // TODO This does not correctly position
-                        density,
-                        indicatorOffset,
-                        indicatorWidth,
-                        indicatorProperties,
-                    )
+            HaloBottomBarIndicatorType.LineBottom ->
+                HaloBottomBarIndicators.LineIndicator(
+                    modifier = indicatorModifier,
+                    density = density,
+                    lineYOffset = bottomBarHeight - indicatorProperties.lineHeight,
+                    indicatorOffsetX = indicatorXOffset,
+                    indicatorWidth = indicatorWidth,
+                    properties = indicatorProperties,
+                )
 
-                HaloBottomBarIndicatorType.Pill ->
-                    HaloBottomBarIndicators.PillIndicator(
-                        modifier = indicatorModifier.align(Alignment.Center),
-                        density,
-                        indicatorOffset,
-                        indicatorWidth,
-                        indicatorProperties,
-                    )
-            }
+            HaloBottomBarIndicatorType.Pill ->
+                HaloBottomBarIndicators.PillIndicator(
+                    modifier = indicatorModifier,
+                    density = density,
+                    pillYOffset = (bottomBarHeight - indicatorProperties.pillHeight) / 2,
+                    indicatorXOffset = indicatorXOffset,
+                    indicatorWidth = indicatorWidth,
+                    properties = indicatorProperties,
+                )
         }
     },
     content = content,
@@ -180,14 +182,15 @@ fun BaseHaloBottomBar(
     (
         modifier: Modifier,
         density: Density,
-        indicatorOffset: Animatable<Float, AnimationVector1D>,
+        bottomBarHeight: Dp,
+        indicatorXOffset: Animatable<Float, AnimationVector1D>,
         indicatorWidth: Animatable<Float, AnimationVector1D>,
     ) -> Unit
-    ) = { indicatorModifier, density, indicatorOffset, indicatorWidth ->
+    ) = { indicatorModifier, density, _, indicatorOffset, indicatorWidth ->
         HaloBottomBarIndicators.LineIndicator(
             modifier = indicatorModifier,
             density = density,
-            indicatorOffset = indicatorOffset,
+            indicatorOffsetX = indicatorOffset,
             indicatorWidth = indicatorWidth,
         )
     },
@@ -197,11 +200,12 @@ fun BaseHaloBottomBar(
     val itemPositions = remember { mutableStateMapOf<Int, Pair<Float, Float>>() }
     val density = LocalDensity.current
 
-    // State to track the overall width of the bottom bar
+    // State to track the overall size of the bottom bar
     val bottomBarWidth = remember { mutableStateOf(0) }
+    val bottomBarHeight = remember { mutableStateOf(0) }
 
     // Animatable states for the indicator's position and width
-    val indicatorOffset = remember { Animatable(0f) }
+    val indicatorXOffset = remember { Animatable(0f) }
     val indicatorWidth = remember { Animatable(0f) }
     val coroutineScope = rememberCoroutineScope()
 
@@ -211,7 +215,7 @@ fun BaseHaloBottomBar(
             val (xPos, width) = itemPositions[selectedIndex]!!
 
             coroutineScope.launch {
-                indicatorOffset.animateTo(
+                indicatorXOffset.animateTo(
                     targetValue = xPos,
                     animationSpec = tween(durationMillis = 300),
                 )
@@ -229,7 +233,10 @@ fun BaseHaloBottomBar(
         modifier =
             modifier
                 .fillMaxWidth()
-                .onSizeChanged { size -> bottomBarWidth.value = size.width }
+                .onSizeChanged { size ->
+                    bottomBarWidth.value = size.width
+                    bottomBarHeight.value = size.height
+                }
                 .defaultMinSize(minHeight = HaloBottomBarItemDefaults.minBottomBarHeight)
                 .background(containerColor),
     ) {
@@ -237,7 +244,8 @@ fun BaseHaloBottomBar(
         indicator(
             Modifier,
             density,
-            indicatorOffset,
+            bottomBarHeight.value.toFloat().pxToDp(),
+            indicatorXOffset,
             indicatorWidth,
         )
 
@@ -276,7 +284,7 @@ object HaloBottomBarIndicators {
      *
      * @param modifier The modifier to be applied to the indicator.
      * @param density The density of the current screen, used for converting dp to pixels.
-     * @param indicatorOffset An [Animatable] that controls the horizontal offset of the indicator.
+     * @param indicatorOffsetX An [Animatable] that controls the horizontal offset of the indicator.
      * @param indicatorWidth An [Animatable] that controls the width of the indicator.
      * @param properties The properties of the indicator.
      */
@@ -284,7 +292,8 @@ object HaloBottomBarIndicators {
     fun LineIndicator(
         modifier: Modifier = Modifier,
         density: Density,
-        indicatorOffset: Animatable<Float, AnimationVector1D>,
+        lineYOffset: Dp = 0.dp,
+        indicatorOffsetX: Animatable<Float, AnimationVector1D>,
         indicatorWidth: Animatable<Float, AnimationVector1D>,
         properties: IndicatorProperties = IndicatorProperties.default(),
     ) {
@@ -292,7 +301,8 @@ object HaloBottomBarIndicators {
             modifier =
                 modifier
                     .offset(
-                        x = with(density) { indicatorOffset.value.toDp() },
+                        x = with(density) { indicatorOffsetX.value.toDp() },
+                        y = lineYOffset,
                     )
                     .width(with(density) { indicatorWidth.value.toDp() })
                     .height(properties.lineHeight)
@@ -305,7 +315,7 @@ object HaloBottomBarIndicators {
      *
      * @param modifier The modifier to be applied to the indicator.
      * @param density The density of the current screen, used for converting dp to pixels.
-     * @param indicatorOffset An [Animatable] that controls the horizontal offset of the indicator.
+     * @param indicatorXOffset An [Animatable] that controls the horizontal offset of the indicator.
      * @param indicatorWidth An [Animatable] that controls the width of the indicator.
      * @param properties The properties of the indicator.
      */
@@ -313,14 +323,15 @@ object HaloBottomBarIndicators {
     fun PillIndicator(
         modifier: Modifier = Modifier,
         density: Density,
-        indicatorOffset: Animatable<Float, AnimationVector1D>,
+        pillYOffset: Dp,
+        indicatorXOffset: Animatable<Float, AnimationVector1D>,
         indicatorWidth: Animatable<Float, AnimationVector1D>,
         properties: IndicatorProperties = IndicatorProperties.default(),
     ) {
         Box(
             modifier =
                 modifier
-                    .offset(x = with(density) { indicatorOffset.value.toDp() })
+                    .offset(x = with(density) { indicatorXOffset.value.toDp() }, y = pillYOffset)
                     .width(with(density) { indicatorWidth.value.toDp() })
                     .height(properties.pillHeight)
                     .padding(properties.pillPadding)
