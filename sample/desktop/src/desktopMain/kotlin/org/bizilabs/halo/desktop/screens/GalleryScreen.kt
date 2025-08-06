@@ -163,6 +163,7 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Stepper.Horizontal -> HorizontalStepperSection()
                     GalleryScreenSection.Stepper.Vertical -> VerticalStepperSection()
+                    GalleryScreenSection.BottomBar -> BottomBarSection()
                     GalleryScreenSection.Charts -> {
                         GalleryList(
                             sections =
