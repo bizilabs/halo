@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,12 +25,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.components.HaloText
+import org.bizilabs.halo.components.bottombar.HaloBottomBarItemDefaults
 import org.bizilabs.halo.components.cards.HaloFilledCard
 import org.bizilabs.halo.components.cards.HaloOutlinedCard
 import org.bizilabs.halo.desktop.screens.accordion.AccordionSection
@@ -162,7 +167,7 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Stepper.Horizontal -> HorizontalStepperSection()
                     GalleryScreenSection.Stepper.Vertical -> VerticalStepperSection()
-                    GalleryScreenSection.BottomBar -> {}
+                    GalleryScreenSection.BottomBar -> BottomBarSection()
 
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
