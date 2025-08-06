@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -43,6 +44,119 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ProvideContentColorTextStyle
+
+/**
+ * A customizable bottom navigation bar with a composable slot for a fully custom indicator.
+ *
+ * This composable provides a flexible container for a set of [HaloBottomBarItem]s, automatically
+ * managing the animation of a visual indicator that tracks the currently selected item. The
+ * indicator's position and size are calculated based on the layout of its children.
+ *
+ * @param modifier The modifier to be applied to the bottom bar.
+ * @param containerColor The background color of the bottom bar. Defaults to the surface color from [HaloTheme].
+ * @param selectedIndex The index of the currently selected item. This value drives the indicator's animation.
+ * @param onItemSelected The callback that is invoked when an item is selected. It provides the index of the newly selected item.
+ * @param indicator A custom composable for the indicator.
+ * @param content The composable lambda that contains the [HaloBottomBarItem]s. This lambda is executed within a [HaloBottomBarScope].
+ */
+@Composable
+fun HaloBottomBar(
+    modifier: Modifier = Modifier,
+    containerColor: Color = HaloTheme.colorScheme.background.surface,
+    selectedIndex: Int,
+    onItemSelected: (Int) -> Unit = {},
+    indicator: @Composable (
+        (
+        modifier: Modifier,
+        density: Density,
+        indicatorOffset: Animatable<Float, AnimationVector1D>,
+        indicatorWidth: Animatable<Float, AnimationVector1D>,
+    ) -> Unit
+    ) = { indicatorModifier, density, indicatorOffset, indicatorWidth ->
+        HaloBottomBarIndicators.LineIndicator(
+            modifier = indicatorModifier,
+            density = density,
+            indicatorOffset = indicatorOffset,
+            indicatorWidth = indicatorWidth,
+        )
+    },
+    content: @Composable HaloBottomBarScope.() -> Unit,
+) = BaseHaloBottomBar(
+    modifier = modifier,
+    containerColor = containerColor,
+    selectedIndex = selectedIndex,
+    onItemSelected = onItemSelected,
+    indicator = indicator,
+    content = content,
+)
+
+/**
+ * A customizable bottom navigation bar with a choice of pre-configured Halo indicators.
+ *
+ * This composable provides a flexible container for a set of [HaloBottomBarItem]s, automatically
+ * managing the animation of a visual indicator that tracks the currently selected item. The
+ * indicator's position and size are calculated based on the layout of its children.
+ *
+ * @param modifier The modifier to be applied to the bottom bar.
+ * @param containerColor The background color of the bottom bar. Defaults to the surface color from [HaloTheme].
+ * @param selectedIndex The index of the currently selected item. This value drives the indicator's animation.
+ * @param onItemSelected The callback that is invoked when an item is selected. It provides the index of the newly selected item.
+ * @param indicator The type of indicator to be used (e.g., LineTop, LineBottom, Pill). Defaults to [HaloBottomBarIndicatorType.LineBottom].
+ * @param indicatorProperties A data class containing properties for the indicator, such as colors and shapes.
+ * @param indicator Halo predefined bottom bars.
+ * @param content The composable lambda that contains the [HaloBottomBarItem]s. This lambda is executed within a [HaloBottomBarScope].
+ */
+@Composable
+fun HaloBottomBar(
+    modifier: Modifier = Modifier,
+    containerColor: Color = HaloTheme.colorScheme.background.surface,
+    selectedIndex: Int,
+    onItemSelected: (Int) -> Unit = {},
+    indicator: HaloBottomBarIndicatorType = HaloBottomBarIndicatorType.LineBottom,
+    indicatorProperties: IndicatorProperties = IndicatorProperties.default(),
+    content: @Composable HaloBottomBarScope.() -> Unit,
+) = BaseHaloBottomBar(
+    modifier = modifier,
+    containerColor = containerColor,
+    selectedIndex = selectedIndex,
+    onItemSelected = onItemSelected,
+    indicator = { indicatorModifier, density, indicatorOffset, indicatorWidth ->
+        Box(modifier = indicatorModifier.fillMaxSize()) {
+            when (indicator) {
+                HaloBottomBarIndicatorType.LineTop ->
+                    HaloBottomBarIndicators.LineIndicator(
+                        modifier = indicatorModifier.align(Alignment.TopStart),
+                        density,
+                        indicatorOffset,
+                        indicatorWidth,
+                        indicatorProperties,
+                    )
+
+                HaloBottomBarIndicatorType.LineBottom ->
+                    HaloBottomBarIndicators.LineIndicator(
+                        modifier = indicatorModifier.align(Alignment.BottomStart),
+                        density,
+                        indicatorOffset,
+                        indicatorWidth,
+                        indicatorProperties,
+                    )
+
+                HaloBottomBarIndicatorType.Pill ->
+                    HaloBottomBarIndicators.PillIndicator(
+                        modifier =
+                            indicatorModifier.align(
+                                Alignment.Center,
+                            ),
+                        density,
+                        indicatorOffset,
+                        indicatorWidth,
+                        indicatorProperties,
+                    )
+            }
+        }
+    },
+    content = content,
+)
 
 /**
  * A customizable bottom navigation bar that supports different types of animated indicators.
