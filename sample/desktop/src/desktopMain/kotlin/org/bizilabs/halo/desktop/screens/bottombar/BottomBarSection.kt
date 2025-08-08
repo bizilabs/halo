@@ -2,10 +2,12 @@ package org.bizilabs.halo.desktop.screens.bottombar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
@@ -26,6 +28,7 @@ import org.bizilabs.halo.components.bottombar.HaloBottomBarIndicatorType
 import org.bizilabs.halo.components.bottombar.HaloBottomBarItem
 import org.bizilabs.halo.components.bottombar.HaloBottomBarItemContentOrientation
 import org.bizilabs.halo.components.cards.HaloSlotCard
+import java.awt.SystemColor.text
 
 @Composable
 fun BottomBarSection() {
@@ -43,7 +46,7 @@ fun BottomBarSection() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                HaloText(text = "Design")
+                HaloText(text = "Bottom Bar Design")
                 Spacer(modifier = Modifier.height(8.dp))
                 HaloSlotCard(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
@@ -52,6 +55,53 @@ fun BottomBarSection() {
                                 modifier = Modifier.fillMaxWidth().padding(16.dp),
                                 text = "Content",
                             )
+                        }
+                    }
+                }
+            }
+            item {
+                Row {
+                    Column(modifier = Modifier.weight(1f)) {
+                        HaloText(text = "Vertical Bottom Bar Item Design")
+                        Spacer(modifier = Modifier.height(8.dp))
+                        HaloSlotCard(modifier = Modifier.fillMaxWidth()) {
+                            Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+                                HaloSlotCard {
+                                    HaloText(
+                                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                        text = "Icon",
+                                    )
+                                }
+                                HaloSlotCard {
+                                    HaloText(
+                                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                        text = "Text",
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+
+                    Column(modifier = Modifier.weight(1f)) {
+                        HaloText(text = "Horizontal Bottom Bar Item Design")
+                        Spacer(modifier = Modifier.height(8.dp))
+                        HaloSlotCard(modifier = Modifier.fillMaxWidth()) {
+                            Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+                                HaloSlotCard(Modifier.weight(1f)) {
+                                    HaloText(
+                                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                        text = "Icon",
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(8.dp))
+                                HaloSlotCard(Modifier.weight(1f)) {
+                                    HaloText(
+                                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                        text = "Text",
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -90,7 +140,7 @@ fun BottomBarSection() {
                     onItemSelected = { index ->
                         selectedItemIndex2 = index
                     },
-                    indicator = HaloBottomBarIndicatorType.LineTop,
+                    indicator = HaloBottomBarIndicatorType.LineBottom,
                 ) {
                     List(4) { i ->
                         HaloBottomBarItem(
