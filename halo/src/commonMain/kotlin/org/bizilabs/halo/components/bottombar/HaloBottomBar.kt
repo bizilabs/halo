@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -121,7 +120,7 @@ fun HaloBottomBar(
     selectedIndex = selectedIndex,
     onItemSelected = onItemSelected,
     indicator = { indicatorModifier, density, indicatorOffset, indicatorWidth ->
-        Box(modifier = indicatorModifier.fillMaxSize()) {
+        Box { // Only used because of the align modifier
             when (indicator) {
                 HaloBottomBarIndicatorType.LineTop ->
                     HaloBottomBarIndicators.LineIndicator(
@@ -134,7 +133,7 @@ fun HaloBottomBar(
 
                 HaloBottomBarIndicatorType.LineBottom ->
                     HaloBottomBarIndicators.LineIndicator(
-                        modifier = indicatorModifier.align(Alignment.BottomStart),
+                        modifier = indicatorModifier.align(Alignment.Center), // TODO This does not correctly position
                         density,
                         indicatorOffset,
                         indicatorWidth,
@@ -143,10 +142,7 @@ fun HaloBottomBar(
 
                 HaloBottomBarIndicatorType.Pill ->
                     HaloBottomBarIndicators.PillIndicator(
-                        modifier =
-                            indicatorModifier.align(
-                                Alignment.Center,
-                            ),
+                        modifier = indicatorModifier.align(Alignment.Center),
                         density,
                         indicatorOffset,
                         indicatorWidth,
@@ -239,7 +235,7 @@ fun BaseHaloBottomBar(
     ) {
         // The sliding indicator bar
         indicator(
-            Modifier.align(Alignment.BottomStart),
+            Modifier,
             density,
             indicatorOffset,
             indicatorWidth,
