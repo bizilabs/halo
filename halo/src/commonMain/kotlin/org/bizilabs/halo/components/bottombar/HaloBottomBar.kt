@@ -65,7 +65,7 @@ fun HaloBottomBar(
     selectedIndex: Int,
     onItemSelected: (Int) -> Unit = {},
     indicator: @Composable (
-        (
+    (
         modifier: Modifier,
         density: Density,
         indicatorOffset: Animatable<Float, AnimationVector1D>,
@@ -177,7 +177,7 @@ fun BaseHaloBottomBar(
     selectedIndex: Int,
     onItemSelected: (Int) -> Unit = {},
     indicator: @Composable (
-        (
+    (
         modifier: Modifier,
         density: Density,
         indicatorOffset: Animatable<Float, AnimationVector1D>,
