@@ -13,16 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import org.bizilabs.halo.HaloTheme
 
 /**
@@ -68,12 +64,6 @@ fun rememberHaloSheetLauncher(
 
     var isVisible by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = skipPartiallyExpanded)
-    val scope = rememberCoroutineScope()
-    var job: Job? = null
-    val cancelAndLaunchCoroutine: (block: suspend CoroutineScope.() -> Unit) -> Unit = { block ->
-        job?.cancel()
-        job = scope.launch(block = block)
-    }
 
     AnimatedVisibility(
         visible = isVisible,
@@ -94,11 +84,9 @@ fun rememberHaloSheetLauncher(
 
     return HaloSheetLauncher(
         onLaunch = {
-            cancelAndLaunchCoroutine { sheetState.show() }
             isVisible = true
         },
         onDismiss = {
-            cancelAndLaunchCoroutine { sheetState.hide() }
             isVisible = false
         },
     )
