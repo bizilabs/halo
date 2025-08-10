@@ -6,8 +6,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.unit.dp
-import org.bizilabs.halo.charts.data.Point
-import org.bizilabs.halo.charts.style.AxisStyle
+import org.bizilabs.halo.charts.data.HaloChartPoint
+import org.bizilabs.halo.charts.style.HaloAxisStyle
 
 /**
  * Draws the Y-axis labels and grid lines.
@@ -15,7 +15,7 @@ import org.bizilabs.halo.charts.style.AxisStyle
 internal fun DrawScope.drawYAxis(
     labels: List<String>,
     toPxY: (Float) -> Float,
-    style: AxisStyle,
+    style: HaloAxisStyle,
     textMeasurer: TextMeasurer,
     yAxisLabelMaxWidth: Float,
 ) {
@@ -39,9 +39,9 @@ internal fun DrawScope.drawYAxis(
  * Draws the X-axis labels and grid lines.
  */
 internal fun DrawScope.drawXAxis(
-    points: List<Point>,
+    points: List<HaloChartPoint>,
     toPxX: (Float) -> Float,
-    style: AxisStyle,
+    style: HaloAxisStyle,
     textMeasurer: TextMeasurer,
     drawingHeight: Float,
 ) {
