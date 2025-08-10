@@ -2,13 +2,13 @@ package org.bizilabs.halo.charts.draw
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
-import org.bizilabs.halo.charts.data.Point
+import org.bizilabs.halo.charts.data.HaloChartPoint
 
 /**
  * Generates a smooth, curved path for a set of points using cubic bezier interpolation.
  */
 internal fun generatePath(
-    points: List<Point>,
+    points: List<HaloChartPoint>,
     toPxX: (Float) -> Float,
     toPxY: (Float) -> Float,
     progress: Float,

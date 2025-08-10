@@ -94,6 +94,23 @@ sealed interface GalleryScreenSection {
         }
     }
 
+    sealed class Charts : GalleryScreenSection {
+        companion object : Charts()
+
+        override val label: String
+            get() = "Charts"
+
+        data object Bar : Charts() {
+            override val label: String
+                get() = "Bar"
+        }
+
+        data object Line : Charts() {
+            override val label: String
+                get() = "Line"
+        }
+    }
+
     companion object {
         val values: List<GalleryScreenSection>
             get() =
@@ -104,6 +121,7 @@ sealed interface GalleryScreenSection {
                     BottomSheet,
                     Button,
                     Card,
+                    Charts,
                     Chip,
                     Stepper,
                     TextField,
@@ -155,6 +173,8 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
                 GalleryScreenSection.Button.Icon -> GalleryScreenSection.Button
                 GalleryScreenSection.Stepper.Horizontal -> GalleryScreenSection.Stepper
                 GalleryScreenSection.Stepper.Vertical -> GalleryScreenSection.Stepper
+                GalleryScreenSection.Charts.Line -> GalleryScreenSection.Charts
+                GalleryScreenSection.Charts.Bar -> GalleryScreenSection.Charts
                 else -> null
             }
         mutableState.update { it.copy(section = update) }

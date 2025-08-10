@@ -2,20 +2,16 @@ package org.bizilabs.halo.charts.ui
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
@@ -25,9 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -45,43 +39,41 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import org.bizilabs.halo.HaloTheme
-import org.bizilabs.halo.charts.data.ChartPadding
-import org.bizilabs.halo.charts.data.LineChartData
-import org.bizilabs.halo.charts.data.Point
+import org.bizilabs.halo.charts.data.HaloChartPadding
+import org.bizilabs.halo.charts.data.HaloChartPoint
+import org.bizilabs.halo.charts.data.HaloLineChartData
 import org.bizilabs.halo.charts.draw.drawXAxis
 import org.bizilabs.halo.charts.draw.drawYAxis
 import org.bizilabs.halo.charts.draw.generatePath
 import org.bizilabs.halo.charts.helpers.dpToPx
 import org.bizilabs.halo.charts.helpers.format
 import org.bizilabs.halo.charts.helpers.pxToDp
-import org.bizilabs.halo.charts.style.ChartDefaults
-import org.bizilabs.halo.charts.style.IndicatorStyle
-import org.bizilabs.halo.charts.style.LineChartStyle
-import org.bizilabs.halo.charts.style.LineStyle
-import org.bizilabs.halo.components.HaloText
+import org.bizilabs.halo.charts.style.HaloChartStyle
+import org.bizilabs.halo.charts.style.HaloIndicatorStyle
+import org.bizilabs.halo.charts.style.HaloLineStyle
+import org.bizilabs.halo.charts.style.haloLineChartStyle
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
 
 @Composable
 fun HaloLineChart(
-    lineChartData: LineChartData,
+    data: HaloLineChartData,
     modifier: Modifier = Modifier,
-    contentPadding: ChartPadding =
-        ChartPadding(
-            start = 16.dp,
-            end = 16.dp,
+    contentPadding: HaloChartPadding =
+        HaloChartPadding(
+            start = 0.dp,
+            end = 0.dp,
         ),
-    style: LineChartStyle = ChartDefaults.lineChartStyle(),
-    onPointSelected: (Point?) -> Unit,
+    style: HaloChartStyle.HaloLineChartStyle = haloLineChartStyle(),
+    onPointSelected: (HaloChartPoint?) -> Unit,
 ) {
     val textMeasurer = rememberTextMeasurer()
     val scope = rememberCoroutineScope()
     val density = LocalDensity.current
 
     // Combine all points from all lines for calculations.
-    val allPoints = remember(lineChartData) { lineChartData.lines.flatMap { it.points } }
+    val allPoints = remember(data) { data.lines.flatMap { it.points } }
     if (allPoints.isEmpty()) return
 
     // Animation progress for drawing the lines.
@@ -89,7 +81,7 @@ fun HaloLineChart(
 
     // State to hold user touch location and selected point index.
     var touchLocation by remember { mutableStateOf<Offset?>(null) }
-    var selectedIndex by remember { mutableStateOf<Int?>(lineChartData.defaultSelectedIndex) }
+    var selectedIndex by remember { mutableStateOf<Int?>(data.defaultSelectedIndex) }
 
     // Find min/max values to scale the chart correctly.
     val minX = remember(allPoints) { allPoints.minOf { it.x } }
@@ -119,15 +111,18 @@ fun HaloLineChart(
 
     val yAxisLabelMaxWidth =
         remember(yAxisLabels, style.yAxisStyle) {
-            (
-                yAxisLabels.maxOfOrNull {
-                    textMeasurer
-                        .measure(
-                            AnnotatedString(it),
-                            style = style.yAxisStyle.labelTextStyle,
-                        ).size.width
-                } ?: 0
-            )
+            when (style.yAxisStyle.showLabels) {
+                true ->
+                    yAxisLabels.maxOfOrNull {
+                        textMeasurer
+                            .measure(
+                                text = AnnotatedString(it),
+                                style = style.yAxisStyle.labelTextStyle,
+                            ).size.width
+                    } ?: 0
+
+                false -> 0
+            }
         }.toFloat()
 
     val yAxisPadding =
@@ -136,7 +131,7 @@ fun HaloLineChart(
     val xAxisPadding =
         remember(style.xAxisStyle) {
             with(density) { 30.dp.toPx() } // Fixed padding for X-axis labels
-        }.toFloat()
+        }
 
     // This buffer accounts for half of the label height at both top and bottom edges
     // plus a small extra visual padding.
@@ -147,9 +142,9 @@ fun HaloLineChart(
         }
 
     // Trigger animation when data changes.
-    LaunchedEffect(lineChartData) {
+    LaunchedEffect(data) {
         animationProgress.snapTo(0f)
-        animationProgress.animateTo(1f, animationSpec = lineChartData.animationSpec)
+        animationProgress.animateTo(1f, animationSpec = data.animationSpec)
     }
 
     // Update selected point callback when selection changes
@@ -157,7 +152,7 @@ fun HaloLineChart(
         val selectedPoint =
             selectedIndex?.let {
                 // Find the point from the first line for the callback. This can be customized.
-                lineChartData.lines
+                data.lines
                     .firstOrNull()
                     ?.points
                     ?.getOrNull(it)
@@ -169,34 +164,34 @@ fun HaloLineChart(
 
     Column(modifier = modifier.fillMaxWidth()) {
         // Legend
-        Row(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = style.legendBottomSpacing),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            lineChartData.lines.forEach { line ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(end = 16.dp),
-                ) {
-                    Spacer(
-                        modifier =
-                            Modifier
-                                .size(16.dp)
-                                .clip(HaloTheme.shapes.medium)
-                                .background(line.style.color),
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    HaloText(
-                        text = line.label,
-                        style = style.legendTextStyle,
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.width(8.dp))
+//        Row(
+//            modifier =
+//                Modifier
+//                    .fillMaxWidth()
+//                    .padding(bottom = style.legendBottomSpacing),
+//            verticalAlignment = Alignment.CenterVertically,
+//        ) {
+//            data.lines.forEach { line ->
+//                Row(
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    modifier = Modifier.padding(end = 16.dp),
+//                ) {
+//                    Spacer(
+//                        modifier =
+//                            Modifier
+//                                .size(16.dp)
+//                                .clip(HaloTheme.shapes.medium)
+//                                .background(line.style.color),
+//                    )
+//                    Spacer(modifier = Modifier.width(4.dp))
+//                    HaloText(
+//                        text = line.label,
+//                        style = style.legendTextStyle,
+//                    )
+//                }
+//            }
+//        }
+//        Spacer(modifier = Modifier.width(8.dp))
 
         BoxWithConstraints(modifier = Modifier.fillMaxWidth().weight(1f)) {
             val chartHeight = constraints.maxHeight.toFloat()
@@ -270,28 +265,9 @@ fun HaloLineChart(
                                     onPress = { offset ->
                                         touchLocation = offset
                                         scope.launch { awaitRelease() }
-                                        // Keep selection on tap release unless configured otherwise
                                     },
                                 )
                             },
-//                            .pointerInput(allPoints) {
-                    //                            detectDragGestures(
-                    //                                onDragStart = { offset -> touchLocation = offset },
-                    //                                onDragEnd = {
-                    //                                    touchLocation = null
-                    //                                    // Optional: Clear selection on drag end
-                    //                                    // selectedIndex = null
-                    //                                    // onPointSelected(null)
-                    //                                },
-                    //                                onDragCancel = {
-                    //                                    touchLocation = null
-                    //                                    // selectedIndex = null
-                    //                                    // onPointSelected(null)
-                    //                                },
-                    //                            ) { change, _ ->
-                    //                                touchLocation = change.position
-                    //                            }
-//                        },
                 ) {
                     // Draw Y-Axis grid lines *before* drawing the chart lines, so they appear in the background
                     if (style.yAxisStyle.showGridLines) {
@@ -304,8 +280,8 @@ fun HaloLineChart(
                                 start = Offset(yAxisPadding, y),
                                 end =
                                     Offset(
-                                        drawingWidth,
-                                        y,
+                                        x = drawingWidth,
+                                        y = y,
                                     ),
                                 // Use drawingWidth as the end point for grid lines
                                 strokeWidth = style.yAxisStyle.gridLineWidth.toPx(),
@@ -330,7 +306,7 @@ fun HaloLineChart(
                     drawXAxis(allPoints, toPxX, style.xAxisStyle, textMeasurer, drawingHeight)
 
                     // Draw each line
-                    lineChartData.lines.forEach { line ->
+                    data.lines.forEach { line ->
                         val linePath =
                             generatePath(line.points, toPxX, toPxY, animationProgress.value)
                         val fillPath =
@@ -361,11 +337,11 @@ fun HaloLineChart(
                     }
 
                     // Draw indicator for the selected point index
-                    if (lineChartData.selectedLineVisible) {
+                    if (data.style.indicatorStyle.visible) {
                         selectedIndex?.let { index ->
                             val pointsAtSelectedIndex =
-                                lineChartData.lines.mapNotNull { it.points.getOrNull(index) }
-                            val lineStyles = lineChartData.lines.map { it.style }
+                                data.lines.mapNotNull { it.points.getOrNull(index) }
+                            val lineStyles = data.lines.map { it.style }
 
                             // Find the point closest to the touch vertically to display its label
                             val primaryPoint =
@@ -389,43 +365,45 @@ fun HaloLineChart(
                 }
             }
 
-            // Draw Y-Axis labels and grid lines
-            Canvas(
-                modifier =
-                    Modifier
-                        // Shift the whole Y-axis canvas up by the calculated extension
-                        .offset(y = (-labelVerticalMarginPx).pxToDp())
-                        // Set the height of the Y-axis canvas to cover the drawingHeight plus the top extension
-                        .height(with(density) { (chartHeight + labelVerticalMarginPx).pxToDp() })
-                        .width(yAxisPadding.pxToDp()),
-            ) {
-                // Draw the background rectangle first
-                drawRect(
-                    color = style.yAxisStyle.axisBackgroundColor,
-                    // The rectangle starts at 0,0 of this Canvas. This Canvas itself is offset.
-                    topLeft = Offset.Zero,
-                    size = size,
-                )
-                // Local toPxY for labels, mapping data to this specific Canvas's coordinates
-                val toPxYLabelsCanvas: (Float) -> Float = { y ->
-                    val yRange = (maxY - minY).takeIf { it > 0f } ?: 1f
-                    val yNormalized =
-                        (y - minY) / yRange
+            if (data.style.yAxisStyle.showLabels) {
+                // Draw Y-Axis labels and grid lines
+                Canvas(
+                    modifier =
+                        Modifier
+                            // Shift the whole Y-axis canvas up by the calculated extension
+                            .offset(y = (-labelVerticalMarginPx).pxToDp())
+                            // Set the height of the Y-axis canvas to cover the drawingHeight plus the top extension
+                            .height(with(density) { (chartHeight + labelVerticalMarginPx).pxToDp() })
+                            .width(yAxisPadding.pxToDp()),
+                ) {
+                    // Draw the background rectangle first
+                    drawRect(
+                        color = style.yAxisStyle.axisBackgroundColor,
+                        // The rectangle starts at 0,0 of this Canvas. This Canvas itself is offset.
+                        topLeft = Offset.Zero,
+                        size = size,
+                    )
+                    // Local toPxY for labels, mapping data to this specific Canvas's coordinates
+                    val toPxYLabelsCanvas: (Float) -> Float = { y ->
+                        val yRange = (maxY - minY).takeIf { it > 0f } ?: 1f
+                        val yNormalized =
+                            (y - minY) / yRange
 
-                    // Map yNormalized (0 to 1) to the Y-axis canvas coordinates.
-                    // We want:
-                    // - When y=maxY (yNormalized=1), it maps to labelVerticalMarginPx (top effective chart area within this Canvas)
-                    // - When y=minY (yNormalized=0), it maps to labelVerticalMarginPx + drawingHeight (bottom effective chart area within this Canvas)
-                    (labelVerticalMarginPx + drawingHeight) - yNormalized * drawingHeight
+                        // Map yNormalized (0 to 1) to the Y-axis canvas coordinates.
+                        // We want:
+                        // - When y=maxY (yNormalized=1), it maps to labelVerticalMarginPx (top effective chart area within this Canvas)
+                        // - When y=minY (yNormalized=0), it maps to labelVerticalMarginPx + drawingHeight (bottom effective chart area within this Canvas)
+                        (labelVerticalMarginPx + drawingHeight) - yNormalized * drawingHeight
+                    }
+
+                    drawYAxis(
+                        labels = yAxisLabels,
+                        toPxY = toPxYLabelsCanvas,
+                        style = style.yAxisStyle,
+                        textMeasurer = textMeasurer,
+                        yAxisLabelMaxWidth = yAxisLabelMaxWidth,
+                    )
                 }
-
-                drawYAxis(
-                    labels = yAxisLabels,
-                    toPxY = toPxYLabelsCanvas,
-                    style = style.yAxisStyle,
-                    textMeasurer = textMeasurer,
-                    yAxisLabelMaxWidth = yAxisLabelMaxWidth,
-                )
             }
         }
     }
@@ -435,11 +413,11 @@ fun HaloLineChart(
  * Draws the indicator on the canvas.
  */
 internal fun DrawScope.drawIndicator(
-    points: List<Point>,
+    points: List<HaloChartPoint>,
     toPxX: (Float) -> Float,
     toPxY: (Float) -> Float,
-    style: IndicatorStyle,
-    lineStyles: List<LineStyle>,
+    style: HaloIndicatorStyle,
+    lineStyles: List<HaloLineStyle>,
     textMeasurer: TextMeasurer,
     drawingHeight: Float,
 ) {
@@ -473,7 +451,6 @@ internal fun DrawScope.drawIndicator(
         )
 
         // --- Draw the value label for the primary point ---
-//    val labelText = "%.2f".format(primaryPoint.y)
         val labelText = point.y.format(2)
         val textLayoutResult =
             textMeasurer.measure(
