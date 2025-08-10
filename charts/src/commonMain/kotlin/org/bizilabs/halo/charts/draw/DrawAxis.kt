@@ -29,6 +29,7 @@ internal fun DrawScope.drawYAxis(
                 style = style.labelTextStyle,
             )
         drawText(
+            color = style.labelTextColor,
             textLayoutResult = textLayoutResult,
             topLeft = Offset(yAxisLabelMaxWidth - textLayoutResult.size.width, y - textLayoutResult.size.height / 2),
         )

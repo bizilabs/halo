@@ -19,6 +19,7 @@ data class HaloAxisStyle internal constructor(
     val showLabels: Boolean = true,
     val labelTextStyle: TextStyle = TextStyle(color = Color.Gray, fontSize = 12.sp),
     val labelCount: Int = 4,
+    val labelTextColor: Color = Color.Gray,
     val showGridLines: Boolean = true,
     val gridLineColor: Color = Color.Gray.copy(alpha = 0.2f),
     val axisBackgroundColor: Color = Color.Gray,
@@ -30,6 +31,7 @@ fun haloAxisStyle(
     showLabels: Boolean = true,
     labelCount: Int = 4,
     labelTextStyle: TextStyle = HaloTheme.typography.bodySmall,
+    labelTextColor: Color = HaloTheme.colorScheme.content.neutral,
     showGridLines: Boolean = true,
     gridLineWidth: Dp = 1.dp,
     gridLineColor: Color =
@@ -41,6 +43,7 @@ fun haloAxisStyle(
         showLabels = showLabels,
         labelTextStyle = labelTextStyle,
         labelCount = labelCount,
+        labelTextColor = labelTextColor,
         showGridLines = showGridLines,
         gridLineColor = gridLineColor,
         axisBackgroundColor = axisBackgroundColor,
