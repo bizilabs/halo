@@ -81,7 +81,7 @@ fun HaloLineChart(
 
     // State to hold user touch location and selected point index.
     var touchLocation by remember { mutableStateOf<Offset?>(null) }
-    var selectedIndex by remember { mutableStateOf<Int?>(data.defaultSelectedIndex) }
+    var selectedIndex by remember { mutableStateOf(data.defaultSelectedIndex ?: allPoints.lastIndex) }
 
     // Find min/max values to scale the chart correctly.
     val minX = remember(allPoints) { allPoints.minOf { it.x } }
@@ -163,36 +163,6 @@ fun HaloLineChart(
     val scrollState = rememberScrollState()
 
     Column(modifier = modifier.fillMaxWidth()) {
-        // Legend
-//        Row(
-//            modifier =
-//                Modifier
-//                    .fillMaxWidth()
-//                    .padding(bottom = style.legendBottomSpacing),
-//            verticalAlignment = Alignment.CenterVertically,
-//        ) {
-//            data.lines.forEach { line ->
-//                Row(
-//                    verticalAlignment = Alignment.CenterVertically,
-//                    modifier = Modifier.padding(end = 16.dp),
-//                ) {
-//                    Spacer(
-//                        modifier =
-//                            Modifier
-//                                .size(16.dp)
-//                                .clip(HaloTheme.shapes.medium)
-//                                .background(line.style.color),
-//                    )
-//                    Spacer(modifier = Modifier.width(4.dp))
-//                    HaloText(
-//                        text = line.label,
-//                        style = style.legendTextStyle,
-//                    )
-//                }
-//            }
-//        }
-//        Spacer(modifier = Modifier.width(8.dp))
-
         BoxWithConstraints(modifier = Modifier.fillMaxWidth().weight(1f)) {
             val chartHeight = constraints.maxHeight.toFloat()
             val chartWidth = constraints.maxWidth.toFloat()
@@ -296,7 +266,7 @@ fun HaloLineChart(
                         val closestIndex =
                             uniqueXPoints.indices.minByOrNull {
                                 abs(toPxX(uniqueXPoints[it].x) - (currentTouchLocation.x + scrollState.value))
-                            }
+                            } ?: uniqueXPoints.lastIndex
                         if (selectedIndex != closestIndex) {
                             selectedIndex = closestIndex
                         }
@@ -338,7 +308,7 @@ fun HaloLineChart(
 
                     // Draw indicator for the selected point index
                     if (data.style.indicatorStyle.visible) {
-                        selectedIndex?.let { index ->
+                        selectedIndex.let { index ->
                             val pointsAtSelectedIndex =
                                 data.lines.mapNotNull { it.points.getOrNull(index) }
                             val lineStyles = data.lines.map { it.style }

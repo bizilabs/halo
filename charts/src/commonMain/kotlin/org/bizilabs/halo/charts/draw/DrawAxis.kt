@@ -57,6 +57,7 @@ internal fun DrawScope.drawXAxis(
             val x =
                 toPxX(point.x)
             drawText(
+                color = style.labelTextColor,
                 textLayoutResult = textLayoutResult,
                 topLeft = Offset(x - textLayoutResult.size.width / 2, drawingHeight + 8.dp.toPx()),
             )
