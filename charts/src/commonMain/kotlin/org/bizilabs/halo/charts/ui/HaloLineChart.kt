@@ -202,8 +202,10 @@ fun HaloLineChart(
                     0f // For 0 or 1 point, contentWidth is 0
                 }
 
-            val drawingWidth =
+            val rawDrawingWidth =
                 yAxisPadding + startPadding + contentWidth + endPadding // Total width of the scrollable canvas
+
+            val drawingWidth = rawDrawingWidth.coerceAtMost(chartWidth)
 
             val drawingHeight = chartHeight - xAxisPadding
 
