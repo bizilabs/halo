@@ -205,8 +205,6 @@ fun HaloLineChart(
             val rawDrawingWidth =
                 yAxisPadding + startPadding + contentWidth + endPadding // Total width of the scrollable canvas
 
-            val drawingWidth = rawDrawingWidth.coerceAtMost(chartWidth)
-
             val drawingHeight = chartHeight - xAxisPadding
 
             // Lambdas to convert data points to canvas coordinates.
@@ -227,7 +225,7 @@ fun HaloLineChart(
                     Modifier
                         .fillMaxHeight()
                         .horizontalScroll(scrollState)
-                        .width(drawingWidth.toInt().pxToDp()),
+                        .width(rawDrawingWidth.toInt().pxToDp()),
             ) {
                 Canvas(
                     modifier =
@@ -255,7 +253,7 @@ fun HaloLineChart(
                                 drawLine(
                                     color = style.yAxisStyle.gridLineColor,
                                     start = Offset(yAxisPadding, y),
-                                    end = Offset(drawingWidth, y),
+                                    end = Offset(rawDrawingWidth, y),
                                     strokeWidth = style.yAxisStyle.gridLineWidth.toPx(),
                                 )
                             }
