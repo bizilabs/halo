@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
@@ -201,7 +202,7 @@ fun HaloLineChart(
                     0f // For 0 or 1 point, contentWidth is 0
                 }
 
-            val drawingWidth =
+            val rawDrawingWidth =
                 yAxisPadding + startPadding + contentWidth + endPadding // Total width of the scrollable canvas
 
             val drawingHeight = chartHeight - xAxisPadding
@@ -224,7 +225,7 @@ fun HaloLineChart(
                     Modifier
                         .fillMaxHeight()
                         .horizontalScroll(scrollState)
-                        .width(drawingWidth.toInt().pxToDp()),
+                        .width(rawDrawingWidth.toInt().pxToDp()),
             ) {
                 Canvas(
                     modifier =
@@ -233,102 +234,97 @@ fun HaloLineChart(
                             .pointerInput(Unit) {
                                 detectTapGestures(
                                     onPress = { offset ->
-                                        touchLocation = offset
+                                        // Add scroll offset to touch so we work in chart-space
+                                        touchLocation = Offset(offset.x + scrollState.value, offset.y)
                                         scope.launch { awaitRelease() }
                                     },
                                 )
                             },
                 ) {
-                    // Draw Y-Axis grid lines *before* drawing the chart lines, so they appear in the background
-                    if (style.yAxisStyle.showGridLines) {
-                        yAxisLabels.forEach { label ->
-                            val yValue = label.toFloat()
-                            val y = toPxY(yValue)
-                            // Grid line starts after the y-axis labels area and extends to the end of the chart width
-                            drawLine(
-                                color = style.yAxisStyle.gridLineColor,
-                                start = Offset(yAxisPadding, y),
-                                end =
-                                    Offset(
-                                        x = drawingWidth,
-                                        y = y,
-                                    ),
-                                // Use drawingWidth as the end point for grid lines
-                                strokeWidth = style.yAxisStyle.gridLineWidth.toPx(),
-                            )
+                    withTransform({
+                        // Apply horizontal translation based on scroll
+                        translate(left = -scrollState.value.toFloat())
+                    }) {
+                        // Draw Y-axis grid lines
+                        if (style.yAxisStyle.showGridLines) {
+                            yAxisLabels.forEach { label ->
+                                val yValue = label.toFloat()
+                                val y = toPxY(yValue)
+                                drawLine(
+                                    color = style.yAxisStyle.gridLineColor,
+                                    start = Offset(yAxisPadding, y),
+                                    end = Offset(rawDrawingWidth, y),
+                                    strokeWidth = style.yAxisStyle.gridLineWidth.toPx(),
+                                )
+                            }
                         }
-                    }
 
-                    // Find the closest point index to the touch location
-                    val currentTouchLocation = touchLocation
-                    if (currentTouchLocation != null) {
-                        val uniqueXPoints = allPoints.distinctBy { it.x }
-                        val closestIndex =
-                            uniqueXPoints.indices.minByOrNull {
-                                abs(toPxX(uniqueXPoints[it].x) - (currentTouchLocation.x + scrollState.value))
-                            } ?: uniqueXPoints.lastIndex
-                        if (selectedIndex != closestIndex) {
-                            selectedIndex = closestIndex
+                        // Find the closest point index to the touch location
+                        val currentTouchLocation = touchLocation
+                        if (currentTouchLocation != null) {
+                            val uniqueXPoints = allPoints.distinctBy { it.x }
+                            val closestIndex =
+                                uniqueXPoints.indices.minByOrNull {
+                                    abs(toPxX(uniqueXPoints[it].x) - currentTouchLocation.x)
+                                } ?: uniqueXPoints.lastIndex
+                            if (selectedIndex != closestIndex) {
+                                selectedIndex = closestIndex
+                            }
                         }
-                    }
 
-                    // Draw X-Axis labels and grid lines
-                    drawXAxis(allPoints, toPxX, style.xAxisStyle, textMeasurer, drawingHeight)
+                        // Draw X-axis
+                        drawXAxis(allPoints, toPxX, style.xAxisStyle, textMeasurer, drawingHeight)
 
-                    // Draw each line
-                    data.lines.forEach { line ->
-                        val linePath =
-                            generatePath(line.points, toPxX, toPxY, animationProgress.value)
-                        val fillPath =
-                            Path().apply {
-                                addPath(linePath)
-                                lineTo(toPxX(line.points.last().x), drawingHeight)
-                                lineTo(toPxX(line.points.first().x), drawingHeight)
-                                close()
+                        // Draw chart lines
+                        data.lines.forEach { line ->
+                            val linePath = generatePath(line.points, toPxX, toPxY, animationProgress.value)
+                            val fillPath =
+                                Path().apply {
+                                    addPath(linePath)
+                                    lineTo(toPxX(line.points.last().x), drawingHeight)
+                                    lineTo(toPxX(line.points.first().x), drawingHeight)
+                                    close()
+                                }
+
+                            line.style.fillGradient?.let {
+                                drawPath(path = fillPath, brush = it)
                             }
 
-                        // Draw fill gradient
-                        line.style.fillGradient?.let {
-                            drawPath(path = fillPath, brush = it)
+                            drawPath(
+                                path = linePath,
+                                color = line.style.color,
+                                style =
+                                    Stroke(
+                                        width = line.style.strokeWidth.toPx(),
+                                        cap = StrokeCap.Round,
+                                        join = StrokeJoin.Round,
+                                        pathEffect = line.style.pathEffect,
+                                    ),
+                            )
                         }
 
-                        // Draw the line stroke
-                        drawPath(
-                            path = linePath,
-                            color = line.style.color,
-                            style =
-                                Stroke(
-                                    width = line.style.strokeWidth.toPx(),
-                                    cap = StrokeCap.Round,
-                                    join = StrokeJoin.Round,
-                                    pathEffect = line.style.pathEffect,
-                                ),
-                        )
-                    }
+                        // Draw indicator
+                        if (data.style.indicatorStyle.visible) {
+                            selectedIndex.let { index ->
+                                val pointsAtSelectedIndex = data.lines.mapNotNull { it.points.getOrNull(index) }
+                                val lineStyles = data.lines.map { it.style }
 
-                    // Draw indicator for the selected point index
-                    if (data.style.indicatorStyle.visible) {
-                        selectedIndex.let { index ->
-                            val pointsAtSelectedIndex =
-                                data.lines.mapNotNull { it.points.getOrNull(index) }
-                            val lineStyles = data.lines.map { it.style }
+                                val primaryPoint =
+                                    currentTouchLocation?.let { touch ->
+                                        pointsAtSelectedIndex.minByOrNull { abs(toPxY(it.y) - touch.y) }
+                                    } ?: pointsAtSelectedIndex.firstOrNull()
 
-                            // Find the point closest to the touch vertically to display its label
-                            val primaryPoint =
-                                currentTouchLocation?.let { touch ->
-                                    pointsAtSelectedIndex.minByOrNull { abs(toPxY(it.y) - touch.y) }
-                                } ?: pointsAtSelectedIndex.firstOrNull()
-
-                            if (primaryPoint != null) {
-                                drawIndicator(
-                                    points = pointsAtSelectedIndex,
-                                    toPxX = toPxX,
-                                    toPxY = toPxY,
-                                    style = style.indicatorStyle,
-                                    lineStyles = lineStyles,
-                                    textMeasurer = textMeasurer,
-                                    drawingHeight = drawingHeight,
-                                )
+                                if (primaryPoint != null) {
+                                    drawIndicator(
+                                        points = pointsAtSelectedIndex,
+                                        toPxX = toPxX,
+                                        toPxY = toPxY,
+                                        style = style.indicatorStyle,
+                                        lineStyles = lineStyles,
+                                        textMeasurer = textMeasurer,
+                                        drawingHeight = drawingHeight,
+                                    )
+                                }
                             }
                         }
                     }
