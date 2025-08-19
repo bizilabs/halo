@@ -150,8 +150,8 @@ object HaloSwitchDefaults {
         checkedTrack: Color = HaloTheme.colorScheme.content.stronger,
         checkedThumb: Color = HaloTheme.colorScheme.background.surface,
         checkedBorder: Color = HaloTheme.colorScheme.content.strong,
-    ): SwitchColors {
-        return SwitchColors(
+    ): SwitchColors =
+        SwitchColors(
             default =
                 HaloColor(
                     container = track,
@@ -171,5 +171,4 @@ object HaloSwitchDefaults {
                     border = checkedBorder,
                 ),
         )
-    }
 }
