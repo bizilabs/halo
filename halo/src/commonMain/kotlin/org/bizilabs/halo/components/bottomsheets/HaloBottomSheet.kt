@@ -34,7 +34,7 @@ import org.bizilabs.halo.HaloTheme
  *                   Defaults to [rememberModalBottomSheetState].
  * @param sheetMaxWidth Maximum width of the bottom sheet. Defaults to [BottomSheetDefaults.SheetMaxWidth].
  * @param shape The shape of the sheet surface. Defaults to [BottomSheetDefaults.ExpandedShape].
- * @param containerColor The background color of the sheet. Defaults to [HaloTheme.colorScheme.background.surface].
+ * @param containerColor The background color of the sheet. Defaults to [HaloTheme.colorScheme.background.low].
  * @param contentColor The content color applied to children. Defaults to [HaloTheme.colorScheme.content.strong].
  * @param tonalElevation The elevation for the sheet surface. Defaults to 0.dp.
  * @param scrimColor Color of the background scrim behind the sheet. Defaults to [BottomSheetDefaults.ScrimColor].
@@ -54,7 +54,7 @@ fun HaloBottomSheet(
     sheetState: SheetState = rememberModalBottomSheetState(),
     sheetMaxWidth: Dp = BottomSheetDefaults.SheetMaxWidth,
     shape: Shape = BottomSheetDefaults.ExpandedShape,
-    containerColor: Color = HaloTheme.colorScheme.background.surface,
+    containerColor: Color = HaloTheme.colorScheme.background.low,
     contentColor: Color = HaloTheme.colorScheme.content.strong,
     tonalElevation: Dp = 0.dp,
     scrimColor: Color = BottomSheetDefaults.ScrimColor,

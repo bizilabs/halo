@@ -55,7 +55,7 @@ fun BadgeSection() {
                 HaloBadge(
                     properties =
                         BadgeProperties.default().copy(
-                            backgroundColor = HaloTheme.colorScheme.background.surface,
+                            backgroundColor = HaloTheme.colorScheme.background.low,
                             contentColor = HaloTheme.colorScheme.content.strong,
                         ),
                 ) {

@@ -148,7 +148,7 @@ sealed interface GalleryScreenAction {
 
 data class GalleryScreenState(
     val isDarkModeEnabled: Boolean = false,
-    val colorTheme: HaloColorTheme = HaloDefaults.ColorThemes.Default,
+    val colorTheme: HaloColorTheme = HaloDefaults.ColorThemes.Polar,
     val section: GalleryScreenSection? = null,
     val sections: List<GalleryScreenSection> = GalleryScreenSection.values,
 )

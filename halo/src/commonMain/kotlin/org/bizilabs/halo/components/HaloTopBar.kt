@@ -30,7 +30,7 @@ fun HaloTopBar(
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
     colors: TopAppBarColors =
         TopAppBarDefaults.topAppBarColors(
-            containerColor = HaloTheme.colorScheme.background.surface,
+            containerColor = HaloTheme.colorScheme.background.low,
             titleContentColor = HaloTheme.colorScheme.content.strong,
             actionIconContentColor = HaloTheme.colorScheme.content.strong,
             navigationIconContentColor = HaloTheme.colorScheme.content.strong,
