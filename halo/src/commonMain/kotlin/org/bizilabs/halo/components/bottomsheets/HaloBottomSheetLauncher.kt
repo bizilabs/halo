@@ -122,7 +122,7 @@ object HaloSheetDefaults {
 
     @Composable
     fun sheetColors(
-        container: Color = HaloTheme.colorScheme.background.surface,
+        container: Color = HaloTheme.colorScheme.background.low,
         content: Color = HaloTheme.colorScheme.content.strong,
     ): HaloSheetColors =
         HaloSheetColors(

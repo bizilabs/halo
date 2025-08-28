@@ -63,7 +63,7 @@ fun HaloFilledCard(
     colors: CardColors =
         CardDefaults.cardColors(
             contentColor = HaloTheme.colorScheme.content.strong,
-            containerColor = HaloTheme.colorScheme.background.surface,
+            containerColor = HaloTheme.colorScheme.background.low,
             disabledContentColor = HaloTheme.colorScheme.disabled.content,
             disabledContainerColor = HaloTheme.colorScheme.disabled.container,
         ),
@@ -93,7 +93,7 @@ fun HaloSlotCard(
     colors: CardColors =
         CardDefaults.cardColors(
             contentColor = HaloTheme.colorScheme.content.strong,
-            containerColor = HaloTheme.colorScheme.background.surface,
+            containerColor = HaloTheme.colorScheme.background.low,
             disabledContentColor = HaloTheme.colorScheme.disabled.content,
             disabledContainerColor = HaloTheme.colorScheme.disabled.container,
         ),

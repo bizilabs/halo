@@ -1,26 +1,26 @@
 package org.bizilabs.halo.base.colors
 
 import androidx.compose.ui.graphics.Color
-import org.bizilabs.halo.base.HaloBackgroundValue
 import org.bizilabs.halo.base.HaloColorScheme
 
-private val PolarLightBackgroundColor = Color(0xFFFFFFFF)
-private val PolarLightOnBackgroundColor = Color(0xFF000000)
-private val PolarLightSurfaceColor = Color(0xFFEBEBEB)
-private val PolarLightOnSurfaceColor = Color(0xFF141414)
+private val PolarLightBackgroundHighest = Color(0xFFD4D4D4)
+private val PolarLightBackgroundHigh = Color(0xFFE5E5E5)
+private val PolarLightBackgroundLow = Color(0xFFF5F5F5)
+private val PolarLightBackgroundLowest = Color(0xFFFAFAFA)
 
-private val PolarDarkBackgroundColor = Color(0xFF000000)
-private val PolarDarkOnBackgroundColor = Color(0xFFFFFFFF)
-private val PolarDarkSurfaceColor = Color(0xFF141414)
-private val PolarDarkOnSurfaceColor = Color(0xFFEBEBEB)
-
+private val PolarDarkBackgroundHighest = Color(0xFF0A0A0A)
+private val PolarDarkBackgroundHigh = Color(0xFF171717)
+private val PolarDarkBackgroundLow = Color(0xFF1F1F1F)
+private val PolarDarkBackgroundLowest = Color(0xFF333333)
 internal val PolarLightColorScheme =
     HaloColorScheme(
         primary = HaloLightColorScheme.primary,
         background =
-            HaloBackgroundValue(
-                base = PolarLightBackgroundColor,
-                surface = PolarLightSurfaceColor,
+            HaloElevationColor(
+                highest = PolarLightBackgroundHighest,
+                high = PolarLightBackgroundHigh,
+                low = PolarLightBackgroundLow,
+                lowest = PolarLightBackgroundLowest,
             ),
         content = HaloLightColorScheme.content,
         success = HaloLightColorScheme.success,
@@ -34,9 +34,11 @@ internal val PolarDarkColorScheme =
     HaloColorScheme(
         primary = HaloDarkColorScheme.primary,
         background =
-            HaloBackgroundValue(
-                base = PolarDarkBackgroundColor,
-                surface = PolarDarkSurfaceColor,
+            HaloElevationColor(
+                highest = PolarDarkBackgroundHighest,
+                high = PolarDarkBackgroundHigh,
+                low = PolarDarkBackgroundLow,
+                lowest = PolarDarkBackgroundLowest,
             ),
         content = HaloDarkColorScheme.content,
         success = HaloDarkColorScheme.success,

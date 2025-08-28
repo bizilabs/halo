@@ -19,7 +19,7 @@ fun HaloScaffold(
     snackbarHost: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
-    containerColor: Color = HaloTheme.colorScheme.background.base,
+    containerColor: Color = HaloTheme.colorScheme.background.lowest,
     contentColor: Color = contentColorFor(HaloTheme.colorScheme.content.stronger),
     contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
     content: @Composable (PaddingValues) -> Unit,

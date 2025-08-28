@@ -62,7 +62,7 @@ import org.bizilabs.halo.base.ProvideContentColorTextStyle
 @Composable
 fun HaloBottomBar(
     modifier: Modifier = Modifier,
-    containerColor: Color = HaloTheme.colorScheme.background.surface,
+    containerColor: Color = HaloTheme.colorScheme.background.low,
     selectedIndex: Int,
     onItemSelected: (Int) -> Unit = {},
     indicator: @Composable (
@@ -110,7 +110,7 @@ fun HaloBottomBar(
 @Composable
 fun HaloBottomBar(
     modifier: Modifier = Modifier,
-    containerColor: Color = HaloTheme.colorScheme.background.surface,
+    containerColor: Color = HaloTheme.colorScheme.background.low,
     selectedIndex: Int,
     onItemSelected: (Int) -> Unit = {},
     indicator: HaloBottomBarIndicatorType = HaloBottomBarIndicatorType.LineBottom,
@@ -175,7 +175,7 @@ fun HaloBottomBar(
 @Composable
 fun BaseHaloBottomBar(
     modifier: Modifier = Modifier,
-    containerColor: Color = HaloTheme.colorScheme.background.surface,
+    containerColor: Color = HaloTheme.colorScheme.background.low,
     selectedIndex: Int,
     onItemSelected: (Int) -> Unit = {},
     indicator: @Composable (
@@ -236,8 +236,7 @@ fun BaseHaloBottomBar(
                 .onSizeChanged { size ->
                     bottomBarWidth.value = size.width
                     bottomBarHeight.value = size.height
-                }
-                .defaultMinSize(minHeight = HaloBottomBarItemDefaults.minBottomBarHeight)
+                }.defaultMinSize(minHeight = HaloBottomBarItemDefaults.minBottomBarHeight)
                 .background(containerColor),
     ) {
         // The sliding indicator bar
@@ -303,8 +302,7 @@ object HaloBottomBarIndicators {
                     .offset(
                         x = with(density) { indicatorOffsetX.value.toDp() },
                         y = lineYOffset,
-                    )
-                    .width(with(density) { indicatorWidth.value.toDp() })
+                    ).width(with(density) { indicatorWidth.value.toDp() })
                     .height(properties.lineHeight)
                     .background(properties.color.border, properties.shape),
         )
@@ -435,8 +433,7 @@ fun HaloBottomBarScope.HaloBottomBarItem(
                     role = Role.Tab,
                     interactionSource = interactionSource,
                     indication = indication,
-                )
-                .background(containerColor)
+                ).background(containerColor)
                 .weight(1f)
                 .wrapContentHeight()
                 .onGloballyPositioned { layoutCoordinates ->

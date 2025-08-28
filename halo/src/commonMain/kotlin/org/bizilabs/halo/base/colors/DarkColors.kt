@@ -1,7 +1,6 @@
 package org.bizilabs.halo.base.colors
 
 import androidx.compose.ui.graphics.Color
-import org.bizilabs.halo.base.HaloBackgroundValue
 import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloColorValue
@@ -12,10 +11,6 @@ val BaseDarkPrimaryDarkColor = Color(0xFF560887)
 val BaseDarkPrimaryBaseColor = Color(0xFFA020F0)
 val BaseDarkPrimaryLightColor = Color(0xFFCE8DF7)
 val BaseDarkPrimaryLightestColor = Color(0xFFDEB3FA)
-
-// Default Dark Background Color
-private val BaseDarkBackgroundContainerColor = Color(0xFF0A0A0A)
-private val BaseDarkSurfaceContainerColor = Color(0xFF141414)
 
 // Default Dark Surface Color
 private val BaseDarkContentStrongerColor = Color(0xFFFFFFFF)
@@ -52,6 +47,11 @@ private val BaseDarkInfoBaseColor = Color(0xFF2454FF)
 private val BaseDarkInfoLightColor = Color(0xFF859FFF)
 private val BaseDarkInfoLightestColor = Color(0xFFC2CFFF)
 
+private val BaseDarkBackgroundHighest = Color(0xFF020617)
+private val BaseDarkBackgroundHigh = Color(0xFF121626)
+private val BaseDarkBackgroundLow = Color(0xFF1A1E2D)
+private val BaseDarkBackgroundLowest = Color(0xFF222634)
+
 internal val HaloDarkColorScheme =
     HaloColorScheme(
         primary =
@@ -63,9 +63,11 @@ internal val HaloDarkColorScheme =
                 weaker = BaseDarkPrimaryDarkerColor,
             ),
         background =
-            HaloBackgroundValue(
-                base = BaseDarkBackgroundContainerColor,
-                surface = BaseDarkSurfaceContainerColor,
+            HaloElevationColor(
+                highest = BaseDarkBackgroundHighest,
+                high = BaseDarkBackgroundHigh,
+                low = BaseDarkBackgroundLow,
+                lowest = BaseDarkBackgroundLowest,
             ),
         content =
             HaloColorValue(

@@ -37,7 +37,7 @@ fun haloAxisStyle(
     gridLineColor: Color =
         HaloTheme.colorScheme.content.weaker
             .copy(0.25f),
-    axisBackgroundColor: Color = HaloTheme.colorScheme.background.base,
+    axisBackgroundColor: Color = HaloTheme.colorScheme.background.lowest,
 ): HaloAxisStyle =
     HaloAxisStyle(
         showLabels = showLabels,

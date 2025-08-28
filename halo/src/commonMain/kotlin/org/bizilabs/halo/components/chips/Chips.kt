@@ -97,7 +97,7 @@ object HaloChipDefaults {
     fun chipColors(
         default: HaloColor =
             HaloColor(
-                container = HaloTheme.colorScheme.background.surface,
+                container = HaloTheme.colorScheme.background.low,
                 content = HaloTheme.colorScheme.content.strong,
                 border =
                     HaloTheme.colorScheme.content.stronger
@@ -106,7 +106,7 @@ object HaloChipDefaults {
         selected: HaloColor =
             HaloColor(
                 container = HaloTheme.colorScheme.content.strong,
-                content = HaloTheme.colorScheme.background.surface,
+                content = HaloTheme.colorScheme.background.low,
                 border =
                     HaloTheme.colorScheme.content.stronger
                         .copy(0.25f),

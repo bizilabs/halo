@@ -88,7 +88,7 @@ internal fun HaloBaseTextField(
 
                         TextFieldMode.OUTLINED ->
                             colors?.default?.container
-                                ?: HaloTheme.colorScheme.background.base
+                                ?: HaloTheme.colorScheme.background.lowest
                     }
 
                 !enabled -> colors?.disabled?.container ?: HaloTheme.colorScheme.disabled.container
@@ -100,7 +100,7 @@ internal fun HaloBaseTextField(
 
                         TextFieldMode.OUTLINED ->
                             colors?.error?.container
-                                ?: HaloTheme.colorScheme.background.base
+                                ?: HaloTheme.colorScheme.background.lowest
                     }
 
                 else -> {
@@ -108,18 +108,18 @@ internal fun HaloBaseTextField(
                         TextFieldMode.FILLED ->
                             if (focused) {
                                 colors?.focused?.container
-                                    ?: HaloTheme.colorScheme.background.surface
+                                    ?: HaloTheme.colorScheme.background.low
                             } else {
                                 colors?.default?.container
-                                    ?: HaloTheme.colorScheme.background.surface
+                                    ?: HaloTheme.colorScheme.background.low
                             }
 
                         TextFieldMode.OUTLINED ->
                             if (focused) {
                                 colors?.focused?.container
-                                    ?: HaloTheme.colorScheme.background.surface
+                                    ?: HaloTheme.colorScheme.background.low
                             } else {
-                                colors?.default?.container ?: HaloTheme.colorScheme.background.base
+                                colors?.default?.container ?: HaloTheme.colorScheme.background.lowest
                             }
                     }
                 }
