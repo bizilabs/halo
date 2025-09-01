@@ -120,7 +120,7 @@ fun HaloSlotCard(
                 cap = cap,
             ),
         enabled = enabled,
-        onClick = onClick ?: {},
+        onClick = onClick,
         shape = shape,
         colors = colors,
         elevation = elevation,
