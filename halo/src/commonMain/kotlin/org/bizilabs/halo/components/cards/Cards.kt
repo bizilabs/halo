@@ -9,6 +9,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.Dp
@@ -99,6 +100,9 @@ fun HaloSlotCard(
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
     strokeWidth: Dp = 2.dp,
+    dashColor: Color =
+        HaloTheme.colorScheme.content.strong
+            .copy(alpha = 0.25f),
     dashLength: Dp = 4.dp,
     gapLength: Dp = 4.dp,
     cap: StrokeCap = StrokeCap.Round,
@@ -108,8 +112,7 @@ fun HaloSlotCard(
     CardBase(
         modifier =
             modifier.dashedBorder(
-                HaloTheme.colorScheme.content.strong
-                    .copy(alpha = 0.25f),
+                color = dashColor,
                 shape = shape,
                 strokeWidth = strokeWidth,
                 dashLength = dashLength,
