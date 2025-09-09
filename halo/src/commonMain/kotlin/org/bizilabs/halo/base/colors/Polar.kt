@@ -3,15 +3,24 @@ package org.bizilabs.halo.base.colors
 import androidx.compose.ui.graphics.Color
 import org.bizilabs.halo.base.HaloColorScheme
 
-private val PolarLightBackgroundHighest = Color(0xFFD4D4D4)
-private val PolarLightBackgroundHigh = Color(0xFFE5E5E5)
-private val PolarLightBackgroundLow = Color(0xFFF5F5F5)
-private val PolarLightBackgroundLowest = Color(0xFFFAFAFA)
+/**
+ * Polar : Light Background Elevation colors
+ */
+private val PolarLightBackgroundHighest = Color(0xFFD0D1D0)
+private val PolarLightBackgroundHigh = Color(0xFFD9D9D9)
+private val PolarLightBackgroundMiddle = Color(0xFFE2E3E2)
+private val PolarLightBackgroundLow = Color(0xFFECEDEC)
+private val PolarLightBackgroundLowest = Color(0xFFF7F6F7)
 
-private val PolarDarkBackgroundHighest = Color(0xFF0A0A0A)
-private val PolarDarkBackgroundHigh = Color(0xFF171717)
-private val PolarDarkBackgroundLow = Color(0xFF1F1F1F)
-private val PolarDarkBackgroundLowest = Color(0xFF333333)
+/**
+ * Polar : Dark Background Elevation colors
+ */
+private val PolarDarkBackgroundHighest = Color(0xFF4C4C4D)
+private val PolarDarkBackgroundHigh = Color(0xFF414140)
+private val PolarDarkBackgroundMiddle = Color(0xFF363736)
+private val PolarDarkBackgroundLow = Color(0xFF2A2A2B)
+private val PolarDarkBackgroundLowest = Color(0xFF1F1F1E)
+
 internal val PolarLightColorScheme =
     HaloColorScheme(
         primary = HaloLightColorScheme.primary,
@@ -19,6 +28,7 @@ internal val PolarLightColorScheme =
             HaloElevationColor(
                 highest = PolarLightBackgroundHighest,
                 high = PolarLightBackgroundHigh,
+                middle = PolarDarkBackgroundMiddle,
                 low = PolarLightBackgroundLow,
                 lowest = PolarLightBackgroundLowest,
             ),
@@ -37,6 +47,7 @@ internal val PolarDarkColorScheme =
             HaloElevationColor(
                 highest = PolarDarkBackgroundHighest,
                 high = PolarDarkBackgroundHigh,
+                middle = PolarLightBackgroundMiddle,
                 low = PolarDarkBackgroundLow,
                 lowest = PolarDarkBackgroundLowest,
             ),

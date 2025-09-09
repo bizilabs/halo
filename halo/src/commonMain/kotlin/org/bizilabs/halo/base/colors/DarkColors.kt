@@ -52,6 +52,15 @@ private val BaseDarkBackgroundHigh = Color(0xFF121626)
 private val BaseDarkBackgroundLow = Color(0xFF1A1E2D)
 private val BaseDarkBackgroundLowest = Color(0xFF222634)
 
+/**
+ * Sky : Dark Background Elevation colors
+ */
+private val SkyDarkBackgroundHighest = Color(0xFF0E2B4C)
+private val SkyDarkBackgroundHigh = Color(0xFF0F2541)
+private val SkyDarkBackgroundMiddle = Color(0xFF0E2136)
+private val SkyDarkBackgroundLow = Color(0xFF101B2B)
+private val SkyDarkBackgroundLowest = Color(0xFF10171E)
+
 internal val HaloDarkColorScheme =
     HaloColorScheme(
         primary =
@@ -64,10 +73,11 @@ internal val HaloDarkColorScheme =
             ),
         background =
             HaloElevationColor(
-                highest = BaseDarkBackgroundHighest,
-                high = BaseDarkBackgroundHigh,
-                low = BaseDarkBackgroundLow,
-                lowest = BaseDarkBackgroundLowest,
+                highest = SkyDarkBackgroundHighest,
+                high = SkyDarkBackgroundHigh,
+                middle = SkyDarkBackgroundMiddle,
+                low = SkyDarkBackgroundLow,
+                lowest = SkyDarkBackgroundLowest,
             ),
         content =
             HaloColorValue(
