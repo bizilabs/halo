@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 data class HaloElevationColor internal constructor(
     val highest: Color,
     val high: Color,
+    val middle: Color,
     val low: Color,
     val lowest: Color,
 )

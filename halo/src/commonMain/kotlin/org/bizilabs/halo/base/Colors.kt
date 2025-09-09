@@ -49,12 +49,6 @@ data class HaloColorValue(
 }
 
 @Immutable
-data class HaloBackgroundValue(
-    val surface: Color,
-    val base: Color,
-)
-
-@Immutable
 data class HaloColor(
     val container: Color,
     val content: Color,

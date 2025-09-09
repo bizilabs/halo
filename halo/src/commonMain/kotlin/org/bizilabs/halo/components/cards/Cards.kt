@@ -100,7 +100,7 @@ fun HaloSlotCard(
         ),
     elevation: CardElevation = CardDefaults.cardElevation(),
     strokeWidth: Dp = 2.dp,
-    dashColor: Color = HaloTheme.colorScheme.background.low,
+    dashColor: Color = HaloTheme.colorScheme.background.high,
     dashLength: Dp = 4.dp,
     gapLength: Dp = 4.dp,
     cap: StrokeCap = StrokeCap.Round,
