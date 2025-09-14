@@ -26,12 +26,16 @@ internal fun DrawScope.drawYAxis(
         val textLayoutResult =
             textMeasurer.measure(
                 text = AnnotatedString(label),
-                style = style.labelTextStyle,
+                style = style.labelStyle.textStyle,
             )
         drawText(
-            color = style.labelTextColor,
+            color = style.labelStyle.color,
             textLayoutResult = textLayoutResult,
-            topLeft = Offset(yAxisLabelMaxWidth - textLayoutResult.size.width, y - textLayoutResult.size.height / 2),
+            topLeft =
+                Offset(
+                    yAxisLabelMaxWidth - textLayoutResult.size.width,
+                    y - textLayoutResult.size.height / 2,
+                ),
         )
     }
 }
@@ -52,12 +56,17 @@ internal fun DrawScope.drawXAxis(
             val textLayoutResult =
                 textMeasurer.measure(
                     text = AnnotatedString(label),
-                    style = style.labelTextStyle,
+                    style = style.labelStyle.textStyle,
                 )
             val x =
                 toPxX(point.x)
             drawText(
-                color = style.labelTextColor,
+                color =
+                    if (point.y != null) {
+                        style.labelStyle.color
+                    } else {
+                        style.labelStyle.color.copy(0.5f)
+                    },
                 textLayoutResult = textLayoutResult,
                 topLeft = Offset(x - textLayoutResult.size.width / 2, drawingHeight + 8.dp.toPx()),
             )

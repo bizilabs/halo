@@ -15,7 +15,6 @@ import org.bizilabs.halo.charts.ui.HaloLineChart
  *
  * @param data The data to be displayed in the chart.
  * @param modifier Modifier for this composable.
- * @param style The overall styling for the chart.
  * @param onPointSelected A callback that provides the currently selected point.
  */
 @Composable

@@ -39,23 +39,35 @@ fun LineChartSection() {
                                         HaloTheme.colorScheme.content.weaker
                                             .copy(0.5f),
                                 ),
-                            xAxisStyle = haloAxisStyle(labelCount = 11, showLabels = false),
+                            xAxisStyle =
+                                haloAxisStyle(
+                                    labelCount = 11,
+                                    showLabels = true,
+                                    gridLineColor =
+                                        HaloTheme.colorScheme.content.weaker
+                                            .copy(0.5f),
+                                ),
                         ),
                     lines =
                         listOf(
                             HaloChartLine(
                                 points =
                                     listOf(
-                                        HaloChartPoint(x = 1f, 1f),
-                                        HaloChartPoint(x = 2f, 2f),
-                                        HaloChartPoint(x = 3f, 3f),
-                                        HaloChartPoint(x = 4f, 4f),
-                                        HaloChartPoint(x = 5f, 5f),
-                                        HaloChartPoint(x = 6f, 6f),
-                                        HaloChartPoint(x = 7f, 7f),
-                                        HaloChartPoint(x = 8f, 8f),
-                                        HaloChartPoint(x = 9f, 9f),
-                                        HaloChartPoint(x = 10f, 10f),
+                                        HaloChartPoint(x = 1f, 1f, xLabel = "1"),
+                                        HaloChartPoint(x = 2f, 2f, xLabel = "2"),
+                                        HaloChartPoint(x = 3f, 3f, xLabel = "3"),
+                                        HaloChartPoint(x = 4f, 4f, xLabel = "4"),
+                                        HaloChartPoint(x = 5f, 5f, xLabel = "5"),
+                                        HaloChartPoint(x = 6f, 6f, xLabel = "6"),
+                                        HaloChartPoint(x = 7f, 7f, xLabel = "7"),
+                                        HaloChartPoint(x = 8f, 8f, xLabel = "8"),
+                                        HaloChartPoint(x = 9f, 9f, xLabel = "9"),
+                                        HaloChartPoint(x = 10f, 10f, xLabel = "10"),
+                                        HaloChartPoint(x = 11f, null, xLabel = "11"),
+                                        HaloChartPoint(x = 12f, null, xLabel = "12"),
+                                        HaloChartPoint(x = 13f, null, xLabel = "13"),
+                                        HaloChartPoint(x = 14f, null, xLabel = "14"),
+                                        HaloChartPoint(x = 15f, null, xLabel = "15"),
                                     ),
                                 style = haloLineStyle(color = HaloTheme.colorScheme.error.neutral),
                                 label = "One",
@@ -63,16 +75,21 @@ fun LineChartSection() {
                             HaloChartLine(
                                 points =
                                     listOf(
-                                        HaloChartPoint(x = 1f, 10f),
-                                        HaloChartPoint(x = 2f, 9f),
-                                        HaloChartPoint(x = 3f, 8f),
-                                        HaloChartPoint(x = 4f, 7f),
-                                        HaloChartPoint(x = 5f, 6f),
-                                        HaloChartPoint(x = 6f, 5f),
-                                        HaloChartPoint(x = 7f, 4f),
-                                        HaloChartPoint(x = 8f, 3f),
-                                        HaloChartPoint(x = 9f, 2f),
-                                        HaloChartPoint(x = 10f, 1f),
+                                        HaloChartPoint(x = 1f, 10f, xLabel = "1"),
+                                        HaloChartPoint(x = 2f, 9f, xLabel = "2"),
+                                        HaloChartPoint(x = 3f, 8f, xLabel = "3"),
+                                        HaloChartPoint(x = 4f, 7f, xLabel = "4"),
+                                        HaloChartPoint(x = 5f, 6f, xLabel = "5"),
+                                        HaloChartPoint(x = 6f, 5f, xLabel = "6"),
+                                        HaloChartPoint(x = 7f, 4f, xLabel = "7"),
+                                        HaloChartPoint(x = 8f, 3f, xLabel = "8"),
+                                        HaloChartPoint(x = 9f, 2f, xLabel = "9"),
+                                        HaloChartPoint(x = 10f, 1f, xLabel = "10"),
+                                        HaloChartPoint(x = 11f, null, xLabel = "11"),
+                                        HaloChartPoint(x = 12f, null, xLabel = "12"),
+                                        HaloChartPoint(x = 13f, null, xLabel = "13"),
+                                        HaloChartPoint(x = 14f, null, xLabel = "14"),
+                                        HaloChartPoint(x = 15f, null, xLabel = "15"),
                                     ),
                                 style = haloLineStyle(color = HaloTheme.colorScheme.success.neutral),
                                 label = "Two",
