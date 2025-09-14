@@ -16,7 +16,9 @@ internal fun generatePath(
     val path = Path()
     if (points.isEmpty()) return path
 
-    val pathPoints = points.map { Offset(toPxX(it.x), toPxY(it.y)) }
+    val pathPoints =
+        points
+            .mapNotNull { if (it.y != null) Offset(toPxX(it.x), toPxY(it.y)) else null }
     // Animate path drawing by taking a sublist based on progress
     val subPathPoints = pathPoints.take((pathPoints.size * progress).toInt().coerceAtLeast(0))
 

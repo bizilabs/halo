@@ -82,14 +82,18 @@ fun HaloLineChart(
 
     // State to hold user touch location and selected point index.
     var touchLocation by remember { mutableStateOf<Offset?>(null) }
-    var selectedIndex by remember { mutableStateOf(data.defaultSelectedIndex ?: allPoints.lastIndex) }
+    var selectedIndex by remember {
+        mutableStateOf(
+            data.defaultSelectedIndex ?: allPoints.lastIndex,
+        )
+    }
 
     // Find min/max values to scale the chart correctly.
     val minX = remember(allPoints) { allPoints.minOf { it.x } }
     val maxX = remember(allPoints) { allPoints.maxOf { it.x } }
 
-    val minY = remember(allPoints) { allPoints.minOf { it.y } }
-    val maxY = remember(allPoints) { allPoints.maxOf { it.y } }
+    val minY = remember(allPoints) { allPoints.mapNotNull { it.y }.minOf { it } }
+    val maxY = remember(allPoints) { allPoints.mapNotNull { it.y }.maxOf { it } }
 
     // Calculate Y-axis labels(In whole numbers) and the required padding.
     val yAxisLabels =
@@ -118,7 +122,7 @@ fun HaloLineChart(
                         textMeasurer
                             .measure(
                                 text = AnnotatedString(it),
-                                style = style.yAxisStyle.labelTextStyle,
+                                style = style.yAxisStyle.labelStyle.textStyle,
                             ).size.width
                     } ?: 0
 
@@ -138,7 +142,7 @@ fun HaloLineChart(
     // plus a small extra visual padding.
     val labelVerticalMarginPx =
         with(density) {
-            style.yAxisStyle.labelTextStyle.fontSize
+            style.yAxisStyle.labelStyle.textStyle.fontSize
                 .toPx() / 2 + 4.dp.toPx()
         }
 
@@ -151,7 +155,7 @@ fun HaloLineChart(
     // Update selected point callback when selection changes
     LaunchedEffect(selectedIndex) {
         val selectedPoint =
-            selectedIndex?.let {
+            selectedIndex.let {
                 // Find the point from the first line for the callback. This can be customized.
                 data.lines
                     .firstOrNull()
@@ -235,7 +239,8 @@ fun HaloLineChart(
                                 detectTapGestures(
                                     onPress = { offset ->
                                         // Add scroll offset to touch so we work in chart-space
-                                        touchLocation = Offset(offset.x + scrollState.value, offset.y)
+                                        touchLocation =
+                                            Offset(offset.x + scrollState.value, offset.y)
                                         scope.launch { awaitRelease() }
                                     },
                                 )
@@ -267,7 +272,8 @@ fun HaloLineChart(
                                 uniqueXPoints.indices.minByOrNull {
                                     abs(toPxX(uniqueXPoints[it].x) - currentTouchLocation.x)
                                 } ?: uniqueXPoints.lastIndex
-                            if (selectedIndex != closestIndex) {
+                            val valueY = uniqueXPoints.getOrNull(closestIndex)?.y
+                            if (selectedIndex != closestIndex && valueY != null) {
                                 selectedIndex = closestIndex
                             }
                         }
@@ -277,11 +283,24 @@ fun HaloLineChart(
 
                         // Draw chart lines
                         data.lines.forEach { line ->
-                            val linePath = generatePath(line.points, toPxX, toPxY, animationProgress.value)
+                            val linePath =
+                                generatePath(
+                                    points = line.points,
+                                    toPxX = toPxX,
+                                    toPxY = toPxY,
+                                    progress = animationProgress.value,
+                                )
                             val fillPath =
                                 Path().apply {
                                     addPath(linePath)
-                                    lineTo(toPxX(line.points.last().x), drawingHeight)
+                                    lineTo(
+                                        toPxX(
+                                            line.points
+                                                .mapNotNull { if (it.y == null) null else it.x }
+                                                .last(),
+                                        ),
+                                        drawingHeight,
+                                    )
                                     lineTo(toPxX(line.points.first().x), drawingHeight)
                                     close()
                                 }
@@ -306,15 +325,18 @@ fun HaloLineChart(
                         // Draw indicator
                         if (data.style.indicatorStyle.visible) {
                             selectedIndex.let { index ->
-                                val pointsAtSelectedIndex = data.lines.mapNotNull { it.points.getOrNull(index) }
+                                val pointsAtSelectedIndex =
+                                    data.lines.mapNotNull { it.points.getOrNull(index) }
                                 val lineStyles = data.lines.map { it.style }
 
                                 val primaryPoint =
                                     currentTouchLocation?.let { touch ->
-                                        pointsAtSelectedIndex.minByOrNull { abs(toPxY(it.y) - touch.y) }
+                                        pointsAtSelectedIndex.minByOrNull {
+                                            abs(toPxY(it.y ?: 0f) - touch.y)
+                                        }
                                     } ?: pointsAtSelectedIndex.firstOrNull()
 
-                                if (primaryPoint != null) {
+                                if (primaryPoint != null && primaryPoint.y != null) {
                                     drawIndicator(
                                         points = pointsAtSelectedIndex,
                                         toPxX = toPxX,
@@ -400,7 +422,7 @@ internal fun DrawScope.drawIndicator(
     // Draw circles on each line for the selected X-value
     points.forEachIndexed { index, point ->
         val lineStyle = lineStyles.getOrNull(index) ?: return@forEachIndexed
-        val pointY = toPxY(point.y)
+        val pointY = point.y?.let { toPxY(it) } ?: return@forEachIndexed
 
         // Outer stroke for the circle
         drawCircle(

@@ -10,7 +10,7 @@ import org.bizilabs.halo.charts.style.HaloLineStyle
  */
 data class HaloChartPoint(
     val x: Float,
-    val y: Float,
+    val y: Float?,
     val xLabel: String? = null,
 )
 
