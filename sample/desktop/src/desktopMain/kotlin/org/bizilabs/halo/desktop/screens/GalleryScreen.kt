@@ -177,8 +177,6 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Charts.Bar -> LineChartSection()
                     GalleryScreenSection.Charts.Line -> LineChartSection()
-                    GalleryScreenSection.BottomBar -> {}
-
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
             }
