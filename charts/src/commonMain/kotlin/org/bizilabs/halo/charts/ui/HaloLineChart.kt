@@ -92,8 +92,16 @@ fun HaloLineChart(
     val minX = remember(allPoints) { allPoints.minOf { it.x } }
     val maxX = remember(allPoints) { allPoints.maxOf { it.x } }
 
-    val minY = remember(allPoints) { allPoints.mapNotNull { it.y }.minOf { it } }
-    val maxY = remember(allPoints) { allPoints.mapNotNull { it.y }.maxOf { it } }
+    val minY =
+        remember(allPoints) {
+            val values = allPoints.mapNotNull { it.y }
+            if (values.isEmpty()) 0f else values.minOf { it }
+        }
+    val maxY =
+        remember(allPoints) {
+            val values = allPoints.mapNotNull { it.y }
+            if (values.isEmpty()) 0f else values.maxOf { it }
+        }
 
     // Calculate Y-axis labels(In whole numbers) and the required padding.
     val yAxisLabels =
