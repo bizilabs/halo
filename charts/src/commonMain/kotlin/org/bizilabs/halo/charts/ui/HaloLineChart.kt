@@ -305,7 +305,8 @@ fun HaloLineChart(
                                         toPxX(
                                             line.points
                                                 .mapNotNull { if (it.y == null) null else it.x }
-                                                .last(),
+                                                .lastOrNull()
+                                                ?: 0f,
                                         ),
                                         drawingHeight,
                                     )
