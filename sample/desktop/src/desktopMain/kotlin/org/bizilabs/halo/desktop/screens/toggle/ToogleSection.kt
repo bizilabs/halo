@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.toogle.HaloSwitch
+import org.bizilabs.halo.components.toogle.HaloBaseSwitch
 
 @Composable
 fun ToggleSection() {
@@ -35,7 +35,7 @@ fun ToggleSection() {
                 HaloText(text = "Active unchecked")
             }
             item {
-                HaloSwitch(
+                HaloBaseSwitch(
                     checked = false,
                     onCheckedChange = {},
                 )
@@ -44,7 +44,7 @@ fun ToggleSection() {
                 HaloText(text = "Active checked")
             }
             item {
-                HaloSwitch(
+                HaloBaseSwitch(
                     checked = true,
                     onCheckedChange = {},
                 )
@@ -53,7 +53,7 @@ fun ToggleSection() {
                 HaloText(text = "Disabled unchecked")
             }
             item {
-                HaloSwitch(
+                HaloBaseSwitch(
                     checked = false,
                     onCheckedChange = {},
                     enabled = false,
@@ -63,7 +63,7 @@ fun ToggleSection() {
                 HaloText(text = "Disabled checked")
             }
             item {
-                HaloSwitch(
+                HaloBaseSwitch(
                     checked = true,
                     onCheckedChange = {},
                     enabled = false,
