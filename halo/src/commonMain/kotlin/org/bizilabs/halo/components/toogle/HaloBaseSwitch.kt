@@ -38,8 +38,51 @@ import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ComponentSize
 import org.bizilabs.halo.base.HaloColor
 
-enum class SwitchVariant { Filled, Outline }
-
+/**
+ * A customizable switch component for toggling between two states (on/off).
+ *
+ * `HaloBaseSwitch` is a base-level implementation of a switch used in the Halo design system.
+ * It provides options for size, shape, colors, animations, and additional UI content such as
+ * indicators and custom thumb content.
+ *
+ * The switch animates the thumb and indicator offset when toggled, applies proper theming,
+ * and supports both filled and outlined variants.
+ *
+ * ### Example usage:
+ * ```
+ * HaloBaseSwitch(
+ *     toggled = isEnabled,
+ *     onToggled = { isEnabled = it },
+ *     size = ComponentSize.Large,
+ *     switchVariant = SwitchVariant.Outline
+ * )
+ * ```
+ *
+ * @param toggled Current checked state of the switch. `true` means ON, `false` means OFF.
+ * @param modifier Modifier to be applied to the switch container for styling, sizing, or interaction.
+ * @param onToggled Callback invoked when the switch is toggled, passing the new state.
+ * @param enabled Controls whether the switch is enabled for user interaction. Defaults to `true`.
+ * @param shape The shape applied to the track and thumb. Defaults to `HaloTheme.shapes.full`.
+ * @param colors The color scheme for the switch, including track, thumb, and border colors.
+ *               Defaults to [HaloSwitchDefaults.switchColors].
+ * @param size Defines the size of the switch (track and thumb). Defaults to [ComponentSize.Medium].
+ * @param contentPadding Padding applied inside the switch layout. Defaults to `0.dp`.
+ * @param interactionSource An optional [MutableInteractionSource] for observing and customizing
+ *        interaction events (e.g., pressed, focused, hovered). If null, a new one is remembered.
+ * @param indication Visual feedback for user interactions (e.g., ripple effect).
+ *                   Defaults to [LocalIndication.current].
+ * @param thumbContent Optional composable displayed inside the thumb (e.g., icon or image).
+ * @param switchVariant Variant of the switch track:
+ *  - [SwitchVariant.Filled]: A solid filled background (no border).
+ *  - [SwitchVariant.Outline]: Transparent fill with a visible border.
+ * @param indicator Optional composable displayed inside the track opposite to the thumb,
+ *        useful for showing icons or contextual states.
+ *
+ * ### Notes:
+ * - The switch animates its thumb and indicator positions when toggled using a short tween animation.
+ * - Colors automatically adjust depending on `enabled` and `toggled` state.
+ * - The track width and thumb width are measured dynamically to ensure accurate offset calculations.
+ */
 @Composable
 fun HaloBaseSwitch(
     toggled: Boolean,
@@ -162,6 +205,8 @@ fun HaloBaseSwitch(
         }
     }
 }
+
+enum class SwitchVariant { Filled, Outline }
 
 /**
  * Holds the container (track), content (thumb), and border colors for a Halo switch,
