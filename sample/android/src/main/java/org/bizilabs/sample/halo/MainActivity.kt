@@ -26,9 +26,7 @@ import org.bizilabs.halo.HaloTheme
 import org.bizilabs.halo.base.ComponentSize
 import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.components.HaloScaffold
-import org.bizilabs.halo.components.toogle.HaloBaseSwitch
 import org.bizilabs.halo.components.toogle.HaloFilledSwitch
-import org.bizilabs.halo.components.toogle.HaloOutlineSwitch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

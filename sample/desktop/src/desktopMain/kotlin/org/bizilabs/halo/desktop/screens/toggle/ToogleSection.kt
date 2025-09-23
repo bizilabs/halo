@@ -1,17 +1,39 @@
 package org.bizilabs.halo.desktop.screens.toggle
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.base.HaloShapes
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.toogle.HaloBaseSwitch
+import org.bizilabs.halo.components.cards.HaloSlotCard
+import org.bizilabs.halo.components.toogle.HaloFilledSwitch
+import org.bizilabs.halo.components.toogle.HaloOutlineSwitch
 
 @Composable
 fun ToggleSection() {
@@ -32,43 +54,438 @@ fun ToggleSection() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                HaloText(text = "Active unchecked")
+                HaloText(text = "Design")
+                Spacer(modifier = Modifier.height(8.dp))
+                HaloSlotCard(
+                    modifier =
+                        Modifier
+                            .width(180.dp),
+                ) {
+                    Box(
+                        modifier = Modifier.padding(8.dp).height(40.dp).wrapContentWidth(),
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            HaloSlotCard(
+                                modifier =
+                                    Modifier
+                                        .width(80.dp),
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    HaloText(text = "Thumb")
+                                }
+                            }
+                            Box(
+                                modifier = Modifier.fillMaxHeight(),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                HaloText(text = "Indicator")
+                            }
+                        }
+                    }
+                }
             }
             item {
-                HaloBaseSwitch(
-                    checked = false,
-                    onCheckedChange = {},
-                )
+                HaloText(text = "Filled enabled toggle")
             }
             item {
-                HaloText(text = "Active checked")
+                FilledEnabledToggleSection()
+            }
+
+            item {
+                HaloText(text = "Filled disabled toggle")
             }
             item {
-                HaloBaseSwitch(
-                    checked = true,
-                    onCheckedChange = {},
-                )
+                FilledDisabledToggleSection()
+            }
+
+            item {
+                HaloText(text = "Filled with indicator")
             }
             item {
-                HaloText(text = "Disabled unchecked")
+                FilledToogleWithIndicator()
             }
             item {
-                HaloBaseSwitch(
-                    checked = false,
-                    onCheckedChange = {},
-                    enabled = false,
-                )
+                HaloText(text = "Outline enabled toggle")
             }
             item {
-                HaloText(text = "Disabled checked")
+                OutlineEnabledToggleSection()
             }
             item {
-                HaloBaseSwitch(
-                    checked = true,
-                    onCheckedChange = {},
-                    enabled = false,
-                )
+                HaloText(text = "Outline disabled toggle")
+            }
+            item {
+                OutlineDisabledToggleSection()
+            }
+            item {
+                HaloText(text = "Outline with indicator")
+            }
+            item {
+                OutlineToggleWithIndicator()
             }
         }
+    }
+}
+
+@Composable
+fun FilledEnabledToggleSection() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+    }
+}
+
+@Composable
+fun FilledDisabledToggleSection() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloFilledSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+    }
+}
+
+@Composable
+fun FilledToogleWithIndicator() {
+    var toggled by remember { mutableStateOf(false) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        HaloFilledSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloFilledSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloFilledSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloFilledSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloFilledSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+    }
+}
+
+@Composable
+fun OutlineEnabledToggleSection() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+    }
+}
+
+@Composable
+fun OutlineDisabledToggleSection() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+    }
+}
+
+@Composable
+fun OutlineToggleWithIndicator() {
+    var toggled by remember { mutableStateOf(false) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        HaloOutlineSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                Icon(
+                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    contentDescription = null,
+                    tint = if (toggled) Color.White else Color.Black,
+                )
+            },
+        )
     }
 }

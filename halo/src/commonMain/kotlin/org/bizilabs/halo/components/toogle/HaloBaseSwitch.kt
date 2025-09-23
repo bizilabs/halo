@@ -70,13 +70,15 @@ fun HaloBaseSwitch(
         trackWidth - paddingStart - paddingEnd
     }
 
-    val offset by animateDpAsState(
+    val thumbOffset by animateDpAsState(
         targetValue = if (toggled) actualTrackWidth - thumbWidth else 0.dp,
         animationSpec = tween(durationMillis = 100),
+        label = "SwitchOffset",
     )
 
     val indicatorOffsetX by animateDpAsState(
-        targetValue = if (toggled) 0.dp else trackWidth - thumbWidth,
+        targetValue = if (toggled) 0.dp else actualTrackWidth - thumbWidth,
+        animationSpec = tween(durationMillis = 100),
         label = "IndicatorOffset",
     )
 
@@ -130,21 +132,22 @@ fun HaloBaseSwitch(
                     onValueChange = onToggled,
                 ).padding(contentPadding),
     ) {
-        /*indicator?.let {
-            Box(
-                Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(horizontal = 2.dp)
-                    .offset { IntOffset(indicatorOffsetX.roundToPx(), 0) },
-            ) {
-                it()
-            }
-        }*/
         Box(
             Modifier
                 .align(Alignment.CenterStart)
                 .size(HaloSwitchDefaults.thumbSize(size))
-                .offset { IntOffset(offset.roundToPx(), 0) }
+                .offset { IntOffset(indicatorOffsetX.roundToPx(), 0) },
+            contentAlignment = Alignment.Center,
+        ) {
+            indicator?.let {
+                it()
+            }
+        }
+        Box(
+            Modifier
+                .align(Alignment.CenterStart)
+                .size(HaloSwitchDefaults.thumbSize(size))
+                .offset { IntOffset(thumbOffset.roundToPx(), 0) }
                 .onSizeChanged {
                     thumbWidth =
                         with(density) {
