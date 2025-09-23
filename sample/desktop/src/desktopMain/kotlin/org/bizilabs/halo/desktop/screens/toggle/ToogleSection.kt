@@ -173,6 +173,43 @@ fun FilledEnabledToggleSection() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
         )
+
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
     }
 }
 
@@ -213,6 +250,43 @@ fun FilledDisabledToggleSection() {
         )
         HaloFilledSwitch(
             toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloFilledSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloFilledSwitch(
+            toggled = true,
             onToggled = {},
             shape = HaloShapes.Rounded.extraLarge,
             contentPadding = PaddingValues(4.dp),
@@ -288,6 +362,66 @@ fun FilledToggleWithIndicator() {
                 IndicatorIcon(toggled)
             },
         )
+        HaloFilledSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloFilledSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloFilledSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloFilledSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloFilledSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
     }
 }
 
@@ -332,6 +466,41 @@ fun OutlineEnabledToggleSection() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
         )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+        )
     }
 }
 
@@ -371,6 +540,41 @@ fun OutlineDisabledToggleSection() {
         )
         HaloOutlineSwitch(
             toggled = false,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
+            onToggled = {},
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = false,
+        )
+        HaloOutlineSwitch(
+            toggled = true,
             onToggled = {},
             shape = HaloShapes.Rounded.extraLarge,
             contentPadding = PaddingValues(4.dp),
@@ -444,6 +648,67 @@ fun OutlineToggleWithIndicator() {
             enabled = true,
             indicator = {
                 IndicatorIcon(toggled)
+            },
+        )
+
+        HaloOutlineSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraSmall,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.small,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.medium,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.large,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
+            },
+        )
+        HaloOutlineSwitch(
+            toggled = !toggled,
+            onToggled = {
+                toggled = it
+            },
+            shape = HaloShapes.Rounded.extraLarge,
+            contentPadding = PaddingValues(4.dp),
+            enabled = true,
+            indicator = {
+                IndicatorIcon(!toggled)
             },
         )
     }
