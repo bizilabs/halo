@@ -230,14 +230,14 @@ object HaloSwitchDefaults {
      */
     @Composable
     fun switchColors(
-        track: Color = HaloTheme.colorScheme.background.surface,
+        track: Color = HaloTheme.colorScheme.background.high,
         thumb: Color = HaloTheme.colorScheme.content.strong,
         border: Color = HaloTheme.colorScheme.content.strong,
         disabledTrack: Color = HaloTheme.colorScheme.disabled.container,
         disabledThumb: Color = HaloTheme.colorScheme.disabled.content,
         disabledBorder: Color = HaloTheme.colorScheme.disabled.border,
         checkedTrack: Color = HaloTheme.colorScheme.content.stronger,
-        checkedThumb: Color = HaloTheme.colorScheme.background.surface,
+        checkedThumb: Color = HaloTheme.colorScheme.background.high,
         checkedBorder: Color = HaloTheme.colorScheme.content.strong,
     ): SwitchColors =
         SwitchColors(

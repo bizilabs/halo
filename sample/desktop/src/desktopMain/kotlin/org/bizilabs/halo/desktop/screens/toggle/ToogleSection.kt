@@ -25,7 +25,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
@@ -108,7 +107,7 @@ fun ToggleSection() {
                 HaloText(text = "Filled with indicator")
             }
             item {
-                FilledToogleWithIndicator()
+                FilledToggleWithIndicator()
             }
             item {
                 HaloText(text = "Outline enabled toggle")
@@ -223,7 +222,7 @@ fun FilledDisabledToggleSection() {
 }
 
 @Composable
-fun FilledToogleWithIndicator() {
+fun FilledToggleWithIndicator() {
     var toggled by remember { mutableStateOf(false) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -238,11 +237,7 @@ fun FilledToogleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloFilledSwitch(
@@ -254,11 +249,7 @@ fun FilledToogleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloFilledSwitch(
@@ -270,11 +261,7 @@ fun FilledToogleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloFilledSwitch(
@@ -286,11 +273,7 @@ fun FilledToogleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloFilledSwitch(
@@ -302,11 +285,7 @@ fun FilledToogleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
     }
@@ -416,11 +395,7 @@ fun OutlineToggleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloOutlineSwitch(
@@ -432,11 +407,7 @@ fun OutlineToggleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloOutlineSwitch(
@@ -448,11 +419,7 @@ fun OutlineToggleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloOutlineSwitch(
@@ -464,11 +431,7 @@ fun OutlineToggleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
         HaloOutlineSwitch(
@@ -480,12 +443,17 @@ fun OutlineToggleWithIndicator() {
             contentPadding = PaddingValues(4.dp),
             enabled = true,
             indicator = {
-                Icon(
-                    imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    contentDescription = null,
-                    tint = if (toggled) Color.White else Color.Black,
-                )
+                IndicatorIcon(toggled)
             },
         )
     }
+}
+
+@Composable
+fun IndicatorIcon(toggled: Boolean) {
+    Icon(
+        imageVector = if (toggled) Icons.Default.DarkMode else Icons.Default.LightMode,
+        contentDescription = null,
+        tint = if (toggled) HaloTheme.colorScheme.background.high else HaloTheme.colorScheme.content.strong,
+    )
 }
