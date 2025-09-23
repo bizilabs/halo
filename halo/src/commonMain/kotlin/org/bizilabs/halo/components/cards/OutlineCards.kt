@@ -61,7 +61,7 @@ fun HaloOutlinedCard(
     colors: CardColors =
         CardDefaults.outlinedCardColors(
             contentColor = HaloTheme.colorScheme.content.strong,
-            containerColor = HaloTheme.colorScheme.background.surface,
+            containerColor = HaloTheme.colorScheme.background.low,
             disabledContentColor = HaloTheme.colorScheme.disabled.content,
             disabledContainerColor = HaloTheme.colorScheme.disabled.container,
         ),

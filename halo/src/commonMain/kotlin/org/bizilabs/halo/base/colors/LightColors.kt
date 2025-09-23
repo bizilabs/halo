@@ -1,7 +1,6 @@
 package org.bizilabs.halo.base.colors
 
 import androidx.compose.ui.graphics.Color
-import org.bizilabs.halo.base.HaloBackgroundValue
 import org.bizilabs.halo.base.HaloColor
 import org.bizilabs.halo.base.HaloColorScheme
 import org.bizilabs.halo.base.HaloColorValue
@@ -12,10 +11,6 @@ val BaseLightPrimaryDarkColor = Color(0xFF690BA2)
 val BaseLightPrimaryBaseColor = Color(0xFFA020F0)
 val BaseLightPrimarySubtleColor = Color(0xFFC87FF6)
 val BaseLightPrimaryLightestColor = Color(0xFFF1DFFD)
-
-// Default Light Background Colors
-private val BaseLightBackgroundContainerColor = Color(0xFFFFFFFF)
-private val BaseLightSurfaceContainerColor = Color(0xFFF0F0F0)
 
 // Default Light Content Colors
 private val BaseLightContentStrongerColor = Color(0xFF020202)
@@ -52,6 +47,20 @@ private val BaseLightInfoBaseColor = Color(0xFF2454FF)
 private val BaseLightInfoSubtleColor = Color(0xFF91A9FF)
 private val BaseLightInfoLightestColor = Color(0xFFEFF3FF)
 
+private val BaseLightBackgroundHighest = Color(0xFFD7EFFE)
+private val BaseLightBackgroundHigh = Color(0xFFE0F2FE)
+private val BaseLightBackgroundLow = Color(0xFFE8F6FF)
+private val BaseLightBackgroundLowest = Color(0xFFF0F9FF)
+
+/**
+ * Sky : Light Background Elevation Colors
+ */
+private val SkyLightBackgroundHighest = Color(0xFFCDE2FE)
+private val SkyLightBackgroundHigh = Color(0xFFD7E8FE)
+private val SkyLightBackgroundMiddle = Color(0xFFE1EFFF)
+private val SkyLightBackgroundLow = Color(0xFFEAF4FF)
+private val SkyLightBackgroundLowest = Color(0xFFF5F8FE)
+
 internal val HaloLightColorScheme =
     HaloColorScheme(
         primary =
@@ -63,9 +72,12 @@ internal val HaloLightColorScheme =
                 weaker = BaseLightPrimaryLightestColor,
             ),
         background =
-            HaloBackgroundValue(
-                base = BaseLightBackgroundContainerColor,
-                surface = BaseLightSurfaceContainerColor,
+            HaloElevationColor(
+                highest = SkyLightBackgroundHighest,
+                high = SkyLightBackgroundHigh,
+                middle = SkyLightBackgroundMiddle,
+                low = SkyLightBackgroundLow,
+                lowest = SkyLightBackgroundLowest,
             ),
         content =
             HaloColorValue(

@@ -1,18 +1,4 @@
-# Halo
-A compose ui components library for kotlin multiplatform (android, iOS, desktop)
+<p align="center"><img width=100% src="/gallery/images/cover-dark.svg" alt="halo"></p>
 
-> Built on top of Material3 `with styling`
-
-## Installation
-
-## Usage
-### Starts With Theme
-```kotlin
-HaloTheme(
-    font: FontFamily, // configure fonts here
-    shape: Shapes, // configure shapes here
-    colorScheme: HaloColorScheme, // configure colors here
-){
-    // add your content here
-}
-```
+# [Halo](https://halo.bizilabs.org)
+**`Halo`** is a compose multiplatform components library built for all platforms

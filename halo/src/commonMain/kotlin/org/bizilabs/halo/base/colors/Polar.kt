@@ -1,26 +1,36 @@
 package org.bizilabs.halo.base.colors
 
 import androidx.compose.ui.graphics.Color
-import org.bizilabs.halo.base.HaloBackgroundValue
 import org.bizilabs.halo.base.HaloColorScheme
 
-private val PolarLightBackgroundColor = Color(0xFFFFFFFF)
-private val PolarLightOnBackgroundColor = Color(0xFF000000)
-private val PolarLightSurfaceColor = Color(0xFFEBEBEB)
-private val PolarLightOnSurfaceColor = Color(0xFF141414)
+/**
+ * Polar : Light Background Elevation colors
+ */
+private val PolarLightBackgroundHighest = Color(0xFFD0D1D0)
+private val PolarLightBackgroundHigh = Color(0xFFD9D9D9)
+private val PolarLightBackgroundMiddle = Color(0xFFE2E3E2)
+private val PolarLightBackgroundLow = Color(0xFFECEDEC)
+private val PolarLightBackgroundLowest = Color(0xFFF7F6F7)
 
-private val PolarDarkBackgroundColor = Color(0xFF000000)
-private val PolarDarkOnBackgroundColor = Color(0xFFFFFFFF)
-private val PolarDarkSurfaceColor = Color(0xFF141414)
-private val PolarDarkOnSurfaceColor = Color(0xFFEBEBEB)
+/**
+ * Polar : Dark Background Elevation colors
+ */
+private val PolarDarkBackgroundHighest = Color(0xFF4C4C4D)
+private val PolarDarkBackgroundHigh = Color(0xFF414140)
+private val PolarDarkBackgroundMiddle = Color(0xFF363736)
+private val PolarDarkBackgroundLow = Color(0xFF2A2A2B)
+private val PolarDarkBackgroundLowest = Color(0xFF1F1F1E)
 
 internal val PolarLightColorScheme =
     HaloColorScheme(
         primary = HaloLightColorScheme.primary,
         background =
-            HaloBackgroundValue(
-                base = PolarLightBackgroundColor,
-                surface = PolarLightSurfaceColor,
+            HaloElevationColor(
+                highest = PolarLightBackgroundHighest,
+                high = PolarLightBackgroundHigh,
+                middle = PolarDarkBackgroundMiddle,
+                low = PolarLightBackgroundLow,
+                lowest = PolarLightBackgroundLowest,
             ),
         content = HaloLightColorScheme.content,
         success = HaloLightColorScheme.success,
@@ -34,9 +44,12 @@ internal val PolarDarkColorScheme =
     HaloColorScheme(
         primary = HaloDarkColorScheme.primary,
         background =
-            HaloBackgroundValue(
-                base = PolarDarkBackgroundColor,
-                surface = PolarDarkSurfaceColor,
+            HaloElevationColor(
+                highest = PolarDarkBackgroundHighest,
+                high = PolarDarkBackgroundHigh,
+                middle = PolarLightBackgroundMiddle,
+                low = PolarDarkBackgroundLow,
+                lowest = PolarDarkBackgroundLowest,
             ),
         content = HaloDarkColorScheme.content,
         success = HaloDarkColorScheme.success,

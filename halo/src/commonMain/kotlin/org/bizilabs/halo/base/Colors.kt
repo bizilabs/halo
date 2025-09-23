@@ -8,6 +8,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import org.bizilabs.halo.HaloDefaults
 import org.bizilabs.halo.base.colors.HaloDarkColorScheme
+import org.bizilabs.halo.base.colors.HaloElevationColor
 import org.bizilabs.halo.base.colors.HaloLightColorScheme
 import org.bizilabs.halo.base.colors.PolarDarkColorScheme
 import org.bizilabs.halo.base.colors.PolarLightColorScheme
@@ -48,12 +49,6 @@ data class HaloColorValue(
 }
 
 @Immutable
-data class HaloBackgroundValue(
-    val surface: Color,
-    val base: Color,
-)
-
-@Immutable
 data class HaloColor(
     val container: Color,
     val content: Color,
@@ -68,7 +63,7 @@ data class HaloColorTheme(
 @Immutable
 data class HaloColorScheme(
     val primary: HaloColorValue,
-    val background: HaloBackgroundValue,
+    val background: HaloElevationColor,
     val content: HaloColorValue,
     val info: HaloColorValue,
     val error: HaloColorValue,
@@ -77,7 +72,7 @@ data class HaloColorScheme(
     val disabled: HaloColor,
 ) {
     companion object {
-        val Default =
+        val Sky =
             HaloColorTheme(
                 light = HaloLightColorScheme,
                 dark = HaloDarkColorScheme,
@@ -93,8 +88,8 @@ data class HaloColorScheme(
 
 internal fun getHaloColorScheme(isDarkThemeEnabled: Boolean) =
     when (isDarkThemeEnabled) {
-        true -> HaloDefaults.ColorThemes.Default.dark
-        false -> HaloDefaults.ColorThemes.Default.light
+        true -> HaloDefaults.ColorThemes.Polar.dark
+        false -> HaloDefaults.ColorThemes.Polar.light
     }
 
 internal val LocalHaloColorScheme = staticCompositionLocalOf { HaloLightColorScheme }
