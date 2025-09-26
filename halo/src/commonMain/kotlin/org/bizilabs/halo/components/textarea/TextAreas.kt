@@ -63,8 +63,6 @@ internal fun HaloBaseTextArea(
     label: @Composable (() -> Unit)? = null,
     count: @Composable (() -> Unit)? = null,
     helper: @Composable (() -> Unit)? = null,
-    leading: @Composable (() -> Unit)? = null,
-    trailing: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
     shape: Shape = HaloTheme.shapes.medium,
     colors: HaloTextFieldColors? = null,
@@ -257,29 +255,21 @@ internal fun HaloBaseTextArea(
                             )
                     },
             ) {
-                Row(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .heightIn(min = 48.dp)
-                            .padding(vertical = 8.dp, horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.Top,
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .fillMaxWidth()
                 ) {
-                    leading?.invoke()
-                    Box(modifier = Modifier.weight(1f)) { // 👈 Box instead of Row
-                        ProvideContentColor(color = contentColor) {
-                            if (value.isBlank() && !focused && placeholder.isNotBlank()) {
-                                HaloText(
-                                    text = placeholder,
-                                    style = textStyle.copy(color = placeholderColor),
-                                )
-                            } else {
-                                innerTextField()
-                            }
+                    ProvideContentColor(color = contentColor) {
+                        if (value.isBlank() && !focused && placeholder.isNotBlank()) {
+                            HaloText(
+                                text = placeholder,
+                                style = textStyle.copy(color = placeholderColor),
+                            )
+                        } else {
+                            innerTextField()
                         }
                     }
-                    trailing?.invoke()
                 }
             }
 
@@ -312,7 +302,7 @@ internal fun HaloBaseTextArea(
                 ProvideContentColor(
                     color = helperColor,
                 ) {
-                    helper?.invoke()
+                    helper.invoke()
                 }
             }
         }
@@ -351,8 +341,6 @@ fun HaloFilledTextArea(
         enabled = enabled,
         readOnly = readOnly,
         label = label,
-        leading = leading,
-        trailing = trailing,
         isError = isError,
         textStyle = textStyle,
         helper = helper,
@@ -400,8 +388,6 @@ fun HaloOutlinedTextArea(
         enabled = enabled,
         readOnly = readOnly,
         label = label,
-        leading = leading,
-        trailing = trailing,
         isError = isError,
         textStyle = textStyle,
         helper = helper,

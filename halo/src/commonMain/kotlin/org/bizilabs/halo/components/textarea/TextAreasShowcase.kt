@@ -22,6 +22,14 @@ import org.bizilabs.halo.components.HaloSurface
 import org.bizilabs.halo.components.HaloText
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+/**
+ * "Man is a tool-using animal. Nowhere do you find him without tools;
+ * without tools he is nothing, with tools he is all"
+ *
+ * Thomas Carlyle
+ *
+ * This is the preview showcase for the text area. Necessary for ui tooling
+ */
 @Preview
 @Composable
 private fun BaseTextAreaPreview() {
