@@ -41,7 +41,6 @@ import org.bizilabs.halo.base.TextAreaHeightMode
 import org.bizilabs.halo.base.colors.ProvideContentColor
 import org.bizilabs.halo.components.HaloSurface
 import org.bizilabs.halo.components.HaloText
-import org.bizilabs.halo.components.textfields.HaloBaseTextField
 import org.bizilabs.halo.components.textfields.HaloTextFieldColors
 import org.bizilabs.halo.components.textfields.TextFieldMode
 
@@ -207,11 +206,11 @@ internal fun HaloBaseTextArea(
     val effectiveLineHeight = if (textStyle.lineHeight.isUnspecified) 20.sp else textStyle.lineHeight
     val baseHeight = with(LocalDensity.current) { (lines * effectiveLineHeight.value).sp.toDp() }
 
-    val surfaceModifier = when (heightMode) {
-        TextAreaHeightMode.Expandable -> Modifier.defaultMinSize(minHeight = baseHeight)
-        TextAreaHeightMode.Fixed -> Modifier.height(baseHeight)
-    }
-
+    val surfaceModifier =
+        when (heightMode) {
+            TextAreaHeightMode.Expandable -> Modifier.defaultMinSize(minHeight = baseHeight)
+            TextAreaHeightMode.Fixed -> Modifier.height(baseHeight)
+        }
 
     BasicTextField(
         modifier =
@@ -241,9 +240,10 @@ internal fun HaloBaseTextArea(
                 }
             }
             HaloSurface(
-                modifier = Modifier
-                    .then(surfaceModifier)
-                    .padding(top = 4.dp, bottom = 2.dp),
+                modifier =
+                    Modifier
+                        .then(surfaceModifier)
+                        .padding(top = 4.dp, bottom = 2.dp),
                 color = containerColor,
                 contentColor = contentColor,
                 shape = shape,
@@ -267,7 +267,7 @@ internal fun HaloBaseTextArea(
                     verticalAlignment = Alignment.Top,
                 ) {
                     leading?.invoke()
-                    Box(modifier = Modifier.weight(1f)) {   // 👈 Box instead of Row
+                    Box(modifier = Modifier.weight(1f)) { // 👈 Box instead of Row
                         ProvideContentColor(color = contentColor) {
                             if (value.isBlank() && !focused && placeholder.isNotBlank()) {
                                 HaloText(
@@ -342,7 +342,7 @@ fun HaloFilledTextArea(
     interactionSource: MutableInteractionSource? = null,
     shape: Shape = RoundedCornerShape(20),
     colors: HaloTextFieldColors? = null,
-){
+) {
     HaloBaseTextArea(
         modifier = modifier,
         value = value,
@@ -391,7 +391,7 @@ fun HaloOutlinedTextArea(
     interactionSource: MutableInteractionSource? = null,
     shape: Shape = RoundedCornerShape(20),
     colors: HaloTextFieldColors? = null,
-){
+) {
     HaloBaseTextArea(
         modifier = modifier,
         value = value,
