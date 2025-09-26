@@ -177,6 +177,19 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Charts.Bar -> LineChartSection()
                     GalleryScreenSection.Charts.Line -> LineChartSection()
+
+                    GalleryScreenSection.TextArea -> {
+                        GalleryList(
+                            sections = listOf(
+                                GalleryScreenSection.TextArea.Outlined,
+                                GalleryScreenSection.TextArea.Filled,
+                            ),
+                            onAction = onAction,
+                        )
+                    }
+                    GalleryScreenSection.TextArea.Outlined -> {}
+                    GalleryScreenSection.TextArea.Filled -> {}
+
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
             }
