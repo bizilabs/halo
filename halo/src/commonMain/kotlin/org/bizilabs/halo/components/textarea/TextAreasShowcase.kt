@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import org.bizilabs.halo.HaloTheme
+import org.bizilabs.halo.base.TextAreaHeightMode
 import org.bizilabs.halo.components.HaloSurface
 import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.textfields.HaloBaseTextField
@@ -34,15 +35,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  * We will be focusing on outlined and filled text fields.
  * Code text fields is for pins so we can ignoew
  */
-@Composable
-fun BaseTextArea(){
-    var text by remember { mutableStateOf("") }
 
-    OutlinedTextField(
-        value = text,
-        onValueChange = { text = it }
-    )
-}
 
 @Preview
 @Composable
@@ -61,7 +54,6 @@ fun BaseTextAreaPreview(){
                 verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-
 
                 HaloBaseTextField(
                     value = text,
@@ -100,7 +92,22 @@ fun BaseTextAreaPreview(){
                     onValueChange = { value -> text = value }
                 )
 
+                HaloFilledTextArea(
+                    value = text,
+                    lines = 2,
+                    heightMode = TextAreaHeightMode.Fixed,
+                    placeholder = "This is the Filled text area",
+                    label = { HaloText(buildAnnotatedString {
+                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                            append("Filled ")
+                        }
+                        append("text area")
+                    }) },
+                    onValueChange = { value -> text = value }
+                )
             }
+
+
 
         }
     }
