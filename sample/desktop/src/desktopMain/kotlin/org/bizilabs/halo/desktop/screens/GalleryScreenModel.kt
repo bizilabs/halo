@@ -116,7 +116,7 @@ sealed interface GalleryScreenSection {
             get() = "BottomBar"
     }
 
-    data object Toggle : GalleryScreenSection {
+    data object Switch : GalleryScreenSection {
         override val label: String
             get() = "Toogle"
     }
@@ -137,7 +137,7 @@ sealed interface GalleryScreenSection {
                     Stepper,
                     TextField,
                     TopBar,
-                    Toggle,
+                    Switch,
                 )
     }
 }

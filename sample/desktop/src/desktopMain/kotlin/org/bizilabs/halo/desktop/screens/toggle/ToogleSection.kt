@@ -35,7 +35,7 @@ import org.bizilabs.halo.components.toogle.HaloFilledSwitch
 import org.bizilabs.halo.components.toogle.HaloOutlineSwitch
 
 @Composable
-fun ToggleSection() {
+fun SwitchSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             HaloText(
