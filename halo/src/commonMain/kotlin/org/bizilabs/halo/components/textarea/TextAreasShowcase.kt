@@ -26,20 +26,9 @@ import org.bizilabs.halo.components.textfields.HaloFilledTextField
 import org.bizilabs.halo.components.textfields.HaloOutlinedTextField
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-/**
- * DISCLAIMER: This is the test area for text area with previews to test
- * how the text area component works
- *
- * NOTES
- *
- * We will be focusing on outlined and filled text fields.
- * Code text fields is for pins so we can ignoew
- */
-
-
 @Preview
 @Composable
-fun BaseTextAreaPreview(){
+private fun BaseTextAreaPreview(){
     var text by remember { mutableStateOf("") }
 
     HaloTheme {
@@ -54,47 +43,23 @@ fun BaseTextAreaPreview(){
                 verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-
-                HaloBaseTextField(
+                HaloFilledTextArea(
                     value = text,
-                    placeholder = "This is the base text field",
-                    label = { HaloText(buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("Base ")
-                        }
-                        append("text field ")
-
-                    }) },
-                    onValueChange = { text = it }
-                )
-
-                HaloFilledTextField(
-                    value = text,
-                    placeholder = "This is the Filled text field",
+                    lines = 5,
+                    heightMode = TextAreaHeightMode.Fixed,
+                    placeholder = "This is the Filled text area",
                     label = { HaloText(buildAnnotatedString {
                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                             append("Filled ")
                         }
-                        append("text field")
+                        append("text area")
                     }) },
                     onValueChange = { value -> text = value }
                 )
 
-                HaloOutlinedTextField(
+                HaloOutlinedTextArea(
                     value = text,
-                    placeholder = "This is the Outlined text field",
-                    label = { HaloText(buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("Outlined ")
-                        }
-                        append("text field")
-                    }) },
-                    onValueChange = { value -> text = value }
-                )
-
-                HaloFilledTextArea(
-                    value = text,
-                    lines = 2,
+                    lines = 5,
                     heightMode = TextAreaHeightMode.Fixed,
                     placeholder = "This is the Filled text area",
                     label = { HaloText(buildAnnotatedString {
@@ -106,9 +71,6 @@ fun BaseTextAreaPreview(){
                     onValueChange = { value -> text = value }
                 )
             }
-
-
-
         }
     }
 }

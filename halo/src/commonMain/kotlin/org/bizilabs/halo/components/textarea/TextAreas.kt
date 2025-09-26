@@ -367,3 +367,53 @@ fun HaloFilledTextArea(
         heightMode = heightMode,
     )
 }
+
+@Composable
+fun HaloOutlinedTextArea(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String = "",
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    singleLine: Boolean = false,
+    lines: Int = 5,
+    textStyle: TextStyle = LocalTextStyle.current,
+    label: @Composable (() -> Unit)? = null,
+    count: @Composable (() -> Unit)? = null,
+    helper: @Composable (() -> Unit)? = null,
+    leading: @Composable (() -> Unit)? = null,
+    trailing: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    heightMode: TextAreaHeightMode = TextAreaHeightMode.Expandable,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    interactionSource: MutableInteractionSource? = null,
+    shape: Shape = RoundedCornerShape(20),
+    colors: HaloTextFieldColors? = null,
+){
+    HaloBaseTextArea(
+        modifier = modifier,
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = placeholder,
+        enabled = enabled,
+        readOnly = readOnly,
+        label = label,
+        leading = leading,
+        trailing = trailing,
+        isError = isError,
+        textStyle = textStyle,
+        helper = helper,
+        count = count,
+        shape = shape,
+        singleLine = singleLine,
+        lines = lines,
+        interactionSource = interactionSource,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        colors = colors,
+        heightMode = heightMode,
+        mode = TextFieldMode.OUTLINED,
+    )
+}
