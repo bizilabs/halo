@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,21 +25,20 @@ import org.bizilabs.halo.components.HaloText
 import org.bizilabs.halo.components.cards.HaloSlotCard
 import org.bizilabs.halo.components.textarea.HaloFilledTextArea
 import org.bizilabs.halo.components.textarea.HaloOutlinedTextArea
-import org.bizilabs.halo.components.textfields.HaloFilledTextField
-import org.bizilabs.halo.components.textfields.HaloOutlinedTextField
 
 @Composable
 fun TextAreaSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
         HaloText(
             modifier = Modifier.padding(vertical = 16.dp),
-            text = buildAnnotatedString {
-                append("A ")
-                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                    append("text area")
-                }
-                append(" is a form element that lets users enter text in multiple lines.")
-            },
+            text =
+                buildAnnotatedString {
+                    append("A ")
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append("text area")
+                    }
+                    append(" is a form element that lets users enter text in multiple lines.")
+                },
             color = HaloTheme.colorScheme.content.stronger,
         )
         LazyColumn(
@@ -317,18 +313,19 @@ fun TextAreaSection() {
             }
             item {
                 HaloText(
-                    modifier = Modifier.padding(bottom = 8.dp),
+                    modifier = Modifier.padding(bottom = 8.dp, top = 16.dp),
                     text = "Height mode",
                     style = HaloTheme.typography.subTitle,
                 )
                 HaloText(
                     modifier = Modifier.padding(bottom = 16.dp),
-                    text = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("Height mode")
-                        }
-                        append(" is a property that allows the text area to be fixed or match content in height.")
-                    },
+                    text =
+                        buildAnnotatedString {
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                append("Height mode")
+                            }
+                            append(" is a property that allows the text area to be fixed or match content in height.")
+                        },
                     color = HaloTheme.colorScheme.content.stronger,
                 )
                 Spacer(Modifier.height(24.dp))
@@ -347,7 +344,21 @@ fun TextAreaSection() {
                             text = "Fixed",
                             style = HaloTheme.typography.subTitle,
                         )
-                        var content by remember { mutableStateOf("Lorem ipsum dolor sit amet consectetur adipiscing elit. Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus. Integer nunc posuere ut hendrerit semper vel class. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est efficitur laoreet mauris pharetra vestibulum fusce. Sodales consequat magna ante condimentum neque at luctus. Ligula congue sollicitudin erat viverra ac tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet. Cras eleifend turpis fames primis vulputate ornare sagittis. Libero feugiat tristique accumsan maecenas potenti ultricies habitant. Cubilia curae hac habitasse platea dictumst lorem ipsum. Faucibus ex sapien vitae pellentesque sem placerat in. Tempus leo eu aenean sed diam urna tempor.") }
+                        var content by remember {
+                            mutableStateOf(
+                                "Lorem ipsum dolor sit amet consectetur adipiscing elit. " +
+                                    "Placerat in id cursus mi pretium tellus duis. Urna tempor " +
+                                    "pulvinar vivamus fringilla lacus nec metus." +
+                                    " Integer nunc posuere ut hendrerit semper vel class." +
+                                    " Conubia nostra inceptos himenaeos orci varius natoque penatibus. " +
+                                    "Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est " +
+                                    "efficitur laoreet mauris pharetra vestibulum " +
+                                    "fusce. Sodales consequat magna ante condimentum neque at luctus. " +
+                                    "Ligula congue sollicitudin erat viverra ac " +
+                                    "tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet." +
+                                    " Cras eleifend turpis fames ",
+                            )
+                        }
 
                         HaloFilledTextArea(
                             modifier = Modifier.fillMaxWidth(),
@@ -371,7 +382,21 @@ fun TextAreaSection() {
                             text = "Expandable",
                             style = HaloTheme.typography.subTitle,
                         )
-                        var content by remember { mutableStateOf("Lorem ipsum dolor sit amet consectetur adipiscing elit. Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus. Integer nunc posuere ut hendrerit semper vel class. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est efficitur laoreet mauris pharetra vestibulum fusce. Sodales consequat magna ante condimentum neque at luctus. Ligula congue sollicitudin erat viverra ac tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet. Cras eleifend turpis fames primis vulputate ornare sagittis. Libero feugiat tristique accumsan maecenas potenti ultricies habitant. Cubilia curae hac habitasse platea dictumst lorem ipsum. Faucibus ex sapien vitae pellentesque sem placerat in. Tempus leo eu aenean sed diam urna tempor.") }
+                        var content by remember {
+                            mutableStateOf(
+                                "Lorem ipsum dolor sit amet consectetur adipiscing elit. " +
+                                    "Placerat in id cursus mi pretium tellus duis. Urna tempor " +
+                                    "pulvinar vivamus fringilla lacus nec metus." +
+                                    " Integer nunc posuere ut hendrerit semper vel class." +
+                                    " Conubia nostra inceptos himenaeos orci varius natoque penatibus. " +
+                                    "Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est " +
+                                    "efficitur laoreet mauris pharetra vestibulum " +
+                                    "fusce. Sodales consequat magna ante condimentum neque at luctus. " +
+                                    "Ligula congue sollicitudin erat viverra ac " +
+                                    "tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet." +
+                                    " Cras eleifend turpis fames ",
+                            )
+                        }
 
                         HaloFilledTextArea(
                             modifier = Modifier.fillMaxWidth(),
@@ -406,7 +431,22 @@ fun TextAreaSection() {
                             text = "Fixed",
                             style = HaloTheme.typography.subTitle,
                         )
-                        var content by remember { mutableStateOf("Lorem ipsum dolor sit amet consectetur adipiscing elit. Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus. Integer nunc posuere ut hendrerit semper vel class. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est efficitur laoreet mauris pharetra vestibulum fusce. Sodales consequat magna ante condimentum neque at luctus. Ligula congue sollicitudin erat viverra ac tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet. Cras eleifend turpis fames primis vulputate ornare sagittis. Libero feugiat tristique accumsan maecenas potenti ultricies habitant. Cubilia curae hac habitasse platea dictumst lorem ipsum. Faucibus ex sapien vitae pellentesque sem placerat in. Tempus leo eu aenean sed diam urna tempor.") }
+                        var content by remember {
+                            mutableStateOf(
+                                "Lorem ipsum dolor sit amet consectetur adipiscing elit. " +
+                                    "Placerat in id cursus mi pretium tellus duis. Urna tempor " +
+                                    "pulvinar vivamus fringilla lacus nec metus." +
+                                    " Integer nunc posuere ut hendrerit semper vel class." +
+                                    " Conubia nostra inceptos himenaeos orci varius natoque penatibus. " +
+                                    "Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est " +
+                                    "efficitur laoreet mauris pharetra vestibulum " +
+                                    "fusce. Sodales consequat magna ante condimentum neque at luctus. " +
+                                    "Ligula congue sollicitudin erat viverra ac " +
+                                    "tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet." +
+                                    " Cras eleifend turpis fames ",
+                            )
+                        }
+
                         HaloOutlinedTextArea(
                             modifier = Modifier.fillMaxWidth(),
                             value = content,
@@ -429,7 +469,22 @@ fun TextAreaSection() {
                             text = "Expandable",
                             style = HaloTheme.typography.subTitle,
                         )
-                        var content by remember { mutableStateOf("Lorem ipsum dolor sit amet consectetur adipiscing elit. Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus. Integer nunc posuere ut hendrerit semper vel class. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est efficitur laoreet mauris pharetra vestibulum fusce. Sodales consequat magna ante condimentum neque at luctus. Ligula congue sollicitudin erat viverra ac tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet. Cras eleifend turpis fames primis vulputate ornare sagittis. Libero feugiat tristique accumsan maecenas potenti ultricies habitant. Cubilia curae hac habitasse platea dictumst lorem ipsum. Faucibus ex sapien vitae pellentesque sem placerat in. Tempus leo eu aenean sed diam urna tempor.") }
+                        var content by remember {
+                            mutableStateOf(
+                                "Lorem ipsum dolor sit amet consectetur adipiscing elit. " +
+                                    "Placerat in id cursus mi pretium tellus duis. Urna tempor " +
+                                    "pulvinar vivamus fringilla lacus nec metus." +
+                                    " Integer nunc posuere ut hendrerit semper vel class." +
+                                    " Conubia nostra inceptos himenaeos orci varius natoque penatibus. " +
+                                    "Mus donec rhoncus eros lobortis nulla molestie mattis. Purus est " +
+                                    "efficitur laoreet mauris pharetra vestibulum " +
+                                    "fusce. Sodales consequat magna ante condimentum neque at luctus. " +
+                                    "Ligula congue sollicitudin erat viverra ac " +
+                                    "tincidunt nam. Lectus commodo augue arcu dignissim velit aliquam imperdiet." +
+                                    " Cras eleifend turpis fames ",
+                            )
+                        }
+
                         HaloOutlinedTextArea(
                             modifier = Modifier.fillMaxWidth(),
                             value = content,

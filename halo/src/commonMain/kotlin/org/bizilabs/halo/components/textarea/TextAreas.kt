@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -26,7 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Shape
@@ -207,30 +205,31 @@ internal fun HaloBaseTextArea(
     val innerBoxVerticalPadding = 12.dp + 12.dp
     val totalVerticalPadding = surfaceOuterPadding + innerBoxVerticalPadding
 
-    val (minLines, maxLines, modifierHeight) = when (heightMode) {
-        is TextAreaHeightMode.Fixed -> {
-            val targetHeight = lineHeightDp * heightMode.lines + totalVerticalPadding
-            val animatedHeight by animateDpAsState(
-                targetValue = targetHeight,
-                animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
-                label = "fixedHeight"
-            )
-            Triple(heightMode.lines, heightMode.lines, Modifier.height(animatedHeight))
+    val (minLines, maxLines, modifierHeight) =
+        when (heightMode) {
+            is TextAreaHeightMode.Fixed -> {
+                val targetHeight = lineHeightDp * heightMode.lines + totalVerticalPadding
+                val animatedHeight by animateDpAsState(
+                    targetValue = targetHeight,
+                    animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
+                    label = "fixedHeight",
+                )
+                Triple(heightMode.lines, heightMode.lines, Modifier.height(animatedHeight))
+            }
+            is TextAreaHeightMode.Expandable -> {
+                val targetMinHeight = lineHeightDp * heightMode.minLines + totalVerticalPadding
+                val animatedMinHeight by animateDpAsState(
+                    targetValue = targetMinHeight,
+                    animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
+                    label = "expandableMinHeight",
+                )
+                Triple(
+                    heightMode.minLines,
+                    heightMode.maxLines,
+                    Modifier.defaultMinSize(minHeight = animatedMinHeight),
+                )
+            }
         }
-        is TextAreaHeightMode.Expandable -> {
-            val targetMinHeight = lineHeightDp * heightMode.minLines + totalVerticalPadding
-            val animatedMinHeight by animateDpAsState(
-                targetValue = targetMinHeight,
-                animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
-                label = "expandableMinHeight"
-            )
-            Triple(
-                heightMode.minLines,
-                heightMode.maxLines,
-                Modifier.defaultMinSize(minHeight = animatedMinHeight)
-            )
-        }
-    }
 
     BasicTextField(
         modifier =
@@ -279,9 +278,10 @@ internal fun HaloBaseTextArea(
                     },
             ) {
                 Box(
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
-                        .fillMaxWidth()
+                    modifier =
+                        Modifier
+                            .padding(horizontal = 16.dp, vertical = 12.dp)
+                            .fillMaxWidth(),
                 ) {
                     ProvideContentColor(color = contentColor) {
                         if (value.isBlank() && !focused && placeholder.isNotBlank()) {

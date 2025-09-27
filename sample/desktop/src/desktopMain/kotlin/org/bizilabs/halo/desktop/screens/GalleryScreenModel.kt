@@ -64,6 +64,7 @@ sealed interface GalleryScreenSection {
 
     sealed class TextArea : GalleryScreenSection {
         companion object : TextArea()
+
         override val label: String
             get() = "TextArea"
     }

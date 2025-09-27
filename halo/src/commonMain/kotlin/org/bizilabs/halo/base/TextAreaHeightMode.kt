@@ -14,6 +14,6 @@ sealed class TextAreaHeightMode {
      */
     data class Expandable(
         val minLines: Int = 5,
-        val maxLines: Int = Int.MAX_VALUE
+        val maxLines: Int = Int.MAX_VALUE,
     ) : TextAreaHeightMode()
 }
