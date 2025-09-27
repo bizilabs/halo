@@ -53,11 +53,10 @@ internal fun HaloBaseTextArea(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     singleLine: Boolean = false,
-    lines: Int = 5,
     textStyle: TextStyle = LocalTextStyle.current,
     mode: TextFieldMode = TextFieldMode.FILLED,
     interactionSource: MutableInteractionSource? = null,
-    heightMode: TextAreaHeightMode = TextAreaHeightMode.Expandable,
+    heightMode: TextAreaHeightMode = TextAreaHeightMode.Fixed(lines = 5),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     label: @Composable (() -> Unit)? = null,
@@ -202,13 +201,36 @@ internal fun HaloBaseTextArea(
     )
 
     val effectiveLineHeight = if (textStyle.lineHeight.isUnspecified) 20.sp else textStyle.lineHeight
-    val baseHeight = with(LocalDensity.current) { (lines * effectiveLineHeight.value).sp.toDp() }
+    val lineHeightDp = with(LocalDensity.current) { effectiveLineHeight.toDp() }
 
-    val surfaceModifier =
-        when (heightMode) {
-            TextAreaHeightMode.Expandable -> Modifier.defaultMinSize(minHeight = baseHeight)
-            TextAreaHeightMode.Fixed -> Modifier.height(baseHeight)
+    val surfaceOuterPadding = 4.dp + 2.dp
+    val innerBoxVerticalPadding = 12.dp + 12.dp
+    val totalVerticalPadding = surfaceOuterPadding + innerBoxVerticalPadding
+
+    val (minLines, maxLines, modifierHeight) = when (heightMode) {
+        is TextAreaHeightMode.Fixed -> {
+            val targetHeight = lineHeightDp * heightMode.lines + totalVerticalPadding
+            val animatedHeight by animateDpAsState(
+                targetValue = targetHeight,
+                animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
+                label = "fixedHeight"
+            )
+            Triple(heightMode.lines, heightMode.lines, Modifier.height(animatedHeight))
         }
+        is TextAreaHeightMode.Expandable -> {
+            val targetMinHeight = lineHeightDp * heightMode.minLines + totalVerticalPadding
+            val animatedMinHeight by animateDpAsState(
+                targetValue = targetMinHeight,
+                animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
+                label = "expandableMinHeight"
+            )
+            Triple(
+                heightMode.minLines,
+                heightMode.maxLines,
+                Modifier.defaultMinSize(minHeight = animatedMinHeight)
+            )
+        }
+    }
 
     BasicTextField(
         modifier =
@@ -221,7 +243,8 @@ internal fun HaloBaseTextArea(
         textStyle = textStyle.copy(color = contentColor),
         onValueChange = onValueChange,
         singleLine = singleLine,
-        maxLines = lines,
+        maxLines = maxLines,
+        minLines = minLines,
         interactionSource = interactionSource,
         keyboardActions = keyboardActions,
         keyboardOptions = keyboardOptions,
@@ -240,7 +263,7 @@ internal fun HaloBaseTextArea(
             HaloSurface(
                 modifier =
                     Modifier
-                        .then(surfaceModifier)
+                        .then(modifierHeight)
                         .padding(top = 4.dp, bottom = 2.dp),
                 color = containerColor,
                 contentColor = contentColor,
@@ -257,7 +280,7 @@ internal fun HaloBaseTextArea(
             ) {
                 Box(
                     modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
                         .fillMaxWidth()
                 ) {
                     ProvideContentColor(color = contentColor) {
@@ -318,15 +341,12 @@ fun HaloFilledTextArea(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     singleLine: Boolean = false,
-    lines: Int = 5,
     textStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,
     count: @Composable (() -> Unit)? = null,
     helper: @Composable (() -> Unit)? = null,
-    leading: @Composable (() -> Unit)? = null,
-    trailing: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
-    heightMode: TextAreaHeightMode = TextAreaHeightMode.Expandable,
+    heightMode: TextAreaHeightMode = TextAreaHeightMode.Fixed(5),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource? = null,
@@ -347,7 +367,6 @@ fun HaloFilledTextArea(
         count = count,
         shape = shape,
         singleLine = singleLine,
-        lines = lines,
         interactionSource = interactionSource,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
@@ -365,15 +384,12 @@ fun HaloOutlinedTextArea(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     singleLine: Boolean = false,
-    lines: Int = 5,
     textStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,
     count: @Composable (() -> Unit)? = null,
     helper: @Composable (() -> Unit)? = null,
-    leading: @Composable (() -> Unit)? = null,
-    trailing: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
-    heightMode: TextAreaHeightMode = TextAreaHeightMode.Expandable,
+    heightMode: TextAreaHeightMode = TextAreaHeightMode.Fixed(5),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource? = null,
@@ -394,7 +410,6 @@ fun HaloOutlinedTextArea(
         count = count,
         shape = shape,
         singleLine = singleLine,
-        lines = lines,
         interactionSource = interactionSource,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,

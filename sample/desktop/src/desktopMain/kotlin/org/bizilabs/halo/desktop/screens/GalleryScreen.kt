@@ -44,6 +44,7 @@ import org.bizilabs.halo.desktop.screens.charts.LineChartSection
 import org.bizilabs.halo.desktop.screens.chip.ChipSection
 import org.bizilabs.halo.desktop.screens.stepper.HorizontalStepperSection
 import org.bizilabs.halo.desktop.screens.stepper.VerticalStepperSection
+import org.bizilabs.halo.desktop.screens.textarea.TextAreaSection
 import org.bizilabs.halo.desktop.screens.textfield.CodeFieldSection
 import org.bizilabs.halo.desktop.screens.textfield.TextFieldSection
 import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
@@ -178,17 +179,7 @@ fun LandingScreenContent(
                     GalleryScreenSection.Charts.Bar -> LineChartSection()
                     GalleryScreenSection.Charts.Line -> LineChartSection()
 
-                    GalleryScreenSection.TextArea -> {
-                        GalleryList(
-                            sections = listOf(
-                                GalleryScreenSection.TextArea.Outlined,
-                                GalleryScreenSection.TextArea.Filled,
-                            ),
-                            onAction = onAction,
-                        )
-                    }
-                    GalleryScreenSection.TextArea.Outlined -> {}
-                    GalleryScreenSection.TextArea.Filled -> {}
+                    GalleryScreenSection.TextArea -> TextAreaSection()
 
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }

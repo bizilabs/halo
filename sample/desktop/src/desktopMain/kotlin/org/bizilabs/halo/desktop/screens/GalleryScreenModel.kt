@@ -64,19 +64,8 @@ sealed interface GalleryScreenSection {
 
     sealed class TextArea : GalleryScreenSection {
         companion object : TextArea()
-
         override val label: String
             get() = "TextArea"
-
-        data object Outlined : TextArea() {
-            override val label: String
-                get() = "Outlined"
-        }
-
-        data object Filled : TextArea() {
-            override val label: String
-                get() = "Filled"
-        }
     }
 
     data object Chip : GalleryScreenSection {

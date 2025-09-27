@@ -47,8 +47,7 @@ private fun BaseTextAreaPreview() {
             ) {
                 HaloBaseTextArea(
                     value = text,
-                    lines = 5,
-                    heightMode = TextAreaHeightMode.Fixed,
+                    heightMode = TextAreaHeightMode.Fixed(),
                     placeholder = "This is the Filled text area",
                     label = {
                         HaloText(
@@ -65,8 +64,7 @@ private fun BaseTextAreaPreview() {
 
                 HaloFilledTextArea(
                     value = text,
-                    lines = 5,
-                    heightMode = TextAreaHeightMode.Fixed,
+                    heightMode = TextAreaHeightMode.Fixed(5),
                     placeholder = "This is the Filled text area",
                     label = {
                         HaloText(
@@ -83,8 +81,7 @@ private fun BaseTextAreaPreview() {
 
                 HaloOutlinedTextArea(
                     value = text,
-                    lines = 5,
-                    heightMode = TextAreaHeightMode.Fixed,
+                    heightMode = TextAreaHeightMode.Fixed(),
                     placeholder = "This is the Filled text area",
                     label = {
                         HaloText(
