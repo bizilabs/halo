@@ -39,6 +39,13 @@ kotlin {
                 api(libs.coil.network.ktor)
             }
         }
+        val androidMain by getting {
+            dependencies {
+                implementation(compose.preview)
+                implementation(libs.bundles.preview)
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)

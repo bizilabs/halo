@@ -62,6 +62,13 @@ sealed interface GalleryScreenSection {
         }
     }
 
+    sealed class TextArea : GalleryScreenSection {
+        companion object : TextArea()
+
+        override val label: String
+            get() = "TextArea"
+    }
+
     data object Chip : GalleryScreenSection {
         override val label: String
             get() = "Chip"
@@ -130,6 +137,7 @@ sealed interface GalleryScreenSection {
                     Charts,
                     Chip,
                     Stepper,
+                    TextArea,
                     TextField,
                     TopBar,
                 )
