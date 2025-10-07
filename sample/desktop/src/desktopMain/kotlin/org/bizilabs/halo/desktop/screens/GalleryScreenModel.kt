@@ -100,7 +100,7 @@ sealed interface GalleryScreenSection {
         override val label: String
             get() = "Charts"
 
-        data object Bar : Charts() {
+        data object Pie : Charts() {
             override val label: String
                 get() = "Bar"
         }
@@ -180,7 +180,7 @@ class GalleryScreenModel : StateScreenModel<GalleryScreenState>(GalleryScreenSta
                 GalleryScreenSection.Stepper.Horizontal -> GalleryScreenSection.Stepper
                 GalleryScreenSection.Stepper.Vertical -> GalleryScreenSection.Stepper
                 GalleryScreenSection.Charts.Line -> GalleryScreenSection.Charts
-                GalleryScreenSection.Charts.Bar -> GalleryScreenSection.Charts
+                GalleryScreenSection.Charts.Pie -> GalleryScreenSection.Charts
                 else -> null
             }
         mutableState.update { it.copy(section = update) }
