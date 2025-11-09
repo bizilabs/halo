@@ -1,11 +1,11 @@
 package org.bizilabs.halo.base
 
-sealed class TextAreaHeightMode {
+sealed interface TextAreaHeightMode {
     /**
      * Fixed height in number of text lines.
      * The text box will always measure exactly this tall.
      */
-    data class Fixed(val lines: Int = 5) : TextAreaHeightMode()
+    data class Fixed(val lines: Int = 5) : TextAreaHeightMode
 
     /**
      * Expandable height:
@@ -15,5 +15,5 @@ sealed class TextAreaHeightMode {
     data class Expandable(
         val minLines: Int = 5,
         val maxLines: Int = Int.MAX_VALUE,
-    ) : TextAreaHeightMode()
+    ) : TextAreaHeightMode
 }
