@@ -298,17 +298,13 @@ internal fun HaloBaseTextArea(
                 targetValue =
                     when {
                         readOnly -> colors?.default?.border ?: HaloTheme.colorScheme.disabled.border
-                        !enabled ->
-                            colors?.disabled?.border
-                                ?: HaloTheme.colorScheme.disabled.border
-
+                        !enabled -> colors?.disabled?.border ?: HaloTheme.colorScheme.disabled.border
                         isError -> colors?.error?.content ?: HaloTheme.colorScheme.error.neutral
+                        focused -> {
+                            colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
+                        }
                         else -> {
-                            if (focused) {
-                                colors?.focused?.border ?: HaloTheme.colorScheme.content.stronger
-                            } else {
-                                colors?.default?.border ?: HaloTheme.colorScheme.content.strong
-                            }
+                            colors?.default?.border ?: HaloTheme.colorScheme.content.strong
                         }
                     },
                 animationSpec =
