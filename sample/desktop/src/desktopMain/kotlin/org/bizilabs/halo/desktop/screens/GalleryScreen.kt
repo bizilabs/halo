@@ -47,6 +47,7 @@ import org.bizilabs.halo.desktop.screens.stepper.HorizontalStepperSection
 import org.bizilabs.halo.desktop.screens.stepper.VerticalStepperSection
 import org.bizilabs.halo.desktop.screens.textfield.CodeFieldSection
 import org.bizilabs.halo.desktop.screens.textfield.TextFieldSection
+import org.bizilabs.halo.desktop.screens.toggle.SwitchSection
 import org.bizilabs.halo.desktop.screens.topbar.TopBarSection
 
 data object GalleryScreen : Screen {
@@ -178,6 +179,7 @@ fun LandingScreenContent(
 
                     GalleryScreenSection.Charts.Pie -> PieChartSection()
                     GalleryScreenSection.Charts.Line -> LineChartSection()
+                    GalleryScreenSection.Switch -> SwitchSection()
                     null -> GalleryList(sections = state.sections, onAction = onAction)
                 }
             }
