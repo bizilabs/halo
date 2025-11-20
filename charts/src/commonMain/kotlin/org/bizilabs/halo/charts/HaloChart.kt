@@ -7,7 +7,15 @@ import org.bizilabs.halo.charts.data.HaloChartData
 import org.bizilabs.halo.charts.data.HaloChartPadding
 import org.bizilabs.halo.charts.data.HaloChartPoint
 import org.bizilabs.halo.charts.data.HaloLineChartData
+import org.bizilabs.halo.charts.data.HaloPieChartData
+import org.bizilabs.halo.charts.style.haloPieChartStrokeStyle
 import org.bizilabs.halo.charts.ui.HaloLineChart
+import org.bizilabs.halo.charts.ui.HaloPieChart
+
+object HaloChartDefaults {
+    @Composable
+    fun pieChartStyle() = haloPieChartStrokeStyle()
+}
 
 /**
  * The main entry point for creating a chart.
@@ -32,6 +40,13 @@ fun HaloChart(
                 style = data.style,
                 contentPadding = padding,
                 onPointSelected = onPointSelected,
+            )
+
+        is HaloPieChartData ->
+            HaloPieChart(
+                modifier = modifier,
+                data = data,
+                style = data.style,
             )
     }
 }
